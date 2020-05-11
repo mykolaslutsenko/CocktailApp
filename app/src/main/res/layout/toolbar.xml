@@ -7,7 +7,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:background="@color/colorAppBar"
         android:elevation="2dp"
@@ -16,8 +16,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@null"
             android:cursorVisible="true"
