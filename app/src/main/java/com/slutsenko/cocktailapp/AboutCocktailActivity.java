@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Objects;
+
 import static com.slutsenko.cocktailapp.MainActivity.cocktailDatabase;
 
 public class AboutCocktailActivity extends AppCompatActivity {
@@ -22,13 +24,14 @@ public class AboutCocktailActivity extends AppCompatActivity {
     TextView instructionsTitle;
     TextView instructionsValue;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_cocktail);
 
         cocktail = (Cocktail) getIntent().getSerializableExtra("cocktail");
-        getSupportActionBar().setTitle(cocktail.getStrDrink());
+        Objects.requireNonNull(getSupportActionBar()).setTitle(cocktail.getStrDrink());
 
         findComponents();
         customizeComponents();
