@@ -4,5 +4,7 @@
     <color name="colorAppBar">#fafafa</color>
     <color name="colorPrimaryDark">#e0e0e0</color>
     <color name="colorAccent">#009688</color>
+    <color name="colorTextPrimary">#de000000</color>
+    <color name="colorTextSecond">#727272</color>
 
 </resources>

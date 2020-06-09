@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--shape size-->
+    <dimen name="two">2dp</dimen>
+    <dimen name="four">4dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="twelve">12dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="image_size">156dp</dimen>
+
+    <!--font size-->
+    <dimen name="font_eight">8sp</dimen>
+    <dimen name="font_ten">10sp</dimen>
+    <dimen name="font_twelve">12sp</dimen>
+    <dimen name="font_fourteen">14sp</dimen>
+    <dimen name="font_sixteen">16sp</dimen>
+    <dimen name="font_eighteen">18sp</dimen>
+
+</resources>
