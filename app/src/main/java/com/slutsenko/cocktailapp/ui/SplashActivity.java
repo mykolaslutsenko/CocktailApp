@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp;
+package com.slutsenko.cocktailapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

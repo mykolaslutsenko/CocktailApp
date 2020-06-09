@@ -1,20 +1,23 @@
-package com.slutsenko.cocktailapp;
+package com.slutsenko.cocktailapp.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.slutsenko.cocktailapp.Base;
+import com.slutsenko.cocktailapp.Cocktail;
+import com.slutsenko.cocktailapp.R;
+import com.slutsenko.cocktailapp.adapter.list.CocktailAdapter;
+import com.slutsenko.cocktailapp.db.CocktailDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Base {
     private static final int COLUMN = 2;
     public static CocktailDatabase cocktailDatabase;
     CocktailAdapter cocktailAdapter;
@@ -24,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int myView() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void activityCreated() {
         floatingActionButton = findViewById(R.id.fab_search);
         textView = findViewById(R.id.tv_history);
 
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         cocktailDatabase = Room.databaseBuilder(getApplicationContext(),
-                CocktailDatabase.class, "cocktail_data2").allowMainThreadQueries().build();
+                CocktailDatabase.class, "cocktail_data").allowMainThreadQueries().build();
         cocktail = (ArrayList<Cocktail>) cocktailDatabase.cocktailDao().getCocktails();
 
         if (cocktail.isEmpty()) {

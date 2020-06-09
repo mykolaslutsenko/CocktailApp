@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp;
+package com.slutsenko.cocktailapp.ui;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -7,12 +7,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.slutsenko.cocktailapp.Base;
+import com.slutsenko.cocktailapp.Cocktail;
+import com.slutsenko.cocktailapp.R;
 
 import java.util.Objects;
 
-import static com.slutsenko.cocktailapp.MainActivity.cocktailDatabase;
+import static com.slutsenko.cocktailapp.ui.MainActivity.cocktailDatabase;
 
-public class AboutCocktailActivity extends AppCompatActivity {
+public class AboutCocktailActivity extends Base {
 
     Cocktail cocktail;
     ImageView image;
@@ -24,12 +27,13 @@ public class AboutCocktailActivity extends AppCompatActivity {
     TextView instructionsTitle;
     TextView instructionsValue;
 
+    @Override
+    protected int myView() {
+        return R.layout.activity_about_cocktail;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_cocktail);
-
+    protected void activityCreated() {
         cocktail = (Cocktail) getIntent().getSerializableExtra("cocktail");
         Objects.requireNonNull(getSupportActionBar()).setTitle(cocktail.getStrDrink());
 

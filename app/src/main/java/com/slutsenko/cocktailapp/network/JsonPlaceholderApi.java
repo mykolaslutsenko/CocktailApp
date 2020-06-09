@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp;
+package com.slutsenko.cocktailapp.network;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

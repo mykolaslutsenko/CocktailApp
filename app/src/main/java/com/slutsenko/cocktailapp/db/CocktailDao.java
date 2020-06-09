@@ -1,9 +1,11 @@
-package com.slutsenko.cocktailapp;
+package com.slutsenko.cocktailapp.db;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import com.slutsenko.cocktailapp.Cocktail;
 
 import java.util.List;
 
@@ -15,6 +17,4 @@ public interface CocktailDao {
 
     @Query("SELECT * FROM cocktail")
     List<Cocktail> getCocktails();
-
-
 }
