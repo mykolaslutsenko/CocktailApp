@@ -3,6 +3,7 @@
     package="com.slutsenko.cocktailapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,39 @@
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".service.StartService"
+            android:enabled="true"
+            android:exported="true">
+
+        </service>
+
+        <receiver
+            android:name=".receiver.StartReceiver"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- <receiver -->
+        <!-- android:name=".receiver.AirplaneModeReceiver" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.AIRPLANE_MODE"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <receiver android:name=".receiver.BatteryStateReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +55,7 @@
         <activity
             android:name=".ui.AboutCocktailActivity"
             android:parentActivityName=".ui.SearchActivity" />
-
         <activity android:name=".ui.SearchActivity" />
-
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Splash">
@@ -34,6 +66,9 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".service.DrinkService"
+            android:exported="false" />
     </application>
 
 </manifest>

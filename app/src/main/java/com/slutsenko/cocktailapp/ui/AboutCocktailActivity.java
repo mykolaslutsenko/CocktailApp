@@ -1,5 +1,6 @@
 package com.slutsenko.cocktailapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,9 +8,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.slutsenko.cocktailapp.Base;
 import com.slutsenko.cocktailapp.Cocktail;
 import com.slutsenko.cocktailapp.R;
+import com.slutsenko.cocktailapp.service.DrinkService;
 
 import java.util.Objects;
 
@@ -30,6 +33,13 @@ public class AboutCocktailActivity extends Base {
     @Override
     protected int myView() {
         return R.layout.activity_about_cocktail;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        startService(new Intent(this, DrinkService.class));
+        Snackbar.make(findViewById(android.R.id.content), "Random", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

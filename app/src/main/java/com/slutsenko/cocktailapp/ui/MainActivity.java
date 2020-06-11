@@ -4,15 +4,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.slutsenko.cocktailapp.Base;
 import com.slutsenko.cocktailapp.Cocktail;
 import com.slutsenko.cocktailapp.R;
 import com.slutsenko.cocktailapp.adapter.list.CocktailAdapter;
 import com.slutsenko.cocktailapp.db.CocktailDatabase;
+import com.slutsenko.cocktailapp.receiver.AirplaneModeReceiver;
+import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +34,12 @@ public class MainActivity extends Base {
     @Override
     protected int myView() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Snackbar.make(findViewById(android.R.id.content), "Random", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
