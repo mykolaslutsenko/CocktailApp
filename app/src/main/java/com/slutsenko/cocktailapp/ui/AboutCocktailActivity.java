@@ -2,6 +2,7 @@ package com.slutsenko.cocktailapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,9 @@ public class AboutCocktailActivity extends Base {
 
     }
 
+    public void back(View view) {
+        finish();
+    }
     private void findComponents() {
         image = findViewById(R.id.iv_cocktail_full);
         infoItem = findViewById(R.id.tv_info_item);
