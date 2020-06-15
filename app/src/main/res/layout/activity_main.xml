@@ -2,9 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
+
+
 
     <TextView
         android:id="@+id/tv_history"
@@ -16,12 +19,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/eight">
+
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_search"
+        style="@style/fab"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_search"
-        style="@style/fab" />
+        app:srcCompat="@drawable/ic_search" />
+
+    <TextView
+        android:id="@+id/tv_battery"
+        android:layout_width="match_parent"
+        android:elevation="@dimen/font_sixteen"
+        android:layout_gravity="bottom"
+        android:layout_height="48dp"
+        android:layout_margin="100dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="battery"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
 
 </FrameLayout>
