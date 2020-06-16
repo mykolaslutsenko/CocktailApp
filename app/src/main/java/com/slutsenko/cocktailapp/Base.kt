@@ -35,14 +35,7 @@ abstract class Base : AppCompatActivity() {
         //val airModeReceiver = AirModeReceiver()
         registerReceiver(airModeReceiver, IntentFilter("android.intent.action.AIRPLANE_MODE"))
 
-        val batteryStateReceiver = BatteryStateReceiver()
-        val filter = IntentFilter()
-        filter.addAction("android.intent.action.ACTION_BATTERY_CHANGED")
-        filter.addAction("android.intent.action.ACTION_POWER_CONNECTED")
-        filter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED")
-        filter.addAction("android.intent.action.ACTION_BATTERY_LOW")
-        filter.addAction("android.intent.action.ACTION_BATTERY_OKAY")
-        registerReceiver(batteryStateReceiver, filter)
+
 
         Log.d(LOG, this::class.java.toString() + " OnResume")
     }
