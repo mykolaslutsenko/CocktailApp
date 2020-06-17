@@ -3,22 +3,16 @@ package com.slutsenko.cocktailapp.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.view.View
-import android.widget.FrameLayout
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
-import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.ui.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.slutsenko.cocktailapp.ui.MainActivity.Companion.ANOTHER_COCKTAIL
 
 class DrinkService : Service() {
+    private val wait = 3000L
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         try {
-            Thread.sleep(3000)
-            val another = Intent("com.slutsenko.action.anotherCocktail")
+            Thread.sleep(wait)
+            val another = Intent(ANOTHER_COCKTAIL)
             sendBroadcast(another)
             stopSelf()
         } catch (e: InterruptedException) {

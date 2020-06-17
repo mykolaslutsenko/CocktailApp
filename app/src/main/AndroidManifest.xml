@@ -23,9 +23,9 @@
                 <action android:name="android.intent.action.ACTION_BATTERY_OKAY"/>
             </intent-filter>
         </receiver>
-        <service android:name=".service.StartAppService"/>
+        <service android:name=".service.BootService"/>
         <service android:name=".service.DrinkService"/>
-        <receiver android:name=".receiver.StartAppReceiver">
+        <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

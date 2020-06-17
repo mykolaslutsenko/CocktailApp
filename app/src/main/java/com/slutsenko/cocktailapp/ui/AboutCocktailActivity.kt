@@ -1,9 +1,7 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
-import android.view.View
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R

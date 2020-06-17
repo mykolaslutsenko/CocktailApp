@@ -11,6 +11,7 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
+import com.slutsenko.cocktailapp.ui.MainActivity.Companion.COLUMN
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
@@ -79,6 +80,5 @@ class SearchActivity : Base() {
 
     companion object {
         private const val URL = "https://www.thecocktaildb.com/api/json/v1/1/"
-        private const val COLUMN = 2
     }
 }

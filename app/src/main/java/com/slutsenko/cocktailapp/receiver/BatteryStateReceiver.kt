@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 
-class BatteryStateReceiver (val batteryListener: BatteryListener): BroadcastReceiver() {
+class BatteryStateReceiver (private val batteryListener: BatteryListener): BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         batteryListener.onBatteryChange(intent!!)
     }

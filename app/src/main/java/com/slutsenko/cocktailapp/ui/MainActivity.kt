@@ -6,12 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.os.BatteryManager
-import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
@@ -31,9 +26,8 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
     lateinit var batteryStateReceiver: BatteryStateReceiver
     lateinit var cocktail: ArrayList<Cocktail>
 
+
     override fun myView(): Int {
-
-
         return R.layout.activity_main
     }
 
@@ -42,7 +36,8 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (cocktail.size > 1) {
                     val randomCocktail = cocktail[Random().nextInt(cocktail.size)]
-                    val snackbar = Snackbar.make(frame_layout, "Open ${randomCocktail.strDrink}?", Snackbar.LENGTH_LONG).setAction("OPEN") { v: View? ->
+                    Snackbar.make(frame_layout, "Open ${randomCocktail.strDrink}?",
+                            Snackbar.LENGTH_LONG).setAction("OPEN") {
                         val intentRandom = Intent(context, AboutCocktailActivity::class.java)
                         intentRandom.putExtra("cocktail", randomCocktail)
                         context?.startActivity(intentRandom)
@@ -51,7 +46,7 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
             }
         }
         val filter = IntentFilter()
-        filter.addAction("com.slutsenko.action.anotherCocktail")
+        filter.addAction(ANOTHER_COCKTAIL)
         registerReceiver(br, filter)
 
 
@@ -68,7 +63,9 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
         }
-        fab_search.setOnClickListener { v: View? -> startActivity(Intent(this@MainActivity, SearchActivity::class.java)) }
+        fab_search.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+        }
     }
 
 
@@ -91,7 +88,8 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
     }
 
     companion object {
-        private const val COLUMN = 2
+        const val ANOTHER_COCKTAIL = "com.slutsenko.action.anotherCocktail"
+        const val COLUMN = 2
         var cocktailDatabase: CocktailDatabase? = null
     }
 
@@ -105,25 +103,23 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
             Intent.ACTION_POWER_CONNECTED -> {
                 tv_battery.visibility = View.VISIBLE
                 tv_battery.setBackgroundColor(Color.WHITE)
-                tv_battery.setText(percent)
+                tv_battery.text = percent
             }
             Intent.ACTION_POWER_DISCONNECTED -> {
                 tv_battery.visibility = View.GONE
             }
             Intent.ACTION_BATTERY_OKAY -> {
                 tv_battery.setBackgroundColor(Color.GREEN)
-                tv_battery.setText(percent)
+                tv_battery.text = percent
             }
             Intent.ACTION_BATTERY_LOW -> {
                 tv_battery.setBackgroundColor(Color.RED)
-                tv_battery.setText(percent)
+                tv_battery.text = percent
             }
             Intent.ACTION_BATTERY_CHANGED -> {
                 tv_battery.setBackgroundColor(Color.BLACK)
-                tv_battery.setText(percent)
+                tv_battery.text = percent
             }
         }
-//        tv_battery.setBackgroundColor(Color.YELLOW)
-//        tv_battery.setTextColor(Color.BLUE)
     }
 }

@@ -3,4 +3,9 @@
     <string name="history">History is empty</string>
     <string name="enter_text">Enter text to start search</string>
     <string name="no_found">No cocktails found</string>
+    <string name="toast_airmode">"Смакуйте маргаритку із відчуттям міри." +
+                    " І надіємося, що Ви не пілот під  час польоту"</string>
+
+
+
 </resources>
