@@ -1,43 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frame_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_history"
-        style="@style/message" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_database"
+    <com.slutsenko.cocktailapp.ui.view.MyToolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/eight">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:gravity="start|bottom"
+            android:text="@string/app_name"
+            android:textSize="@dimen/font_20" />
+    </com.slutsenko.cocktailapp.ui.view.MyToolbar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_search"
-        style="@style/fab"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_search" />
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar">
 
-    <TextView
-        android:visibility="invisible"
-        android:id="@+id/tv_battery"
-        android:layout_width="match_parent"
-        android:elevation="@dimen/font_sixteen"
-        android:layout_gravity="bottom"
-        android:layout_height="48dp"
-        android:layout_margin="100dp"
-        android:background="@color/colorAccent"
-        android:gravity="center"
-        android:text="battery"
-        android:textColor="@color/colorPrimary"
-        android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tv_history"
+            style="@style/message" />
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_database"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_8">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_search"
+            style="@style/fab"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_search" />
+
+        <TextView
+            android:id="@+id/tv_battery"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="100dp"
+            android:background="@color/colorAccent"
+            android:elevation="@dimen/font_16"
+            android:gravity="center"
+            android:text="@string/battery"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

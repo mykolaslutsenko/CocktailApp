@@ -5,13 +5,13 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_search"
+        android:id="@+id/til_search1"
         style="@style/search_layout"
-        app:cardCornerRadius="@dimen/two"
+        app:cardCornerRadius="@dimen/dp_2"
         app:startIconDrawable="@drawable/ic_search">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_text"
+            android:id="@+id/tiet_text1"
             style="@style/search_edit_text" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.slutsenko.cocktailapp"
     android:installLocation="internalOnly">
 
@@ -14,11 +15,13 @@
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".auth.LoginActivity">
+        <activity android:name=".auth.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
 
-        <receiver android:name=".receiver.BatteryStateReceiver">
+        <receiver android:name=".receiver.BatteryStateReceiver"
+            tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -27,10 +30,10 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".service.StartAppService" />
+        <service android:name=".service.BootService" />
         <service android:name=".service.DrinkService" />
 
-        <receiver android:name=".receiver.StartAppReceiver">
+        <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

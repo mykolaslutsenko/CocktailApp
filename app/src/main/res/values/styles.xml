@@ -1,7 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -15,19 +14,19 @@
     <style name="message">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_fourteen</item>
+        <item name="android:textSize">@dimen/font_14</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorTextSecond</item>
-        <item name="android:lineSpacingExtra">@dimen/font_ten</item>
+        <item name="android:lineSpacingExtra">@dimen/font_10</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="drink_name">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_fourteen</item>
-        <item name="android:padding">@dimen/eight</item>
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:padding">@dimen/dp_8</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
@@ -36,22 +35,22 @@
     <style name="about_cocktail_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/sixteen</item>
+        <item name="android:textSize">@dimen/dp_16</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:lineSpacingExtra">@dimen/twelve</item>
+        <item name="android:lineSpacingExtra">@dimen/dp_12</item>
     </style>
 
     <style name="about_cocktail_text.title">
-        <item name="android:padding">@dimen/eight</item>
+        <item name="android:padding">@dimen/dp_8</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_eighteen</item>
+        <item name="android:textSize">@dimen/font_18</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:lineSpacingExtra">@dimen/font_ten</item>
+        <item name="android:lineSpacingExtra">@dimen/font_10</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:background">#e7e7e7</item>
     </style>
@@ -64,25 +63,25 @@
         <item name="android:cursorVisible">true</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:imeOptions">actionSearch</item>
-        <item name="android:lineSpacingExtra">@dimen/eight</item>
+        <item name="android:lineSpacingExtra">@dimen/dp_8</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:textSize">@dimen/font_sixteen</item>
+        <item name="android:textSize">@dimen/font_16</item>
     </style>
 
     <style name="search_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/eight</item>
+        <item name="android:layout_margin">@dimen/dp_8</item>
         <item name="android:background">@color/colorAppBar</item>
-        <item name="android:elevation">@dimen/two</item>
+        <item name="android:elevation">@dimen/dp_8</item>
     </style>
 
     <style name="fab">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">bottom|end</item>
-        <item name="android:layout_margin">@dimen/sixteen</item>
+        <item name="android:layout_margin">@dimen/dp_16</item>
     </style>
 
 </resources>

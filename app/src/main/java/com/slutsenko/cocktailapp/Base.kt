@@ -50,4 +50,6 @@ abstract class Base : AppCompatActivity() {
         super.onDestroy()
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
+
+
 }

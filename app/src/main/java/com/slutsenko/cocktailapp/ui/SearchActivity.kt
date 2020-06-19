@@ -4,7 +4,6 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
@@ -13,13 +12,12 @@ import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
 import com.slutsenko.cocktailapp.ui.MainActivity.Companion.COLUMN
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
+
 
 class SearchActivity : Base() {
     var cocktailAdapter: CocktailAdapter? = null
@@ -29,8 +27,6 @@ class SearchActivity : Base() {
     }
 
     override fun activityCreated() {
-        Objects.requireNonNull(supportActionBar)?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar!!.setCustomView(R.layout.toolbar)
         tv_answer.setText( R.string.enter_text)
         rv_search.layoutManager = GridLayoutManager(this, COLUMN)
         tiet_text.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->

@@ -5,7 +5,10 @@
     <string name="no_found">No cocktails found</string>
     <string name="toast_airmode">"Смакуйте маргаритку із відчуттям міри." +
                     " І надіємося, що Ви не пілот під  час польоту"</string>
-
+    <string name="battery">battery</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
+    <string name="btn_login">Login</string>
 
 
 </resources>

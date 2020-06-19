@@ -14,20 +14,37 @@
         android:layout_height="wrap_content"
         android:elevation="0dp"
         app:elevation="0dp">
-        <FrameLayout
-            android:minHeight="48dp"
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctl_collaps"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            app:expandedTitleGravity="bottom|left"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
-            <ImageView
-                android:id="@+id/iv_cocktail_full"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="centerCrop"/>
+                android:layout_height="match_parent">
 
-        </FrameLayout>
+                <ImageView
+                    android:id="@+id/iv_cocktail_full"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax" />
+            </FrameLayout>
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/AppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
 
 
     <androidx.core.widget.NestedScrollView
@@ -42,19 +59,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/sixteen"
-                app:cardCornerRadius="@dimen/eight">
-            </androidx.cardview.widget.CardView>
-
+            <TextView
+                android:id="@+id/tv_basic"
+                style="@style/about_cocktail_text.title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/sixteen"
+                android:layout_margin="@dimen/dp_16"
                 android:orientation="horizontal">
 
                 <TextView
@@ -75,7 +87,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/sixteen"
+                android:layout_margin="@dimen/dp_16"
                 android:orientation="horizontal">
 
                 <TextView
@@ -96,15 +108,15 @@
             <TextView
                 android:id="@+id/tv_instructions_value"
                 style="@style/about_cocktail_text"
-                android:layout_margin="@dimen/sixteen" />
+                android:layout_margin="@dimen/dp_16" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_logo"
-        android:onClick="back"/>
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:onClick="back"
+        android:src="@drawable/ic_back_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
