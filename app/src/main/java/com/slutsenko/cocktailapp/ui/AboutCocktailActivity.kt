@@ -9,6 +9,7 @@ import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.service.DrinkService
+import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
 class AboutCocktailActivity : Base() {
@@ -28,7 +29,7 @@ class AboutCocktailActivity : Base() {
         ctl_collaps.title = cocktail.strDrink
        // title = cocktail.strDrink
         customizeComponents()
-        MainActivity.cocktailDatabase?.cocktailDao()?.addCocktail(cocktail)
+        MainFragment.cocktailDatabase?.cocktailDao()?.addCocktail(cocktail)
     }
 
     override fun onDestroy() {

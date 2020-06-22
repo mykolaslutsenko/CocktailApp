@@ -9,6 +9,12 @@
     <string name="login">login</string>
     <string name="password">password</string>
     <string name="btn_login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alcoholic">Alcoholic</string>
+    <string name="non_alcoholic">Non alcoholic</string>
+    <string name="optional_alcohol">Optional alcohol</string>
+    <string name="non">Non</string>
 
 
 </resources>

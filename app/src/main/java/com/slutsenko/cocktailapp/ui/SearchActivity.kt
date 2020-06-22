@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.adapter.list.CocktailAdapter
+import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
-import com.slutsenko.cocktailapp.ui.MainActivity.Companion.COLUMN
+import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.COLUMN
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
 import retrofit2.Callback

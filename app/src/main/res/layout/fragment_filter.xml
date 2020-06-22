@@ -1,0 +1,72 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.slutsenko.cocktailapp.ui.fragment.FilterFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioGroup
+            android:layout_margin="@dimen/dp_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_alcoholic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alcoholic" />
+
+            <RadioButton
+                android:id="@+id/rb_non_alcoholic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/non_alcoholic" />
+
+            <RadioButton
+                android:id="@+id/rb_optional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/optional_alcohol" />
+
+            <RadioButton
+                android:id="@+id/rb_non"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/non" />
+
+
+        </RadioGroup>
+        <androidx.legacy.widget.Space
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+        <LinearLayout
+            android:layout_margin="@dimen/dp_24"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48">
+            <Button
+                android:id="@+id/btn_drop"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="СКИНУТИ" />
+
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ЗАСТОСУВАТИ" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
