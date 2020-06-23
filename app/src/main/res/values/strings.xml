@@ -15,6 +15,9 @@
     <string name="non_alcoholic">Non alcoholic</string>
     <string name="optional_alcohol">Optional alcohol</string>
     <string name="non">Non</string>
+    <string name="menu_save">save</string>
+    <string name="menu_item_open">open</string>
+    <string name="menu_add_favorite">add favorite</string>
 
 
 </resources>
