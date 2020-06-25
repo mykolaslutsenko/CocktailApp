@@ -64,6 +64,6 @@ class AboutCocktailActivity : Base() {
     }
 
     fun back(view: View) {
-
+        onBackPressed()
     }
 }

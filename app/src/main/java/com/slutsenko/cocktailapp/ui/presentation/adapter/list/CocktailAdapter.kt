@@ -15,7 +15,7 @@ import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter.Co
 import com.slutsenko.cocktailapp.ui.AboutCocktailActivity
 import java.util.*
 
-class CocktailAdapter(private val context: Context, private val cocktailsList: ArrayList<Cocktail>)
+class CocktailAdapter(private val context: Context, private val cocktailsList: List<Cocktail>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)
