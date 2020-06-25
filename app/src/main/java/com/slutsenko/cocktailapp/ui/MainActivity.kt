@@ -1,8 +1,10 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
+import androidx.activity.viewModels
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.auth.LoginViewModel
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
@@ -11,11 +13,11 @@ import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 
 
-class MainActivity : Base(), BatteryStateReceiver.BatteryListener,
+class MainActivity : Base<LoginViewModel>(), BatteryStateReceiver.BatteryListener,
         FilterFragment.OnFilterResultListener, FilterResultCallback {
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
-
+    override val viewModel: LoginViewModel by viewModels()
     var callback : FilterFragment.OnFilterResultListener? = null
     override fun myView(): Int {
 

@@ -3,16 +3,18 @@ package com.slutsenko.cocktailapp.ui
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.auth.LoginViewModel
 import com.slutsenko.cocktailapp.service.DrinkService
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
-class AboutCocktailActivity : Base() {
+class AboutCocktailActivity : Base<LoginViewModel>() {
     lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
@@ -66,4 +68,7 @@ class AboutCocktailActivity : Base() {
     fun back(view: View) {
         onBackPressed()
     }
+
+    override val viewModel: LoginViewModel by viewModels()
+
 }
