@@ -1,15 +1,14 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
-import android.view.View
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.slutsenko.cocktailapp.Base
+import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
+import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
+import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
 import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
-import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 
 
 class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
@@ -24,16 +23,7 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
     }
 
     override fun activityCreated() {
-        viewpager2.adapter = FavoritePagerAdapter(this)
-        val tabLayout: TabLayout = findViewById(R.id.tab_layout)
-        TabLayoutMediator(tabLayout, viewpager2) { tab, position ->
-            when (position) {
-                0 -> tab.text = "History"
-                else -> tab.text = "Favorite"
-            }
-        }.attach()
-
-        //supportFragmentManager.beginTransaction().add(R.id.main_container, MainFragment::class.java, null).addToBackStack("Name").commit()
+        supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
 
 //        br = object : BroadcastReceiver() {
 //            override fun onReceive(context: Context?, intent: Intent?) {
@@ -53,7 +43,6 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
 //        registerReceiver(br, filter)
 
     }
-
 
 
     override fun onResume() {
@@ -121,4 +110,5 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
     override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
         callbacks.remove(listener)
     }
+
 }

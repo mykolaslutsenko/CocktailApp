@@ -1,18 +1,23 @@
 package com.slutsenko.cocktailapp.ui.fragment
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.room.Room
-
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.slutsenko.cocktailapp.BaseFragment
 import com.slutsenko.cocktailapp.Cocktail
-
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.db.CocktailDatabase
+import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
+import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
+import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.ui.SearchActivity
+import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
@@ -58,17 +63,7 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
         cocktailDatabase = Room.databaseBuilder(requireContext(),
-                CocktailDatabase::class.java, "cocktail5").allowMainThreadQueries().build()
-        cocktail = cocktailDatabase?.cocktailDao()?.cocktails as ArrayList<Cocktail>
-        if (cocktail.isEmpty()) {
-            tv_history.setText(R.string.history)
-        } else {
-            cocktail.reverse()
-            val cocktailAdapter = CocktailAdapter(requireContext(), cocktail)
-            rv_database.layoutManager = GridLayoutManager(context, COLUMN)
-            rv_database.adapter = cocktailAdapter
-            tv_history.text = ""
-        }
+                CocktailDatabase::class.java, "cocktail10").allowMainThreadQueries().build()
     }
 
     override fun onBottomSheetDialogFragmentClick(dialog: DialogFragment, data: Cocktail?) {

@@ -5,7 +5,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +17,7 @@ import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter.Co
 import com.slutsenko.cocktailapp.ui.AboutCocktailActivity
 import java.util.*
 
-class CocktailAdapter(private val context: Context, private val cocktailsList: ArrayList<Cocktail>)
+class CocktailAdapter(private val context: Context, private var cocktailsList: List<Cocktail>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)

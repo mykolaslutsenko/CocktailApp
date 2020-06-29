@@ -9,7 +9,7 @@ import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
 
-abstract class Base : AppCompatActivity(),
+abstract class BaseActivity : AppCompatActivity(),
         BaseDialogFragment.OnDialogFragmentClickListener<Cocktail>,
         BaseDialogFragment.OnDialogFragmentDismissListener<Cocktail> {
     private val airModeReceiver= AirModeReceiver()
