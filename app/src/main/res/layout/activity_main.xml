@@ -7,78 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <com.slutsenko.cocktailapp.ui.view.MyToolbar
-        android:id="@+id/my_toolbar"
+    
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_main"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_16"
-            android:layout_weight="1"
-            android:gravity="start|bottom"
-            android:text="@string/app_name"
-            android:textSize="@dimen/font_20" />
-
-        <androidx.legacy.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-
-        <ImageView
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="@dimen/dp_32"
-            android:layout_weight="0"
-            android:onClick="onClickFilter"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_filter_list_24" />
-    </com.slutsenko.cocktailapp.ui.view.MyToolbar>
-
-    <LinearLayout
-        android:id="@+id/main_container"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/tv_battery"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_gravity="bottom"-->
-            <!--                android:layout_margin="100dp"-->
-            <!--                android:background="@color/colorAccent"-->
-            <!--                android:elevation="@dimen/font_16"-->
-            <!--                android:gravity="center"-->
-            <!--                android:text="@string/battery"-->
-            <!--                android:textColor="@color/colorPrimary"-->
-            <!--                android:textSize="24sp"-->
-            <!--                android:visibility="invisible" />-->
-
-            <!--        </FrameLayout>-->
-
-        </androidx.viewpager2.widget.ViewPager2>
-
-    </LinearLayout>
-
-
+        android:layout_height="match_parent"/>
 </LinearLayout>

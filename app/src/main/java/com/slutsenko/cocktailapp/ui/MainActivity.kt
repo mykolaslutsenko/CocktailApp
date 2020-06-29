@@ -1,43 +1,24 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.commit
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
-import com.slutsenko.cocktailapp.ui.dialog.RegularBottomSheetDialogFragment
 import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
+class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
+        FilterFragment.OnFilterResultListener, FilterResultCallback {
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        supportFragmentManager.commit {
-//            this.add(R.id.main_container, MainFragment(), MainFragment::class.java.simpleName)
-//            this.addToBackStack(MainFragment::class.java.toString())
-//        }
-//
-//        RegularBottomSheetDialogFragment.newInstance {
-////            title="Test"
-//            this.titleText="Test"
-//
-//        }.show(supportFragmentManager)
 
-    }
     override fun myView(): Int {
-
-
 
         return R.layout.activity_main
     }
@@ -71,17 +52,7 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
 //        filter.addAction(ANOTHER_COCKTAIL)
 //        registerReceiver(br, filter)
 
-
-        //this@MainActivity.title = "          " + "Cocktail App"
     }
-
-    fun onClickFilter(view: View) {
-        supportFragmentManager.beginTransaction().
-        add(R.id.main_container, FilterFragment::class.java, null).
-        commit()
-    }
-
-
 
 
 
@@ -132,5 +103,22 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener {
 //                tv_battery.text = percent
 //            }
 //        }
+    }
+
+    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+        callbacks.forEach {
+            it.onFilterResult(alcoholFilter, categoryFilter)
+        }
+    }
+
+    override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
+
+
+    override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
+        callbacks.add(listener)
+    }
+
+    override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
+        callbacks.remove(listener)
     }
 }
