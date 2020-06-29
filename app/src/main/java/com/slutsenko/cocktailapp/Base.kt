@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 
-abstract class Base : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     private val airModeReceiver= AirModeReceiver()
     private val bootReceiver = BootReceiver()
     private val log: String = "BaseLog"
