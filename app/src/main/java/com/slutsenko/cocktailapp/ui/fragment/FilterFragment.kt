@@ -2,6 +2,9 @@ package com.slutsenko.cocktailapp.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
+import android.widget.Toast
 import com.slutsenko.cocktailapp.BaseFragment
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
@@ -19,23 +22,67 @@ class FilterFragment : BaseFragment() {
         onFilterResultListener = context as OnFilterResultListener
         alcoholFilter = arguments?.getSerializable(ALCOHOL_DRINK_FILTER) as AlcoholDrinkFilter?
         categoryFilter = arguments?.getSerializable(CATEGORY_DRINK_FILTER) as CategoryDrinkFilter?
-
-
     }
 
     override fun configureView(savedInstanceState: Bundle?) {
+        initFilters()
         super.configureView(savedInstanceState)
-        initFilter()
+
+        val onAlcoholicRadioButtonClickListener = View.OnClickListener {
+            when (it.id) {
+                R.id.rb_alcoholic -> {
+                    alcoholFilter = AlcoholDrinkFilter.ALCOHOLIC
+                }
+                R.id.rb_non_alcoholic -> {
+                    alcoholFilter = AlcoholDrinkFilter.NON_ALCOHOLIC
+                }
+                R.id.rb_optional -> {
+                    alcoholFilter = AlcoholDrinkFilter.OPTIONAL_ALCOHOL
+                }
+                R.id.rb_non -> {
+                    alcoholFilter = AlcoholDrinkFilter.NON
+                }
+            }
+        }
+        rb_alcoholic.setOnClickListener(onAlcoholicRadioButtonClickListener)
+        rb_non_alcoholic.setOnClickListener(onAlcoholicRadioButtonClickListener)
+        rb_optional.setOnClickListener(onAlcoholicRadioButtonClickListener)
+
+        rg_category.setOnCheckedChangeListener { _, checkedId ->
+            CategoryDrinkFilter.values().forEach {
+                if (it.key == requireView().findViewById<RadioButton>(checkedId).text) {
+                    categoryFilter = it
+                }
+            }
+        }
+        CategoryDrinkFilter.values().forEach {
+            rg_category.addView(
+                    RadioButton(context).apply {
+                        id = View.generateViewId()
+                        text = it.key
+                    }
+            )
+        }
+
         toolbar_iv_back.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
         btn_apply.setOnClickListener {
-            onFilterResultListener?.onFilterApply(alcoholFilter, categoryFilter)
+            onFilterResultListener?.onFilterResult(alcoholFilter, categoryFilter)
             activity?.supportFragmentManager?.popBackStack()
         }
         btn_drop.setOnClickListener {
-            onFilterResultListener?.onFilterReset(AlcoholDrinkFilter.NON, CategoryDrinkFilter.NON)
+            onFilterResultListener?.onFilterResult(AlcoholDrinkFilter.NON, CategoryDrinkFilter.NON)
             activity?.supportFragmentManager?.popBackStack()
+        }
+    }
+
+    private fun initFilters() {
+        when (alcoholFilter) {
+            AlcoholDrinkFilter.ALCOHOLIC -> rb_alcoholic.isChecked = true
+            AlcoholDrinkFilter.NON_ALCOHOLIC -> rb_non_alcoholic.isChecked = true
+            AlcoholDrinkFilter.OPTIONAL_ALCOHOL -> rb_optional.isChecked = true
+            AlcoholDrinkFilter.NON -> rb_non.isChecked = true
         }
     }
 
@@ -51,34 +98,10 @@ class FilterFragment : BaseFragment() {
             fragment.arguments = bundle
             return fragment
         }
-
-    }
-
-    private fun initFilter() {
-        when (alcoholFilter) {
-            AlcoholDrinkFilter.ALCOHOLIC -> {
-                rb_alcoholic.isChecked = true
-                //alcoholFilter = AlcoholDrinkFilter.ALCOHOLIC
-            }
-            AlcoholDrinkFilter.NON_ALCOHOLIC -> {
-                rb_non_alcoholic.isChecked = true
-               // alcoholFilter = AlcoholDrinkFilter.NON_ALCOHOLIC
-            }
-            AlcoholDrinkFilter.OPTIONAL_ALCOHOL -> {
-                rb_optional.isChecked = true
-                //alcoholFilter = AlcoholDrinkFilter.OPTIONAL_ALCOHOL
-            }
-            else -> {
-                rb_non.isChecked = true
-               // alcoholFilter = AlcoholDrinkFilter.NON
-            }
-        }
     }
 
 
     interface OnFilterResultListener {
-        fun onFilterApply(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?)
-        fun onFilterReset(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?)
+        fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?)
     }
-
 }

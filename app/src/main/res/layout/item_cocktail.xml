@@ -16,17 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/iv_cocktail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
-            <ImageView
-                android:layout_margin="@dimen/dp_8"
+
+            <CheckBox
+                android:id="@+id/chb_favorite"
                 android:layout_width="@dimen/dp_48"
-                android:layout_gravity="end|top"
                 android:layout_height="@dimen/dp_48"
-                android:src="@drawable/ic_star_48"/>
+                android:layout_margin="@dimen/dp_8"
+                android:layout_gravity="end|top"
+                 />
+
+
         </FrameLayout>
 
         <TextView

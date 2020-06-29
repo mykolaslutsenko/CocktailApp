@@ -16,7 +16,6 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener,
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
 
-    var callback : FilterFragment.OnFilterResultListener? = null
     override fun myView(): Int {
 
         return R.layout.activity_main
@@ -46,9 +45,6 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener,
 
     }
 
-    fun onClickFilter(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-
-    }
 
 
     override fun onResume() {
@@ -100,21 +96,20 @@ class MainActivity : Base(), BatteryStateReceiver.BatteryListener,
 //        }
     }
 
-    override fun onFilterApply(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        //iv_indicator.visibility = View.VISIBLE
+    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+        callbacks.forEach {
+            it.onFilterResult(alcoholFilter, categoryFilter)
+        }
     }
 
-    override fun onFilterReset(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        //iv_indicator.visibility = View.GONE
-    }
+    override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
+
 
     override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
-
+        callbacks.add(listener)
     }
 
     override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
-
+        callbacks.remove(listener)
     }
-
-
 }

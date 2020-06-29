@@ -12,7 +12,9 @@ class Cocktail : Serializable {
     @PrimaryKey
     var strDrink = ""
 
-    //var isFavorite:Boolean? = null
+
+
+    var isFavorite:Boolean? = null
     var strDrinkAlternate: String? = null
     var strDrinkES: String? = null
     var strDrinkDE: String? = null
