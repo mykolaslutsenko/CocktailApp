@@ -49,7 +49,7 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
         iv_main_toolbar_filter.setOnClickListener {
             val filterFragment = FilterFragment.newInstance(alcoholFilter, categoryFilter)
             activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.fcv_main, filterFragment, FilterFragment::class.java.simpleName)
+                    ?.add(R.id.rl_container, filterFragment, FilterFragment::class.java.simpleName)
                     ?.addToBackStack(null)
                     ?.commit()
         }
@@ -66,13 +66,7 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
                 CocktailDatabase::class.java, "cocktail10").allowMainThreadQueries().build()
     }
 
-    override fun onBottomSheetDialogFragmentClick(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
 
-    override fun onBottomSheetDialogFragmentDismiss(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
 
     companion object {
         lateinit var cocktailList: List<Cocktail>

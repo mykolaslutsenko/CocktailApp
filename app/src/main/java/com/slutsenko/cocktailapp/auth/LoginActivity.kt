@@ -7,9 +7,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.DialogFragment
 import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.ui.MainActivity
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
@@ -78,5 +82,6 @@ class LoginActivity : BaseActivity() {
         invalidate()
         super.onStart()
     }
+
 
 }

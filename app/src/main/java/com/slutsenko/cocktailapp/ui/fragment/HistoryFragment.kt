@@ -12,7 +12,6 @@ import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.cocktailList
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.android.synthetic.main.item_cocktail.*
 
 class HistoryFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     override val contentLayoutResId: Int = R.layout.fragment_history

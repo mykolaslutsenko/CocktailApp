@@ -18,6 +18,9 @@
     <string name="menu_save">save</string>
     <string name="menu_item_open">open</string>
     <string name="menu_add_favorite">add favorite</string>
+    <string name="profile">profile</string>
+    <string name="main">main</string>
+    <string name="log_out">Log out</string>
 
 
 </resources>

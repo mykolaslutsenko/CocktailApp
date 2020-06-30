@@ -1,6 +1,7 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
+import android.os.Bundle
 import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
@@ -9,6 +10,8 @@ import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
 import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
+import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
@@ -22,8 +25,42 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
         return R.layout.activity_main
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val mainFragment = MainFragment.newInstance()
+        val profileFragment = ProfileFragment.newInstance()
+
+
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_main -> {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .hide(profileFragment)
+                            .show(mainFragment)
+                            .commit()
+                    true
+                }
+                R.id.menu_profile -> {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .hide(mainFragment)
+                            .show(profileFragment)
+                            .commit()
+                    true
+                }
+                else -> false
+            }
+
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
+
+    }
+
     override fun activityCreated() {
-        supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
+
+
 
 //        br = object : BroadcastReceiver() {
 //            override fun onReceive(context: Context?, intent: Intent?) {

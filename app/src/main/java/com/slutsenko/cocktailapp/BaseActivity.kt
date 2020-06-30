@@ -4,15 +4,14 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseActivity : AppCompatActivity(),
-        BaseDialogFragment.OnDialogFragmentClickListener<Cocktail>,
-        BaseDialogFragment.OnDialogFragmentDismissListener<Cocktail> {
-    private val airModeReceiver= AirModeReceiver()
+abstract class BaseActivity : AppCompatActivity(){
+    private val airModeReceiver = AirModeReceiver()
     private val bootReceiver = BootReceiver()
     private val log: String = "BaseLog"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,13 +54,6 @@ abstract class BaseActivity : AppCompatActivity(),
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
 
-    override fun onBottomSheetDialogFragmentClick(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBottomSheetDialogFragmentDismiss(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
 
 
 }

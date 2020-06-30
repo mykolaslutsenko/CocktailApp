@@ -1,26 +1,27 @@
 package com.slutsenko.cocktailapp.ui.dialog
 
-import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-
+import com.slutsenko.cocktailapp.R
 
 class RegularBottomSheetDialogFragment<Data> :
-        SimpleBaseDialogFragment<Data, SimpleBaseDialogFragment.SimpleDialogBuilder>() {
+        SimpleBaseBottomSheetDialogFragment<Data, RegularDialogButton, RegularDialogType, SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder>() {
 
+    override val dialogType: RegularDialogType = RegularDialogType
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override var dialogBuilder: SimpleDialogBuilder = SimpleDialogBuilder()
+    override var data: Data? = null
 
-        dialogBuilder= requireArguments().getParcelable<SimpleDialogBuilder>(EXTRA_KEY_BUILDER)!!
+    override fun getButtonType(view: View): RegularDialogButton {
+        return when (view.id) {
+            R.id.lb_dialog_bs_left -> LeftDialogButton
+            R.id.lb_dialog_bs_right -> RightDialogButton
+            else -> throw NotImplementedError("handle another dialog button types")
+        }
     }
 
-    override var dialogBuilder: SimpleBaseDialogFragment.SimpleDialogBuilder =SimpleDialogBuilder()
-    override var data: Data? =null
-
-
     companion object {
-        fun newInstance(builder: SimpleBaseDialogFragment.SimpleDialogBuilder.() -> Unit): RegularBottomSheetDialogFragment<Any?> {
+        fun newInstance(builder: SimpleDialogBuilder.() -> Unit): RegularBottomSheetDialogFragment<Any?> {
             return newInstance(null, builder)
         }
 
@@ -30,17 +31,14 @@ class RegularBottomSheetDialogFragment<Data> :
          */
         fun <Data> newInstance(
                 data: Data? = null,
-                builder: SimpleBaseDialogFragment.SimpleDialogBuilder.() -> Unit
+                builder: SimpleDialogBuilder.() -> Unit
         ): RegularBottomSheetDialogFragment<Data> {
             val fragment = RegularBottomSheetDialogFragment<Data>()
-            fragment.arguments = bundleOf (
-                    EXTRA_KEY_BUILDER to (SimpleDialogBuilder().apply(builder)),
-                    EXTRA_KEY_DATA to data
-            )
+            fragment.arguments = bundleOf()
+                EXTRA_KEY_BUILDER to (SimpleDialogBuilder().apply(builder))
             return fragment
         }
 
         private const val EXTRA_KEY_BUILDER = "EXTRA_KEY_BUILDER"
-        private const val EXTRA_KEY_DATA = "EXTRA_KEY_DATA"
     }
 }

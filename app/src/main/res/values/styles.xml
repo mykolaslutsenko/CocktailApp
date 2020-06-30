@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -92,6 +92,20 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="Widget.PopupMenu" parent="">
+        <item name="android:popupBackground" tools:ignore="PrivateResource">@drawable/mtrl_popupmenu_background</item>
+        <item name="android:popupElevation">8dp</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">1px</item>
+        <item name="android:dropDownHorizontalOffset">-16dp</item>
+
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:outlineSpotShadowColor" tools:ignore="NewApi">?colorPrimary</item>
+        <item name="android:outlineAmbientShadowColor" tools:ignore="NewApi">?colorPrimary</item>
     </style>
 
 </resources>

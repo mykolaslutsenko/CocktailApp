@@ -5,19 +5,23 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.slutsenko.cocktailapp.R
 import kotlinx.android.synthetic.main.layout_dialog_simple.*
 
+abstract class SimpleBaseBottomSheetDialogFragment<
+        Data,
+        ButtonType : DialogButton,
+        Type : DialogType<ButtonType>,
+        Builder : SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder
+        >
+protected constructor() : BaseBottomSheetDialogFragment<Data, ButtonType, Type>() {
 
-abstract class SimpleBaseDialogFragment<Data, Builder : SimpleBaseDialogFragment.SimpleDialogBuilder>
-protected constructor() : BaseDialogFragment<Data>() {
-
-    override val contentLayoutResId = R.layout.layout_dialog_simple
+    override val contentLayoutResId = R.layout.layout_dialog_bottom_sheet_simple
     protected open val extraContentLayoutResId: Int = 0
 
     protected open lateinit var dialogBuilder: Builder
@@ -26,13 +30,9 @@ protected constructor() : BaseDialogFragment<Data>() {
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lb_dialog_bs_left.setOnClickListener(this)
-        lb_dialog_bs_right.setOnClickListener(this)
-        btn_dialog_bs_close.setOnClickListener(this)
-
         @Suppress("SENSELESS_COMPARISON")
         check(dialogBuilder != null) {
-            "${SimpleBaseDialogFragment::class.java.simpleName}. " +
+            "${SimpleBaseBottomSheetDialogFragment::class.java.simpleName}. " +
                     "Property dialogBuilder must not be implemented and must not be null after " +
                     "super.onViewCreated(view, savedInstanceState) called and afterwards"
         }
@@ -57,7 +57,7 @@ protected constructor() : BaseDialogFragment<Data>() {
         vg_dialog_bs_buttons.isVisible = lb_dialog_bs_left.isVisible || lb_dialog_bs_right.isVisible
 
         lb_dialog_bs_left.text = leftButtonText ?: ""
-        lb_dialog_bs_right.text = rightButtonText ?: ""
+        lb_dialog_bs_right.text = leftButtonText ?: ""
 
         if (dialogBuilder.isCloseButtonVisible) {
             btn_dialog_bs_close.setOnClickListener {
@@ -83,6 +83,10 @@ protected constructor() : BaseDialogFragment<Data>() {
         //stub
     }
 
+    override fun obtainClickableViews(): List<View> = listOf(
+            lb_dialog_bs_left,
+            lb_dialog_bs_right
+    )
 
     open class SimpleDialogBuilder constructor() : Parcelable {
         /**
@@ -148,10 +152,5 @@ protected constructor() : BaseDialogFragment<Data>() {
                 return arrayOfNulls(size)
             }
         }
-    }
-
-    fun TextView.setTextOrGone(text: CharSequence? = null) {
-        this.text = text
-        isGone = this.text.isNullOrEmpty()
     }
 }

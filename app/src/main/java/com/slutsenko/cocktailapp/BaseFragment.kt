@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseFragment : Fragment(),
-        BaseDialogFragment.OnDialogFragmentClickListener<Cocktail>,
-        BaseDialogFragment.OnDialogFragmentDismissListener<Cocktail> {
+abstract class BaseFragment : Fragment()
+        {
 
     protected abstract val contentLayoutResId: Int
 
@@ -31,11 +32,7 @@ abstract class BaseFragment : Fragment(),
         //stub
     }
 
-    override fun onBottomSheetDialogFragmentClick(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
 
-    override fun onBottomSheetDialogFragmentDismiss(dialog: DialogFragment, data: Cocktail?) {
-        TODO("Not yet implemented")
-    }
+
+
 }
