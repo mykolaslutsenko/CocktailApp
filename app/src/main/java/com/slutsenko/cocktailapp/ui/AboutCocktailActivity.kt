@@ -8,12 +8,14 @@ import com.google.android.material.appbar.AppBarLayout
 import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.service.DrinkService
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
-class AboutCocktailActivity : BaseActivity() {
+class AboutCocktailActivity : BaseActivity<ActivityAboutCocktailBinding>() {
     lateinit var cocktail: Cocktail
+
 
     override fun myView(): Int {
 
@@ -27,15 +29,22 @@ class AboutCocktailActivity : BaseActivity() {
         })
         cocktail = intent.getSerializableExtra("cocktail") as Cocktail
         ctl_collaps.title = cocktail.strDrink
-       // title = cocktail.strDrink
+        // title = cocktail.strDrink
         customizeComponents()
         MainFragment.cocktailDatabase?.cocktailDao()?.addCocktail(cocktail)
+    }
+
+    override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {
+        super.configureDataBinding(binding)
+        binding.cocktail = cocktail
     }
 
     override fun onDestroy() {
         startService(Intent(this, DrinkService::class.java))
         super.onDestroy()
     }
+
+
 
     private fun customizeComponents() {
         val strInfoItem = """
@@ -52,7 +61,7 @@ class AboutCocktailActivity : BaseActivity() {
         val strIngredientTitle = "Ingredients"
         val strInstructionsTitle = "Instructions"
 
-        Glide.with(this).load(cocktail.strDrinkThumb).into(iv_cocktail_full)
+        //Glide.with(this).load(cocktail.strDrinkThumb).into(iv_cocktail_full)
         tv_basic.text = strBasic
         tv_info_item.text = strInfoItem
         tv_info_value.text = strInfoValue
@@ -60,7 +69,7 @@ class AboutCocktailActivity : BaseActivity() {
         tv_ingredient_names.text = cocktail.ingredients
         tv_ingredient_values.text = cocktail.measures
         tv_instructions_title.text = strInstructionsTitle
-        tv_instructions_value.text = cocktail.strInstructions
+        //tv_instructions_value.text = cocktail.strInstructions
     }
 
     fun back(view: View) {

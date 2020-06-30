@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivitySearchBinding
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
@@ -19,7 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     var cocktailAdapter: CocktailAdapter? = null
 
     override fun myView(): Int {

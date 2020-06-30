@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
@@ -14,7 +15,7 @@ import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
+class MainActivity : BaseActivity<ActivityMainBinding>(), BatteryStateReceiver.BatteryListener,
         FilterFragment.OnFilterResultListener, FilterResultCallback {
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
