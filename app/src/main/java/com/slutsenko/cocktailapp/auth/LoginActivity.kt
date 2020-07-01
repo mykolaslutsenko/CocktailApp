@@ -29,19 +29,19 @@ class LoginActivity : Base<LoginViewModel>() {
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                invalidate()
-                et_login.setTextColor(Color.BLACK)
-                et_password.setTextColor(Color.BLACK)
+//                invalidate()
+//                et_login.setTextColor(Color.BLACK)
+//                et_password.setTextColor(Color.BLACK)
             }
             override fun afterTextChanged(s: Editable) {
                 viewModel.loginInputLiveData.value = s.toString()
-                viewModel.passwordInputLiveData.value = s.toString()
+
             }
         }
 
         val textWatcher2:TextWatcher = object :TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
+                viewModel.passwordInputLiveData.value = s.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -54,7 +54,7 @@ class LoginActivity : Base<LoginViewModel>() {
 
         }
         et_login.addTextChangedListener(textWatcher)
-        et_password.addTextChangedListener(textWatcher)
+        et_password.addTextChangedListener(textWatcher2)
 
         viewModel.isLoginDataValidLiveData.observe(this, Observer {
             btn_login.isEnabled = it
@@ -91,8 +91,8 @@ class LoginActivity : Base<LoginViewModel>() {
     fun onClickLogin(v: View?) {
 //        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        if (login == myLogin && password == myPassword) {
-//            startActivity(Intent(this, MainActivity::class.java))
-//            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+            startActivity(Intent(this, MainActivity::class.java))
+           // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        } else if (login != myLogin || password != myPassword) {
 //            et_login.setTextColor(Color.RED)
 //            et_password.setTextColor(Color.RED)
