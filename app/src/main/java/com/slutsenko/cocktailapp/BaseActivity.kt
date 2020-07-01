@@ -4,11 +4,10 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 
-abstract class Base<ViewModel:BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<ViewModel:BaseViewModel> : AppCompatActivity() {
     protected abstract val viewModel: ViewModel
 
     private val airModeReceiver= AirModeReceiver()

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cocktail App </string>
+    <string name="app_name">Mykola Slutsenko</string>
     <string name="history">History is empty</string>
     <string name="enter_text">Enter text to start search</string>
     <string name="no_found">No cocktails found</string>
@@ -15,6 +15,12 @@
     <string name="non_alcoholic">Non alcoholic</string>
     <string name="optional_alcohol">Optional alcohol</string>
     <string name="non">Non</string>
+    <string name="menu_save">save</string>
+    <string name="menu_item_open">open</string>
+    <string name="menu_add_favorite">add favorite</string>
+    <string name="profile">profile</string>
+    <string name="main">main</string>
+    <string name="log_out">Log out</string>
 
 
 </resources>

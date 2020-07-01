@@ -7,6 +7,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.DialogFragment
+import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.Cocktail
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.Base
@@ -14,13 +17,14 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : Base<LoginViewModel>() {
+class LoginActivity : BaseActivity<LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
 
     lateinit var login: String
     lateinit var password: String
-
+    private val myLogin = "mykola"
+    private val myPassword = "a23456"
     override fun myView(): Int {
         return R.layout.activity_login
     }
@@ -60,8 +64,6 @@ class LoginActivity : Base<LoginViewModel>() {
             btn_login.isEnabled = it
         })
     }
-
-
 
     private fun invalidate() {
 //        login = et_login.text.toString()
@@ -106,8 +108,5 @@ class LoginActivity : Base<LoginViewModel>() {
         invalidate()
         super.onStart()
     }
-
-
-
 
 }

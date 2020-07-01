@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment()
+        {
 
     protected abstract val contentLayoutResId: Int
 
@@ -26,4 +31,8 @@ abstract class BaseFragment : Fragment() {
     protected open fun configureView(savedInstanceState: Bundle?) {
         //stub
     }
+
+
+
+
 }

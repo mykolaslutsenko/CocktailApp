@@ -4,11 +4,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.auth.LoginViewModel
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
@@ -21,9 +19,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchActivity : Base<LoginViewModel>() {
+class SearchActivity : BaseActivity() {
     var cocktailAdapter: CocktailAdapter? = null
-    override val viewModel: LoginViewModel by viewModels()
+
     override fun myView(): Int {
         return R.layout.activity_search
     }

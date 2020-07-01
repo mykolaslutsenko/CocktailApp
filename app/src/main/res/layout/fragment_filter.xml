@@ -6,21 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:clickable="true"
+    android:orientation="vertical"
+    android:focusable="true">
 
     <com.slutsenko.cocktailapp.ui.view.MyToolbar
         android:id="@+id/main_fragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
+
         <ImageView
             android:id="@+id/toolbar_iv_back"
             android:layout_width="@dimen/dp_24"
-            android:layout_margin="@dimen/dp_16"
-            android:layout_gravity="center_vertical"
             android:layout_height="@dimen/dp_24"
-            android:src="@drawable/ic_back_24"/>
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/dp_16"
+            android:src="@drawable/ic_back_24" />
+
         <TextView
             android:id="@+id/title_toolbar"
             android:layout_width="wrap_content"
@@ -38,65 +41,89 @@
 
     </com.slutsenko.cocktailapp.ui.view.MyToolbar>
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dp_48"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/rb_alcoholic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/alcoholic" />
-
-        <RadioButton
-            android:id="@+id/rb_non_alcoholic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/non_alcoholic" />
-
-        <RadioButton
-            android:id="@+id/rb_optional"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/optional_alcohol" />
-
-        <RadioButton
-            android:id="@+id/rb_non"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/non" />
-
-
-    </RadioGroup>
-
-    <androidx.legacy.widget.Space
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:layout_margin="@dimen/dp_24"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_drop"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="СКИНУТИ" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_apply"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="ЗАСТОСУВАТИ" />
 
-    </LinearLayout>
+            <RadioGroup
+                android:id="@+id/rg_alcohol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_48"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_alcoholic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/alcoholic" />
+
+                <RadioButton
+                    android:id="@+id/rb_non_alcoholic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/non_alcoholic" />
+
+                <RadioButton
+                    android:id="@+id/rb_optional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/optional_alcohol" />
+
+                <RadioButton
+                    android:id="@+id/rb_non"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/non" />
+
+
+            </RadioGroup>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <RadioGroup
+                android:id="@+id/rg_category"
+                android:layout_margin="@dimen/dp_48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_margin="@dimen/dp_24"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="СКИНУТИ" />
+
+                <Button
+                    android:id="@+id/btn_apply"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="ЗАСТОСУВАТИ" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

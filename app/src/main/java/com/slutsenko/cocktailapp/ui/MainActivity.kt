@@ -1,10 +1,8 @@
 package com.slutsenko.cocktailapp.ui
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.slutsenko.cocktailapp.Base
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.auth.LoginViewModel
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
@@ -13,15 +11,48 @@ import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 
 
-class MainActivity : Base<LoginViewModel>(), BatteryStateReceiver.BatteryListener,
+class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
         FilterFragment.OnFilterResultListener, FilterResultCallback {
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
-    override val viewModel: LoginViewModel by viewModels()
+
     var callback : FilterFragment.OnFilterResultListener? = null
     override fun myView(): Int {
 
         return R.layout.activity_main
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val mainFragment = MainFragment.newInstance()
+        val profileFragment = ProfileFragment.newInstance()
+
+
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_main -> {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .hide(profileFragment)
+                            .show(mainFragment)
+                            .commit()
+                    true
+                }
+                R.id.menu_profile -> {
+                    supportFragmentManager
+                            .beginTransaction()
+                            .hide(mainFragment)
+                            .show(profileFragment)
+                            .commit()
+                    true
+                }
+                else -> false
+            }
+
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
+
     }
 
     override fun activityCreated() {
@@ -102,20 +133,21 @@ class MainActivity : Base<LoginViewModel>(), BatteryStateReceiver.BatteryListene
 //        }
     }
 
-    override fun onFilterApply(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        //iv_indicator.visibility = View.VISIBLE
+    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+        callbacks.forEach {
+            it.onFilterResult(alcoholFilter, categoryFilter)
+        }
     }
 
-    override fun onFilterReset(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        //iv_indicator.visibility = View.GONE
-    }
+    override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
+
 
     override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
-
+        callbacks.add(listener)
     }
 
     override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
-
+        callbacks.remove(listener)
     }
 
 
