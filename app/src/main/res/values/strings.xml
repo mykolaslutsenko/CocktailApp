@@ -21,6 +21,7 @@
     <string name="profile">profile</string>
     <string name="main">main</string>
     <string name="log_out">Log out</string>
+    <string name="show_main_navigation_bar_titles">Show Main Navigation Bar Titles</string>
 
 
 </resources>

@@ -58,7 +58,7 @@ class SearchActivity : BaseActivity<SearchViewModel>() {
             call?.enqueue(object : Callback<CocktailList?> {
                 override fun onResponse(call: Call<CocktailList?>,
                                         response: Response<CocktailList?>) {
-                    val cocktail = response.body()!!.cocktails
+                    val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
                         cocktailAdapter = CocktailAdapter(this@SearchActivity, cocktail)
                         rv_search.adapter = cocktailAdapter

@@ -1,8 +1,13 @@
 package com.slutsenko.cocktailapp.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.tabs.TabLayout
 import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
@@ -18,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.BatteryListener,
         FilterFragment.OnFilterResultListener, FilterResultCallback {
+    override val viewModel: MainViewModel by viewModels()
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
 
@@ -57,8 +63,17 @@ class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.Battery
 
     override fun activityCreated() {
 
+        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
+            if (it) {
+                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+            } else {
+                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
+            }
+        })
+    }
 
-        //supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
+
+    //supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
 
 //        br = object : BroadcastReceiver() {
 //            override fun onReceive(context: Context?, intent: Intent?) {
@@ -77,9 +92,9 @@ class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.Battery
 //        filter.addAction(ANOTHER_COCKTAIL)
 //        registerReceiver(br, filter)
 
-    }
 
-    override fun onResume() {
+
+override fun onResume() {
 //        batteryStateReceiver = BatteryStateReceiver(this)
 //        val filter = IntentFilter()
 //        filter.addAction("android.intent.action.ACTION_BATTERY_CHANGED")
@@ -88,16 +103,16 @@ class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.Battery
 //        filter.addAction("android.intent.action.ACTION_BATTERY_LOW")
 //        filter.addAction("android.intent.action.ACTION_BATTERY_OKAY")
 //        registerReceiver(batteryStateReceiver, filter)
-        super.onResume()
-    }
+    super.onResume()
+}
 
-    override fun onDestroy() {
+override fun onDestroy() {
 //        unregisterReceiver(br)
 //        unregisterReceiver(batteryStateReceiver)
-        super.onDestroy()
-    }
+    super.onDestroy()
+}
 
-    override fun onBatteryChange(intent: Intent) {
+override fun onBatteryChange(intent: Intent) {
 //        val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
 //        val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
 //        val percent = (level * 100 / scale.toFloat()).toInt().toString()
@@ -125,23 +140,23 @@ class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.Battery
 //                tv_battery.text = percent
 //            }
 //        }
+}
+
+override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+    callbacks.forEach {
+        it.onFilterResult(alcoholFilter, categoryFilter)
     }
+}
 
-    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        callbacks.forEach {
-            it.onFilterResult(alcoholFilter, categoryFilter)
-        }
-    }
+override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
 
-    override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
+override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
+    callbacks.add(listener)
+}
 
-    override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
-        callbacks.add(listener)
-    }
+override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
+    callbacks.remove(listener)
+}
 
-    override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
-        callbacks.remove(listener)
-    }
 
-    override val viewModel: MainViewModel by viewModels()
 }
