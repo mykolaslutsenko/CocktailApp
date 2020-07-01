@@ -1,16 +1,18 @@
-package com.slutsenko.cocktailapp.ui
+package com.slutsenko.cocktailapp.ui.activity
 
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.slutsenko.cocktailapp.Base
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.COLUMN
+import com.slutsenko.cocktailapp.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseActivity<SearchViewModel>() {
     var cocktailAdapter: CocktailAdapter? = null
 
     override fun myView(): Int {
@@ -77,4 +79,7 @@ class SearchActivity : BaseActivity() {
     companion object {
         private const val URL = "https://www.thecocktaildb.com/api/json/v1/1/"
     }
+
+    override val viewModel: SearchViewModel by viewModels()
+
 }

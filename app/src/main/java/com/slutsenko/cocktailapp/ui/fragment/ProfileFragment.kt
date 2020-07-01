@@ -1,10 +1,8 @@
 package com.slutsenko.cocktailapp.ui.fragment
 
 import android.os.Bundle
-import com.slutsenko.cocktailapp.BaseFragment
-import com.slutsenko.cocktailapp.Cocktail
+import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.db.CocktailDatabase
 
 class ProfileFragment : BaseFragment() {
     override val contentLayoutResId: Int = R.layout.fragment_profile
@@ -15,8 +13,13 @@ class ProfileFragment : BaseFragment() {
     }
 
     companion object {
-
-        fun newInstance() = ProfileFragment()
+        private var profileFragment: ProfileFragment? = null
+        fun getInstance(): ProfileFragment {
+            if (profileFragment == null) {
+                profileFragment = ProfileFragment()
+            }
+            return profileFragment as ProfileFragment
+        }
 
     }
 }

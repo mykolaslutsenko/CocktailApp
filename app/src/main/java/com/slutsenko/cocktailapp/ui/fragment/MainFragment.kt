@@ -5,18 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.DialogFragment
 import androidx.room.Room
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.slutsenko.cocktailapp.BaseFragment
-import com.slutsenko.cocktailapp.Cocktail
+import com.slutsenko.cocktailapp.base.BaseFragment
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
-import com.slutsenko.cocktailapp.ui.SearchActivity
+import com.slutsenko.cocktailapp.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -36,6 +35,7 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
+
 
         viewpager2.adapter = FavoritePagerAdapter(this)
         val tabLayout: TabLayout = requireView().findViewById(R.id.tab_layout)
@@ -62,18 +62,19 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
         fab_search.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
-        cocktailDatabase = Room.databaseBuilder(requireContext(),
-                CocktailDatabase::class.java, "cocktail10").allowMainThreadQueries().build()
     }
-
 
 
     companion object {
         lateinit var cocktailList: List<Cocktail>
-        fun newInstance() = MainFragment()
+        private var mainFragment: MainFragment? = null
+        fun getInstance(): MainFragment {
+            if (mainFragment == null) mainFragment = MainFragment()
+            return mainFragment as MainFragment
+        }
+
         const val ANOTHER_COCKTAIL = "com.slutsenko.action.anotherCocktail"
         const val COLUMN = 2
-        var cocktailDatabase: CocktailDatabase? = null
     }
 
     override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {

@@ -1,7 +1,9 @@
-package com.slutsenko.cocktailapp.ui
+package com.slutsenko.cocktailapp.ui.activity
 
 import android.content.Intent
-import com.slutsenko.cocktailapp.Base
+import android.os.Bundle
+import androidx.activity.viewModels
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
@@ -9,24 +11,24 @@ import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
 import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
+import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
+class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.BatteryListener,
         FilterFragment.OnFilterResultListener, FilterResultCallback {
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
 
-    var callback : FilterFragment.OnFilterResultListener? = null
     override fun myView(): Int {
-
         return R.layout.activity_main
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val mainFragment = MainFragment.newInstance()
-        val profileFragment = ProfileFragment.newInstance()
-
+        val mainFragment = MainFragment.getInstance()
+        val profileFragment = ProfileFragment.getInstance()
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -48,17 +50,15 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
                 }
                 else -> false
             }
-
         }
-        supportFragmentManager.beginTransaction().replace(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
-
     }
 
     override fun activityCreated() {
 
 
-        supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
+        //supportFragmentManager.beginTransaction().add(R.id.fcv_main, MainFragment::class.java, null).commit()
 
 //        br = object : BroadcastReceiver() {
 //            override fun onReceive(context: Context?, intent: Intent?) {
@@ -79,11 +79,6 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
 
     }
 
-    fun onClickFilter(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-
-    }
-
-
     override fun onResume() {
 //        batteryStateReceiver = BatteryStateReceiver(this)
 //        val filter = IntentFilter()
@@ -101,7 +96,6 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
 //        unregisterReceiver(batteryStateReceiver)
         super.onDestroy()
     }
-
 
     override fun onBatteryChange(intent: Intent) {
 //        val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
@@ -141,7 +135,6 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
 
     override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
 
-
     override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
         callbacks.add(listener)
     }
@@ -150,5 +143,5 @@ class MainActivity : BaseActivity(), BatteryStateReceiver.BatteryListener,
         callbacks.remove(listener)
     }
 
-
+    override val viewModel: MainViewModel by viewModels()
 }

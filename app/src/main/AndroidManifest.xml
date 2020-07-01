@@ -40,7 +40,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,11 +48,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AboutCocktailActivity"
-            android:parentActivityName=".ui.SearchActivity" />
-        <activity android:name=".ui.SearchActivity" />
+            android:name=".ui.activity.AboutCocktailActivity"
+            android:parentActivityName=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

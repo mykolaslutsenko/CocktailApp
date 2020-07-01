@@ -4,7 +4,7 @@ package com.slutsenko.cocktailapp.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.slutsenko.cocktailapp.BaseViewModel
+import com.slutsenko.cocktailapp.base.BaseViewModel
 
 class LoginViewModel : BaseViewModel() {
 

@@ -1,11 +1,9 @@
-package com.slutsenko.cocktailapp.ui
+package com.slutsenko.cocktailapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.slutsenko.cocktailapp.auth.LoginActivity
-import com.slutsenko.cocktailapp.auth.LoginViewModel
 
 class SplashActivity : AppCompatActivity() {
 

@@ -2,11 +2,11 @@ package com.slutsenko.cocktailapp.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.slutsenko.cocktailapp.BaseFragment
-import com.slutsenko.cocktailapp.Cocktail
+import com.slutsenko.cocktailapp.base.BaseFragment
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
@@ -27,7 +27,7 @@ class FavoriteFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
-        cocktailList = MainFragment.cocktailDatabase?.cocktailDao()?.cocktails as List<Cocktail>
+        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         favoriteList = cocktailList.filter { it.isFavorite == true }
         if (favoriteList.isEmpty()) {
             tv_history.setText(R.string.history)
@@ -40,7 +40,11 @@ class FavoriteFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     }
 
     companion object {
-        fun newInstance() = FavoriteFragment()
+        private var favoriteFragment: FavoriteFragment? = null
+        fun getInstance(): FavoriteFragment {
+            if (favoriteFragment == null) favoriteFragment = FavoriteFragment()
+            return favoriteFragment as FavoriteFragment
+        }
     }
 
     override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {

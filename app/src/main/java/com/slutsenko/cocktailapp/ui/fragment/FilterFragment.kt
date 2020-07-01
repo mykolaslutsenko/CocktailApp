@@ -4,8 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
-import android.widget.Toast
-import com.slutsenko.cocktailapp.BaseFragment
+import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter

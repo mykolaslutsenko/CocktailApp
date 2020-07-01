@@ -11,11 +11,10 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.slutsenko.cocktailapp.Cocktail
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter.CocktailViewHolder
-import com.slutsenko.cocktailapp.ui.AboutCocktailActivity
-import java.util.*
+import com.slutsenko.cocktailapp.ui.activity.AboutCocktailActivity
 
 class CocktailAdapter(private val context: Context, private var cocktailsList: List<Cocktail>)
     : RecyclerView.Adapter<CocktailViewHolder>() {

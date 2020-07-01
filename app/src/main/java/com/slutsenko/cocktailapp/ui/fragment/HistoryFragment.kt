@@ -3,9 +3,10 @@ package com.slutsenko.cocktailapp.ui.fragment
 import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.slutsenko.cocktailapp.BaseFragment
-import com.slutsenko.cocktailapp.Cocktail
+import com.slutsenko.cocktailapp.base.BaseFragment
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
@@ -26,7 +27,7 @@ class HistoryFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
-        cocktailList = MainFragment.cocktailDatabase?.cocktailDao()?.cocktails as List<Cocktail>
+        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         historyList = cocktailList
 
         if (historyList.isEmpty()) {
@@ -40,7 +41,13 @@ class HistoryFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     }
 
     companion object {
-        fun newInstance() = HistoryFragment()
+        private var historyFragment: HistoryFragment? = null
+        fun getInstance(): HistoryFragment {
+            if (historyFragment == null) {
+                historyFragment = HistoryFragment()
+            }
+            return historyFragment as HistoryFragment
+        }
     }
 
     override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {

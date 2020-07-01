@@ -1,18 +1,20 @@
-package com.slutsenko.cocktailapp.ui
+package com.slutsenko.cocktailapp.ui.activity
 
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
-import com.slutsenko.cocktailapp.Base
-import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.base.BaseActivity
+import com.slutsenko.cocktailapp.db.CocktailDatabase
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.service.DrinkService
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment
+import com.slutsenko.cocktailapp.viewmodel.AboutCocktailViewModel
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
-class AboutCocktailActivity : BaseActivity() {
+class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
     lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
@@ -29,7 +31,7 @@ class AboutCocktailActivity : BaseActivity() {
         ctl_collaps.title = cocktail.strDrink
        // title = cocktail.strDrink
         customizeComponents()
-        MainFragment.cocktailDatabase?.cocktailDao()?.addCocktail(cocktail)
+        CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
     }
 
     override fun onDestroy() {
@@ -66,4 +68,7 @@ class AboutCocktailActivity : BaseActivity() {
     fun back(view: View) {
         onBackPressed()
     }
+
+    override val viewModel: AboutCocktailViewModel by viewModels()
+
 }
