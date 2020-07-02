@@ -2,13 +2,12 @@ package com.slutsenko.cocktailapp.ui.presentation.adapter.list
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.entity.Cocktail
@@ -50,9 +49,9 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
 
         init {
             favorite.setOnClickListener {
-                favorite.isChecked = true
-                cocktailsList[adapterPosition].isFavorite = true
-                refreshData(cocktailsList)
+                val cockta = cocktailsList[adapterPosition]
+                cockta.isFavorite = true
+                Log.d("qwerty", " ${cockta.isFavorite}")
             }
 
             itemView.setOnLongClickListener { v: View? ->

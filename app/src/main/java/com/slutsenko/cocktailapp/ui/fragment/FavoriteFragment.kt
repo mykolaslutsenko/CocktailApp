@@ -2,6 +2,7 @@ package com.slutsenko.cocktailapp.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.entity.Cocktail
@@ -29,6 +30,10 @@ class FavoriteFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
 
         cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         favoriteList = cocktailList.filter { it.isFavorite == true }
+        //Toast.makeText(requireContext(), "${cocktailList.size}", Toast.LENGTH_LONG).show()
+        cocktailAdapter = CocktailAdapter(requireContext(), favoriteList)
+        cocktailAdapter.refreshData(favoriteList)
+        //Toast.makeText(requireContext(), "${favoriteList.size}", Toast.LENGTH_LONG).show()
         if (favoriteList.isEmpty()) {
             tv_history.setText(R.string.history)
         } else {

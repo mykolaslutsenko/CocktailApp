@@ -49,7 +49,7 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
         iv_main_toolbar_filter.setOnClickListener {
             val filterFragment = FilterFragment.newInstance(alcoholFilter, categoryFilter)
             activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.rl_container, filterFragment, FilterFragment::class.java.simpleName)
+                    ?.add(R.id.fcv_main, filterFragment, FilterFragment::class.java.simpleName)
                     ?.addToBackStack(null)
                     ?.commit()
         }

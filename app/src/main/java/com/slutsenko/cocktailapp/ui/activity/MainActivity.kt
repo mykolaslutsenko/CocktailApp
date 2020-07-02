@@ -1,15 +1,12 @@
 package com.slutsenko.cocktailapp.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.android.material.tabs.TabLayout
-import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
