@@ -8,6 +8,8 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/dp_16"
     android:paddingTop="@dimen/dp_32"
     android:paddingRight="@dimen/dp_16"
@@ -43,6 +45,7 @@
             android:layout_height="@dimen/dp_48">
 
             <EditText
+                android:saveEnabled="false"
                 android:text="mykola"
                 android:id="@+id/et_login"
                 android:layout_width="match_parent"
@@ -57,6 +60,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
+                android:saveEnabled="false"
                 android:text="a23456"
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"

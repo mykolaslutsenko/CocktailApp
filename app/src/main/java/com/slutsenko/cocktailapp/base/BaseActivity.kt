@@ -1,11 +1,14 @@
 package com.slutsenko.cocktailapp.base
 
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
+import java.util.*
 
 abstract class BaseActivity<ViewModel: BaseViewModel> : AppCompatActivity() {
     protected abstract val viewModel: ViewModel
@@ -14,6 +17,19 @@ abstract class BaseActivity<ViewModel: BaseViewModel> : AppCompatActivity() {
     private val bootReceiver = BootReceiver()
     private val log: String = "BaseLog"
     override fun onCreate(savedInstanceState: Bundle?) {
+        val locale = Locale("uk")
+        Locale.setDefault(locale)
+        val resources = resources
+        val configuration = resources.configuration
+        configuration.setLocale(locale)
+        configuration.setLayoutDirection(locale)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N /*24*/) {
+            with(LocaleList(locale)) {
+                LocaleList.setDefault(this)
+                configuration.setLocales(this)
+            }
+        }
+        resources.updateConfiguration(configuration, resources.displayMetrics)
         super.onCreate(savedInstanceState)
         Log.d(log, this::class.java.toString() + " OnCreate")
         setContentView(myView())

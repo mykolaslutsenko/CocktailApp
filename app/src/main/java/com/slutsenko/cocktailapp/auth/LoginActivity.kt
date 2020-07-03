@@ -1,6 +1,8 @@
 package com.slutsenko.cocktailapp.auth
 
 import android.content.Intent
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -14,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity<LoginViewModel>() {
 
     override val viewModel: LoginViewModel by viewModels()
+    val EXTRA_KEY_LOGIN = "LOGIN"
+    val EXTRA_KEY_PASSWORD = "PASSWORD"
 
     lateinit var login: String
     lateinit var password: String
@@ -21,6 +25,18 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     private val myPassword = "a23456"
     override fun myView(): Int {
         return R.layout.activity_login
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        et_login.text = savedInstanceState?.getString(EXTRA_KEY_LOGIN)
+//        et_password.text = savedInstanceState.getString(EXTRA_KEY_PASSWORD)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+//        outState.putString(EXTRA_KEY_LOGIN, et_login)
+//        outState.putString(EXTRA_KEY_PASSWORD, et_password)
     }
 
     override fun activityCreated() {
@@ -31,13 +47,14 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
 //                et_login.setTextColor(Color.BLACK)
 //                et_password.setTextColor(Color.BLACK)
             }
+
             override fun afterTextChanged(s: Editable) {
                 viewModel.loginInputLiveData.value = s.toString()
 
             }
         }
 
-        val textWatcher2:TextWatcher = object :TextWatcher {
+        val textWatcher2: TextWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.passwordInputLiveData.value = s.toString()
             }
@@ -87,8 +104,8 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     fun onClickLogin(v: View?) {
 //        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        if (login == myLogin && password == myPassword) {
-            startActivity(Intent(this, MainActivity::class.java))
-           // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        startActivity(Intent(this, MainActivity::class.java))
+        // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        } else if (login != myLogin || password != myPassword) {
 //            et_login.setTextColor(Color.RED)
 //            et_password.setTextColor(Color.RED)
