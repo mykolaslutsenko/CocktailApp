@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter.CocktailViewHolder
 import com.slutsenko.cocktailapp.ui.activity.AboutCocktailActivity
 
@@ -49,15 +50,15 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
 
         init {
             favorite.setOnClickListener {
-                val cockta = cocktailsList[adapterPosition]
-                cockta.isFavorite = true
-                Log.d("qwerty", " ${cockta.isFavorite}")
+                val favoriteCocktail = cocktailsList[adapterPosition]
+                favoriteCocktail.isFavorite = true
+                CocktailDatabase.getInstance(context)?.cocktailDao()?.addCocktail(favoriteCocktail)
             }
 
             itemView.setOnLongClickListener { v: View? ->
                 PopupMenu(context, v).apply {
                     // MainActivity implements OnMenuItemClickListener
-                    setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                    setOnMenuItemClickListener {
                         when (it.itemId) {
                             R.id.menu_item_open -> {
                                 val intent = Intent(context, AboutCocktailActivity::class.java)
@@ -69,7 +70,7 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
                             else -> false
                         }
 
-                    })
+                    }
                     inflate(R.menu.menu_drink_item_shortcut)
                     show()
                 }

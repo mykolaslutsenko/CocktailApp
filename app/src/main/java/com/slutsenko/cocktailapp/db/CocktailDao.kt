@@ -8,7 +8,7 @@ import com.slutsenko.cocktailapp.entity.Cocktail
 
 @Dao
 interface CocktailDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCocktail(cocktail: Cocktail?)
 
     @get:Query("SELECT * FROM cocktail")

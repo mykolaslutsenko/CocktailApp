@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_category_ordinary"
+        android:title="@string/ordinary_drink" />
+    <item
+        android:id="@+id/item_category_cocktail"
+        android:title="@string/cocktail" />
+    <item
+        android:id="@+id/item_category_milk"
+        android:title="@string/milk_float_shake" />
+    <item
+        android:id="@+id/item_category_other"
+        android:title="@string/other_unknown" />
+    <item
+        android:id="@+id/item_category_cocoa"
+        android:title="@string/cocoa" />
+    <item
+        android:id="@+id/item_category_shot"
+        android:title="@string/shot" />
+    <item
+        android:id="@+id/item_category_coffee"
+        android:title="@string/coffee_tea" />
+    <item
+        android:id="@+id/item_category_homemadeLiqueur"
+        android:title="@string/homemade_liqueur" />
+    <item
+        android:id="@+id/item_category_punch"
+        android:title="@string/punch_party_drink" />
+    <item
+        android:id="@+id/item_category_beer"
+        android:title="@string/beer" />
+    <item
+        android:id="@+id/item_category_softDrink"
+        android:title="@string/soft_drink_soda" />
+
+
+</menu>

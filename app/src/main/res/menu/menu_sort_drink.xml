@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_sort_recent"
+        android:title="@string/recent"
+        app:showAsAction="always"/>
+    <item android:id="@+id/menu_sort_nameAscending"
+        android:title="@string/name_ascending"/>
+    <item android:id="@+id/menu_sort_nameDescending"
+        android:title="@string/name_descending"/>
+    <item android:id="@+id/menu_sort_alcoholFirst"
+        android:title="@string/alcohol_first"/>
+    <item android:id="@+id/menu_sort_nonAlcoholFirst"
+        android:title="@string/non_alcohol_first"/>
+    <item android:id="@+id/menu_sort_ingredientAscending"
+        android:title="@string/ingredient_count_ascending"/>
+    <item android:id="@+id/menu_sort_ingredientDescending"
+        android:title="@string/ingredient_count_descending"/>
+</menu>

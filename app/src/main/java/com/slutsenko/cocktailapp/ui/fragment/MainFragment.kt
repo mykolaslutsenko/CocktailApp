@@ -4,23 +4,26 @@ package com.slutsenko.cocktailapp.ui.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
 import android.view.View
-import androidx.room.Room
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.slutsenko.cocktailapp.base.BaseFragment
-import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.db.CocktailDatabase
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
-class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
+class MainFragment : BaseFragment<MainViewModel>() {
 
     private var alcoholFilter: AlcoholDrinkFilter? = null
 
@@ -29,13 +32,40 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
     override val contentLayoutResId: Int = R.layout.fragment_main
 
     override fun onAttach(context: Context) {
-        (context as FilterResultCallback).addCallBack(this)
+        //(context as FilterResultCallback).addCallBack(this)
+
         super.onAttach(context)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        setHasOptionsMenu(true)
+        registerForContextMenu(iv_sort)
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        activity?.menuInflater?.inflate(R.menu.menu_sort_drink, menu)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        viewModel.cocktailDBLiveData?.value = cocktailList
+
+    }
+
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        viewModel.sortCocktailList(item)
+        return true
+    }
+
+
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-
 
         viewpager2.adapter = FavoritePagerAdapter(this)
         val tabLayout: TabLayout = requireView().findViewById(R.id.tab_layout)
@@ -54,19 +84,20 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
                     ?.commit()
         }
         iv_main_toolbar_filter.setOnLongClickListener {
-            alcoholFilter = AlcoholDrinkFilter.NON
-            categoryFilter = CategoryDrinkFilter.NON
-            iv_indicator.visibility = View.GONE
+//            alcoholFilter = AlcoholDrinkFilter.NON
+//            categoryFilter = CategoryDrinkFilter.NON
+//            iv_indicator.visibility = View.GONE
             true
         }
         fab_search.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
+
     }
 
 
     companion object {
-        lateinit var cocktailList: List<Cocktail>
+        var cocktailList: List<Cocktail>? = null
         private var mainFragment: MainFragment? = null
         fun getInstance(): MainFragment {
             if (mainFragment == null) mainFragment = MainFragment()
@@ -77,8 +108,11 @@ class MainFragment : BaseFragment(), FilterFragment.OnFilterResultListener {
         const val COLUMN = 2
     }
 
-    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-        this.alcoholFilter = alcoholFilter
-        this.categoryFilter = categoryFilter
-    }
+//    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+//        this.alcoholFilter = alcoholFilter
+//        this.categoryFilter = categoryFilter
+//    }
+
+    override val viewModel: MainViewModel by activityViewModels()
+
 }

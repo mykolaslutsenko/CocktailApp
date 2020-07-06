@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:clickable="true"
-    android:orientation="vertical"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical">
 
     <com.slutsenko.cocktailapp.ui.view.MyToolbar
         android:id="@+id/main_fragment_toolbar"
@@ -43,63 +43,94 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal">
 
-            <RadioGroup
-                android:id="@+id/rg_alcohol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_48"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/rb_alcoholic"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/alcoholic" />
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/dp_48"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/alcohol" />
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb_non_alcoholic"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_chosenAlcohol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_change_alcohol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_marginEnd="@dimen/dp_48"
+                    android:layout_weight="0"
+                    android:drawableEnd="@drawable/ic_expand_24"
+                    android:gravity="center_vertical"
+                    android:text="@string/change" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/non_alcoholic" />
+                    android:layout_height="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/dp_48"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/category" />
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb_optional"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/optional_alcohol" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_non"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/non" />
+                <TextView
+                    android:id="@+id/tv_chosenCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-
-            </RadioGroup>
-
-            <androidx.legacy.widget.Space
+                <TextView
+                    android:id="@+id/tv_change_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_marginEnd="@dimen/dp_48"
+                    android:layout_weight="0"
+                    android:drawableEnd="@drawable/ic_expand_24"
+                    android:gravity="center_vertical"
+                    android:text="@string/change" />
+            </LinearLayout>
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <RadioGroup
-                android:id="@+id/rg_category"
-                android:layout_margin="@dimen/dp_48"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,14 +143,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="СКИНУТИ" />
+                    android:text="@string/drop" />
 
                 <Button
                     android:id="@+id/btn_apply"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="ЗАСТОСУВАТИ" />
+                    android:text="@string/apply" />
 
             </LinearLayout>
         </LinearLayout>

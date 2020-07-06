@@ -18,8 +18,7 @@ import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.BatteryListener,
-        FilterFragment.OnFilterResultListener, FilterResultCallback {
+class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.BatteryListener {
     override val viewModel: MainViewModel by viewModels()
     //lateinit var br: BroadcastReceiver
     // lateinit var batteryStateReceiver: BatteryStateReceiver
@@ -90,8 +89,7 @@ class MainActivity : BaseActivity<MainViewModel>(), BatteryStateReceiver.Battery
 //        registerReceiver(br, filter)
 
 
-
-override fun onResume() {
+    override fun onResume() {
 //        batteryStateReceiver = BatteryStateReceiver(this)
 //        val filter = IntentFilter()
 //        filter.addAction("android.intent.action.ACTION_BATTERY_CHANGED")
@@ -100,16 +98,16 @@ override fun onResume() {
 //        filter.addAction("android.intent.action.ACTION_BATTERY_LOW")
 //        filter.addAction("android.intent.action.ACTION_BATTERY_OKAY")
 //        registerReceiver(batteryStateReceiver, filter)
-    super.onResume()
-}
+        super.onResume()
+    }
 
-override fun onDestroy() {
+    override fun onDestroy() {
 //        unregisterReceiver(br)
 //        unregisterReceiver(batteryStateReceiver)
-    super.onDestroy()
-}
+        super.onDestroy()
+    }
 
-override fun onBatteryChange(intent: Intent) {
+    override fun onBatteryChange(intent: Intent) {
 //        val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
 //        val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
 //        val percent = (level * 100 / scale.toFloat()).toInt().toString()
@@ -137,23 +135,23 @@ override fun onBatteryChange(intent: Intent) {
 //                tv_battery.text = percent
 //            }
 //        }
-}
-
-override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-    callbacks.forEach {
-        it.onFilterResult(alcoholFilter, categoryFilter)
     }
-}
 
-override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
-
-override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
-    callbacks.add(listener)
-}
-
-override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
-    callbacks.remove(listener)
-}
+//    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
+//        callbacks.forEach {
+//            it.onFilterResult(alcoholFilter, categoryFilter)
+//        }
+//    }
+//
+//    override val callbacks: HashSet<FilterFragment.OnFilterResultListener> = hashSetOf()
+//
+//    override fun addCallBack(listener: FilterFragment.OnFilterResultListener) {
+//        callbacks.add(listener)
+//    }
+//
+//    override fun removeCallBack(listener: FilterFragment.OnFilterResultListener) {
+//        callbacks.remove(listener)
+//    }
 
 
 }
