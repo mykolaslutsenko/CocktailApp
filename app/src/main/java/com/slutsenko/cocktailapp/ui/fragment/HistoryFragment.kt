@@ -37,7 +37,7 @@ class HistoryFragment : BaseFragment<MainViewModel>() {
 
 
         cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        cocktailAdapter = CocktailAdapter(requireContext(), cocktailList)
+        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
         cocktailAdapter.refreshData(cocktailList)
 
         if (cocktailList.isEmpty()) {
@@ -52,6 +52,7 @@ class HistoryFragment : BaseFragment<MainViewModel>() {
         viewModel.alcoholDrinkFilterLiveData.observe(requireActivity(), Observer {
             alcoholFilteredList = viewModel.filterAlcohol(it)
             cocktailAdapter.refreshData(alcoholFilteredList)
+            viewModel.sortCocktailLiveData.value = alcoholFilteredList
             viewModel.cocktailQuantityLiveData.value = alcoholFilteredList.size
         })
 

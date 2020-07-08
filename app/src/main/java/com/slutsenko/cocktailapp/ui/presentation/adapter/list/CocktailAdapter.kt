@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.entity.Cocktail
@@ -15,6 +16,7 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter.CocktailViewHolder
 import com.slutsenko.cocktailapp.ui.activity.AboutCocktailActivity
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 
 class CocktailAdapter(private val context: Context, private var cocktailsList: List<Cocktail>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
@@ -51,7 +53,11 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
         init {
             favorite.setOnClickListener {
                 val favoriteCocktail = cocktailsList[adapterPosition]
-                favoriteCocktail.isFavorite = true
+                if (favoriteCocktail.isFavorite == false) {
+                    favoriteCocktail.isFavorite = true
+                } else {
+                    favoriteCocktail.isFavorite = false
+                }
                 CocktailDatabase.getInstance(context)?.cocktailDao()?.addCocktail(favoriteCocktail)
             }
 

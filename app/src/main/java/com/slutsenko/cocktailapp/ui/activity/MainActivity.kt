@@ -7,11 +7,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseActivity
-import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
-import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
-import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
-import com.slutsenko.cocktailapp.ui.fragment.FilterFragment
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel

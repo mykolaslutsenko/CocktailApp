@@ -19,7 +19,7 @@ abstract class CocktailDatabase : RoomDatabase() {
         fun getInstance(context: Context): CocktailDatabase? {
             if (instance == null) {
                 instance = Room.databaseBuilder(context,
-                        CocktailDatabase::class.java, "cocktail11").allowMainThreadQueries().build()
+                        CocktailDatabase::class.java, "cocktail12").allowMainThreadQueries().build()
             }
             return instance
         }

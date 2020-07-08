@@ -4,6 +4,7 @@ package com.slutsenko.cocktailapp.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.slutsenko.cocktailapp.app.MyApplication
 import com.slutsenko.cocktailapp.base.BaseViewModel
 
 class LoginViewModel : BaseViewModel() {
@@ -25,7 +26,5 @@ class LoginViewModel : BaseViewModel() {
             invalidate()
         }
     }
-
-
 }
 

@@ -4,6 +4,7 @@ import android.view.MenuItem
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.app.MyApplication
 import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
@@ -35,30 +36,30 @@ class MainViewModel : BaseViewModel() {
     fun sortCocktailList(menuItem: MenuItem): List<Cocktail> {
         when (menuItem.itemId) {
             R.id.menu_sort_recent -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedBy { it.dateModified }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.dateModified }
             }
             R.id.menu_sort_nameAscending -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedBy { it.strDrink }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.strDrink }
 
             }
             R.id.menu_sort_nameDescending -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedByDescending { it.strDrink }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
 
             }
             R.id.menu_sort_alcoholFirst -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedByDescending { it.strDrink }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
 
             }
             R.id.menu_sort_nonAlcoholFirst -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedByDescending { it.strDrink }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
 
             }
             R.id.menu_sort_ingredientAscending -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedBy { it.ingredients }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.ingredients }
 
             }
             R.id.menu_sort_ingredientDescending -> {
-                sortCocktailLiveData.value = cocktailDBLiveData?.value?.sortedByDescending { it.ingredients }
+                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.ingredients }
             }
             //else -> return super.onContextItemSelected(item)
 

@@ -16,7 +16,6 @@ import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
-import com.slutsenko.cocktailapp.impl.FilterResultCallback
 import com.slutsenko.cocktailapp.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
@@ -41,7 +40,7 @@ class MainFragment : BaseFragment<MainViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        setHasOptionsMenu(true)
+        viewModel.cocktailDBLiveData?.value = cocktailList
         registerForContextMenu(iv_sort)
     }
 
@@ -52,8 +51,8 @@ class MainFragment : BaseFragment<MainViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        viewModel.cocktailDBLiveData?.value = cocktailList
+//        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+//        viewModel.cocktailDBLiveData?.value = cocktailList
 
     }
 
