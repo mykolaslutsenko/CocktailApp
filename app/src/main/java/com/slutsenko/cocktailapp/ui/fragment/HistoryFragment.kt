@@ -7,11 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseFragment
-import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
-import com.slutsenko.cocktailapp.impl.FilterResultCallback
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.cocktailList
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
@@ -21,7 +18,7 @@ class HistoryFragment : BaseFragment<MainViewModel>() {
     override val contentLayoutResId: Int = R.layout.fragment_history
     lateinit var cocktailAdapter: CocktailAdapter
     lateinit var alcoholFilteredList: List<Cocktail>
-    lateinit var cocktailList: List<Cocktail>
+    //lateinit var cocktailList: List<Cocktail>
 
     override fun onAttach(context: Context) {
         //(context as FilterResultCallback).addCallBack(this)
@@ -36,33 +33,43 @@ class HistoryFragment : BaseFragment<MainViewModel>() {
         super.configureView(savedInstanceState)
 
 
-        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        //cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
-        cocktailAdapter.refreshData(cocktailList)
+        cocktailAdapter.refreshData(viewModel.cocktailDBLiveData?.value!!)
 
-        if (cocktailList.isEmpty()) {
+        if (viewModel.cocktailDBLiveData?.value!!.isEmpty()) {
             tv_history.setText(R.string.history)
         } else {
-            cocktailAdapter = CocktailAdapter(requireContext(), cocktailList)
+            cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
             rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
         }
 
-        viewModel.alcoholDrinkFilterLiveData.observe(requireActivity(), Observer {
-            alcoholFilteredList = viewModel.filterAlcohol(it)
-            cocktailAdapter.refreshData(alcoholFilteredList)
-            viewModel.sortCocktailLiveData.value = alcoholFilteredList
-            viewModel.cocktailQuantityLiveData.value = alcoholFilteredList.size
+//        viewModel.categoryDrinkFilterLiveData.observe(requireActivity(), Observer {
+//
+//        })
+
+        viewModel.allDrinkFiltersLiveData.observe(requireActivity(), Observer<List<Cocktail>> {
+            cocktailAdapter.refreshData(it)
+            viewModel.cocktailQuantityLiveData.value = it.size
+            viewModel.sortCocktailLiveData.value = it
         })
 
-        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
-            cocktailList = viewModel.cocktailDBLiveData?.value!!
-        })
+
+//        viewModel.alcoholDrinkFilterLiveData.observe(requireActivity(), Observer {
+//            alcoholFilteredList = viewModel.filterAlcohol(it)
+//            cocktailAdapter.refreshData(alcoholFilteredList)
+//            viewModel.sortCocktailLiveData.value = alcoholFilteredList
+//            viewModel.cocktailQuantityLiveData.value = alcoholFilteredList.size
+//        })
+
+//        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
+//            //cocktailList = viewModel.cocktailDBLiveData?.value!!
+//        })
 
         viewModel.sortCocktailLiveData.observe(requireActivity(), Observer {
-            alcoholFilteredList = viewModel.sortCocktailLiveData.value!!
-            cocktailAdapter.refreshData(alcoholFilteredList)
+            cocktailAdapter.refreshData(viewModel.sortCocktailLiveData.value!!)
         })
     }
 

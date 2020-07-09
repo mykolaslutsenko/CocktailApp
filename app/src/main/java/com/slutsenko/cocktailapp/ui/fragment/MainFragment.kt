@@ -39,8 +39,7 @@ class MainFragment : BaseFragment<MainViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        viewModel.cocktailDBLiveData?.value = cocktailList
+        viewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         registerForContextMenu(iv_sort)
     }
 
@@ -96,7 +95,7 @@ class MainFragment : BaseFragment<MainViewModel>() {
 
 
     companion object {
-        var cocktailList: List<Cocktail>? = null
+        //var cocktailList: List<Cocktail>? = null
         private var mainFragment: MainFragment? = null
         fun getInstance(): MainFragment {
             if (mainFragment == null) mainFragment = MainFragment()

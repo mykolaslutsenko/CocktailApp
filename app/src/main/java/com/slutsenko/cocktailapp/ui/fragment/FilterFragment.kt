@@ -10,7 +10,7 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.cocktailList
+
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_filter.*
 
@@ -52,14 +52,8 @@ class FilterFragment : BaseFragment<MainViewModel>() {
         tv_change_category.setOnClickListener { v: View ->
             PopupMenu(requireContext(), v).apply {
                 setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.item_category_ordinary -> {
-                            viewModel.categoryDrinkFilterLiveData.value = CategoryDrinkFilter.ORDINARY_DRINK
-                            true
-                        }
-                        else -> false
-                    }
-
+                    tv_chosenCategory.text = viewModel.setCategoryFilter(it)
+                    true
                 }
                 inflate(R.menu.menu_category)
                 show()
@@ -74,7 +68,9 @@ class FilterFragment : BaseFragment<MainViewModel>() {
             activity?.supportFragmentManager?.popBackStack()
         }
         btn_drop.setOnClickListener {
-            viewModel.cocktailDBLiveData?.value = cocktailList
+            viewModel.alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.NON
+            viewModel.categoryDrinkFilterLiveData.value = CategoryDrinkFilter.NON
+            //viewModel.cocktailDBLiveData?.value = cocktailList
             //onFilterResultListener?.onFilterResult(AlcoholDrinkFilter.NON, CategoryDrinkFilter.NON)
             activity?.supportFragmentManager?.popBackStack()
         }
@@ -120,6 +116,7 @@ class FilterFragment : BaseFragment<MainViewModel>() {
 
     private fun initFilters() {
         tv_chosenAlcohol.text = viewModel.alcoholDrinkFilterLiveData.value?.key ?: ""
+        tv_chosenCategory.text = viewModel.categoryDrinkFilterLiveData.value?.key ?: ""
     }
 
 //    private fun initFilters() {

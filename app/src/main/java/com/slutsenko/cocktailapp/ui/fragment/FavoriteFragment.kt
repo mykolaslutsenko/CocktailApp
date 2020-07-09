@@ -8,7 +8,6 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseFragment
 import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.cocktailList
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
@@ -25,18 +24,18 @@ class FavoriteFragment : BaseFragment<MainViewModel>() {
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        cocktailAdapter = CocktailAdapter(requireContext(), cocktailList!!)
-        cocktailAdapter.refreshData(cocktailList!!)
-        cocktailList = cocktailList!!.filter { it.isFavorite == true }
+        viewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
+        cocktailAdapter.refreshData(viewModel.cocktailDBLiveData?.value!!)
+        viewModel.favoriteLiveData.value = viewModel.cocktailDBLiveData?.value!!.filter { it.isFavorite == true }
         //Toast.makeText(requireContext(), "${cocktailList.size}", Toast.LENGTH_LONG).show()
 
 
         //Toast.makeText(requireContext(), "${favoriteList.size}", Toast.LENGTH_LONG).show()
-        if (cocktailList!!.isEmpty()) {
+        if (viewModel.favoriteLiveData.value!!.isEmpty()) {
             tv_history.setText(R.string.history)
         } else {
-            cocktailAdapter = CocktailAdapter(requireContext(), cocktailList!!)
+            cocktailAdapter = CocktailAdapter(requireContext(), viewModel.favoriteLiveData.value!!)
             rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
