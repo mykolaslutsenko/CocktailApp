@@ -3,6 +3,8 @@ package com.slutsenko.cocktailapp.ui.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
@@ -17,29 +19,29 @@ import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.ui.activity.SearchActivity
+import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.ui.presentation.adapter.page.FavoritePagerAdapter
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
-class MainFragment : BaseFragment<MainViewModel>() {
+class MainFragment : BaseFragment<MainViewModel>(), CocktailAdapter.OnFavoriteClick {
 
-    private var alcoholFilter: AlcoholDrinkFilter? = null
-
-    private var categoryFilter: CategoryDrinkFilter? = null
+    override val viewModel: MainViewModel by activityViewModels()
 
     override val contentLayoutResId: Int = R.layout.fragment_main
 
-    override fun onAttach(context: Context) {
-        //(context as FilterResultCallback).addCallBack(this)
+    var onFavoriteClick: CocktailAdapter.OnFavoriteClick? = null
 
+    override fun onAttach(context: Context) {
+        (context as CocktailAdapter.OnFavoriteClick).refreshDB()
         super.onAttach(context)
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        viewModel.cocktailDBLiveData?.value =
+                CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        viewModel.setStartParam()
         registerForContextMenu(iv_sort)
     }
 
@@ -48,19 +50,10 @@ class MainFragment : BaseFragment<MainViewModel>() {
         activity?.menuInflater?.inflate(R.menu.menu_sort_drink, menu)
     }
 
-    override fun onResume() {
-        super.onResume()
-//        cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-//        viewModel.cocktailDBLiveData?.value = cocktailList
-
-    }
-
-
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        viewModel.sortCocktailList(item)
+        viewModel.setSortValue(item)
         return true
     }
-
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
@@ -75,16 +68,14 @@ class MainFragment : BaseFragment<MainViewModel>() {
         }.attach()
 
         iv_main_toolbar_filter.setOnClickListener {
-            val filterFragment = FilterFragment.newInstance(alcoholFilter, categoryFilter)
+            val filterFragment = FilterFragment.newInstance()
             activity?.supportFragmentManager?.beginTransaction()
                     ?.add(R.id.fcv_main, filterFragment, FilterFragment::class.java.simpleName)
                     ?.addToBackStack(null)
                     ?.commit()
         }
         iv_main_toolbar_filter.setOnLongClickListener {
-//            alcoholFilter = AlcoholDrinkFilter.NON
-//            categoryFilter = CategoryDrinkFilter.NON
-//            iv_indicator.visibility = View.GONE
+            viewModel.dropFilters()
             true
         }
         fab_search.setOnClickListener {
@@ -93,9 +84,7 @@ class MainFragment : BaseFragment<MainViewModel>() {
 
     }
 
-
     companion object {
-        //var cocktailList: List<Cocktail>? = null
         private var mainFragment: MainFragment? = null
         fun getInstance(): MainFragment {
             if (mainFragment == null) mainFragment = MainFragment()
@@ -106,11 +95,10 @@ class MainFragment : BaseFragment<MainViewModel>() {
         const val COLUMN = 2
     }
 
-//    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-//        this.alcoholFilter = alcoholFilter
-//        this.categoryFilter = categoryFilter
-//    }
+    override fun refreshDB() {
+        viewModel.cocktailDBLiveData?.value =
+                CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+    }
 
-    override val viewModel: MainViewModel by activityViewModels()
 
 }

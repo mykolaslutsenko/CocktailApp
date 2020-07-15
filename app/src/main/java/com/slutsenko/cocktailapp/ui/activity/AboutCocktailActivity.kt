@@ -12,6 +12,7 @@ import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.service.DrinkService
 import com.slutsenko.cocktailapp.viewmodel.AboutCocktailViewModel
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
 class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
@@ -29,9 +30,10 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
         })
         cocktail = intent.getSerializableExtra("cocktail") as Cocktail
         ctl_collaps.title = cocktail.strDrink
-       // title = cocktail.strDrink
+        // title = cocktail.strDrink
         customizeComponents()
         CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
+        //mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
     }
 
     override fun onDestroy() {
@@ -70,5 +72,6 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
     }
 
     override val viewModel: AboutCocktailViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
 }

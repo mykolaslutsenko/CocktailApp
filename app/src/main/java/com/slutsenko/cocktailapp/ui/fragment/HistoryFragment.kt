@@ -1,78 +1,45 @@
 package com.slutsenko.cocktailapp.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseFragment
+import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
-import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : BaseFragment<MainViewModel>() {
-    lateinit var alcoholDrinkFilter: AlcoholDrinkFilter
+    override val viewModel: MainViewModel by activityViewModels()
     override val contentLayoutResId: Int = R.layout.fragment_history
     lateinit var cocktailAdapter: CocktailAdapter
-    lateinit var alcoholFilteredList: List<Cocktail>
-    //lateinit var cocktailList: List<Cocktail>
-
-    override fun onAttach(context: Context) {
-        //(context as FilterResultCallback).addCallBack(this)
-        super.onAttach(context)
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-
-
-        //cocktailList = CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
-        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
-        cocktailAdapter.refreshData(viewModel.cocktailDBLiveData?.value!!)
-
-        if (viewModel.cocktailDBLiveData?.value!!.isEmpty()) {
+        viewModel.historyLiveData.value = viewModel.cocktailDBLiveData?.value
+        cocktailAdapter = CocktailAdapter(requireContext(),  viewModel.historyLiveData.value!!)
+        if (viewModel.historyLiveData.value!!.isEmpty()) {
             tv_history.setText(R.string.history)
         } else {
-            cocktailAdapter = CocktailAdapter(requireContext(), viewModel.cocktailDBLiveData?.value!!)
+            cocktailAdapter = CocktailAdapter(requireContext(),  viewModel.historyLiveData.value!!)
             rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
         }
 
-//        viewModel.categoryDrinkFilterLiveData.observe(requireActivity(), Observer {
-//
-//        })
-
-        viewModel.allDrinkFiltersLiveData.observe(requireActivity(), Observer<List<Cocktail>> {
-            cocktailAdapter.refreshData(it)
+        viewModel.mediatorLiveData.observe(requireActivity(), Observer {
+            viewModel.historyLiveData.value = it
+            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
             viewModel.cocktailQuantityLiveData.value = it.size
-            viewModel.sortCocktailLiveData.value = it
         })
 
-
-//        viewModel.alcoholDrinkFilterLiveData.observe(requireActivity(), Observer {
-//            alcoholFilteredList = viewModel.filterAlcohol(it)
-//            cocktailAdapter.refreshData(alcoholFilteredList)
-//            viewModel.sortCocktailLiveData.value = alcoholFilteredList
-//            viewModel.cocktailQuantityLiveData.value = alcoholFilteredList.size
-//        })
-
-//        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
-//            //cocktailList = viewModel.cocktailDBLiveData?.value!!
-//        })
-
-        viewModel.sortCocktailLiveData.observe(requireActivity(), Observer {
-            cocktailAdapter.refreshData(viewModel.sortCocktailLiveData.value!!)
+        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
+            viewModel.refreshParam()
         })
     }
-
 
     companion object {
         private var historyFragment: HistoryFragment? = null
@@ -83,62 +50,4 @@ class HistoryFragment : BaseFragment<MainViewModel>() {
             return historyFragment as HistoryFragment
         }
     }
-
-//    override fun onFilterResult(alcoholFilter: AlcoholDrinkFilter?, categoryFilter: CategoryDrinkFilter?) {
-//        val alcoholFilteredList: List<Cocktail> = when (alcoholFilter) {
-//            AlcoholDrinkFilter.ALCOHOLIC -> historyList.filter {
-//                it.strAlcoholic == AlcoholDrinkFilter.ALCOHOLIC.key
-//            }
-//            AlcoholDrinkFilter.NON_ALCOHOLIC -> historyList.filter {
-//                it.strAlcoholic == AlcoholDrinkFilter.NON_ALCOHOLIC.key
-//            }
-//            AlcoholDrinkFilter.OPTIONAL_ALCOHOL -> historyList.filter {
-//                it.strAlcoholic == AlcoholDrinkFilter.OPTIONAL_ALCOHOL.key
-//            }
-//            AlcoholDrinkFilter.NON -> cocktailList
-//            else -> cocktailList
-//        }
-//
-//        val categoryFilteredList = when (categoryFilter) {
-//            CategoryDrinkFilter.ORDINARY_DRINK -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.ORDINARY_DRINK.key
-//            }
-//            CategoryDrinkFilter.COCKTAIL -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.COCKTAIL.key
-//            }
-//            CategoryDrinkFilter.MILK_FLOAT_SHAKE -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.MILK_FLOAT_SHAKE.key
-//            }
-//            CategoryDrinkFilter.OTHER_UNKNOWN -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.OTHER_UNKNOWN.key
-//            }
-//            CategoryDrinkFilter.COCOA -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.COCOA.key
-//            }
-//            CategoryDrinkFilter.SHOT -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.SHOT.key
-//            }
-//            CategoryDrinkFilter.COFFEE_TEA -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.COFFEE_TEA.key
-//            }
-//            CategoryDrinkFilter.HOMEMADE_LIQUEUR -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.HOMEMADE_LIQUEUR.key
-//            }
-//            CategoryDrinkFilter.PUNCH_PARTY_DRINK -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.PUNCH_PARTY_DRINK.key
-//            }
-//            CategoryDrinkFilter.BEER -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.BEER.key
-//            }
-//            CategoryDrinkFilter.SOFT_DRINK_SODA -> alcoholFilteredList.filter {
-//                it.strCategory == CategoryDrinkFilter.SOFT_DRINK_SODA.key
-//            }
-//            CategoryDrinkFilter.NON -> alcoholFilteredList
-//            else -> alcoholFilteredList
-//        }
-//        cocktailAdapter.refreshData(categoryFilteredList)
-//    }
-
-    override val viewModel: MainViewModel by activityViewModels()
-
 }

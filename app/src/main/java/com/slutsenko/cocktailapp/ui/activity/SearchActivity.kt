@@ -12,6 +12,7 @@ import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.COLUMN
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import com.slutsenko.cocktailapp.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
@@ -60,7 +61,7 @@ class SearchActivity : BaseActivity<SearchViewModel>() {
                                         response: Response<CocktailList?>) {
                     val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
-                        cocktailAdapter = CocktailAdapter(this@SearchActivity, cocktail)
+                        cocktailAdapter = CocktailAdapter(this@SearchActivity,  cocktail)
                         rv_search.adapter = cocktailAdapter
                         tv_answer.text = ""
                     } else {
@@ -81,5 +82,4 @@ class SearchActivity : BaseActivity<SearchViewModel>() {
     }
 
     override val viewModel: SearchViewModel by viewModels()
-
 }

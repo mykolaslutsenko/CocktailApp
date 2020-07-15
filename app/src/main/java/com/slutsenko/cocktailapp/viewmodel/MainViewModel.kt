@@ -1,117 +1,87 @@
 package com.slutsenko.cocktailapp.viewmodel
 
+import android.graphics.Color
 import android.view.MenuItem
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.app.MyApplication
 import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
+import com.slutsenko.cocktailapp.filter.DrinkFilterType
+import com.slutsenko.cocktailapp.filter.SortDrink
 
 class MainViewModel : BaseViewModel() {
 
+    var filteredList: List<Cocktail>? = null
+
     var cocktailDBLiveData: MutableLiveData<List<Cocktail>>? = MutableLiveData()
-
-    var alcoholListLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
-
-    var categoryListLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
-
-    var favoriteLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
-
-    val sortCocktailLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
-
-    val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = MutableLiveData()
-
 
     val alcoholDrinkFilterLiveData: MutableLiveData<AlcoholDrinkFilter> = MutableLiveData()
 
     var categoryDrinkFilterLiveData: MutableLiveData<CategoryDrinkFilter> = MutableLiveData()
 
+    var historyLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
+
+    var favoriteLiveData: MutableLiveData<List<Cocktail>> = MutableLiveData()
+
+    val sortDrinkLiveData: MutableLiveData<SortDrink> = MutableLiveData()
+
+    val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
     var cocktailQuantityLiveData: MutableLiveData<Int> = MutableLiveData()
 
-
-    var allDrinkFiltersLiveData: MutableLiveData<List<Cocktail>> = MediatorLiveData<List<Cocktail>>().apply {
-
+    var mediatorLiveData: MutableLiveData<List<Cocktail>> = MediatorLiveData<List<Cocktail>>().apply {
         fun filter() {
-            value = filterCocktailList(alcoholDrinkFilterLiveData.value ?: AlcoholDrinkFilter.NON,
-                    categoryDrinkFilterLiveData.value ?: CategoryDrinkFilter.NON)
+            value = filterAndSortCocktailList()
         }
-
         addSource(alcoholDrinkFilterLiveData) {
-            //value = alcoholListLiveData.value
             filter()
         }
         addSource(categoryDrinkFilterLiveData) {
-            //value = categoryListLiveData.value
             filter()
         }
-
-
-    }
-
-
-    //value = arrayListOf(
-
-    fun sortCocktailList(menuItem: MenuItem): List<Cocktail> {
-        when (menuItem.itemId) {
-            R.id.menu_sort_recent -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.dateModified }
-            }
-            R.id.menu_sort_nameAscending -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.strDrink }
-
-            }
-            R.id.menu_sort_nameDescending -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
-
-            }
-            R.id.menu_sort_alcoholFirst -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
-
-            }
-            R.id.menu_sort_nonAlcoholFirst -> {
-                sortCocktailLiveData.value?.sortedByDescending { it.strDrink }
-
-            }
-            R.id.menu_sort_ingredientAscending -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedBy { it.ingredients }
-
-            }
-            R.id.menu_sort_ingredientDescending -> {
-                sortCocktailLiveData.value = sortCocktailLiveData.value?.sortedByDescending { it.ingredients }
-            }
-            //else -> return super.onContextItemSelected(item)
-
+        addSource(sortDrinkLiveData) {
+            filter()
         }
-        return sortCocktailLiveData.value!!
     }
 
-    fun setAlcoholFilters(menuItem: MenuItem): String {
-        when (menuItem.itemId) {
-            R.id.item_alcoholic -> {
-                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.ALCOHOLIC
+    private fun filterAndSortCocktailList(): List<Cocktail> {
+        filteredList = cocktailDBLiveData?.value!!
+        filterAlcohol(alcoholDrinkFilterLiveData.value!!)
+        filterCategory(categoryDrinkFilterLiveData.value!!)
+        sortCocktailList(sortDrinkLiveData.value!!)
+        return filteredList!!
+    }
+
+    private fun sortCocktailList(sort: SortDrink) {
+        filteredList = when (sort) {
+            SortDrink.RECENT -> {
+                filteredList?.sortedBy { it.dateModified }
             }
-            R.id.item_nonAlcoholic -> {
-                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.NON_ALCOHOLIC
+            SortDrink.NAME_ASCENDING -> {
+                filteredList?.sortedBy { it.strDrink }
             }
-            R.id.item_optionalAlcohol -> {
-                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.OPTIONAL_ALCOHOL
+            SortDrink.NAME_DESCENDING -> {
+                filteredList?.sortedByDescending { it.strDrink }
             }
-            else -> AlcoholDrinkFilter.NON
+            SortDrink.ALCOHOL_FIRST -> {
+                filteredList?.sortedBy { it.strDrink }
+            }
+            SortDrink.NON_ALCOHOL_FIRST -> {
+                filteredList?.sortedBy { it.strDrink }
+            }
+            SortDrink.INGREDIENT_ASCENDING -> {
+                filteredList?.sortedBy { it.ingredients }
+            }
+            SortDrink.INGREDIENT_DESCENDING -> {
+                filteredList?.sortedByDescending { it.ingredients }
+            }
         }
-        return alcoholDrinkFilterLiveData.value!!.key
     }
 
-    fun setCategoryFilters(menuItem: MenuItem): String {
-
-        return ""
-
-    }
-
-
-    fun filterAlcohol(alcoholDrinkFilter: AlcoholDrinkFilter) {
+    private fun filterAlcohol(alcoholDrinkFilter: AlcoholDrinkFilter) {
         filteredList = when (alcoholDrinkFilter) {
             AlcoholDrinkFilter.ALCOHOLIC -> filteredList?.filter {
                 it.strAlcoholic == AlcoholDrinkFilter.ALCOHOLIC.key
@@ -122,60 +92,11 @@ class MainViewModel : BaseViewModel() {
             AlcoholDrinkFilter.OPTIONAL_ALCOHOL -> filteredList?.filter {
                 it.strAlcoholic == AlcoholDrinkFilter.OPTIONAL_ALCOHOL.key
             }
-            AlcoholDrinkFilter.NON -> filteredList
+            AlcoholDrinkFilter.NONE -> filteredList
         }
-        alcoholListLiveData.value = filteredList
     }
-
-    fun setCategoryFilter(menuItem: MenuItem): String {
-        when (menuItem.itemId) {
-            R.id.item_category_ordinary -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.ORDINARY_DRINK
-            }
-            R.id.item_category_cocktail -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COCKTAIL
-            }
-            R.id.item_category_milk -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.MILK_FLOAT_SHAKE
-            }
-            R.id.item_category_other -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COCOA
-            }
-            R.id.item_category_shot -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.SHOT
-            }
-            R.id.item_category_coffee -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COFFEE_TEA
-            }
-            R.id.item_category_homemadeLiqueur -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.HOMEMADE_LIQUEUR
-            }
-            R.id.item_category_punch -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.PUNCH_PARTY_DRINK
-            }
-            R.id.item_category_beer -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.BEER
-            }
-            R.id.item_category_softDrink -> {
-                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.SOFT_DRINK_SODA
-            }
-            else -> CategoryDrinkFilter.NON
-        }
-        return categoryDrinkFilterLiveData.value!!.key
-    }
-
-    var filteredList: List<Cocktail>? = null
-
-    private fun filterCocktailList(alcoholDrinkFilter: AlcoholDrinkFilter, categoryDrinkFilter: CategoryDrinkFilter): List<Cocktail> {
-        filteredList = cocktailDBLiveData?.value!!
-        filterAlcohol(alcoholDrinkFilter)
-        filterCategory(categoryDrinkFilter)
-        return filteredList!!
-    }
-
 
     private fun filterCategory(categoryDrinkFilter: CategoryDrinkFilter) {
-
         filteredList = when (categoryDrinkFilter) {
             CategoryDrinkFilter.ORDINARY_DRINK -> filteredList?.filter {
                 it.strCategory == CategoryDrinkFilter.ORDINARY_DRINK.key
@@ -210,9 +131,104 @@ class MainViewModel : BaseViewModel() {
             CategoryDrinkFilter.SOFT_DRINK_SODA -> filteredList?.filter {
                 it.strCategory == CategoryDrinkFilter.SOFT_DRINK_SODA.key
             }
-            CategoryDrinkFilter.NON -> filteredList
+            CategoryDrinkFilter.NONE -> filteredList
         }
+    }
 
-        categoryListLiveData.value = filteredList
+    fun setAlcoholFilters(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.item_alcoholic -> {
+                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.ALCOHOLIC
+            }
+            R.id.item_nonAlcoholic -> {
+                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.NON_ALCOHOLIC
+            }
+            R.id.item_optionalAlcohol -> {
+                alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.OPTIONAL_ALCOHOL
+            }
+            else -> AlcoholDrinkFilter.NONE
+        }
+    }
+
+    fun setCategoryFilter(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.item_category_ordinary -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.ORDINARY_DRINK
+            }
+            R.id.item_category_cocktail -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COCKTAIL
+            }
+            R.id.item_category_milk -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.MILK_FLOAT_SHAKE
+            }
+            R.id.item_category_other -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.OTHER_UNKNOWN
+            }
+            R.id.item_category_cocoa -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COCOA
+            }
+            R.id.item_category_shot -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.SHOT
+            }
+            R.id.item_category_coffee -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.COFFEE_TEA
+            }
+            R.id.item_category_homemadeLiqueur -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.HOMEMADE_LIQUEUR
+            }
+            R.id.item_category_punch -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.PUNCH_PARTY_DRINK
+            }
+            R.id.item_category_beer -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.BEER
+            }
+            R.id.item_category_softDrink -> {
+                categoryDrinkFilterLiveData.value = CategoryDrinkFilter.SOFT_DRINK_SODA
+            }
+            else -> CategoryDrinkFilter.NONE
+        }
+    }
+
+    fun setSortValue(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.menu_sort_recent -> {
+                sortDrinkLiveData.value = SortDrink.RECENT
+            }
+            R.id.menu_sort_nameAscending -> {
+                sortDrinkLiveData.value = SortDrink.NAME_ASCENDING
+            }
+            R.id.menu_sort_nameDescending -> {
+                sortDrinkLiveData.value = SortDrink.NAME_DESCENDING
+            }
+            R.id.menu_sort_alcoholFirst -> {
+                sortDrinkLiveData.value = SortDrink.ALCOHOL_FIRST
+            }
+            R.id.menu_sort_nonAlcoholFirst -> {
+                sortDrinkLiveData.value = SortDrink.NON_ALCOHOL_FIRST
+            }
+            R.id.menu_sort_ingredientAscending -> {
+                sortDrinkLiveData.value = SortDrink.INGREDIENT_ASCENDING
+            }
+            R.id.menu_sort_ingredientDescending -> {
+                sortDrinkLiveData.value = SortDrink.INGREDIENT_DESCENDING
+            }
+        }
+    }
+
+    fun setStartParam() {
+        alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.NONE
+        categoryDrinkFilterLiveData.value = CategoryDrinkFilter.NONE
+        sortDrinkLiveData.value = SortDrink.RECENT
+    }
+
+    fun refreshParam() {
+        alcoholDrinkFilterLiveData.value = alcoholDrinkFilterLiveData.value
+        categoryDrinkFilterLiveData.value = categoryDrinkFilterLiveData.value
+        sortDrinkLiveData.value = sortDrinkLiveData.value
+    }
+
+    fun dropFilters() {
+        alcoholDrinkFilterLiveData.value = AlcoholDrinkFilter.NONE
+        categoryDrinkFilterLiveData.value = CategoryDrinkFilter.NONE
     }
 }
