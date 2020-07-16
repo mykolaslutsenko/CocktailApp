@@ -4,11 +4,11 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
-import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
-import com.slutsenko.cocktailapp.ui.dialog.DialogButton
-import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
 abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity() {
     protected abstract val viewModel: ViewModel

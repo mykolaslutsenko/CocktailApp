@@ -1,15 +1,18 @@
-package com.slutsenko.cocktailapp.ui
+package com.slutsenko.cocktailapp.ui.activity
 
 import android.content.Intent
 import android.util.Log
 import android.view.View
-import com.bumptech.glide.Glide
+import androidx.activity.viewModels
 import com.google.android.material.appbar.AppBarLayout
 import com.slutsenko.cocktailapp.BaseActivity
-import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
+import com.slutsenko.cocktailapp.db.CocktailDatabase
+import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.service.DrinkService
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment
+import com.slutsenko.cocktailapp.viewmodel.AboutCocktailViewModel
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
 class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAboutCocktailBinding>() {

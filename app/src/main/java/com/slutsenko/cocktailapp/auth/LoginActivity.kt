@@ -1,19 +1,15 @@
 package com.slutsenko.cocktailapp.auth
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.DialogFragment
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.BaseActivity
-import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.ui.MainActivity
-import com.slutsenko.cocktailapp.ui.dialog.DialogButton
-import com.slutsenko.cocktailapp.ui.dialog.DialogType
+import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
+import com.slutsenko.cocktailapp.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {

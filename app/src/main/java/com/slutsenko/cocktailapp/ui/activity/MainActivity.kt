@@ -1,20 +1,20 @@
 package com.slutsenko.cocktailapp.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.base.BaseActivity
-import com.slutsenko.cocktailapp.receiver.BatteryStateReceiver
+import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
+
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity<MainViewModel>() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override val viewModel: MainViewModel by viewModels()
 
 
