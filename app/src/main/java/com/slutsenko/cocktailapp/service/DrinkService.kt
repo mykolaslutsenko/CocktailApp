@@ -12,12 +12,12 @@ class DrinkService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         try {
-            Thread.sleep(wait)
+            //Thread.sleep(wait)
             val another = Intent(ANOTHER_COCKTAIL)
             sendBroadcast(another)
             stopSelf()
         } catch (e: InterruptedException) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
         return super.onStartCommand(intent, flags, startId)
     }

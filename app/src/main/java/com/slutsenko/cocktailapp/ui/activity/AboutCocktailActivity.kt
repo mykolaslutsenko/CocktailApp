@@ -8,14 +8,13 @@ import com.google.android.material.appbar.AppBarLayout
 import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.Cocktail
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.service.DrinkService
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
-class AboutCocktailActivity : BaseActivity<ActivityAboutCocktailBinding>() {
-    lateinit var cocktail: Cocktail
+class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAboutCocktailBinding>() {
 
+    lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
 
@@ -29,9 +28,10 @@ class AboutCocktailActivity : BaseActivity<ActivityAboutCocktailBinding>() {
         })
         cocktail = intent.getSerializableExtra("cocktail") as Cocktail
         ctl_collaps.title = cocktail.strDrink
-        // title = cocktail.strDrink
+       // title = cocktail.strDrink
         customizeComponents()
-        MainFragment.cocktailDatabase?.cocktailDao()?.addCocktail(cocktail)
+        CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
+        mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
     }
 
     override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {
@@ -43,8 +43,6 @@ class AboutCocktailActivity : BaseActivity<ActivityAboutCocktailBinding>() {
         startService(Intent(this, DrinkService::class.java))
         super.onDestroy()
     }
-
-
 
     private fun customizeComponents() {
         val strInfoItem = """
@@ -75,4 +73,8 @@ class AboutCocktailActivity : BaseActivity<ActivityAboutCocktailBinding>() {
     fun back(view: View) {
         onBackPressed()
     }
+
+    override val viewModel: AboutCocktailViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+
 }

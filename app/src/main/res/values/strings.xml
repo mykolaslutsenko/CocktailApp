@@ -9,18 +9,49 @@
     <string name="login">login</string>
     <string name="password">password</string>
     <string name="btn_login">Login</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alcoholic">Alcoholic</string>
     <string name="non_alcoholic">Non alcoholic</string>
     <string name="optional_alcohol">Optional alcohol</string>
     <string name="non">Non</string>
-    <string name="menu_save">save</string>
+    <string name="menu_remove_favorite">remove favorite</string>
     <string name="menu_item_open">open</string>
     <string name="menu_add_favorite">add favorite</string>
     <string name="profile">profile</string>
     <string name="main">main</string>
     <string name="log_out">Log out</string>
+    <string name="show_main_navigation_bar_titles">Show Main Navigation Bar Titles</string>
+    <string name="drop">DROP</string>
+    <string name="apply">APPLY</string>
+    <string name="result">RESULT</string>
+
+
+    <!--Sort type-->
+    <string name="recent">Recent</string>
+    <string name="name_ascending">Name (ascending)</string>
+    <string name="name_descending">Name (descending)</string>
+    <string name="alcohol_first">Alcohol first</string>
+    <string name="non_alcohol_first">Non alcohol first</string>
+    <string name="ingredient_count_ascending">Ingredient Count (ascending)</string>
+    <string name="ingredient_count_descending">Ingredient Count (descending)</string>
+
+    <!--Alcoholic-->
+    <string name="alcohol">Alcohol</string>
+    <string name="change">Change</string>
+    <string name="category">Category</string>
+
+    <!--Category-->
+    <string name="ordinary_drink">Ordinary Drink</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="milk_float_shake">Milk / Float / Shake</string>
+    <string name="other_unknown">Other/Unknown</string>
+    <string name="cocoa">Cocoa</string>
+    <string name="shot">Shot</string>
+    <string name="coffee_tea">Coffee / Tea</string>
+    <string name="homemade_liqueur">Homemade Liqueur</string>
+    <string name="punch_party_drink">Punch / Party Drink</string>
+    <string name="beer">Beer</string>
+    <string name="soft_drink_soda">Soft Drink / Soda</string>
 
 
 </resources>

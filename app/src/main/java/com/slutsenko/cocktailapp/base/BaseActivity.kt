@@ -3,18 +3,15 @@ package com.slutsenko.cocktailapp
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
 import com.slutsenko.cocktailapp.ui.dialog.DialogButton
 import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseActivity<DataBinding : ViewDataBinding> : AppCompatActivity() {
-
+abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity() {
+    protected abstract val viewModel: ViewModel
     protected open lateinit var dataBinding: DataBinding
 
     protected open fun configureDataBinding(binding: DataBinding) {}
@@ -65,6 +62,7 @@ abstract class BaseActivity<DataBinding : ViewDataBinding> : AppCompatActivity()
         super.onDestroy()
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
+
 
 
 }

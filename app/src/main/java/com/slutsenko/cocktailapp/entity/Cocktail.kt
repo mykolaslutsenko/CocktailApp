@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp
+package com.slutsenko.cocktailapp.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,7 +14,7 @@ class Cocktail : Serializable {
 
 
 
-    var isFavorite:Boolean? = null
+    var isFavorite:Boolean? = false
     var strDrinkAlternate: String? = null
     var strDrinkES: String? = null
     var strDrinkDE: String? = null

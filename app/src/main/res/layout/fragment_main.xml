@@ -8,11 +8,10 @@
 
     <com.slutsenko.cocktailapp.ui.view.MyToolbar
         android:id="@+id/main_fragment_toolbar"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/title_toolbar"
@@ -24,13 +23,23 @@
             android:text="@string/app_name"
             android:textSize="@dimen/font_20" />
 
+        <ImageView
+            android:id="@+id/iv_sort"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_sort_24" />
+
         <androidx.legacy.widget.Space
             android:layout_width="0dp"
             android:layout_height="0dp" />
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/iv_main_toolbar_filter"
                 android:layout_width="@dimen/dp_32"
@@ -42,28 +51,26 @@
 
             <ImageView
                 android:id="@+id/iv_indicator"
-                android:layout_marginEnd="@dimen/dp_32"
+                android:visibility="invisible"
                 android:layout_width="@dimen/dp_16"
-                android:layout_gravity="center_vertical|end"
                 android:layout_height="@dimen/dp_16"
-                android:src="@drawable/ic_circle_8"
-                />
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="@dimen/dp_32"
+                android:src="@drawable/ic_circle_8" />
         </FrameLayout>
 
     </com.slutsenko.cocktailapp.ui.view.MyToolbar>
 
     <LinearLayout
-        android:layout_marginTop="?attr/actionBarSize"
-        android:id="@+id/main_container"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager2"

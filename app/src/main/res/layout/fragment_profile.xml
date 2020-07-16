@@ -14,4 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/log_out" />
+
+    <CheckBox
+        android:id="@+id/chb_showTitle"
+        android:layout_margin="@dimen/dp_48"
+        android:checked="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_main_navigation_bar_titles" />
 </FrameLayout>
