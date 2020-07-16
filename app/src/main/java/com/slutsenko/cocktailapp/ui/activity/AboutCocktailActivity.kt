@@ -33,7 +33,7 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
         // title = cocktail.strDrink
         customizeComponents()
         CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
-        //mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
+        mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
     }
 
     override fun onDestroy() {

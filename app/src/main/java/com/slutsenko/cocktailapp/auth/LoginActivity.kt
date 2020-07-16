@@ -75,7 +75,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         return login?.length!! >= 6
     }
 
-
     private fun isValidPassword(password: String?): Boolean {
         password?.let {
             val passwordPattern = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{6,}$"
@@ -102,5 +101,4 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         invalidate()
         super.onStart()
     }
-
 }

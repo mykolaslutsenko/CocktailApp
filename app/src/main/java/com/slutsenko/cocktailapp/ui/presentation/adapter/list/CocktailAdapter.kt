@@ -22,7 +22,6 @@ import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 
 class CocktailAdapter(private val context: Context, private var cocktailsList: List<Cocktail>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
-    val mainViewModel: MainViewModel = MainViewModel()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)
         return CocktailViewHolder(view)
@@ -48,34 +47,28 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
         notifyDataSetChanged()
     }
 
+    interface OnFavoriteClick {
+        fun refreshDB()
+    }
+
+    lateinit var favoriteCallback: OnFavoriteClick
 
     inner class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cocktailImage: ImageView = itemView.findViewById(R.id.iv_cocktail)
         var cocktailImageName: TextView = itemView.findViewById(R.id.tv_cocktail_name)
         var favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
-        var favoriteCallback: OnFavoriteClick? = MainFragment()
-
-        fun setCallback(onFavoriteClick: OnFavoriteClick) {
-            onFavoriteClick.refreshDB()
-        }
-
 
         init {
             favorite.setOnClickListener {
                 val favoriteCocktail = cocktailsList[adapterPosition]
                 if (favoriteCocktail.isFavorite == false) {
                     favoriteCocktail.isFavorite = true
-                    favorite.setImageResource(R.drawable.ic_star_yellow_48)
                 } else if (favoriteCocktail.isFavorite == true) {
                     favoriteCocktail.isFavorite = false
-                    favorite.setImageResource(R.drawable.ic_star_white_48)
                 }
                 CocktailDatabase.getInstance(context)?.cocktailDao()?.addCocktail(favoriteCocktail)
-                this.setCallback(favoriteCallback!!)
+                favoriteCallback.refreshDB()
             }
-//                mainViewModel.cocktailDBLiveData?.value =
-//                        CocktailDatabase.getInstance(context)?.cocktailDao()?.cocktails as List<Cocktail>
-
 
             itemView.setOnLongClickListener { v: View? ->
                 PopupMenu(context, v).apply {
@@ -113,10 +106,4 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
         }
 
     }
-
-    interface OnFavoriteClick {
-        fun refreshDB()
-    }
-
-
 }
