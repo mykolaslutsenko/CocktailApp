@@ -76,40 +76,23 @@ class Cocktail : Serializable {
     var strMeasure15: String? = null
     var strCreativeCommonsConfirmed: String? = null
     var dateModified: String? = null
-    val ingredients: String
-        get() {
-            var allIngredients = ""
-            val ingredients = arrayOf(
-                    strIngredient1, strIngredient2, strIngredient3,
-                    strIngredient4, strIngredient5, strIngredient6,
-                    strIngredient7, strIngredient8, strIngredient9,
-                    strIngredient10, strIngredient11, strIngredient12,
-                    strIngredient13, strIngredient14, strIngredient15)
-            for (i in 1..ingredients.size) {
-                allIngredients = if (ingredients[i - 1] != null) """
-     $allIngredients$i. ${ingredients[i - 1]}
+//    val ingredients = arrayOf(
+//                    strIngredient1, strIngredient2, strIngredient3,
+//                    strIngredient4, strIngredient5, strIngredient6,
+//                    strIngredient7, strIngredient8, strIngredient9,
+//                    strIngredient10, strIngredient11, strIngredient12,
+//                    strIngredient13, strIngredient14, strIngredient15)
+//
+//
+//    val measures = arrayOf(
+//                    strMeasure1, strMeasure2, strMeasure3,
+//                    strMeasure4, strMeasure5, strMeasure6,
+//                    strMeasure7, strMeasure8, strMeasure9,
+//                    strMeasure10, strMeasure11, strMeasure12,
+//                    strMeasure13, strMeasure14, strMeasure15)
 
-     """.trimIndent() else allIngredients
-            }
-            return allIngredients
-        }
 
-    val measures: String
-        get() {
-            var allMeasures = ""
-            val measures = arrayOf(
-                    strMeasure1, strMeasure2, strMeasure3,
-                    strMeasure4, strMeasure5, strMeasure6,
-                    strMeasure7, strMeasure8, strMeasure9,
-                    strMeasure10, strMeasure11, strMeasure12,
-                    strMeasure13, strMeasure14, strMeasure15)
-            for (i in 1..measures.size) {
-                allMeasures = if (measures[i - 1] != null) """
-     $allMeasures${measures[i - 1]}
-
-     """.trimIndent() else allMeasures
-            }
-            return allMeasures
-        }
+    //val ingredients: List<String> = emptyList(),
+    //val measures: List<String> = emptyList()/*,
 
 }

@@ -32,13 +32,14 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 //                et_login.setTextColor(Color.BLACK)
 //                et_password.setTextColor(Color.BLACK)
             }
+
             override fun afterTextChanged(s: Editable) {
                 viewModel.loginInputLiveData.value = s.toString()
 
             }
         }
 
-        val textWatcher2:TextWatcher = object :TextWatcher {
+        val textWatcher2: TextWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.passwordInputLiveData.value = s.toString()
             }
@@ -58,6 +59,11 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewModel.isLoginDataValidLiveData.observe(this, Observer {
             btn_login.isEnabled = it
         })
+    }
+
+    override fun configureDataBinding(binding: ActivityLoginBinding) {
+        super.configureDataBinding(binding)
+        binding.viewModel = viewModel
     }
 
     private fun invalidate() {
@@ -88,8 +94,9 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     fun onClickLogin(v: View?) {
 //        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        if (login == myLogin && password == myPassword) {
-            startActivity(Intent(this, MainActivity::class.java))
-           // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+        // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        } else if (login != myLogin || password != myPassword) {
 //            et_login.setTextColor(Color.RED)
 //            et_password.setTextColor(Color.RED)

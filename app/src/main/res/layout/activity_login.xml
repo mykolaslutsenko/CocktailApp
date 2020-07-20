@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.slutsenko.cocktailapp.auth.LoginViewModel" />
     </data>
 
 <androidx.core.widget.NestedScrollView
@@ -47,7 +49,7 @@
             android:layout_height="@dimen/dp_48">
 
             <EditText
-                android:text="mykola"
+                android:text="@{viewModel.loginInputLiveData}"
                 android:id="@+id/et_login"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"
@@ -61,7 +63,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
-                android:text="a23456"
+                android:text="@{viewModel.passwordInputLiveData}"
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"

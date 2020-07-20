@@ -73,10 +73,10 @@ class MainViewModel : BaseViewModel() {
                 filteredList?.sortedBy { it.strDrink }
             }
             SortDrink.INGREDIENT_ASCENDING -> {
-                filteredList?.sortedBy { it.ingredients }
+                filteredList?.sortedBy { it.strDrink }
             }
             SortDrink.INGREDIENT_DESCENDING -> {
-                filteredList?.sortedByDescending { it.ingredients }
+                filteredList?.sortedByDescending { it.strDrink }
             }
         }
     }

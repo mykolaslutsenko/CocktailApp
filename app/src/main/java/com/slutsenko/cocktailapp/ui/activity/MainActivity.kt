@@ -24,6 +24,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+
+    override fun activityCreated() {
+
         val mainFragment = MainFragment.getInstance()
         val profileFragment = ProfileFragment.getInstance()
 
@@ -50,9 +55,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
-    }
-
-    override fun activityCreated() {
         viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
             if (it) {
                 bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
