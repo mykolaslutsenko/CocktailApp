@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp
+package com.slutsenko.cocktailapp.base
 
 import android.content.IntentFilter
 import android.os.Build

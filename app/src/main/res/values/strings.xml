@@ -9,7 +9,6 @@
     <string name="login">login</string>
     <string name="password">password</string>
     <string name="btn_login">Login</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alcoholic">Alcoholic</string>
     <string name="non_alcoholic">Non alcoholic</string>
     <string name="optional_alcohol">Optional alcohol</string>
@@ -59,7 +58,6 @@
     <string name="punch_party_drink">Punch / Party Drink</string>
     <string name="beer">Beer</string>
     <string name="soft_drink_soda">Soft Drink / Soda</string>
-
 
 
 </resources>
