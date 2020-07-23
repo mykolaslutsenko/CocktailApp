@@ -8,12 +8,13 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.slutsenko.cocktailapp.base.BaseActivity
+import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
 import com.slutsenko.cocktailapp.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BaseActivity<LoginViewModel>() {
+class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override val viewModel: LoginViewModel by viewModels()
     val EXTRA_KEY_LOGIN = "LOGIN"
@@ -119,5 +120,6 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
         invalidate()
         super.onStart()
     }
+
 
 }

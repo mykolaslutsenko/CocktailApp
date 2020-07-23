@@ -14,7 +14,7 @@ class Cocktail : Serializable {
 
 
 
-    var isFavorite:Boolean? = null
+    var isFavorite:Boolean? = false
     var strDrinkAlternate: String? = null
     var strDrinkES: String? = null
     var strDrinkDE: String? = null

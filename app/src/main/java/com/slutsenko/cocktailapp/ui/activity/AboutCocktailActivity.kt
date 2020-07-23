@@ -4,17 +4,19 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
+import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.base.BaseActivity
+import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.db.CocktailDatabase
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.service.DrinkService
 import com.slutsenko.cocktailapp.viewmodel.AboutCocktailViewModel
+import com.slutsenko.cocktailapp.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
-class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
+class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAboutCocktailBinding>() {
+
     lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
@@ -32,6 +34,12 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
        // title = cocktail.strDrink
         customizeComponents()
         CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
+        mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
+    }
+
+    override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {
+        super.configureDataBinding(binding)
+        binding.cocktail = cocktail
     }
 
     override fun onDestroy() {
@@ -54,7 +62,7 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
         val strIngredientTitle = "Ingredients"
         val strInstructionsTitle = "Instructions"
 
-        Glide.with(this).load(cocktail.strDrinkThumb).into(iv_cocktail_full)
+        //Glide.with(this).load(cocktail.strDrinkThumb).into(iv_cocktail_full)
         tv_basic.text = strBasic
         tv_info_item.text = strInfoItem
         tv_info_value.text = strInfoValue
@@ -62,7 +70,7 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
         tv_ingredient_names.text = cocktail.ingredients
         tv_ingredient_values.text = cocktail.measures
         tv_instructions_title.text = strInstructionsTitle
-        tv_instructions_value.text = cocktail.strInstructions
+        //tv_instructions_value.text = cocktail.strInstructions
     }
 
     fun back(view: View) {
@@ -70,5 +78,6 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel>() {
     }
 
     override val viewModel: AboutCocktailViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
 }

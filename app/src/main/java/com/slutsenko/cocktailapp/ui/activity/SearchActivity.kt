@@ -6,8 +6,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.slutsenko.cocktailapp.base.BaseActivity
+import com.slutsenko.cocktailapp.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.ActivitySearchBinding
 import com.slutsenko.cocktailapp.ui.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.network.CocktailList
 import com.slutsenko.cocktailapp.network.JsonPlaceholderApi
@@ -21,7 +22,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchActivity : BaseActivity<SearchViewModel>() {
+class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
+
     var cocktailAdapter: CocktailAdapter? = null
 
     override fun myView(): Int {
@@ -60,7 +62,7 @@ class SearchActivity : BaseActivity<SearchViewModel>() {
                                         response: Response<CocktailList?>) {
                     val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
-                        cocktailAdapter = CocktailAdapter(this@SearchActivity, cocktail)
+                        cocktailAdapter = CocktailAdapter(this@SearchActivity,  cocktail)
                         rv_search.adapter = cocktailAdapter
                         tv_answer.text = ""
                     } else {
@@ -81,5 +83,4 @@ class SearchActivity : BaseActivity<SearchViewModel>() {
     }
 
     override val viewModel: SearchViewModel by viewModels()
-
 }

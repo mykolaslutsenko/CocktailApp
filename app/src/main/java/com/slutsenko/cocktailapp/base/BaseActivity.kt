@@ -1,4 +1,4 @@
-package com.slutsenko.cocktailapp.base
+package com.slutsenko.cocktailapp
 
 import android.content.IntentFilter
 import android.os.Build
@@ -6,14 +6,20 @@ import android.os.Bundle
 import android.os.LocaleList
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
 import java.util.*
 
-abstract class BaseActivity<ViewModel: BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity() {
     protected abstract val viewModel: ViewModel
+    protected open lateinit var dataBinding: DataBinding
 
-    private val airModeReceiver= AirModeReceiver()
+    protected open fun configureDataBinding(binding: DataBinding) {}
+
+    private val airModeReceiver = AirModeReceiver()
     private val bootReceiver = BootReceiver()
     private val log: String = "BaseLog"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +37,13 @@ abstract class BaseActivity<ViewModel: BaseViewModel> : AppCompatActivity() {
         }
         resources.updateConfiguration(configuration, resources.displayMetrics)
         super.onCreate(savedInstanceState)
-        Log.d(log, this::class.java.toString() + " OnCreate")
-        setContentView(myView())
+        dataBinding = DataBindingUtil.setContentView(this, myView())!!
+        dataBinding.setLifecycleOwner(this@BaseActivity)
         activityCreated()
+        configureDataBinding(dataBinding)
+
+        Log.d(log, this::class.java.toString() + " OnCreate")
+
     }
 
     protected abstract fun myView(): Int
@@ -68,6 +78,7 @@ abstract class BaseActivity<ViewModel: BaseViewModel> : AppCompatActivity() {
         super.onDestroy()
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
+
 
 
 }
