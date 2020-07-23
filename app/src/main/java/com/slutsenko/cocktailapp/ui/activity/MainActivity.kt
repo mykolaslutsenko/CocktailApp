@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 
@@ -29,8 +29,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun activityCreated() {
 
-        val mainFragment = MainFragment.getInstance()
-        val profileFragment = ProfileFragment.getInstance()
+        val mainFragment = MainFragment.newInstance()
+        val profileFragment = ProfileFragment.newInstance()
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when (it.itemId) {

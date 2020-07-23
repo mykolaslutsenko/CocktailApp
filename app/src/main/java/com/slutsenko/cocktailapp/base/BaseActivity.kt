@@ -1,16 +1,25 @@
-package com.slutsenko.cocktailapp
+package com.slutsenko.cocktailapp.base
 
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.slutsenko.cocktailapp.base.BaseViewModel
+import androidx.fragment.app.DialogFragment
 import com.slutsenko.cocktailapp.receiver.AirModeReceiver
 import com.slutsenko.cocktailapp.receiver.BootReceiver
+import com.slutsenko.cocktailapp.ui.dialog.BaseBottomSheetDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity(),
+        BaseDialogFragment.OnDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseDialogFragment.OnDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>{
     protected abstract val viewModel: ViewModel
     protected open lateinit var dataBinding: DataBinding
 
@@ -43,6 +52,60 @@ abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBind
         registerReceiver(bootReceiver, IntentFilter("android.intent.action.BOOT_COMPLETED"))
         registerReceiver(airModeReceiver, IntentFilter("android.intent.action.AIRPLANE_MODE"))
         Log.d(log, this::class.java.toString() + " OnResume")
+    }
+
+    @CallSuper
+    override fun onDialogFragmentDismiss(
+            dialog: DialogFragment,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+        (dialog.parentFragment as? BaseFragment<*>)?.onDialogFragmentDismiss(
+                dialog,
+                type,
+                data
+        )
+    }
+
+    @CallSuper
+    override fun onDialogFragmentClick(
+            dialog: DialogFragment,
+            buttonType: DialogButton,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+        (dialog.parentFragment as? BaseFragment<*>)?.onDialogFragmentClick(
+                dialog,
+                buttonType,
+                type,
+                data
+        )
+    }
+
+    override fun onBottomSheetDialogFragmentDismiss(
+            dialog: DialogFragment,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+        (dialog.parentFragment as? BaseFragment<*>)?.onBottomSheetDialogFragmentDismiss(
+                dialog,
+                type,
+                data
+        )
+    }
+
+    override fun onBottomSheetDialogFragmentClick(
+            dialog: DialogFragment,
+            buttonType: DialogButton,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+        (dialog.parentFragment as? BaseFragment<*>)?.onBottomSheetDialogFragmentClick(
+                dialog,
+                buttonType,
+                type,
+                data
+        )
     }
 
     override fun onPause() {

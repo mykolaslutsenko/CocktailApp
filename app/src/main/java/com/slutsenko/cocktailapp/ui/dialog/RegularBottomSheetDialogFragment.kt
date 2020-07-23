@@ -4,13 +4,13 @@ import android.view.View
 import androidx.core.os.bundleOf
 import com.slutsenko.cocktailapp.R
 
-class RegularBottomSheetDialogFragment<Data> :
-        SimpleBaseBottomSheetDialogFragment<Data, RegularDialogButton, RegularDialogType, SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder>() {
+class RegularBottomSheetDialogFragment :
+        SimpleBaseBottomSheetDialogFragment<Any, RegularDialogButton, RegularDialogType, SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder>() {
 
     override val dialogType: RegularDialogType = RegularDialogType
 
     override var dialogBuilder: SimpleDialogBuilder = SimpleDialogBuilder()
-    override var data: Data? = null
+    override var data: Any? = null
 
     override fun getButtonType(view: View): RegularDialogButton {
         return when (view.id) {
@@ -21,7 +21,7 @@ class RegularBottomSheetDialogFragment<Data> :
     }
 
     companion object {
-        fun newInstance(builder: SimpleDialogBuilder.() -> Unit): RegularBottomSheetDialogFragment<Any?> {
+        fun newInstance(builder: SimpleDialogBuilder.() -> Unit): RegularBottomSheetDialogFragment {
             return newInstance(null, builder)
         }
 
@@ -32,8 +32,8 @@ class RegularBottomSheetDialogFragment<Data> :
         fun <Data> newInstance(
                 data: Data? = null,
                 builder: SimpleDialogBuilder.() -> Unit
-        ): RegularBottomSheetDialogFragment<Data> {
-            val fragment = RegularBottomSheetDialogFragment<Data>()
+        ): RegularBottomSheetDialogFragment {
+            val fragment = RegularBottomSheetDialogFragment()
             fragment.arguments = bundleOf()
                 EXTRA_KEY_BUILDER to (SimpleDialogBuilder().apply(builder))
             return fragment

@@ -4,12 +4,15 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
 import com.slutsenko.cocktailapp.ui.activity.MainActivity
+import com.slutsenko.cocktailapp.ui.dialog.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
@@ -25,6 +28,14 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     override fun activityCreated() {
+
+
+
+//        RegularBottomSheetDialogFragment.newInstance {
+//            titleText = "Error"
+//            leftButtonText = "Ok"
+//            descriptionText = "okay"
+//        }.show(supportFragmentManager, RegularBottomSheetDialogFragment::class.java.simpleName)
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -94,8 +105,10 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     fun onClickLogin(v: View?) {
 //        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        if (login == myLogin && password == myPassword) {
+
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+
         // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        } else if (login != myLogin || password != myPassword) {
 //            et_login.setTextColor(Color.RED)
@@ -110,6 +123,24 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         invalidate()
         super.onStart()
     }
+
+//    override fun onDialogFragmentClick(
+//            dialog: DialogFragment,
+//            buttonType: DialogButton,
+//            type: DialogType<DialogButton>,
+//            data: Any?
+//    ) {
+//        super.onDialogFragmentClick(dialog, buttonType, type, data)
+//        when (type) {
+//            RegularDialogType -> {
+//                when (buttonType) {
+//                    ActionSingleDialogButton -> {
+//                        //
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
 }

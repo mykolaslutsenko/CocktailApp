@@ -43,12 +43,10 @@ class HistoryFragment : BaseFragment<MainViewModel>(), CocktailAdapter.OnFavorit
     }
 
     companion object {
-        private var historyFragment: HistoryFragment? = null
-        fun getInstance(): HistoryFragment {
-            if (historyFragment == null) {
-                historyFragment = HistoryFragment()
-            }
-            return historyFragment as HistoryFragment
+
+        fun newInstance(): HistoryFragment {
+
+            return HistoryFragment()
         }
     }
 

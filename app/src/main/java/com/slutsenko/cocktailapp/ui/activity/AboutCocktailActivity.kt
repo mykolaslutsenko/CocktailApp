@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.appbar.AppBarLayout
-import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.db.CocktailDatabase

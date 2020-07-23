@@ -6,9 +6,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.slutsenko.cocktailapp.ui.dialog.BaseBottomSheetDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
+import com.slutsenko.cocktailapp.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.ui.dialog.DialogType
 
-abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment() {
+abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment(),
+        BaseDialogFragment.OnDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseDialogFragment.OnDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
+        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>> {
 
     protected abstract val viewModel: ViewModel
 
@@ -86,4 +96,37 @@ abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment() {
     }
 
 
+    override fun onDialogFragmentDismiss(
+            dialog: DialogFragment,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+
+    }
+
+    override fun onDialogFragmentClick(
+            dialog: DialogFragment,
+            buttonType: DialogButton,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+
+    }
+
+    override fun onBottomSheetDialogFragmentDismiss(
+            dialog: DialogFragment,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+
+    }
+
+    override fun onBottomSheetDialogFragmentClick(
+            dialog: DialogFragment,
+            buttonType: DialogButton,
+            type: DialogType<DialogButton>,
+            data: Any?
+    ) {
+
+    }
 }

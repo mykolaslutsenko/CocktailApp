@@ -73,10 +73,10 @@ class MainFragment : BaseFragment<MainViewModel>() {
     }
 
     companion object {
-        private var mainFragment: MainFragment? = null
-        fun getInstance(): MainFragment {
-            if (mainFragment == null) mainFragment = MainFragment()
-            return mainFragment as MainFragment
+
+        fun newInstance(): MainFragment {
+
+            return MainFragment()
         }
 
         const val ANOTHER_COCKTAIL = "com.slutsenko.action.anotherCocktail"
