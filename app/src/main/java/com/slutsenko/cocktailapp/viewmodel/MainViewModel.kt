@@ -1,6 +1,5 @@
 package com.slutsenko.cocktailapp.viewmodel
 
-import android.graphics.Color
 import android.view.MenuItem
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,6 @@ import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.entity.Cocktail
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
-import com.slutsenko.cocktailapp.filter.DrinkFilterType
 import com.slutsenko.cocktailapp.filter.SortDrink
 
 class MainViewModel : BaseViewModel() {
@@ -73,10 +71,10 @@ class MainViewModel : BaseViewModel() {
                 filteredList?.sortedBy { it.strDrink }
             }
             SortDrink.INGREDIENT_ASCENDING -> {
-                filteredList?.sortedBy { it.ingredients }
+                filteredList?.sortedBy { it.strDrink }
             }
             SortDrink.INGREDIENT_DESCENDING -> {
-                filteredList?.sortedByDescending { it.ingredients }
+                filteredList?.sortedByDescending { it.strDrink }
             }
         }
     }

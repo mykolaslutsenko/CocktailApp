@@ -46,10 +46,9 @@ class FavoriteFragment : BaseFragment<MainViewModel>(), CocktailAdapter.OnFavori
     }
 
     companion object {
-        private var favoriteFragment: FavoriteFragment? = null
-        fun getInstance(): FavoriteFragment {
-            if (favoriteFragment == null) favoriteFragment = FavoriteFragment()
-            return favoriteFragment as FavoriteFragment
+
+        fun newInstance(): FavoriteFragment {
+            return  FavoriteFragment()
         }
     }
 

@@ -11,8 +11,8 @@ class FavoritePagerAdapter(fr: Fragment) : FragmentStateAdapter(fr) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HistoryFragment.getInstance()
-            else -> FavoriteFragment.getInstance()
+            0 -> HistoryFragment.newInstance()
+            else -> FavoriteFragment.newInstance()
         }
     }
 }

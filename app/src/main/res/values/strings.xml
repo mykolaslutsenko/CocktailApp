@@ -13,7 +13,7 @@
     <string name="alcoholic">Alcoholic</string>
     <string name="non_alcoholic">Non alcoholic</string>
     <string name="optional_alcohol">Optional alcohol</string>
-    <string name="non">Non</string>
+    <string name="none">None</string>
     <string name="menu_remove_favorite">remove favorite</string>
     <string name="menu_item_open">open</string>
     <string name="menu_add_favorite">add favorite</string>
@@ -24,6 +24,13 @@
     <string name="drop">DROP</string>
     <string name="apply">APPLY</string>
     <string name="result">RESULT</string>
+
+    <!--About cocktail-->
+    <string name="basic_information">Basic information</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="glass">Glass</string>
+    <string name="name">Name:</string>
 
 
     <!--Sort type-->
@@ -52,6 +59,7 @@
     <string name="punch_party_drink">Punch / Party Drink</string>
     <string name="beer">Beer</string>
     <string name="soft_drink_soda">Soft Drink / Soda</string>
+
 
 
 </resources>

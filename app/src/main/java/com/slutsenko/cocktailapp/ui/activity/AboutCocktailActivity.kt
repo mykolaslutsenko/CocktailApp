@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.appbar.AppBarLayout
-import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.db.CocktailDatabase
@@ -17,10 +17,9 @@ import kotlinx.android.synthetic.main.activity_about_cocktail.*
 
 class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAboutCocktailBinding>() {
 
-    lateinit var cocktail: Cocktail
+    //lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
-
         return R.layout.activity_about_cocktail
     }
 
@@ -29,17 +28,18 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
         abl_login.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             Log.d("ololo", verticalOffset.toString())
         })
-        cocktail = intent.getSerializableExtra("cocktail") as Cocktail
-        ctl_collaps.title = cocktail.strDrink
+        viewModel.cocktailLiveData.value = intent.getSerializableExtra("cocktail") as Cocktail
+        //viewModel.cocktailLiveData.value = cocktail
+        //ctl_collaps.title = cocktail.strDrink
        // title = cocktail.strDrink
         customizeComponents()
-        CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(cocktail)
+        CocktailDatabase.getInstance(this)?.cocktailDao()?.addCocktail(viewModel.cocktailLiveData.value)
         mainViewModel.cocktailDBLiveData?.value = CocktailDatabase.getInstance(this)?.cocktailDao()?.cocktails
     }
 
     override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {
         super.configureDataBinding(binding)
-        binding.cocktail = cocktail
+        binding.cocktail = viewModel
     }
 
     override fun onDestroy() {
@@ -48,28 +48,28 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
     }
 
     private fun customizeComponents() {
-        val strInfoItem = """
-            Name:
-            Alcoholic:
-            Glass:
-            """.trimIndent()
-        val strInfoValue = """
-            ${cocktail.strDrink}
-            ${cocktail.strAlcoholic}
-            ${cocktail.strGlass}
-            """.trimIndent()
-        val strBasic = "Basic information"
-        val strIngredientTitle = "Ingredients"
-        val strInstructionsTitle = "Instructions"
+//        val strInfoItem = """
+//            Name:
+//            Alcoholic:
+//            Glass:
+//            """.trimIndent()
+//        val strInfoValue = """
+//            ${cocktail.strDrink}
+//            ${cocktail.strAlcoholic}
+//            ${cocktail.strGlass}
+//            """.trimIndent()
+        //val strBasic = "Basic information"
+       // val strIngredientTitle = "Ingredients"
+       // val strInstructionsTitle = "Instructions"
 
         //Glide.with(this).load(cocktail.strDrinkThumb).into(iv_cocktail_full)
-        tv_basic.text = strBasic
-        tv_info_item.text = strInfoItem
-        tv_info_value.text = strInfoValue
-        tv_ingredient_title.text = strIngredientTitle
-        tv_ingredient_names.text = cocktail.ingredients
-        tv_ingredient_values.text = cocktail.measures
-        tv_instructions_title.text = strInstructionsTitle
+        //tv_basic.text = strBasic
+        //tv_info_item.text = strInfoItem
+        //tv_info_value.text = strInfoValue
+       // tv_ingredient_title.text = strIngredientTitle
+        //tv_ingredient_names.text = cocktail.ingredients
+        //tv_ingredient_values.text = cocktail.measures
+       // tv_instructions_title.text = strInstructionsTitle
         //tv_instructions_value.text = cocktail.strInstructions
     }
 

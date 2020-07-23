@@ -1,8 +1,6 @@
 package com.slutsenko.cocktailapp.auth
 
 import android.content.Intent
-import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -17,8 +15,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override val viewModel: LoginViewModel by viewModels()
-    val EXTRA_KEY_LOGIN = "LOGIN"
-    val EXTRA_KEY_PASSWORD = "PASSWORD"
 
     lateinit var login: String
     lateinit var password: String
@@ -41,6 +37,14 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     override fun activityCreated() {
+
+
+
+//        RegularBottomSheetDialogFragment.newInstance {
+//            titleText = "Error"
+//            leftButtonText = "Ok"
+//            descriptionText = "okay"
+//        }.show(supportFragmentManager, RegularBottomSheetDialogFragment::class.java.simpleName)
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -48,14 +52,13 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 //                et_login.setTextColor(Color.BLACK)
 //                et_password.setTextColor(Color.BLACK)
             }
-
             override fun afterTextChanged(s: Editable) {
                 viewModel.loginInputLiveData.value = s.toString()
 
             }
         }
 
-        val textWatcher2: TextWatcher = object : TextWatcher {
+        val textWatcher2:TextWatcher = object :TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.passwordInputLiveData.value = s.toString()
             }
@@ -75,6 +78,11 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewModel.isLoginDataValidLiveData.observe(this, Observer {
             btn_login.isEnabled = it
         })
+    }
+
+    override fun configureDataBinding(binding: ActivityLoginBinding) {
+        super.configureDataBinding(binding)
+        binding.viewModel = viewModel
     }
 
     private fun invalidate() {
@@ -105,7 +113,10 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     fun onClickLogin(v: View?) {
 //        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        if (login == myLogin && password == myPassword) {
+
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
+
         // imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        } else if (login != myLogin || password != myPassword) {
 //            et_login.setTextColor(Color.RED)
@@ -120,6 +131,24 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         invalidate()
         super.onStart()
     }
+
+//    override fun onDialogFragmentClick(
+//            dialog: DialogFragment,
+//            buttonType: DialogButton,
+//            type: DialogType<DialogButton>,
+//            data: Any?
+//    ) {
+//        super.onDialogFragmentClick(dialog, buttonType, type, data)
+//        when (type) {
+//            RegularDialogType -> {
+//                when (buttonType) {
+//                    ActionSingleDialogButton -> {
+//                        //
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
 }

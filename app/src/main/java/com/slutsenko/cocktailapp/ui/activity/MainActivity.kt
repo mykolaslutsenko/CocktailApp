@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.slutsenko.cocktailapp.BaseActivity
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 
@@ -24,8 +24,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val mainFragment = MainFragment.getInstance()
-        val profileFragment = ProfileFragment.getInstance()
+
+    }
+
+    override fun activityCreated() {
+
+        val mainFragment = MainFragment.newInstance()
+        val profileFragment = ProfileFragment.newInstance()
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -50,9 +55,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
-    }
-
-    override fun activityCreated() {
         viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
             if (it) {
                 bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
