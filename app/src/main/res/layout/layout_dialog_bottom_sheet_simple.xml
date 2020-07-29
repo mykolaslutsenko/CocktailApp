@@ -34,7 +34,7 @@
                 tools:ignore="RtlSymmetry,UseCompoundDrawables">
 
                 <TextView
-                    android:id="@+id/tv_dialog_title"
+                    android:id="@+id/tv_dialog_bs_title"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
                     android:layout_gravity="center"
@@ -46,7 +46,7 @@
                     android:maxLines="3"/>
 
                 <ImageView
-                    android:id="@+id/iv_dialog_close"
+                    android:id="@+id/iv_dialog_bs_close"
                     android:layout_width="@dimen/dp_48"
                     android:layout_height="@dimen/dp_48"
                     android:layout_gravity="center"
@@ -56,7 +56,7 @@
 
 
             <TextView
-                android:id="@+id/tv_dialog_description"
+                android:id="@+id/tv_dialog_bs_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_24"
@@ -64,31 +64,31 @@
                 android:visibility="gone"/>
 
             <FrameLayout
-                android:id="@+id/fl_dialog_extra_contents"
+                android:id="@+id/fl_dialog_bs_extra_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
             </FrameLayout>
 
             <LinearLayout
-                android:id="@+id/ll_dialog_buttons"
+                android:id="@+id/ll_dialog_bs_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/dp_16">
 
                 <Button
-                    android:id="@+id/b_dialog_left_button"
+                    android:id="@+id/btn_dialog_bs_left"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
                     android:layout_weight="1" />
 
                 <Space
-                    android:id="@+id/space_dialog_buttons"
+                    android:id="@+id/space_dialog_bs_buttons"
                     android:layout_width="16dp"
                     android:layout_height="match_parent" />
 
                 <Button
-                    android:id="@+id/b_dialog_right_button"
+                    android:id="@+id/btn_dialog_bs_right"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
                     android:layout_weight="1" />

@@ -10,18 +10,16 @@ import androidx.annotation.StringRes
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.slutsenko.cocktailapp.R
-import kotlinx.android.synthetic.main.layout_dialog_bottom_sheet_simple.*
+import kotlinx.android.synthetic.main.layout_dialog_simple.*
 
-
-abstract class SimpleBaseBottomSheetDialogFragment<
+abstract class SimpleBaseDialogFragment<
         Data,
         ButtonType : DialogButton,
         Type : DialogType<ButtonType>,
-        Builder : SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder
-        >
-protected constructor() : BaseBottomSheetDialogFragment<Data, ButtonType, Type>() {
+        Builder : SimpleBaseDialogFragment.SimpleDialogBuilder>
+protected constructor() : BaseDialogFragment<Data, ButtonType, Type>() {
 
-    override val contentLayoutResId = R.layout.layout_dialog_bottom_sheet_simple
+    override val contentLayoutResId = R.layout.layout_dialog_simple
     protected open val extraContentLayoutResId: Int = 0
 
     protected open lateinit var dialogBuilder: Builder
@@ -33,20 +31,20 @@ protected constructor() : BaseBottomSheetDialogFragment<Data, ButtonType, Type>(
 
         @Suppress("SENSELESS_COMPARISON")
         check(dialogBuilder != null) {
-            "${SimpleBaseBottomSheetDialogFragment::class.java.simpleName}. " +
+            "${SimpleBaseDialogFragment::class.java.simpleName}. " +
                     "Property dialogBuilder must not be implemented and must not be null after " +
                     "super.onViewCreated(view, savedInstanceState) called and afterwards"
         }
-        tv_dialog_bs_title.text = dialogBuilder.titleText.takeIf { it.isNotEmpty() }
+        tv_dialog_title.text = dialogBuilder.titleText.takeIf { it.isNotEmpty() }
                 ?: runCatching { requireContext().getString(dialogBuilder.titleTextResId) }
                         .getOrElse { throw NotImplementedError("Must supply dialog title for ${this::class.java.simpleName}") }
 
-        tv_dialog_bs_description.setText(
+        tv_dialog_description.setText(
                 dialogBuilder.descriptionText.takeIf { it.isNotEmpty() }
                         ?: runCatching { requireContext().getString(dialogBuilder.descriptionTextResId) }.getOrNull()
         )
-        if (!tv_dialog_bs_description.text.isBlank()) {
-            tv_dialog_bs_description.visibility = View.VISIBLE
+        if (!tv_dialog_description.text.isBlank()) {
+            tv_dialog_description.visibility = View.VISIBLE
         }
 
         val leftButtonText = dialogBuilder.leftButtonText.takeIf { it.isNotEmpty() }
@@ -55,51 +53,51 @@ protected constructor() : BaseBottomSheetDialogFragment<Data, ButtonType, Type>(
         val rightButtonText = dialogBuilder.rightButtonText.takeIf { it.isNotEmpty() }
                 ?: runCatching { requireContext().getString(dialogBuilder.rightButtonTextResId) }.getOrNull()
 
-        btn_dialog_bs_left.isVisible = !leftButtonText.isNullOrEmpty()
-        btn_dialog_bs_right.isVisible = !rightButtonText.isNullOrEmpty()
+        btn_dialog_left.isVisible = !leftButtonText.isNullOrEmpty()
+        btn_dialog_right.isVisible = !rightButtonText.isNullOrEmpty()
 
-        space_dialog_bs_buttons.isVisible =
-                btn_dialog_bs_left.isVisible && btn_dialog_bs_right.isVisible
-        ll_dialog_bs_buttons.isVisible = btn_dialog_bs_left.isVisible || btn_dialog_bs_right.isVisible
+        space_dialog_buttons.isVisible =
+                btn_dialog_left.isVisible &&  btn_dialog_right.isVisible
+        ll_dialog_buttons.isVisible = btn_dialog_left.isVisible ||  btn_dialog_right.isVisible
 
-        btn_dialog_bs_left.text = leftButtonText ?: ""
-        btn_dialog_bs_right.text = rightButtonText ?: ""
+        btn_dialog_left.text = leftButtonText ?: ""
+        btn_dialog_right.text = rightButtonText ?: ""
 
         if (dialogBuilder.isCloseButtonVisible) {
-            iv_dialog_bs_close.setOnClickListener {
+           iv_dialog_close.setOnClickListener {
                 dismiss()
             }
-            iv_dialog_bs_close.isVisible = true
+            iv_dialog_close.isVisible = true
         } else {
-            iv_dialog_bs_close.setOnClickListener(null)
-            iv_dialog_bs_close.isGone = true
+            iv_dialog_close.setOnClickListener(null)
+            iv_dialog_close.isGone = true
         }
 
         isCancelable = dialogBuilder.isCancelable
 
 
-        btn_dialog_bs_left.setOnClickListener(this)
-        btn_dialog_bs_right.setOnClickListener(this)
-        iv_dialog_bs_close.setOnClickListener(this)
+        btn_dialog_left.setOnClickListener(this)
+        btn_dialog_right.setOnClickListener(this)
+        iv_dialog_close.setOnClickListener(this)
 
         if (extraContentLayoutResId != 0) {
-            fl_dialog_bs_extra_contents?.let {
-                layoutInflater.inflate(extraContentLayoutResId, fl_dialog_bs_extra_contents)
-                configureExtraContent(fl_dialog_bs_extra_contents, savedInstanceState)
+            fl_dialog_extra_contents?.let {
+                layoutInflater.inflate(extraContentLayoutResId, fl_dialog_extra_contents)
+                configureExtraContent(fl_dialog_extra_contents, savedInstanceState)
             }
         }
         isCancelable = dialogBuilder.isCancelable
     }
-
 
     protected open fun configureExtraContent(container: FrameLayout, savedInstanceState: Bundle?) {
         //stub
     }
 
     override fun obtainClickableViews(): List<View> = listOf(
-            btn_dialog_bs_left,
-            btn_dialog_bs_right
+            btn_dialog_left,
+            btn_dialog_right
     )
+
 
     open class SimpleDialogBuilder constructor() : Parcelable {
         /**
@@ -158,7 +156,9 @@ protected constructor() : BaseBottomSheetDialogFragment<Data, ButtonType, Type>(
 
         companion object CREATOR : Parcelable.Creator<SimpleDialogBuilder> {
             override fun createFromParcel(parcel: Parcel): SimpleDialogBuilder {
-                return SimpleDialogBuilder(parcel)
+                return SimpleDialogBuilder(
+                        parcel
+                )
             }
 
             override fun newArray(size: Int): Array<SimpleDialogBuilder?> {

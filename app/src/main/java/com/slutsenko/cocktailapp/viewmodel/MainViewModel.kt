@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseViewModel
 import com.slutsenko.cocktailapp.entity.Cocktail
+import com.slutsenko.cocktailapp.databinding.adapter.Page
 import com.slutsenko.cocktailapp.filter.AlcoholDrinkFilter
 import com.slutsenko.cocktailapp.filter.CategoryDrinkFilter
 import com.slutsenko.cocktailapp.filter.SortDrink
@@ -13,6 +14,8 @@ import com.slutsenko.cocktailapp.filter.SortDrink
 class MainViewModel : BaseViewModel() {
 
     var filteredList: List<Cocktail>? = null
+
+    val viewPagerLiveData: MutableLiveData<Page> = MutableLiveData()
 
     var cocktailDBLiveData: MutableLiveData<List<Cocktail>>? = MutableLiveData()
 

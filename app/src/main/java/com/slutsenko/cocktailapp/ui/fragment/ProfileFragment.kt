@@ -15,20 +15,26 @@ class ProfileFragment : BaseFragment<MainViewModel>() {
     override val contentLayoutResId: Int = R.layout.fragment_profile
     override val viewModel: MainViewModel by activityViewModels()
     private lateinit var bottomSheetDialogFragment: RegularBottomSheetDialogFragment
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-        bottomSheetDialogFragment = RegularBottomSheetDialogFragment.newInstance {
-            titleText = "Log Out"
-            descriptionText = "Are you Really want to exit?"
-            leftButtonText = "Cancel"
-            rightButtonText = "Accept"
-        }
+
 
         chb_showTitle.setOnCheckedChangeListener { _, isChecked ->
             viewModel.showNavigationBarTitlesLiveData.value = isChecked
         }
 
         btn_logOut.setOnClickListener {
+            bottomSheetDialogFragment = RegularBottomSheetDialogFragment.newInstance{
+                titleText = "Log Out"
+                descriptionText = "Do you really want log out?"
+                leftButtonText = "Cancel"
+                rightButtonText = "Accept"
+            }
             bottomSheetDialogFragment.show(childFragmentManager, RegularBottomSheetDialogFragment::class.java.simpleName)
         }
 

@@ -5,11 +5,10 @@ import android.view.View
 import androidx.core.os.bundleOf
 import com.slutsenko.cocktailapp.R
 
+class ErrorDialogFragment :
+        SimpleBaseDialogFragment<Any, SingleDialogButton, ErrorDialogType, SimpleBaseDialogFragment.SimpleDialogBuilder>() {
 
-class RegularBottomSheetDialogFragment :
-        SimpleBaseBottomSheetDialogFragment<Any, RegularDialogButton, RegularDialogType, SimpleBaseBottomSheetDialogFragment.SimpleDialogBuilder>() {
-
-    override val dialogType: RegularDialogType = RegularDialogType
+    override val dialogType: ErrorDialogType = ErrorDialogType
 
     override var dialogBuilder: SimpleDialogBuilder = SimpleDialogBuilder()
     override var data: Any? = null
@@ -23,23 +22,23 @@ class RegularBottomSheetDialogFragment :
         return data
     }
 
-    override fun getButtonType(view: View): RegularDialogButton {
+    override fun getButtonType(view: View): SingleDialogButton {
         return when (view.id) {
-            R.id.btn_dialog_bs_left -> LeftDialogButton
-            R.id.btn_dialog_bs_right -> RightDialogButton
+            R.id.btn_dialog_left -> ActionSingleDialogButton
             else -> throw NotImplementedError("handle another dialog button types")
         }
     }
 
     companion object {
-        fun newInstance(builder: SimpleDialogBuilder.() -> Unit): RegularBottomSheetDialogFragment {
+        fun newInstance(builder: SimpleDialogBuilder.() -> Unit): ErrorDialogFragment {
             return getInstance(builder)
         }
 
+
         fun getInstance(
                 builder: SimpleDialogBuilder.() -> Unit
-        ): RegularBottomSheetDialogFragment {
-            val fragment = RegularBottomSheetDialogFragment()
+        ): ErrorDialogFragment {
+            val fragment = ErrorDialogFragment()
             fragment.arguments = bundleOf(
                     EXTRA_KEY_BUILDER to (SimpleDialogBuilder().apply(builder))
             )
