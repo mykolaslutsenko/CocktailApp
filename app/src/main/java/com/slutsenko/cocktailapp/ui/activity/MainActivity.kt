@@ -1,13 +1,11 @@
 package com.slutsenko.cocktailapp.ui.activity
 
-import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
-
 import com.slutsenko.cocktailapp.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.ui.fragment.ProfileFragment
 import com.slutsenko.cocktailapp.viewmodel.MainViewModel
@@ -22,13 +20,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         return R.layout.activity_main
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun activityCreated() {
-
         val mainFragment = MainFragment.newInstance()
         val profileFragment = ProfileFragment.newInstance()
 
@@ -55,6 +48,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, profileFragment, ProfileFragment::class.java.simpleName).hide(profileFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.fcv_main, mainFragment, MainFragment::class.java.simpleName).commit()
+
         viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
             if (it) {
                 bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED

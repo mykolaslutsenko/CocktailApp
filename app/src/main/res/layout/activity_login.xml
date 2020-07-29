@@ -49,7 +49,7 @@
             android:layout_height="@dimen/dp_48">
 
             <EditText
-                android:text="@{viewModel.loginInputLiveData}"
+                android:text="@={viewModel.loginInputLiveData}"
                 android:id="@+id/et_login"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"
@@ -63,7 +63,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
-                android:text="@{viewModel.passwordInputLiveData}"
+                android:text="@={viewModel.passwordInputLiveData}"
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_48"

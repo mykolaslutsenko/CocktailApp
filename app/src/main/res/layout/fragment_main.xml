@@ -1,107 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
 
-    <com.slutsenko.cocktailapp.ui.view.MyToolbar
-        android:id="@+id/main_fragment_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+    <data>
 
-        <TextView
-            android:id="@+id/title_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_16"
-            android:layout_weight="1"
-            android:gravity="start|bottom"
-            android:text="@string/app_name"
-            android:textSize="@dimen/font_20" />
+        <import type="com.slutsenko.cocktailapp.databinding.adapter.ViewPagerBindingAdapter.DataBindingConverter"/>
+        <import type="com.slutsenko.cocktailapp.databinding.adapter.Page"/>
 
-        <ImageView
-            android:id="@+id/iv_sort"
-            android:layout_width="@dimen/dp_32"
-            android:layout_height="@dimen/dp_32"
-            android:layout_gravity="center_vertical"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_sort_24" />
+        <variable
+            name="viewModel"
+            type="com.slutsenko.cocktailapp.viewmodel.MainViewModel" />
+    </data>
 
-        <androidx.legacy.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/iv_main_toolbar_filter"
-                android:layout_width="@dimen/dp_32"
-                android:layout_height="@dimen/dp_32"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="@dimen/dp_32"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_filter_list_24" />
-
-            <ImageView
-                android:id="@+id/iv_indicator"
-                android:visibility="invisible"
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="@dimen/dp_16"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="@dimen/dp_32"
-                android:src="@drawable/ic_circle_8" />
-        </FrameLayout>
-
-    </com.slutsenko.cocktailapp.ui.view.MyToolbar>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical">
+        android:background="@color/colorPrimary">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <com.slutsenko.cocktailapp.ui.view.MyToolbar
+            android:id="@+id/main_fragment_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager2"
+            <TextView
+                android:id="@+id/title_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:layout_weight="1"
+                android:gravity="start|bottom"
+                android:text="@string/app_name"
+                android:textSize="@dimen/font_20" />
+
+            <ImageView
+                android:id="@+id/iv_sort"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_sort_24" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_main_toolbar_filter"
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="@dimen/dp_32"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_filter_list_24" />
+
+                <ImageView
+                    android:id="@+id/iv_indicator"
+                    android:layout_width="@dimen/dp_16"
+                    android:layout_height="@dimen/dp_16"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="@dimen/dp_32"
+                    android:src="@drawable/ic_circle_8"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+        </com.slutsenko.cocktailapp.ui.view.MyToolbar>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+<!--                bind:vp_page="@={DataBindingConverter.convertPageToInt(viewModel.viewPagerLiveData)}">-->
 
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/tv_battery"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="48dp"-->
-            <!--                android:layout_gravity="bottom"-->
-            <!--                android:layout_margin="100dp"-->
-            <!--                android:background="@color/colorAccent"-->
-            <!--                android:elevation="@dimen/font_16"-->
-            <!--                android:gravity="center"-->
-            <!--                android:text="@string/battery"-->
-            <!--                android:textColor="@color/colorPrimary"-->
-            <!--                android:textSize="24sp"-->
-            <!--                android:visibility="invisible" />-->
+                <!--            <TextView-->
+                <!--                android:id="@+id/tv_battery"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="48dp"-->
+                <!--                android:layout_gravity="bottom"-->
+                <!--                android:layout_margin="100dp"-->
+                <!--                android:background="@color/colorAccent"-->
+                <!--                android:elevation="@dimen/font_16"-->
+                <!--                android:gravity="center"-->
+                <!--                android:text="@string/battery"-->
+                <!--                android:textColor="@color/colorPrimary"-->
+                <!--                android:textSize="24sp"-->
+                <!--                android:visibility="invisible" />-->
 
-            <!--        </FrameLayout>-->
+                <!--        </FrameLayout>-->
 
-        </androidx.viewpager2.widget.ViewPager2>
+            </androidx.viewpager2.widget.ViewPager2>
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_search"
-        style="@style/fab"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_search" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_search"
+            style="@style/fab"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_search" />
 
-</FrameLayout>
+    </FrameLayout>
+</layout>
