@@ -1,2 +1,4 @@
-rootProject.name='Cocktail App'
+
+rootProject.name = 'Cocktail App'
 include ':app'
+include ':lang'

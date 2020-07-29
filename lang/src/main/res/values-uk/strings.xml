@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Микола Слуценко</string>
+    <string name="history">Історія порожня</string>
+    <string name="enter_text">введіть текст</string>
+    <string name="no_found">не знайдено</string>
+    <string name="toast_airmode">"Смакуйте маргаритку із відчуттям міри." +
+                    " І надіємося, що Ви не пілот під  час польоту"</string>
+    <string name="battery">батарея</string>
+    <string name="login">логін</string>
+    <string name="password">пароль</string>
+    <string name="btn_login">увійти</string>
+    <string name="alcoholic">Алкогольний</string>
+    <string name="non_alcoholic">Безалкогольний</string>
+    <string name="optional_alcohol">Алкоголь опціонально</string>
+    <string name="non">Нема</string>
+
+    <string name="menu_item_open">відкрити</string>
+    <string name="menu_add_favorite">додати в улюблені</string>
+    <string name="profile">профіль</string>
+    <string name="main">головна</string>
+    <string name="log_out">вийти</string>
+    <string name="show_main_navigation_bar_titles">показати титри навігейшн бар</string>
+    <string name="menu_remove_favorite">видалити з улюблених</string>
+    <string name="drop">СКИНУТИ</string>
+    <string name="apply">ЗАСТОСУВАТИ</string>
+    <string name="result">РЕЗУЛЬТАТ</string>
+    <string name="name">Назва</string>
+    <string name="glass">Стакан</string>
+    <string name="instructions">Інструкція</string>
+    <string name="ingredients">Інгредієнти</string>
+    <string name="basic_information">Головна інформація</string>
+    <string name="beer">Пиво</string>
+    <string name="soft_drink_soda">Сода</string>
+    <string name="punch_party_drink">Пунш</string>
+    <string name="homemade_liqueur">Лікер</string>
+    <string name="coffee_tea">Кава</string>
+    <string name="shot">Шот</string>
+    <string name="cocoa">Какао</string>
+    <string name="other_unknown">Інше</string>
+    <string name="milk_float_shake">Молоко</string>
+    <string name="cocktail">Коктейль</string>
+    <string name="ordinary_drink">Стандартний коктейль</string>
+    <string name="category">Категорія</string>
+    <string name="change">Змінити</string>
+    <string name="alcohol">Алкоголь</string>
+    <string name="none">нема</string>
+    <string name="recent">за замовчуванням</string>
+    <string name="name_ascending">назва (зростання)</string>
+    <string name="name_descending">назва (спадання)</string>
+    <string name="ingredient_count_ascending">кількість інгредієнтів (зростання)</string>
+    <string name="ingredient_count_descending">кількість інгредієнтів (спадання)</string>
+    <string name="alcohol_first">алкогольні спочатку</string>
+    <string name="non_alcohol_first">безалкогольні спочатку</string>
+
+
+</resources>

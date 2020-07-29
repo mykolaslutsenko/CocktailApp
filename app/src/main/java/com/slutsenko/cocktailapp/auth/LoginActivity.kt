@@ -1,14 +1,12 @@
 package com.slutsenko.cocktailapp.auth
 
 import android.content.Intent
-import android.text.Editable
-import android.text.TextWatcher
+import android.graphics.Color
+import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
@@ -23,25 +21,20 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override val viewModel: LoginViewModel by viewModels()
 
-    lateinit var login: String
-    lateinit var password: String
-    private val myLogin = "mykola"
-    private val myPassword = "a23456"
     override fun myView(): Int {
         return R.layout.activity_login
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loginInputLiveData.value = savedInstanceState?.getString(EXTRA_KEY_LOGIN)
-
-        viewModel.passwordInputLiveData.value = savedInstanceState?.getString(EXTRA_KEY_PASSWORD)
+//        viewModel.loginInputLiveData.value = savedInstanceState?.getString(EXTRA_KEY_LOGIN)
+//        viewModel.passwordInputLiveData.value = savedInstanceState?.getString(EXTRA_KEY_PASSWORD)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(EXTRA_KEY_LOGIN, viewModel.loginInputLiveData.value)
-        outState.putString(EXTRA_KEY_PASSWORD, viewModel.passwordInputLiveData.value)
+//        outState.putString(EXTRA_KEY_LOGIN, viewModel.loginInputLiveData.value)
+//        outState.putString(EXTRA_KEY_PASSWORD, viewModel.passwordInputLiveData.value)
     }
 
     override fun activityCreated() {
