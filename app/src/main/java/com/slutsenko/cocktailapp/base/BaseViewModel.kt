@@ -5,4 +5,6 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel : ViewModel() {
     val savedStateHandle: SavedStateHandle? = null
+
+
 }

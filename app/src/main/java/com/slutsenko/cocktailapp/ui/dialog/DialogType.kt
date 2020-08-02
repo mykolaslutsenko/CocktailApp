@@ -3,6 +3,7 @@ package com.slutsenko.cocktailapp.ui.dialog
 sealed class DialogType<out ButtonTypeParent: DialogButton>
 object RegularDialogType: DialogType<RegularDialogButton>()
 object ErrorDialogType: DialogType<SingleDialogButton>()
+
 object NetworkDialogType: DialogType<SingleDialogButton>()
 object DayPickerDialogType: DialogType<SingleDialogButton>()
 object DatePickerDialogType: DialogType<SingleDialogButton>()

@@ -65,6 +65,7 @@ class FilterFragment : BaseFragment<MainViewModel>() {
     }
 
     companion object {
+        @JvmStatic
         fun newInstance(): FilterFragment {
             return FilterFragment()
         }

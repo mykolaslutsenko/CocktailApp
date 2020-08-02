@@ -50,17 +50,17 @@ class MainFragment : BaseFragment<MainViewModel>() {
         val tabLayout: TabLayout = requireView().findViewById(R.id.tab_layout)
         TabLayoutMediator(tabLayout, viewpager2) { tab, position ->
             when (position) {
-                0 -> tab.text = "History"
-                else -> tab.text = "Favorite"
+                0 -> tab.text = getString(R.string.history)
+                else -> tab.text = getString(R.string.favorite)
             }
         }.attach()
 
         iv_main_toolbar_filter.setOnClickListener {
             val filterFragment = FilterFragment.newInstance()
-            activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.fcv_main, filterFragment, FilterFragment::class.java.simpleName)
-                    ?.addToBackStack(null)
-                    ?.commit()
+            childFragmentManager.beginTransaction()
+                    .add(R.id.fcv_main_fragment, filterFragment, FilterFragment::class.java.simpleName)
+                    .addToBackStack(FilterFragment::class.java.name)
+                    .commit()
         }
         iv_main_toolbar_filter.setOnLongClickListener {
             viewModel.dropFilters()
@@ -75,7 +75,6 @@ class MainFragment : BaseFragment<MainViewModel>() {
     companion object {
 
         fun newInstance(): MainFragment {
-
             return MainFragment()
         }
 

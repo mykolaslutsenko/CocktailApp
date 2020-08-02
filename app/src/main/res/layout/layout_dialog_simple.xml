@@ -4,9 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:background="#00ffffff"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:outlineProvider="none">
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -14,7 +12,7 @@
         android:layout_gravity="center"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        android:paddingTop="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_16">
 
         <LinearLayout
@@ -28,8 +26,8 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="@dimen/dp_16"
-                android:paddingEnd="@dimen/dp_4"
+                android:paddingStart="@dimen/dp_24"
+                android:paddingEnd="@dimen/dp_24"
                 tools:ignore="RtlSymmetry,UseCompoundDrawables">
 
                 <TextView
@@ -38,16 +36,14 @@
                     android:layout_height="@dimen/dp_48"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:ellipsize="end"
                     android:gravity="center_vertical"
-                    android:includeFontPadding="false"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:maxLines="3"/>
 
                 <ImageView
                     android:id="@+id/iv_dialog_close"
-                    android:layout_width="@dimen/dp_48"
-                    android:layout_height="@dimen/dp_48"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:layout_marginStart="@dimen/dp_16"

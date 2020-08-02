@@ -99,7 +99,7 @@
                     <TextView
                         style="@style/about_cocktail_text"
                         android:layout_weight="1"
-                        android:text="@string/alcoholic" />
+                        android:text="@string/alcohol" />
 
                     <TextView
                         style="@style/about_cocktail_text"

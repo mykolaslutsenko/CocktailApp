@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">Mykola Slutsenko</string>
-    <string name="history">History is empty</string>
+    <string name="history_empty">History is empty</string>
     <string name="enter_text">Enter text to start search</string>
     <string name="no_found">No cocktails found</string>
-    <string name="toast_airmode">"Смакуйте маргаритку із відчуттям міри." +
-                    " І надіємося, що Ви не пілот під  час польоту"</string>
+    <string name="toast_airmode">"Taste"</string>
     <string name="battery">battery</string>
     <string name="login">login</string>
     <string name="password">password</string>
     <string name="btn_login">Login</string>
-    <string name="alcoholic">Alcoholic</string>
-    <string name="non_alcoholic">Non alcoholic</string>
-    <string name="optional_alcohol">Optional alcohol</string>
+
+    <string name="alcohol">Alcohol</string>
+    <string name="change">Change</string>
+    <string name="category">Category</string>
+
     <string name="none">None</string>
     <string name="menu_remove_favorite">remove favorite</string>
     <string name="menu_item_open">open</string>
@@ -19,10 +20,12 @@
     <string name="profile">profile</string>
     <string name="main">main</string>
     <string name="log_out">Log out</string>
-    <string name="show_main_navigation_bar_titles">Show Main Navigation Bar Titles</string>
-    <string name="drop">DROP</string>
-    <string name="apply">APPLY</string>
-    <string name="result">RESULT</string>
+    <string name="show_main_navigation_bar_titles">Show main navigation bar titles</string>
+    <string name="drop">Drop</string>
+    <string name="apply">Apply</string>
+    <string name="result">Result</string>
+    <string name="history">HISTORY</string>
+    <string name="favorite">FAVORITE</string>
 
     <!--About cocktail-->
     <string name="basic_information">Basic information</string>
@@ -42,9 +45,10 @@
     <string name="ingredient_count_descending">Ingredient Count (descending)</string>
 
     <!--Alcoholic-->
-    <string name="alcohol">Alcohol</string>
-    <string name="change">Change</string>
-    <string name="category">Category</string>
+    <string name="alcoholic">Alcoholic</string>
+    <string name="non_alcoholic">Non alcoholic</string>
+    <string name="optional_alcohol">Optional alcohol</string>
+
 
     <!--Category-->
     <string name="ordinary_drink">Ordinary Drink</string>
@@ -58,6 +62,24 @@
     <string name="punch_party_drink">Punch / Party Drink</string>
     <string name="beer">Beer</string>
     <string name="soft_drink_soda">Soft Drink / Soda</string>
+
+    <!--Language-->
+    <string name="change_language">Change language</string>
+    <string name="english">English</string>
+    <string name="ukrainian">Ukrainian</string>
+
+    <!--Log out-->
+    <string name="logout">Log out</string>
+    <string name="logout_desc">Do you really want log out?</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+
+    <!--Login error-->
+    <string name="error_login">Error</string>
+    <string name="ok">OK</string>
+    <string name="error_login_desc">Incorrect login or password</string>
+
+
 
 
 </resources>

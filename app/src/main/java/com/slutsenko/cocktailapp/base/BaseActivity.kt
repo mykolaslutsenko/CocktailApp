@@ -1,5 +1,6 @@
 package com.slutsenko.cocktailapp.base
 
+import android.content.Context
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
@@ -16,13 +17,14 @@ import com.slutsenko.cocktailapp.ui.dialog.BaseBottomSheetDialogFragment
 import com.slutsenko.cocktailapp.ui.dialog.BaseDialogFragment
 import com.slutsenko.cocktailapp.ui.dialog.DialogButton
 import com.slutsenko.cocktailapp.ui.dialog.DialogType
+import com.slutsenko.cocktailapp.util.Language
 import java.util.*
 
-abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity(),
+abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBinding> : AppCompatActivity(),
         BaseDialogFragment.OnDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseDialogFragment.OnDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
-        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>{
+        BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>> {
     protected abstract val viewModel: ViewModel
     protected open lateinit var dataBinding: DataBinding
 
@@ -31,8 +33,11 @@ abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBind
     private val airModeReceiver = AirModeReceiver()
     private val bootReceiver = BootReceiver()
     private val log: String = "BaseLog"
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        val locale = Locale("uk")
+        val sharedPref = getSharedPreferences("lang", Context.MODE_PRIVATE)
+        val chooseLanguage = sharedPref.getString("language", Language.ENGLISH.locale)
+        val locale = Locale(chooseLanguage!!)
         Locale.setDefault(locale)
         val resources = resources
         val configuration = resources.configuration
@@ -45,6 +50,7 @@ abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBind
             }
         }
         resources.updateConfiguration(configuration, resources.displayMetrics)
+
         super.onCreate(savedInstanceState)
         dataBinding = DataBindingUtil.setContentView(this, myView())!!
         dataBinding.setLifecycleOwner(this@BaseActivity)
@@ -141,7 +147,4 @@ abstract class BaseActivity<ViewModel: BaseViewModel, DataBinding : ViewDataBind
         super.onDestroy()
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
-
-
-
 }

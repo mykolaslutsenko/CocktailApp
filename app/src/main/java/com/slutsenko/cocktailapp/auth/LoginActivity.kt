@@ -61,9 +61,9 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             finish()
         } else {
             ErrorDialogFragment.newInstance {
-                titleText = "Error"
-                leftButtonText = "Ok"
-                descriptionText = "Incorrect login or password"
+                titleText = getString(R.string.error_login)
+                leftButtonText = getString(R.string.ok)
+                descriptionText = getString(R.string.error_login_desc)
             }.show(supportFragmentManager, ErrorDialogFragment::class.java.simpleName)
         }
     }
