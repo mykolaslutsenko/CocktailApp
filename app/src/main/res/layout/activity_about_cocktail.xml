@@ -5,7 +5,7 @@
     <data>
         <variable
             name="cocktail"
-            type="com.slutsenko.cocktailapp.viewmodel.AboutCocktailViewModel" />
+            type="com.slutsenko.cocktailapp.presentation.viewmodel.AboutCocktailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.activity.AboutCocktailActivity">
+        tools:context=".presentation.ui.activity.AboutCocktailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl_login"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:context=".ui.activity.AboutCocktailActivity">
+            tools:context=".presentation.ui.activity.AboutCocktailActivity">
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -4,9 +4,16 @@ package com.slutsenko.cocktailapp.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.slutsenko.cocktailapp.base.BaseViewModel
+import androidx.lifecycle.SavedStateHandle
+import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
+import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
+import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel(
+        private val cocktailRepository: CocktailRepository,
+        private val cocktailModelMapper: CocktailModelMapper,
+        viewStateHandle: SavedStateHandle)
+    : BaseViewModel(viewStateHandle) {
 
     private val myLogin = "mykola"
     private val myPassword = "a23456"

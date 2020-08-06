@@ -10,7 +10,7 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <com.slutsenko.cocktailapp.ui.view.MyToolbar
+    <com.slutsenko.cocktailapp.view.MyToolbar
         android:id="@+id/main_fragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -39,7 +39,7 @@
             android:layout_height="0dp" />
 
 
-    </com.slutsenko.cocktailapp.ui.view.MyToolbar>
+    </com.slutsenko.cocktailapp.view.MyToolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

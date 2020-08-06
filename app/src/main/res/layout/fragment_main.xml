@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.viewmodel.MainViewModel" />
+            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel" />
     </data>
 
     <FrameLayout
@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
 
-            <com.slutsenko.cocktailapp.ui.view.MyToolbar
+            <com.slutsenko.cocktailapp.view.MyToolbar
                 android:id="@+id/main_fragment_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -77,7 +77,7 @@
                         android:visibility="invisible" />
                 </FrameLayout>
 
-            </com.slutsenko.cocktailapp.ui.view.MyToolbar>
+            </com.slutsenko.cocktailapp.view.MyToolbar>
 
             <LinearLayout
                 android:layout_width="match_parent"

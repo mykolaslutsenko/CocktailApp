@@ -3,7 +3,7 @@ package com.slutsenko.cocktailapp.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.slutsenko.cocktailapp.ui.fragment.MainFragment.Companion.ANOTHER_COCKTAIL
+import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment.Companion.ANOTHER_COCKTAIL
 
 
 class DrinkService : Service() {

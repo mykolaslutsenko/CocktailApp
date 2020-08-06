@@ -4,22 +4,24 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.base.BaseActivity
 import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
-import com.slutsenko.cocktailapp.ui.activity.MainActivity
-import com.slutsenko.cocktailapp.ui.dialog.*
+import com.slutsenko.cocktailapp.presentation.ui.activity.MainActivity
+import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
+import com.slutsenko.cocktailapp.presentation.ui.dialog.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlin.reflect.KClass
 
 const val EXTRA_KEY_LOGIN = "EXTRA_KEY_LOGIN"
 const val EXTRA_KEY_PASSWORD = "EXTRA_KEY_PASSWORD"
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModelClass: KClass<LoginViewModel>
+        get() = LoginViewModel::class
+    //override val viewModel: LoginViewModel by viewModels()
 
     override fun myView(): Int {
         return R.layout.activity_login
@@ -85,4 +87,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             }
         }
     }
+
+
 }

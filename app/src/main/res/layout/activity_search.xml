@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.viewmodel.SearchViewModel" />
+            type="com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel" />
     </data>
 
 
@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.slutsenko.cocktailapp.ui.view.MyToolbar
+    <com.slutsenko.cocktailapp.view.MyToolbar
         android:id="@+id/search_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -34,7 +34,7 @@
                 style="@style/search_edit_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
-    </com.slutsenko.cocktailapp.ui.view.MyToolbar>
+    </com.slutsenko.cocktailapp.view.MyToolbar>
 
     <FrameLayout
         android:layout_width="0dp"
