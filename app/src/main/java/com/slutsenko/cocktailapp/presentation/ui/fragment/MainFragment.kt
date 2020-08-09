@@ -12,16 +12,16 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.page.FavoritePagerAdapter
 import com.slutsenko.cocktailapp.presentation.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlin.reflect.KClass
 
 
-class MainFragment : BaseFragment<MainViewModel>() {
-    override val viewModelClass: KClass<MainViewModel>
-        get() = MainViewModel::class
+class MainFragment : BaseFragment<MainFragmentViewModel>() {
+    override val viewModelClass: KClass<MainFragmentViewModel>
+        get() = MainFragmentViewModel::class
 
-    //override val viewModel: MainViewModel by activityViewModels()
+   // private val viewModel: MainViewModel by activityViewModels()
 
     override val contentLayoutResId: Int = R.layout.fragment_main
 

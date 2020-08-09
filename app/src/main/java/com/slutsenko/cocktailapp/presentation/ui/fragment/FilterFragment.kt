@@ -6,15 +6,15 @@ import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlin.reflect.KClass
 
 
-class FilterFragment : BaseFragment<MainViewModel>() {
-    override val viewModelClass: KClass<MainViewModel>
-        get() = MainViewModel::class
-    //override val viewModel: MainViewModel by activityViewModels()
+class FilterFragment : BaseFragment<MainFragmentViewModel>() {
+    override val viewModelClass: KClass<MainFragmentViewModel>
+        get() = MainFragmentViewModel::class
+   // private val viewModel: MainViewModel by activityViewModels()
     override val contentLayoutResId: Int = R.layout.fragment_filter
 
     override fun configureView(savedInstanceState: Bundle?) {

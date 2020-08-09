@@ -21,7 +21,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment(),
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>> {
     abstract val viewModelClass: KClass<ViewModel>
-    protected open val viewModel: ViewModel by baseViewModels()
+    protected val viewModel: ViewModel by baseViewModels()
 
     private val log = "BaseLog"
 

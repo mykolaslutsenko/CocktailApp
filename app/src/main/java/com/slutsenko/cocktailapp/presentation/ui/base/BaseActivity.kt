@@ -7,13 +7,11 @@ import android.os.Bundle
 import android.os.LocaleList
 import android.util.Log
 import androidx.annotation.CallSuper
-import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.LiveData
-import com.slutsenko.cocktailapp.presentation.extension.*
+import com.slutsenko.cocktailapp.presentation.extension.baseViewModels
 import com.slutsenko.cocktailapp.presentation.ui.dialog.BaseBottomSheetDialogFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.BaseDialogFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogButton
@@ -31,7 +29,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>> {
     abstract val viewModelClass: KClass<ViewModel>
 
-    protected open val viewModel: ViewModel by baseViewModels()
+    protected  val viewModel: ViewModel by baseViewModels()
 
     protected open lateinit var dataBinding: DataBinding
 
@@ -155,28 +153,28 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
         Log.d(log, this::class.java.toString() + " OnDestroy")
     }
 
-    @MainThread
-    protected inline fun <reified T> LiveData<T>.observe(noinline observer: (T) -> Unit) {
-        this.observe(this@BaseActivity, observer)
-    }
-
-    @MainThread
-    protected fun <T> LiveData<T?>.observeNotNull(observer: (T) -> Unit) {
-        this.observeNotNull(this@BaseActivity, observer)
-    }
-
-    @MainThread
-    protected inline fun <T> LiveData<T?>.observeTillDestroyNotNull(crossinline observer: (T) -> Unit) {
-        this.observeTillDestroyNotNull(this@BaseActivity, observer)
-    }
-
-    @MainThread
-    protected inline fun <T> LiveData<T>.observeTillDestroy(crossinline observer: (T) -> Unit) {
-        this.observeTillDestroy(this@BaseActivity, observer)
-    }
-
-    @MainThread
-    protected inline fun <T> LiveData<T>.observeNonNullOnce(crossinline observer: (T) -> Unit) {
-        this.observeNotNullOnce(this@BaseActivity, observer)
-    }
+//    @MainThread
+//    protected inline fun <reified T> LiveData<T>.observe(noinline observer: (T) -> Unit) {
+//        this.observe(this@BaseActivity, observer)
+//    }
+//
+//    @MainThread
+//    protected fun <T> LiveData<T?>.observeNotNull(observer: (T) -> Unit) {
+//        this.observeNotNull(this@BaseActivity, observer)
+//    }
+//
+//    @MainThread
+//    protected inline fun <T> LiveData<T?>.observeTillDestroyNotNull(crossinline observer: (T) -> Unit) {
+//        this.observeTillDestroyNotNull(this@BaseActivity, observer)
+//    }
+//
+//    @MainThread
+//    protected inline fun <T> LiveData<T>.observeTillDestroy(crossinline observer: (T) -> Unit) {
+//        this.observeTillDestroy(this@BaseActivity, observer)
+//    }
+//
+//    @MainThread
+//    protected inline fun <T> LiveData<T>.observeNonNullOnce(crossinline observer: (T) -> Unit) {
+//        this.observeNotNullOnce(this@BaseActivity, observer)
+//    }
 }

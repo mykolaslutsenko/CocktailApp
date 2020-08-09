@@ -28,8 +28,8 @@
                 android:layout_height="match_parent"
                 android:minHeight="48dp"
                 app:expandedTitleGravity="bottom|left"
-                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-                app:title="@{cocktail.cocktailLiveData.strDrink}">
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+<!--                app:title="@{cocktail.cocktailLiveData.strDrink}"-->
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -40,8 +40,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:scaleType="centerCrop"
-                        app:layout_collapseMode="parallax"
-                        bind:iv_loadUrl="@{cocktail.cocktailLiveData.strDrinkThumb}" />
+                        app:layout_collapseMode="parallax"/>
+<!--                        bind:iv_loadUrl="@{cocktail.cocktailLiveData.strDrinkThumb}"-->
+
                 </FrameLayout>
 
 
@@ -87,7 +88,7 @@
                     <TextView
                         style="@style/about_cocktail_text"
                         android:layout_weight="2"
-                        android:text="@{cocktail.cocktailLiveData.strDrink}" />
+                        android:text="@{cocktail.currentCocktailLiveData.image}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -103,8 +104,8 @@
 
                     <TextView
                         style="@style/about_cocktail_text"
-                        android:layout_weight="2"
-                        android:text="@{cocktail.cocktailLiveData.strAlcoholic}" />
+                        android:layout_weight="2" />
+<!--                        android:text="@{cocktail.cocktailLiveData.strAlcoholic}" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,8 +121,8 @@
 
                     <TextView
                         style="@style/about_cocktail_text"
-                        android:layout_weight="2"
-                        android:text="@{cocktail.cocktailLiveData.strGlass}" />
+                        android:layout_weight="2"/>
+<!--                        android:text="@{cocktail.cocktailLiveData.strGlass}" />-->
                 </LinearLayout>
 
                 <TextView
@@ -154,8 +155,8 @@
                 <TextView
                     android:id="@+id/tv_instructions_value"
                     style="@style/about_cocktail_text"
-                    android:layout_margin="@dimen/dp_16"
-                    android:text="@{cocktail.cocktailLiveData.strInstructions}" />
+                    android:layout_margin="@dimen/dp_16"/>
+<!--                    android:text="@{cocktail.cocktailLiveData.strInstructions}" />-->
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

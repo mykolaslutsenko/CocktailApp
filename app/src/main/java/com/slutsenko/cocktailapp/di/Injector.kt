@@ -25,9 +25,9 @@ import com.slutsenko.cocktailapp.data.repository.source.base.BaseRepository
 import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.LocalizedStringModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.base.BaseModelMapper
-import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.AboutCocktailViewModel
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
 
 
@@ -46,18 +46,20 @@ object Injector {
     }
 
     class ViewModelFactory(
-        owner: SavedStateRegistryOwner,
-        defaultArgs: Bundle? = (owner as? Activity)?.intent?.extras ?: (owner as? Fragment)?.arguments
+            val application: Application,
+            owner: SavedStateRegistryOwner,
+            defaultArgs: Bundle? = (owner as? Activity)?.intent?.extras
+                    ?: (owner as? Fragment)?.arguments
     ) : AbstractSavedStateViewModelFactory(
-        owner,
-        defaultArgs
+            owner,
+            defaultArgs
     ) {
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(
-            key: String,
-            modelClass: Class<T>,
-            handle: SavedStateHandle
+                key: String,
+                modelClass: Class<T>,
+                handle: SavedStateHandle
         ): T {
 //            return when {
 //                modelClass.isAssignableFrom(MainViewModel::class.java) -> {
@@ -65,17 +67,17 @@ object Injector {
 //                }
 //                else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
 //            }
-            return when(modelClass) {
-                MainViewModel::class.java ->
-                    MainViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+            return when (modelClass) {
+                MainActivityViewModel::class.java ->
+                    MainActivityViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 SearchViewModel::class.java ->
                     SearchViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 LoginViewModel::class.java ->
                     LoginViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 AboutCocktailViewModel::class.java ->
                     AboutCocktailViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
-                BaseViewModel::class.java ->
-                    BaseViewModel(handle) as T
+                MainFragmentViewModel::class.java ->
+                    MainFragmentViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
             }
         }
@@ -84,14 +86,14 @@ object Injector {
     inline fun <reified T : BaseRepository> provideRepository(context: Context): T {
         return when (T::class.java) {
             CocktailRepository::class.java -> CocktailRepositoryImpl(
-                provideDbDataSource(context),
-                provideRepoModelMapper(context)
+                    provideDbDataSource(context),
+                    provideRepoModelMapper(context)
             ) as T
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         }
     }
 
-    inline fun <reified T: BaseDbSource> provideDbDataSource(context: Context): T {
+    inline fun <reified T : BaseDbSource> provideDbDataSource(context: Context): T {
         return when (T::class.java) {
 //            CocktailDbSource::class.java -> CocktailDbSourceImpl(
 //                CocktailAppRoomDatabase.instance(context).cocktailDao()
@@ -101,21 +103,21 @@ object Injector {
         }
     }
 
-    inline fun <reified T: BaseRepoModelMapper<*, *, *>> provideRepoModelMapper(context: Context): T {
+    inline fun <reified T : BaseRepoModelMapper<*, *, *>> provideRepoModelMapper(context: Context): T {
         return when (T::class.java) {
             CocktailRepoModelMapper::class.java -> CocktailRepoModelMapper(provideNestedRepoModelMapper(context))
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         } as T
     }
 
-    inline fun <reified T: BaseModelMapper<*, *>> provideModelMapper(context: Context): T {
+    inline fun <reified T : BaseModelMapper<*, *>> provideModelMapper(context: Context): T {
         return when (T::class.java) {
             CocktailModelMapper::class.java -> CocktailModelMapper(provideNestedModelMapper(context))
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         } as T
     }
 
-    inline fun <reified T: BaseRepoModelMapper<*, *, *>> provideNestedRepoModelMapper(context: Context): T {
+    inline fun <reified T : BaseRepoModelMapper<*, *, *>> provideNestedRepoModelMapper(context: Context): T {
         return when (T::class.java) {
             LocalizedStringRepoModelMapper::class.java -> LocalizedStringRepoModelMapper()
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
@@ -123,7 +125,7 @@ object Injector {
 
     }
 
-    inline fun <reified T: BaseModelMapper<*, *>> provideNestedModelMapper(context: Context): T {
+    inline fun <reified T : BaseModelMapper<*, *>> provideNestedModelMapper(context: Context): T {
         return when (T::class.java) {
             LocalizedStringModelMapper::class.java -> LocalizedStringModelMapper()
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
@@ -131,7 +133,7 @@ object Injector {
 
     }
 
-    inline fun <reified T: BaseDao<*>> provideDao(context: Context): T {
+    inline fun <reified T : BaseDao> provideDao(context: Context): T {
         return when (T::class.java) {
             CocktailDao::class.java -> CocktailAppRoomDatabase.instance(context).cocktailDao()
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")

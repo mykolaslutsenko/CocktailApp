@@ -11,11 +11,9 @@ import com.slutsenko.cocktailapp.data.db.impl.typeconverter.StringListToStringCo
 import com.slutsenko.cocktailapp.data.db.model.CocktailDbModel
 import com.slutsenko.cocktailapp.util.SingletonHolder
 
-@Database(
-        version = 1,
-        entities = [
-            CocktailDbModel::class
-        ],
+@Database(entities = [
+    CocktailDbModel::class
+], version = 1,
         exportSchema = false
 )
 @TypeConverters(DateConverter::class, StringListToStringConverter::class)
@@ -30,7 +28,7 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
                         CocktailAppRoomDatabase::class.java,
                         CocktailAppRoomDatabase::class.java.name,
                 )
-                .fallbackToDestructiveMigration()
+                //.fallbackToDestructiveMigration()
                 .build()
     })
 }

@@ -14,11 +14,10 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.model.cocktail.SortDrink
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 
-class MainViewModel (
-        private val cocktailRepository: CocktailRepository,
-        private val cocktailModelMapper: CocktailModelMapper,
-        viewStateHandle: SavedStateHandle
-): BaseViewModel(viewStateHandle) {
+class MainFragmentViewModel(private val cocktailRepository: CocktailRepository,
+                            private val mapper: CocktailModelMapper,
+                            savedStateHandle: SavedStateHandle
+) : BaseViewModel() {
 
     var filteredList: List<CocktailModel>? = null
 
@@ -30,7 +29,7 @@ class MainViewModel (
 
     var categoryDrinkFilterLiveData: MutableLiveData<CocktailCategory> = MutableLiveData()
 
-    var historyLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
+    var historyLiveData: MutableLiveData<List<CocktailModel>>? = MutableLiveData()
 
     var favoriteLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 
@@ -69,10 +68,10 @@ class MainViewModel (
                 filteredList?.sortedBy { it.id }
             }
             SortDrink.NAME_ASCENDING -> {
-                filteredList?.sortedBy { it.names.def }
+                filteredList?.sortedBy { it.id }
             }
             SortDrink.NAME_DESCENDING -> {
-                filteredList?.sortedByDescending { it.names.def }
+                filteredList?.sortedByDescending { it.id }
             }
             SortDrink.ALCOHOL_FIRST -> {
                 filteredList?.sortedBy { it.id }
@@ -81,10 +80,10 @@ class MainViewModel (
                 filteredList?.sortedBy { it.id }
             }
             SortDrink.INGREDIENT_ASCENDING -> {
-                filteredList?.sortedBy { it.ingredients.size }
+                filteredList?.sortedBy { it.id }
             }
             SortDrink.INGREDIENT_DESCENDING -> {
-                filteredList?.sortedByDescending { it.ingredients.size }
+                filteredList?.sortedByDescending { it.id }
             }
         }
     }
@@ -239,4 +238,5 @@ class MainViewModel (
         alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
         categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
     }
+
 }

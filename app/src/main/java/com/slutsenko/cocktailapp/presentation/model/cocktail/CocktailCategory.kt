@@ -1,6 +1,6 @@
 package com.slutsenko.cocktailapp.presentation.model.cocktail
 
-@Suppress("unused")
+
 enum class CocktailCategory(override val type: DrinkFilterType, override val key: String) : DrinkFilter {
     ORDINARY_DRINK(DrinkFilterType.CATEGORY, "Ordinary Drink"),
     COCKTAIL(DrinkFilterType.CATEGORY, "Cocktail"),

@@ -1,6 +1,6 @@
 package com.slutsenko.cocktailapp.presentation.model.cocktail
 
-@Suppress("unused")
+
 enum class CocktailGlass(val key: String) {
     HIGHBALL_GLASS("Highball glass"),
     COCKTAIL_GLASS("Cocktail glass"),

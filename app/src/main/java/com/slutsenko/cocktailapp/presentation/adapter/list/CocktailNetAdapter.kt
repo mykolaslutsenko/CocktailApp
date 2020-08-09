@@ -94,7 +94,7 @@ class CocktailNetAdapter(private val context: Context, private var cocktailsList
             itemView.setOnClickListener { v: View? ->
                 val intent = Intent(context, AboutCocktailActivity::class.java)
                 val cocktail = cocktailsList[adapterPosition]
-                intent.putExtra("cocktail", cocktail)
+                intent.putExtra("id", cocktail)
                 context.startActivity(intent)
             }
         }

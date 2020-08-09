@@ -30,8 +30,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiet_text"
-                android:text="@={viewModel.searchLiveData}"
+                            android:text="@={viewModel.searchLiveData}"
                 style="@style/search_edit_text" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.slutsenko.cocktailapp.view.MyToolbar>
@@ -45,8 +46,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_toolbar">
 
+
+
         <TextView
-            android:text="@={viewModel.answerLiveData}"
+                android:text="@={viewModel.answerLiveData}"
             android:id="@+id/tv_answer"
             style="@style/message" />
 

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import com.google.android.material.appbar.AppBarLayout
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.data.network.CocktailNetModel
 import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.viewmodel.AboutCocktailViewModel
@@ -18,6 +17,8 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
     override val viewModelClass: KClass<AboutCocktailViewModel>
         get() = AboutCocktailViewModel::class
 
+    //override val viewModel: AboutCocktailViewModel by viewModels()
+
     //lateinit var cocktail: Cocktail
 
     override fun myView(): Int {
@@ -29,7 +30,9 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
         abl_login.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             Log.d("ololo", verticalOffset.toString())
         })
-        viewModel.cocktailLiveData.value = intent.getSerializableExtra("cocktail") as CocktailNetModel
+        val currentId = intent.getSerializableExtra("id") as Long
+        viewModel.saveToDb(currentId)
+        //viewModel.cocktailLiveData.value = intent.getSerializableExtra("cocktail") as CocktailNetModel
         //viewModel.cocktailLiveData.value = cocktail
         //ctl_collaps.title = cocktail.strDrink
        // title = cocktail.strDrink
@@ -40,7 +43,7 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
 
     override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {
         super.configureDataBinding(binding)
-        binding.cocktail = viewModel
+        //binding.cocktail = viewModel
     }
 
     override fun onDestroy() {

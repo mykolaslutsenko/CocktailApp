@@ -48,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48">
 
+
+
             <EditText
                 android:text="@={viewModel.loginInputLiveData}"
                 android:id="@+id/et_login"

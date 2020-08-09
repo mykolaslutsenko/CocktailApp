@@ -1,22 +1,20 @@
 package com.slutsenko.cocktailapp.presentation.ui.activity
 
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.presentation.ui.fragment.ProfileFragment
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.reflect.KClass
 
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() {
 
-    override val viewModelClass: KClass<MainViewModel>
-        get() = MainViewModel::class
+    override val viewModelClass: KClass<MainActivityViewModel>
+        get() = MainActivityViewModel::class
     //override val viewModel: MainViewModel by viewModels()
     private var mainFragment: MainFragment? = null
     private var profileFragment: ProfileFragment? = null
@@ -67,13 +65,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             fragmentTransaction.commit()
         }
 
-        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
-            if (it) {
-                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-            } else {
-                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
-            }
-        })
+//        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
+//            if (it) {
+//                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+//            } else {
+//                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
+//            }
+//        })
     }
 
 

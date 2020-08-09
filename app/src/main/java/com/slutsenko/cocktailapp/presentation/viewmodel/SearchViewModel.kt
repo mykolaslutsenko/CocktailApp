@@ -6,12 +6,12 @@ import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
 import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 
-class SearchViewModel(
-        private val cocktailRepository: CocktailRepository,
-        private val cocktailModelMapper: CocktailModelMapper,
-        viewStateHandle: SavedStateHandle
-): BaseViewModel(viewStateHandle) {
+class SearchViewModel(private val cocktailRepository: CocktailRepository,
+                      private val mapper: CocktailModelMapper,
+                      savedStateHandle: SavedStateHandle
 
-    var searchLiveData: MutableLiveData<String> = MutableLiveData()
-    var answerLiveData: MutableLiveData<String> = MutableLiveData()
+): BaseViewModel() {
+
+    var searchLiveData: MutableLiveData<String>? = MutableLiveData()
+    var answerLiveData: MutableLiveData<String>? = MutableLiveData()
 }

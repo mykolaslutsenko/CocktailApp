@@ -9,16 +9,16 @@ import com.slutsenko.cocktailapp.auth.LoginActivity
 import com.slutsenko.cocktailapp.presentation.ui.activity.SplashActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.*
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import com.slutsenko.cocktailapp.util.Language
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlin.reflect.KClass
 
-class ProfileFragment : BaseFragment<MainViewModel>() {
-    override val viewModelClass: KClass<MainViewModel>
-        get() = MainViewModel::class
+class ProfileFragment : BaseFragment<MainFragmentViewModel>() {
+    override val viewModelClass: KClass<MainFragmentViewModel>
+        get() = MainFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_profile
-    //override val viewModel: MainViewModel by activityViewModels()
+    //private val viewModel: MainViewModel by activityViewModels()
     private lateinit var bottomSheetDialogFragment: RegularBottomSheetDialogFragment
     private lateinit var languageListBottomSheetDialogFragment: LanguageListBottomSheetDialogFragment
 

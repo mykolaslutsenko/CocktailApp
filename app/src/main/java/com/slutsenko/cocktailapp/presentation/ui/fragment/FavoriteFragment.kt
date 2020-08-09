@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlin.reflect.KClass
 
 
-class FavoriteFragment : BaseFragment<MainViewModel>(), CocktailAdapter.OnFavoriteClick {
+class FavoriteFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.OnFavoriteClick {
 
-    override val viewModelClass: KClass<MainViewModel>
-        get() = MainViewModel::class
-    //override val viewModel: MainViewModel by activityViewModels()
+    override val viewModelClass: KClass<MainFragmentViewModel>
+        get() = MainFragmentViewModel::class
+   // private val viewModel: MainViewModel by activityViewModels()
     override val contentLayoutResId: Int = R.layout.fragment_favorite
     lateinit var cocktailAdapter: CocktailAdapter
 

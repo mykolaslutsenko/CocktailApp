@@ -23,6 +23,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
     override val viewModelClass: KClass<SearchViewModel>
         get() = SearchViewModel::class
+   // override val viewModel: SearchViewModel by viewModels()
     var cocktailAdapter: CocktailNetAdapter? = null
     private lateinit var jsonPlaceholderApi : JsonPlaceholderApi
 
@@ -38,20 +39,20 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
          jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
 
 
-        viewModel.answerLiveData.value = getString(R.string.enter_text)
+        viewModel.answerLiveData?.value = getString(R.string.enter_text)
         rv_search.layoutManager = GridLayoutManager(this, COLUMN)
-//        tiet_text.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                search()
-//                true
-//            } else {
-//                false
-//            }
-//        }
-//        til_search.setStartIconOnClickListener { v: View? -> search() }
-
-
-        viewModel.searchLiveData.observe(this, Observer {
+////        tiet_text.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+////            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+////                search()
+////                true
+////            } else {
+////                false
+////            }
+////        }
+////        til_search.setStartIconOnClickListener { v: View? -> search() }
+//
+//
+        viewModel.searchLiveData?.observe(this, Observer {
             search()
         })
     }
@@ -65,26 +66,26 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
     private fun search() {
 
 
-        if (viewModel.searchLiveData.value.isNullOrEmpty()) {
-            viewModel.answerLiveData.value = getString(R.string.enter_text)
+        if (viewModel.searchLiveData?.value.isNullOrEmpty()) {
+            viewModel.answerLiveData?.value = getString(R.string.enter_text)
             rv_search.adapter = null
         } else {
-            val call = jsonPlaceholderApi.getPosts(viewModel.searchLiveData.value)
+            val call = jsonPlaceholderApi.getPosts(viewModel.searchLiveData?.value)
             call?.enqueue(object : Callback<CocktailList?> {
                 override fun onResponse(call: Call<CocktailList?>, response: Response<CocktailList?>) {
                     val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
                         cocktailAdapter = CocktailNetAdapter(this@SearchActivity, cocktail)
                         rv_search.adapter = cocktailAdapter
-                        viewModel.answerLiveData.value = ""
+                        viewModel.answerLiveData?.value = ""
                     } else {
-                        viewModel.answerLiveData.value = getString(R.string.no_found)
+                        viewModel.answerLiveData?.value = getString(R.string.no_found)
                         rv_search.adapter = null
                     }
                 }
 
                 override fun onFailure(call: Call<CocktailList?>, t: Throwable) {
-                    viewModel.answerLiveData.value = t.message
+                    viewModel.answerLiveData?.value = t.message
                 }
             })
         }
