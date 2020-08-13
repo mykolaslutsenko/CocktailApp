@@ -24,6 +24,8 @@ open class BaseViewModel() : ViewModel() {
         }
     }
 
+
+
     protected fun <T> LiveData<T>.setValue(value: T) {
         (this as? MutableLiveData)?.value = value
     }

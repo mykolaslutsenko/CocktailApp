@@ -1,9 +1,7 @@
 package com.slutsenko.cocktailapp.presentation.viewmodel
 
 import android.view.MenuItem
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.*
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
 import com.slutsenko.cocktailapp.databinding.adapter.Page
@@ -14,16 +12,49 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.model.cocktail.SortDrink
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 
-class MainFragmentViewModel(private val cocktailRepository: CocktailRepository,
-                            private val mapper: CocktailModelMapper,
+class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
+                            val mapper: CocktailModelMapper,
                             savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
+
+
+    var cocktailDBLiveData:LiveData<List<CocktailModel>> = cocktailRepository.cocktailListLiveData.map(mapper::mapTo)
+
+//
+//    var cocktailDBLiveData3:LiveData<List<CocktailModel>> = cocktailRepository.cocktailListLiveData.map { mapper.mapTo(it) }
+//
+//
+//
+//
+//    //cocktailRepository.cocktailListLiveData.map { mapper.mapTo(it) }
+//    fun getBD() {
+//            cocktailDBLiveData2 = cocktailRepository.getCocktailLiveData().map { mapper.mapTo(it) }
+//    }
+//
+//    fun getFirstCocktail() {
+//        launchRequest {
+//            firstCocktail = mapper.mapTo(cocktailRepository.getCocktailById(11021L)!!)
+//        }
+//    }
+
+//    private val triggerObserver: Observer<in Any?> = Observer { }
+//    val cocktailLiveData = cocktailRepository.cocktailListLiveData.map { mapper.mapTo(it) }
+//    var cocktailDBLiveData2:List<CocktailModel> = cocktailRepository.getCocktailLiveData().map { mapper.mapTo(it) }
+//
+//    init {
+//        //cocktailDBLiveData2.observeForever(triggerObserver)
+//    }
+//
+//    override fun onCleared() {
+//        //cocktailDBLiveData2.removeObserver(triggerObserver)
+//        super.onCleared()
+//    }
+
 
     var filteredList: List<CocktailModel>? = null
 
     val viewPagerLiveData: MutableLiveData<Page> = MutableLiveData()
 
-    var cocktailDBLiveData: MutableLiveData<List<CocktailModel>>? = MutableLiveData()
 
     val alcoholDrinkFilterLiveData: MutableLiveData<CocktailAlcoholType> = MutableLiveData()
 
@@ -53,12 +84,14 @@ class MainFragmentViewModel(private val cocktailRepository: CocktailRepository,
             filter()
         }
     }
+//
+
 
     private fun filterAndSortCocktailList(): List<CocktailModel> {
-        filteredList = cocktailDBLiveData?.value!!
-        filterAlcohol(alcoholDrinkFilterLiveData.value!!)
-        filterCategory(categoryDrinkFilterLiveData.value!!)
-        sortCocktailList(sortDrinkLiveData.value!!)
+        filteredList = cocktailDBLiveData.value!!
+        filterAlcohol(alcoholDrinkFilterLiveData.value ?: CocktailAlcoholType.UNDEFINED)
+        filterCategory(categoryDrinkFilterLiveData.value ?: CocktailCategory.UNDEFINED)
+        sortCocktailList(sortDrinkLiveData.value ?: SortDrink.RECENT)
         return filteredList!!
     }
 

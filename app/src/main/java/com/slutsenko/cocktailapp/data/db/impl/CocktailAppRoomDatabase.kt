@@ -26,9 +26,9 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
                 .databaseBuilder(
                         it.applicationContext,
                         CocktailAppRoomDatabase::class.java,
-                        CocktailAppRoomDatabase::class.java.name,
+                        "909"
                 )
-                //.fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration()
                 .build()
     })
 }

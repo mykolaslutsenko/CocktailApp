@@ -73,6 +73,4 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 //            }
 //        })
     }
-
-
 }

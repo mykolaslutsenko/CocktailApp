@@ -21,14 +21,10 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
 
-   // private val viewModel: MainViewModel by activityViewModels()
-
     override val contentLayoutResId: Int = R.layout.fragment_main
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.cocktailDBLiveData?.value =
-//                CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
         viewModel.setStartParam()
         registerForContextMenu(iv_sort)
     }
@@ -69,15 +65,12 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
         fab_search.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
-
     }
 
     companion object {
-
         fun newInstance(): MainFragment {
             return MainFragment()
         }
-
         const val ANOTHER_COCKTAIL = "com.slutsenko.action.anotherCocktail"
         const val COLUMN = 2
     }

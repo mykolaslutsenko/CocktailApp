@@ -2,8 +2,10 @@ package com.slutsenko.cocktailapp.presentation.ui.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.map
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
@@ -13,46 +15,49 @@ import kotlin.reflect.KClass
 class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.OnFavoriteClick {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
-    //val viewModel: ParentFragmentViewModel by baseViewModels(requireParentFragment())
     override val contentLayoutResId: Int = R.layout.fragment_history
-     var cocktailAdapter: CocktailAdapter? = null
+    lateinit var cocktailAdapter: CocktailAdapter
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-        viewModel.historyLiveData?.value = viewModel.cocktailDBLiveData?.value
-        //cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData?.value!!)
+
+
+        viewModel.cocktailDBLiveData.value?.size.log
+
+        viewModel.historyLiveData?.value = viewModel.cocktailDBLiveData.value
+        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData?.value
+                ?: emptyList())
         if (viewModel.historyLiveData?.value == null) {
-            tv_history.setText(R.string.history)
+            tv_history.setText(R.string.history_empty)
         } else {
             cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData?.value!!)
             rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
+            cocktailAdapter.favoriteCallback = this
         }
-        cocktailAdapter?.favoriteCallback = this
+
 
         viewModel.mediatorLiveData.observe(requireActivity(), Observer {
             viewModel.historyLiveData?.value = it
-            cocktailAdapter?.refreshData(viewModel.historyLiveData?.value!!)
+            cocktailAdapter.refreshData(viewModel.historyLiveData?.value!!)
             viewModel.cocktailQuantityLiveData.value = it.size
         })
 
-        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
+        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
             viewModel.refreshParam()
+            //cocktailAdapter.refreshData(viewModel.cocktailDBLiveData.value!!)
         })
     }
 
     companion object {
-
         fun newInstance(): HistoryFragment {
-
             return HistoryFragment()
         }
     }
 
     override fun refreshDB() {
-//        viewModel.cocktailDBLiveData?.value =
-//                CocktailDatabase.getInstance(requireContext())?.cocktailDao()?.cocktails as List<Cocktail>
+        viewModel.cocktailDBLiveData = viewModel.cocktailRepository.cocktailListLiveData.map { viewModel.mapper.mapTo(it) }
     }
 }
 

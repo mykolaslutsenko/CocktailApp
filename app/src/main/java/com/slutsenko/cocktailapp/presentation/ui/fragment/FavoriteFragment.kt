@@ -21,8 +21,8 @@ class FavoriteFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-        viewModel.favoriteLiveData.value = viewModel.cocktailDBLiveData?.value!!.filter { it.isFavorite == true }
-        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.favoriteLiveData.value!!)
+        viewModel.favoriteLiveData.value = viewModel.cocktailDBLiveData.value!!.filter { it.isFavorite == true }
+        //cocktailAdapter = CocktailAdapter(requireContext(), viewModel.favoriteLiveData.value!!)
 
         if (viewModel.favoriteLiveData.value!!.isEmpty()) {
             tv_history.setText(R.string.history)
@@ -31,16 +31,17 @@ class FavoriteFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.
             rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
             rv_database.adapter = cocktailAdapter
             tv_history.text = ""
+            cocktailAdapter.favoriteCallback = this
         }
 
-        cocktailAdapter.favoriteCallback = this
+
 
         viewModel.mediatorLiveData.observe(requireActivity(), Observer {
             viewModel.favoriteLiveData.value = it.filter { it.isFavorite == true }
             cocktailAdapter.refreshData(viewModel.favoriteLiveData.value!!)
         })
 
-        viewModel.cocktailDBLiveData?.observe(requireActivity(), Observer {
+        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
             viewModel.refreshParam()
         })
 

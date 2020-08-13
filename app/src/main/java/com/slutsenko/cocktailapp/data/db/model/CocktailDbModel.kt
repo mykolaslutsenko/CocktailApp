@@ -11,8 +11,8 @@ data class CocktailDbModel(
         @ColumnInfo(name = "id")
         val id: Long = -1L,
 
-        @ColumnInfo(name = "isFavorite")
-        val isFavorite: Boolean = false,
+//        @ColumnInfo(name = "isFavorite")
+//        val isFavorite: Boolean = false,
 
 //        @Embedded(prefix = "name_")
 //        val names: LocalizedStringDbModel = LocalizedStringDbModel(),
@@ -27,7 +27,7 @@ data class CocktailDbModel(
         val glass: String = "",
 
         @ColumnInfo(name = "image")
-        val image: String = "",
+        val image: String = ""
 
 //        @Embedded(prefix = "instruction_")
 //        val instructions: LocalizedStringDbModel = LocalizedStringDbModel(),

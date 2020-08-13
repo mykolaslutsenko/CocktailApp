@@ -8,7 +8,7 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailGlass
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 
 class CocktailModelMapper(
-        private val localizedStringModelMapper: LocalizedStringModelMapper,
+        private val localizedStringModelMapper: LocalizedStringModelMapper
 ) : BaseModelMapper<CocktailModel, CocktailRepoModel>() {
 
     override fun mapFrom(model: CocktailModel) = with(model) {
@@ -19,7 +19,7 @@ class CocktailModelMapper(
                 category = category.key,
                 alcoholType = alcoholType.key,
                 glass = glass.key,
-                image = image,
+                image = image
                 //instructions = instructions.run(localizedStringModelMapper::mapFrom),
                 //ingredients = ingredients.map { it.key },
                 //measures = measures
@@ -37,7 +37,7 @@ class CocktailModelMapper(
                         ?: CocktailAlcoholType.UNDEFINED,
                 glass = CocktailGlass.values().firstOrNull { it.key == glass }
                         ?: CocktailGlass.UNDEFINED,
-                image = image,
+                image = image
                 //instructions = instructions.run(localizedStringModelMapper::mapTo),
                 //ingredients = ingredients.map { ingredient ->
 //                    CocktailIngredient.values().firstOrNull { it.key == ingredient }

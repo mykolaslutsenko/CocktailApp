@@ -4,9 +4,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.data.network.CocktailList
+import com.slutsenko.cocktailapp.data.network.CocktailNetModel
 import com.slutsenko.cocktailapp.data.network.JsonPlaceholderApi
 import com.slutsenko.cocktailapp.databinding.ActivitySearchBinding
-import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailNetAdapter
+import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailAlcoholType
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailCategory
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailGlass
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment.Companion.COLUMN
 import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
@@ -23,9 +28,10 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
     override val viewModelClass: KClass<SearchViewModel>
         get() = SearchViewModel::class
-   // override val viewModel: SearchViewModel by viewModels()
-    var cocktailAdapter: CocktailNetAdapter? = null
-    private lateinit var jsonPlaceholderApi : JsonPlaceholderApi
+
+    // override val viewModel: SearchViewModel by viewModels()
+    var cocktailAdapter: CocktailAdapter? = null
+    private lateinit var jsonPlaceholderApi: JsonPlaceholderApi
 
     override fun myView(): Int {
         return R.layout.activity_search
@@ -36,22 +42,12 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-         jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
+        jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
 
 
         viewModel.answerLiveData?.value = getString(R.string.enter_text)
         rv_search.layoutManager = GridLayoutManager(this, COLUMN)
-////        tiet_text.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
-////            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-////                search()
-////                true
-////            } else {
-////                false
-////            }
-////        }
-////        til_search.setStartIconOnClickListener { v: View? -> search() }
-//
-//
+
         viewModel.searchLiveData?.observe(this, Observer {
             search()
         })
@@ -75,7 +71,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 override fun onResponse(call: Call<CocktailList?>, response: Response<CocktailList?>) {
                     val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
-                        cocktailAdapter = CocktailNetAdapter(this@SearchActivity, cocktail)
+                        cocktailAdapter = CocktailAdapter(this@SearchActivity, cocktail.map { mapNetToLocal(it) })
                         rv_search.adapter = cocktailAdapter
                         viewModel.answerLiveData?.value = ""
                     } else {
@@ -95,5 +91,21 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         private const val URL = "https://www.thecocktaildb.com/api/json/v1/1/"
     }
 
-    //override val viewModel: SearchViewModel by viewModels()
+    // тимчасово, в наступних дз перероблю через репозиторій
+    fun mapNetToLocal(db: CocktailNetModel): CocktailModel = with(db) {
+        CocktailModel(
+                id = id!!,
+                //names = names.run(localizedStringRepoModelMapper::mapDbToRepo),
+                category = CocktailCategory.values().firstOrNull { it.key == category }
+                        ?: CocktailCategory.UNDEFINED,
+                alcoholType = CocktailAlcoholType.values().firstOrNull() { it.key == alcoholType }
+                        ?: CocktailAlcoholType.UNDEFINED,
+                glass = CocktailGlass.values().firstOrNull { it.key == glass }
+                        ?: CocktailGlass.UNDEFINED,
+                image = image!!
+                //instructions = instructions.run(localizedStringRepoModelMapper::mapDbToRepo),
+                //ingredients = ingredients,
+                //measures = measures
+        )
+    }
 }

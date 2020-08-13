@@ -1,5 +1,5 @@
 package com.slutsenko.cocktailapp.data.db
 
 object Table {
-    const val COCKTAIL = "ololo9"
+    const val COCKTAIL = "OOOi"
 }

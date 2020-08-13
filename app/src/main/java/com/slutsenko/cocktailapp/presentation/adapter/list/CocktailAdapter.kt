@@ -72,8 +72,8 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
                         when (it.itemId) {
                             R.id.menu_item_open -> {
                                 val intent = Intent(context, AboutCocktailActivity::class.java)
-                                val cocktailId = cocktailsList[adapterPosition].id
-                                intent.putExtra("cocktail", cocktailId)
+                                val cocktail = cocktailsList[adapterPosition]
+                                intent.putExtra("cocktail", cocktail)
                                 context.startActivity(intent)
                                 true
                             }
@@ -94,8 +94,8 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
 
             itemView.setOnClickListener { v: View? ->
                 val intent = Intent(context, AboutCocktailActivity::class.java)
-                val cocktailId = cocktailsList[adapterPosition].id
-                intent.putExtra("cocktail", cocktailId)
+                val cocktail = cocktailsList[adapterPosition]
+                intent.putExtra("cocktail", cocktail)
                 context.startActivity(intent)
             }
         }

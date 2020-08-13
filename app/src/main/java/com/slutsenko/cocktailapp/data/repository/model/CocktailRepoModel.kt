@@ -7,7 +7,7 @@ data class CocktailRepoModel(
         val category: String = "",
         val alcoholType: String = "",
         val glass: String = "",
-        val image: String = "",
+        val image: String = ""
        // val instructions: LocalizedStringRepoModel = LocalizedStringRepoModel(),
         //val ingredients: List<String> = emptyList(),
        // val measures: List<String> = emptyList()/*,

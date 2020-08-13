@@ -15,7 +15,7 @@ class CocktailRepoModelMapper(
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
-                image = image,
+                image = image
                 //instructions = instructions.run(localizedStringRepoModelMapper::mapDbToRepo),
                 //ingredients = ingredients,
                 //measures = measures
@@ -29,7 +29,7 @@ class CocktailRepoModelMapper(
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
-                image = image,
+                image = image
                 //instructions = instructions.run(localizedStringRepoModelMapper::mapRepoToDb),
                 //ingredients = ingredients,
                 //measures = measures
@@ -38,11 +38,11 @@ class CocktailRepoModelMapper(
 
     override fun mapNetToRepo(net: CocktailNetModel): CocktailRepoModel = with(net) {
         CocktailRepoModel(
-                id = idDrink!!,
-                category = strCategory!!,
-                alcoholType = strAlcoholic!!,
-                glass = strGlass!!,
-                image = strDrinkThumb!!,
+                id = id!!,
+                category = category!!,
+                alcoholType = alcoholType!!,
+                glass = glass!!,
+                image = image!!
 
                 )
     }
