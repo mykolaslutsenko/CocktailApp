@@ -28,16 +28,16 @@ data class CocktailDbModel(
         val glass: String = "",
 
         @ColumnInfo(name = "image")
-        val image: String = ""
+        val image: String = "",
 
-//        @Embedded(prefix = "instruction_")
-//        val instructions: LocalizedStringDbModel = LocalizedStringDbModel(),
-//
-//        @ColumnInfo(name = "ingredients")
-//        val ingredients: List<String> = emptyList(),
-//
-//        @ColumnInfo(name = "measures")
-//        val measures: List<String> = emptyList(),
+        @Embedded(prefix = "instruction_")
+        val instructions: LocalizedStringDbModel = LocalizedStringDbModel(),
+
+        @ColumnInfo(name = "ingredients")
+        val ingredients: List<String> = emptyList(),
+
+        @ColumnInfo(name = "measures")
+        val measures: List<String> = emptyList()
 
 //    @ColumnInfo(name = "date")
 //    val date: Date = Date(),

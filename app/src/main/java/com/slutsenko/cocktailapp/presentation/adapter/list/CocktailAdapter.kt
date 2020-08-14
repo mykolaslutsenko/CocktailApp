@@ -25,8 +25,8 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
     override fun onBindViewHolder(holder: CocktailViewHolder, position: Int) {
         val currentCocktail = cocktailsList[position]
         val imageURL = currentCocktail.image
-        //val cocktailName = currentCocktail.names.def
-        //holder.cocktailImageName.text = cocktailName
+        val cocktailName = currentCocktail.names.def
+        holder.cocktailImageName.text = cocktailName
         Glide.with(context)
                 .load(imageURL)
                 .centerCrop()
@@ -99,6 +99,5 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
                 context.startActivity(intent)
             }
         }
-
     }
 }

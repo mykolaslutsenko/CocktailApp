@@ -19,10 +19,10 @@ class CocktailModelMapper(
                 category = category.key,
                 alcoholType = alcoholType.key,
                 glass = glass.key,
-                image = image
-                //instructions = instructions.run(localizedStringModelMapper::mapFrom),
-                //ingredients = ingredients.map { it.key },
-                //measures = measures
+                image = image,
+                instructions = instructions.run(localizedStringModelMapper::mapFrom),
+                ingredients = ingredients,
+                measures = measures
         )
     }
 
@@ -37,13 +37,10 @@ class CocktailModelMapper(
                         ?: CocktailAlcoholType.UNDEFINED,
                 glass = CocktailGlass.values().firstOrNull { it.key == glass }
                         ?: CocktailGlass.UNDEFINED,
-                image = image
-                //instructions = instructions.run(localizedStringModelMapper::mapTo),
-                //ingredients = ingredients.map { ingredient ->
-//                    CocktailIngredient.values().firstOrNull { it.key == ingredient }
-//                            ?: CocktailIngredient.UNDEFINED
-//                },
-//                measures = measures
+                image = image,
+                instructions = instructions.run(localizedStringModelMapper::mapTo),
+                ingredients = ingredients,
+                measures = measures
         )
     }
 }

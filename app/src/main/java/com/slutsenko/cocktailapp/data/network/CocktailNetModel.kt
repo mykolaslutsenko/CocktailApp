@@ -217,4 +217,8 @@ class CocktailNetModel : Serializable {
     @SerializedName("dateModified")
     @Expose
     var dateModified: String? = null
+
+    var ingredients = listOf<String>()
+
+    var measures = listOf<String>()
 }

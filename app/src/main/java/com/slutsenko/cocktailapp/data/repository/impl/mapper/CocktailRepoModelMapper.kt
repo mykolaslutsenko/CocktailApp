@@ -16,10 +16,10 @@ class CocktailRepoModelMapper(
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
-                image = image
-                //instructions = instructions.run(localizedStringRepoModelMapper::mapDbToRepo),
-                //ingredients = ingredients,
-                //measures = measures
+                image = image,
+                instructions = instructions.run(localizedStringRepoModelMapper::mapDbToRepo),
+                ingredients = ingredients,
+                measures = measures
         )
     }
 
@@ -31,10 +31,10 @@ class CocktailRepoModelMapper(
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
-                image = image
-                //instructions = instructions.run(localizedStringRepoModelMapper::mapRepoToDb),
-                //ingredients = ingredients,
-                //measures = measures
+                image = image,
+                instructions = instructions.run(localizedStringRepoModelMapper::mapRepoToDb),
+                ingredients = ingredients,
+                measures = measures
         )
     }
 
