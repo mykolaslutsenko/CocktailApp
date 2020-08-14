@@ -12,7 +12,7 @@ class CocktailNetModel : Serializable {
 
     @SerializedName("strDrink")
     @Expose
-    var name: String? = null
+    var names: String? = null
 
     @SerializedName("strDrinkAlternate")
     @Expose

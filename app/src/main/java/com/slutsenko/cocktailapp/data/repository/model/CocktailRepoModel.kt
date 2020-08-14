@@ -3,7 +3,7 @@ package com.slutsenko.cocktailapp.data.repository.model
 data class CocktailRepoModel(
         val id: Long = -1L,
         val isFavorite:Boolean = false,
-        //val names: LocalizedStringRepoModel = LocalizedStringRepoModel(),
+        val names: LocalizedStringRepoModel = LocalizedStringRepoModel(),
         val category: String = "",
         val alcoholType: String = "",
         val glass: String = "",

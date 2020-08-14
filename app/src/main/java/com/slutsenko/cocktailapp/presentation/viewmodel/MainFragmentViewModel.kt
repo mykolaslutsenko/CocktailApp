@@ -60,7 +60,7 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
 
     var categoryDrinkFilterLiveData: MutableLiveData<CocktailCategory> = MutableLiveData()
 
-    var historyLiveData: MutableLiveData<List<CocktailModel>>? = MutableLiveData()
+    var historyLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 
     var favoriteLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 

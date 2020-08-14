@@ -1,6 +1,7 @@
 package com.slutsenko.cocktailapp.data.db.model
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.slutsenko.cocktailapp.data.db.Table
@@ -11,11 +12,11 @@ data class CocktailDbModel(
         @ColumnInfo(name = "id")
         val id: Long = -1L,
 
-//        @ColumnInfo(name = "isFavorite")
-//        val isFavorite: Boolean = false,
+        @ColumnInfo(name = "isFavorite")
+        val isFavorite: Boolean = false,
 
-//        @Embedded(prefix = "name_")
-//        val names: LocalizedStringDbModel = LocalizedStringDbModel(),
+        @Embedded(prefix = "name_")
+        val names: LocalizedStringDbModel = LocalizedStringDbModel(),
 
         @ColumnInfo(name = "category")
         val category: String = "",

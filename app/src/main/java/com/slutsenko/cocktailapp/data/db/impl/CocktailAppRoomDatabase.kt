@@ -26,7 +26,7 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
                 .databaseBuilder(
                         it.applicationContext,
                         CocktailAppRoomDatabase::class.java,
-                        "909"
+                        "90911"
                 )
                 .fallbackToDestructiveMigration()
                 .build()

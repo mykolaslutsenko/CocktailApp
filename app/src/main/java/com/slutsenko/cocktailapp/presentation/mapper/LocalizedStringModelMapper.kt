@@ -11,25 +11,25 @@ class LocalizedStringModelMapper : BaseModelMapper<LocalizedStringModel, Localiz
 
     override fun mapTo(model: LocalizedStringRepoModel) = with(model) {
         LocalizedStringModel(
-//            def = def,
-//            defAlternate = defAlternate,
-//            es = es,
-//            de = de,
-//            fr = fr,
-//            zhHans = zhHans,
-//            zhHant = zhHant
+            def = def,
+            defAlternate = defAlternate,
+            es = es,
+            de = de,
+            fr = fr,
+            zhHans = zhHans,
+            zhHant = zhHant
         )
     }
 
     override fun mapFrom(model: LocalizedStringModel) = with(model) {
         LocalizedStringRepoModel(
-//            def = def,
-//            defAlternate = defAlternate,
-//            es = es,
-//            de = de,
-//            fr = fr,
-//            zhHans = zhHans,
-//            zhHant = zhHant
+            def = def,
+            defAlternate = defAlternate,
+            es = es,
+            de = de,
+            fr = fr,
+            zhHans = zhHans,
+            zhHant = zhHant
         )
     }
 }

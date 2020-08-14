@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.map
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
@@ -21,26 +20,18 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.O
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
+        viewModel.historyLiveData.value = viewModel.cocktailDBLiveData.value
 
-        viewModel.cocktailDBLiveData.value?.size.log
-
-        viewModel.historyLiveData?.value = viewModel.cocktailDBLiveData.value
-        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData?.value
-                ?: emptyList())
-        if (viewModel.historyLiveData?.value == null) {
-            tv_history.setText(R.string.history_empty)
-        } else {
-            cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData?.value!!)
-            rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
-            rv_database.adapter = cocktailAdapter
-            tv_history.text = ""
-            cocktailAdapter.favoriteCallback = this
-        }
+        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData.value ?: emptyList())
+        rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
+        rv_database.adapter = cocktailAdapter
+        tv_history.text = ""
+        cocktailAdapter.favoriteCallback = this
 
 
         viewModel.mediatorLiveData.observe(requireActivity(), Observer {
-            viewModel.historyLiveData?.value = it
-            cocktailAdapter.refreshData(viewModel.historyLiveData?.value!!)
+            viewModel.historyLiveData.value = it
+            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
             viewModel.cocktailQuantityLiveData.value = it.size
         })
 

@@ -92,6 +92,8 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
     }
 
     // тимчасово, в наступних дз перероблю через репозиторій
+
+
     fun mapNetToLocal(db: CocktailNetModel): CocktailModel = with(db) {
         CocktailModel(
                 id = id!!,

@@ -8,25 +8,25 @@ class LocalizedStringRepoModelMapper :
     BaseRepoModelMapper<LocalizedStringRepoModel, LocalizedStringDbModel, Any /*CocktailNetModel*/>() {
     override fun mapDbToRepo(db: LocalizedStringDbModel) = with(db) {
         LocalizedStringRepoModel(
-//            def = def,
-//            defAlternate = defAlternate,
-//            es = es,
-//            de = de,
-//            fr = fr,
-//            zhHans = zhHans,
-//            zhHant = zhHant
+            def = def,
+            defAlternate = defAlternate,
+            es = es,
+            de = de,
+            fr = fr,
+            zhHans = zhHans,
+            zhHant = zhHant
         )
     }
 
     override fun mapRepoToDb(repo: LocalizedStringRepoModel) = with(repo) {
         LocalizedStringDbModel(
-//            def = def,
-//            defAlternate = defAlternate,
-//            es = es,
-//            de = de,
-//            fr = fr,
-//            zhHans = zhHans,
-//            zhHant = zhHant
+            def = def,
+            defAlternate = defAlternate,
+            es = es,
+            de = de,
+            fr = fr,
+            zhHans = zhHans,
+            zhHant = zhHant
         )
     }
 }

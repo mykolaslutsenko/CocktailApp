@@ -11,7 +11,8 @@ class CocktailRepoModelMapper(
     override fun mapDbToRepo(db: CocktailDbModel): CocktailRepoModel = with(db) {
         CocktailRepoModel(
                 id = id,
-                //names = names.run(localizedStringRepoModelMapper::mapDbToRepo),
+                names = names.run(localizedStringRepoModelMapper::mapDbToRepo),
+                isFavorite = isFavorite,
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
@@ -25,7 +26,8 @@ class CocktailRepoModelMapper(
     override fun mapRepoToDb(repo: CocktailRepoModel): CocktailDbModel = with(repo) {
         CocktailDbModel(
                 id = id,
-                //names = names.run(localizedStringRepoModelMapper::mapRepoToDb),
+                names = names.run(localizedStringRepoModelMapper::mapRepoToDb),
+                isFavorite = isFavorite,
                 category = category,
                 alcoholType = alcoholType,
                 glass = glass,
@@ -39,6 +41,7 @@ class CocktailRepoModelMapper(
     override fun mapNetToRepo(net: CocktailNetModel): CocktailRepoModel = with(net) {
         CocktailRepoModel(
                 id = id!!,
+                //names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
                 category = category!!,
                 alcoholType = alcoholType!!,
                 glass = glass!!,

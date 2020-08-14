@@ -14,8 +14,8 @@ class CocktailModelMapper(
     override fun mapFrom(model: CocktailModel) = with(model) {
         CocktailRepoModel(
                 id = id,
-                //isFavorite = isFavorite,
-                //names = names.run(localizedStringModelMapper::mapFrom),
+                isFavorite = isFavorite,
+                names = names.run(localizedStringModelMapper::mapFrom),
                 category = category.key,
                 alcoholType = alcoholType.key,
                 glass = glass.key,
@@ -29,8 +29,8 @@ class CocktailModelMapper(
     override fun mapTo(model: CocktailRepoModel) = with(model) {
         CocktailModel(
                 id = id,
-                //isFavorite = isFavorite,
-                //names = names.run(localizedStringModelMapper::mapTo),
+                isFavorite = isFavorite,
+                names = names.run(localizedStringModelMapper::mapTo),
                 category = CocktailCategory.values().firstOrNull { it.key == category }
                         ?: CocktailCategory.UNDEFINED,
                 alcoholType = CocktailAlcoholType.values().firstOrNull { it.key == alcoholType }
