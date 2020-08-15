@@ -10,7 +10,7 @@ import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlin.reflect.KClass
 
-class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.OnFavoriteClick {
+class HistoryFragment : BaseFragment<MainFragmentViewModel>() {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_history
@@ -21,12 +21,9 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.O
 
 //        viewModel.historyLiveData.value = viewModel.cocktailDBLiveData.value
 
-        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.mediatorLiveData.value ?: emptyList())
+        cocktailAdapter = CocktailAdapter(viewModel, requireContext(), viewModel.mediatorLiveData.value ?: emptyList())
         rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
         rv_database.adapter = cocktailAdapter
-        //tv_history.text = ""
-        cocktailAdapter.favoriteCallback = this
-
 
         viewModel.mediatorLiveData.observe(requireActivity(), Observer {
 //            viewModel.historyLiveData.value = it
@@ -47,10 +44,6 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.O
         fun newInstance(): HistoryFragment {
             return HistoryFragment()
         }
-    }
-
-    override fun refreshDB() {
-        //viewModel.cocktailDBLiveData = viewModel.cocktailRepository.cocktailListLiveData.map { viewModel.mapper.mapTo(it) }
     }
 }
 

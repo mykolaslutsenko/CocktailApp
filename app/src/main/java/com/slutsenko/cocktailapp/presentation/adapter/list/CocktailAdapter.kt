@@ -14,8 +14,9 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter.CocktailViewHolder
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.ui.activity.AboutCocktailActivity
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 
-class CocktailAdapter(private val context: Context, private var cocktailsList: List<CocktailModel>)
+class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, private val context: Context, private var cocktailsList: List<CocktailModel>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)
@@ -42,12 +43,6 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
         notifyDataSetChanged()
     }
 
-    interface OnFavoriteClick {
-        fun refreshDB()
-    }
-
-    lateinit var favoriteCallback: OnFavoriteClick
-
     inner class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cocktailImage: ImageView = itemView.findViewById(R.id.iv_cocktail)
         var cocktailImageName: TextView = itemView.findViewById(R.id.tv_cocktail_name)
@@ -61,8 +56,7 @@ class CocktailAdapter(private val context: Context, private var cocktailsList: L
                 } else if (favoriteCocktail.isFavorite == true) {
                     favoriteCocktail.isFavorite = false
                 }
-//                CocktailDatabase.getInstance(context)?.cocktailDao()?.addCocktail(favoriteCocktail)
-//                favoriteCallback.refreshDB()
+                viewModel?.saveToDb(favoriteCocktail)
             }
 
             itemView.setOnLongClickListener { v: View? ->

@@ -250,4 +250,10 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
         categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
     }
 
+    fun saveToDb(cocktail: CocktailModel) {
+        launchRequest {
+            cocktailRepository.addOrReplaceCocktail(mapper.mapFrom(cocktail))
+        }
+    }
+
 }

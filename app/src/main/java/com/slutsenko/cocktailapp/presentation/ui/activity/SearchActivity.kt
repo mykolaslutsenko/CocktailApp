@@ -68,7 +68,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 override fun onResponse(call: Call<CocktailList?>, response: Response<CocktailList?>) {
                     val cocktail = response.body()?.cocktails
                     if (cocktail != null) {
-                        cocktailAdapter = CocktailAdapter(this@SearchActivity, cocktail.map { mapNetToLocal(it) })
+                        cocktailAdapter = CocktailAdapter(null, this@SearchActivity, cocktail.map { mapNetToLocal(it) })
                         rv_search.adapter = cocktailAdapter
                         viewModel.answerLiveData?.value = ""
                     } else {
