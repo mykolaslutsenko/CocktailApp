@@ -2,7 +2,6 @@ package com.slutsenko.cocktailapp.presentation.ui.fragment
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
@@ -20,25 +19,28 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.O
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
-        viewModel.historyLiveData.value = viewModel.cocktailDBLiveData.value
+//        viewModel.historyLiveData.value = viewModel.cocktailDBLiveData.value
 
-        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.historyLiveData.value ?: emptyList())
+        cocktailAdapter = CocktailAdapter(requireContext(), viewModel.mediatorLiveData.value ?: emptyList())
         rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
         rv_database.adapter = cocktailAdapter
-        tv_history.text = ""
+        //tv_history.text = ""
         cocktailAdapter.favoriteCallback = this
 
 
         viewModel.mediatorLiveData.observe(requireActivity(), Observer {
-            viewModel.historyLiveData.value = it
-            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
+//            viewModel.historyLiveData.value = it
+//            "mediator".log
+//            it.size.log
+            cocktailAdapter.refreshData(it)
             viewModel.cocktailQuantityLiveData.value = it.size
         })
 
-        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
-            viewModel.refreshParam()
-            //cocktailAdapter.refreshData(viewModel.cocktailDBLiveData.value!!)
-        })
+//        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
+//            //viewModel.refreshParam()
+////            viewModel.historyLiveData.value = it
+////            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
+//        })
     }
 
     companion object {
@@ -48,7 +50,7 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>(), CocktailAdapter.O
     }
 
     override fun refreshDB() {
-        viewModel.cocktailDBLiveData = viewModel.cocktailRepository.cocktailListLiveData.map { viewModel.mapper.mapTo(it) }
+        //viewModel.cocktailDBLiveData = viewModel.cocktailRepository.cocktailListLiveData.map { viewModel.mapper.mapTo(it) }
     }
 }
 

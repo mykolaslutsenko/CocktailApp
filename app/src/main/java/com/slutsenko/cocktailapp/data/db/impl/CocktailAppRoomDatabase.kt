@@ -22,13 +22,21 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
     abstract fun cocktailDao(): CocktailDao
 
     companion object : SingletonHolder<CocktailAppRoomDatabase, Context>({
+//        val MIGRATION_1_2 = object : Migration(1, 2) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                database.execSQL("ALTER TABLE ${Table.COCKTAIL} ADD COLUMN date INTEGER")
+//            }
+//        }
+
+
         Room
                 .databaseBuilder(
                         it.applicationContext,
                         CocktailAppRoomDatabase::class.java,
                         "9091111111"
                 )
-                .fallbackToDestructiveMigration()
+                //.addMigrations(MIGRATION_1_2)
+                //.fallbackToDestructiveMigration()
                 .build()
     })
 }

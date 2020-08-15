@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.slutsenko.cocktailapp.R
 
-class IngredientOrMeasureAdapter(var context: Context, var ingredients: List<String>, var measures: List<String>) : RecyclerView.Adapter<IngredientOrMeasureAdapter.IngredientAndMeasureViewHolder>() {
+class IngredientWithMeasureAdapter(var context: Context, var ingredients: List<String>?, var measures: List<String>?) : RecyclerView.Adapter<IngredientWithMeasureAdapter.IngredientAndMeasureViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientAndMeasureViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.widget_ingredient_and_measure, parent, false)
         return IngredientAndMeasureViewHolder(view)
@@ -16,12 +16,12 @@ class IngredientOrMeasureAdapter(var context: Context, var ingredients: List<Str
 
     override fun onBindViewHolder(holder: IngredientAndMeasureViewHolder, position: Int) {
         holder.number.text = (position + 1).toString()
-        holder.ingredient.text = ingredients[position]
-        holder.measure.text = measures[position]
+        holder.ingredient.text = ingredients?.get(position) ?: ""
+        holder.measure.text = measures?.get(position) ?: ""
     }
 
     override fun getItemCount(): Int {
-        return ingredients.size
+        return ingredients?.size!!
     }
 
     inner class IngredientAndMeasureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

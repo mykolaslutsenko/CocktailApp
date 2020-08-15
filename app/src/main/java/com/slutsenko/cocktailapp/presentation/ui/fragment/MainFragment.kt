@@ -25,7 +25,7 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setStartParam()
+        //viewModel.setStartParam()
         registerForContextMenu(iv_sort)
     }
 

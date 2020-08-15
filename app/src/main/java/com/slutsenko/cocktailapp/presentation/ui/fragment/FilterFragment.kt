@@ -14,7 +14,6 @@ import kotlin.reflect.KClass
 class FilterFragment : BaseFragment<MainFragmentViewModel>() {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
-   // private val viewModel: MainViewModel by activityViewModels()
     override val contentLayoutResId: Int = R.layout.fragment_filter
 
     override fun configureView(savedInstanceState: Bundle?) {
@@ -62,12 +61,11 @@ class FilterFragment : BaseFragment<MainFragmentViewModel>() {
     }
 
     private fun initFilters() {
-        tv_chosenAlcohol.text = viewModel.alcoholDrinkFilterLiveData.value?.key ?: ""
-        tv_chosenCategory.text = viewModel.categoryDrinkFilterLiveData.value?.key ?: ""
+        tv_chosenAlcohol.text = viewModel.alcoholDrinkFilterLiveData.value?.key
+        tv_chosenCategory.text = viewModel.categoryDrinkFilterLiveData.value?.key
     }
 
     companion object {
-        @JvmStatic
         fun newInstance(): FilterFragment {
             return FilterFragment()
         }
