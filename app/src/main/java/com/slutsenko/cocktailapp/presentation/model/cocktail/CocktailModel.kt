@@ -12,6 +12,7 @@ data class CocktailModel(
         val image: String = "",
         val instructions: LocalizedStringModel = LocalizedStringModel(),
         val ingredients: List<String> = emptyList(),
-        val measures: List<String> = emptyList()/*,
+        val measures: List<String> = emptyList()
+        /*,
         //val date: Date = Date()*/
 ) : Serializable
