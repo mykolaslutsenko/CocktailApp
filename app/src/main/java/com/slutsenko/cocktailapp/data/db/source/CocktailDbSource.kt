@@ -13,7 +13,7 @@ interface CocktailDbSource: BaseDbSource {
     suspend fun getCocktailById(id: Long): CocktailDbModel?
     suspend fun addOrReplaceCocktail(cocktail: CocktailDbModel)
     suspend fun addOrReplaceCocktails(vararg cocktail: CocktailDbModel)
-//    suspend fun replaceAllCocktails(vararg cocktail: CocktailDbModel)
-//    suspend fun deleteCocktails(vararg cocktail: CocktailDbModel)
-//    suspend fun deleteAllCocktails()
+    suspend fun replaceAllCocktails(vararg cocktail: CocktailDbModel)
+    suspend fun deleteCocktails(vararg cocktail: CocktailDbModel)
+    suspend fun deleteAllCocktails()
 }

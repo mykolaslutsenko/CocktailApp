@@ -36,9 +36,9 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel>() {
         })
 
 //        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
-//            //viewModel.refreshParam()
-////            viewModel.historyLiveData.value = it
-////            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
+//            viewModel.refreshParam()
+//            viewModel.historyLiveData.value = it
+//            cocktailAdapter.refreshData(viewModel.historyLiveData.value!!)
 //        })
     }
 

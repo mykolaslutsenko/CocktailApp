@@ -13,7 +13,7 @@ interface CocktailRepository : BaseRepository {
     suspend fun getCocktailById(id: Long): CocktailRepoModel?
     suspend fun addOrReplaceCocktail(cocktail: CocktailRepoModel)
     suspend fun addOrReplaceCocktails(vararg cocktail: CocktailRepoModel)
-//    suspend fun replaceAllCocktails(vararg cocktail: CocktailRepoModel)
-//    suspend fun deleteCocktails(vararg cocktail: CocktailRepoModel)
-//    suspend fun deleteAllCocktails()
+    suspend fun replaceAllCocktails(vararg cocktail: CocktailRepoModel)
+    suspend fun deleteCocktails(vararg cocktail: CocktailRepoModel)
+    suspend fun deleteAllCocktails()
 }

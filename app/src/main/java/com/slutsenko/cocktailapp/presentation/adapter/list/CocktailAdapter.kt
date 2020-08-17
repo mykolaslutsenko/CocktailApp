@@ -2,6 +2,7 @@ package com.slutsenko.cocktailapp.presentation.adapter.list
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,11 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         val currentCocktail = cocktailsList[position]
         val imageURL = currentCocktail.image
         val cocktailName = currentCocktail.names.def
+        if (currentCocktail.isFavorite) {
+            holder.favorite.setColorFilter(Color.YELLOW)
+        } else if (!currentCocktail.isFavorite) {
+            holder.favorite.setColorFilter(Color.WHITE)
+        }
         holder.cocktailImageName.text = cocktailName
         Glide.with(context)
                 .load(imageURL)
@@ -51,13 +57,12 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         init {
             favorite.setOnClickListener {
                 val favoriteCocktail = cocktailsList[adapterPosition]
-                if (favoriteCocktail.isFavorite == false) {
-                    favoriteCocktail.isFavorite = true
-                } else if (favoriteCocktail.isFavorite == true) {
-                    favoriteCocktail.isFavorite = false
-                }
-                viewModel?.saveToDb(favoriteCocktail)
+                if (favoriteCocktail.isFavorite) {
+                    removeFavorite()
+                } else addFavorite()
+
             }
+
 
             itemView.setOnLongClickListener { v: View? ->
                 PopupMenu(context, v).apply {
@@ -65,16 +70,19 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
                     setOnMenuItemClickListener {
                         when (it.itemId) {
                             R.id.menu_item_open -> {
-                                val intent = Intent(context, AboutCocktailActivity::class.java)
-                                val cocktail = cocktailsList[adapterPosition]
-                                intent.putExtra("cocktail", cocktail)
-                                context.startActivity(intent)
+                                startAboutActivity()
                                 true
                             }
                             R.id.menu_add_favorite -> {
+                                addFavorite()
                                 true
                             }
                             R.id.menu_remove_favorite -> {
+                                removeFavorite()
+                                true
+                            }
+                            R.id.menu_remove_cocktail -> {
+                                deleteCocktail()
                                 true
                             }
                             else -> false
@@ -87,11 +95,35 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             }
 
             itemView.setOnClickListener { v: View? ->
-                val intent = Intent(context, AboutCocktailActivity::class.java)
-                val cocktail = cocktailsList[adapterPosition]
-                intent.putExtra("cocktail", cocktail)
-                context.startActivity(intent)
+                startAboutActivity()
             }
+        }
+
+        private fun startAboutActivity() {
+            val intent = Intent(context, AboutCocktailActivity::class.java)
+            val cocktail = cocktailsList[adapterPosition]
+            intent.putExtra("cocktail", cocktail)
+            context.startActivity(intent)
+        }
+
+        private fun deleteCocktail() {
+            viewModel?.deleteCocktail(cocktailsList[adapterPosition])
+        }
+
+        private fun addFavorite() {
+            val favoriteCocktail = cocktailsList[adapterPosition]
+            if (!favoriteCocktail.isFavorite) {
+                favoriteCocktail.isFavorite = true
+            }
+            viewModel?.saveToDb(favoriteCocktail)
+        }
+
+        private fun removeFavorite() {
+            val favoriteCocktail = cocktailsList[adapterPosition]
+            if (favoriteCocktail.isFavorite) {
+                favoriteCocktail.isFavorite = false
+            }
+            viewModel?.saveToDb(favoriteCocktail)
         }
     }
 }

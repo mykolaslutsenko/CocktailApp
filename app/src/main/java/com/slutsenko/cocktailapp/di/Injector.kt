@@ -46,7 +46,6 @@ object Injector {
     }
 
     class ViewModelFactory(
-            val application: Application,
             owner: SavedStateRegistryOwner,
             defaultArgs: Bundle? = (owner as? Activity)?.intent?.extras
                     ?: (owner as? Fragment)?.arguments

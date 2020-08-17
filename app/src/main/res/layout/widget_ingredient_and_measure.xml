@@ -6,6 +6,7 @@
     android:orientation="horizontal">
 
     <TextView
+        style="@style/about_cocktail_text"
         android:id="@+id/tv_number"
         android:layout_weight="1"
         android:layout_gravity="start"
@@ -15,6 +16,7 @@
          />
 
     <TextView
+        style="@style/about_cocktail_text"
         android:id="@+id/tv_widget_ingredient"
         android:layout_gravity="start"
         android:layout_weight="1"
@@ -26,6 +28,7 @@
         android:layout_height="0dp"/>
 
     <TextView
+        style="@style/about_cocktail_text"
         android:layout_weight="1"
         android:id="@+id/tv_widget_measure"
         android:layout_gravity="start"

@@ -30,16 +30,16 @@ class CocktailDbSourceImpl(
     override suspend fun addOrReplaceCocktails(vararg cocktail: CocktailDbModel) {
         cocktailDao.addOrReplaceCocktails(*cocktail)
     }
-//
-//    override suspend fun replaceAllCocktails(vararg cocktail: CocktailDbModel) {
-//        cocktailDao.replaceAllCocktails(*cocktail)
-//    }
-//
-//    override suspend fun deleteCocktails(vararg cocktail: CocktailDbModel) {
-//        cocktailDao.deleteCocktails(*cocktail)
-//    }
-//
-//    override suspend fun deleteAllCocktails() {
-//        cocktailDao.deleteAllCocktails()
-//    }
+
+    override suspend fun replaceAllCocktails(vararg cocktail: CocktailDbModel) {
+        cocktailDao.replaceAllCocktails(*cocktail)
+    }
+
+    override suspend fun deleteCocktails(vararg cocktail: CocktailDbModel) {
+        cocktailDao.deleteCocktails(*cocktail)
+    }
+
+    override suspend fun deleteAllCocktails() {
+        cocktailDao.deleteAllCocktails()
+    }
 }

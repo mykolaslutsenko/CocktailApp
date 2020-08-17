@@ -1,6 +1,8 @@
 package com.slutsenko.cocktailapp.presentation.ui.activity
 
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
@@ -8,6 +10,7 @@ import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.presentation.ui.fragment.ProfileFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlin.reflect.KClass
 
 
@@ -72,5 +75,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 //                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
 //            }
 //        })
+
+
     }
 }

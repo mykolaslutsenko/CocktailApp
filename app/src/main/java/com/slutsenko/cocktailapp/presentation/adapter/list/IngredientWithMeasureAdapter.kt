@@ -16,8 +16,10 @@ class IngredientWithMeasureAdapter(var context: Context, var ingredients: List<S
 
     override fun onBindViewHolder(holder: IngredientAndMeasureViewHolder, position: Int) {
         holder.number.text = (position + 1).toString()
-        holder.ingredient.text = ingredients?.get(position) ?: ""
-        holder.measure.text = measures?.get(position) ?: ""
+        holder.ingredient.text = ingredients?.get(position)
+        if (position < measures?.size!!) {
+            holder.measure.text = measures?.get(position)
+        }
     }
 
     override fun getItemCount(): Int {

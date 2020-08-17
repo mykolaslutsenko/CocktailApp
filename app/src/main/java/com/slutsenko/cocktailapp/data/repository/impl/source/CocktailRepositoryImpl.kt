@@ -40,20 +40,20 @@ class CocktailRepositoryImpl(
             *cocktail.map(mapper::mapRepoToDb).toTypedArray()
         )
     }
-//
-//    override suspend fun replaceAllCocktails(vararg cocktail: CocktailRepoModel) {
-//        dbSource.replaceAllCocktails(
-//            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
-//        )
-//    }
-//
-//    override suspend fun deleteCocktails(vararg cocktail: CocktailRepoModel) {
-//        dbSource.deleteCocktails(
-//            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
-//        )
-//    }
-//
-//    override suspend fun deleteAllCocktails() {
-//        dbSource.deleteAllCocktails()
-//    }
+
+    override suspend fun replaceAllCocktails(vararg cocktail: CocktailRepoModel) {
+        dbSource.replaceAllCocktails(
+            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
+        )
+    }
+
+    override suspend fun deleteCocktails(vararg cocktail: CocktailRepoModel) {
+        dbSource.deleteCocktails(
+            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
+        )
+    }
+
+    override suspend fun deleteAllCocktails() {
+        dbSource.deleteAllCocktails()
+    }
 }

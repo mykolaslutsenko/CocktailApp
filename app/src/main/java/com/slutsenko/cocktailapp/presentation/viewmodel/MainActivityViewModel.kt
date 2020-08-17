@@ -10,5 +10,7 @@ class MainActivityViewModel (private val cocktailRepository: CocktailRepository,
                              savedStateHandle: SavedStateHandle
 ): BaseViewModel() {
 
+    //val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
 
 }

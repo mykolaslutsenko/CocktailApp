@@ -35,7 +35,7 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
 
     var favoriteLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 
-    val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
 
     var cocktailQuantityLiveData: MutableLiveData<Int> = MutableLiveData()
 
@@ -63,7 +63,7 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
 
 
     private fun filterAndSortCocktailList(): List<CocktailModel> {
-        filteredList = cocktailDBLiveData.value?: emptyList()
+        filteredList = cocktailDBLiveData.value ?: emptyList()
         filteredList.size.log
         alcoholDrinkFilterLiveData.value.log
         categoryDrinkFilterLiveData.value.log
@@ -118,56 +118,14 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
     }
 
     private fun filterAlcohol(alcoholDrinkFilter: CocktailAlcoholType) {
-        filteredList = when (alcoholDrinkFilter) {
-            CocktailAlcoholType.ALCOHOLIC -> filteredList?.filter {
-                it.alcoholType == CocktailAlcoholType.ALCOHOLIC
-            }
-            CocktailAlcoholType.NON_ALCOHOLIC -> filteredList?.filter {
-                it.alcoholType == CocktailAlcoholType.NON_ALCOHOLIC
-            }
-            CocktailAlcoholType.OPTIONAL_ALCOHOL -> filteredList?.filter {
-                it.alcoholType == CocktailAlcoholType.OPTIONAL_ALCOHOL
-            }
-            else -> filteredList
+        if (alcoholDrinkFilter != CocktailAlcoholType.UNDEFINED) {
+            filteredList = filteredList.filter { it.alcoholType == alcoholDrinkFilter }
         }
     }
 
     private fun filterCategory(categoryDrinkFilter: CocktailCategory) {
-        filteredList = when (categoryDrinkFilter) {
-            CocktailCategory.ORDINARY_DRINK -> filteredList?.filter {
-                it.category == CocktailCategory.ORDINARY_DRINK
-            }
-            CocktailCategory.COCKTAIL -> filteredList?.filter {
-                it.category == CocktailCategory.COCKTAIL
-            }
-            CocktailCategory.MILK_FLOAT_SHAKE -> filteredList?.filter {
-                it.category == CocktailCategory.MILK_FLOAT_SHAKE
-            }
-            CocktailCategory.OTHER_UNKNOWN -> filteredList?.filter {
-                it.category == CocktailCategory.OTHER_UNKNOWN
-            }
-            CocktailCategory.COCOA -> filteredList?.filter {
-                it.category == CocktailCategory.COCOA
-            }
-            CocktailCategory.SHOT -> filteredList?.filter {
-                it.category == CocktailCategory.SHOT
-            }
-            CocktailCategory.COFFEE_TEA -> filteredList?.filter {
-                it.category == CocktailCategory.COFFEE_TEA
-            }
-            CocktailCategory.HOMEMADE_LIQUEUR -> filteredList?.filter {
-                it.category == CocktailCategory.HOMEMADE_LIQUEUR
-            }
-            CocktailCategory.PUNCH_PARTY_DRINK -> filteredList?.filter {
-                it.category == CocktailCategory.PUNCH_PARTY_DRINK
-            }
-            CocktailCategory.BEER -> filteredList?.filter {
-                it.category == CocktailCategory.BEER
-            }
-            CocktailCategory.SOFT_DRINK_SODA -> filteredList?.filter {
-                it.category == CocktailCategory.SOFT_DRINK_SODA
-            }
-            else -> filteredList
+        if (categoryDrinkFilter != CocktailCategory.UNDEFINED) {
+            filteredList = filteredList.filter { it.category == categoryDrinkFilter }
         }
     }
 
@@ -239,9 +197,9 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
     }
 
     fun setStartParam() {
-//        alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
-//        categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
-//        sortDrinkLiveData.value = SortDrink.RECENT
+        alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
+        categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
+        sortDrinkLiveData.value = SortDrink.RECENT
     }
 
     fun refreshParam() {
@@ -258,6 +216,12 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
     fun saveToDb(cocktail: CocktailModel) {
         launchRequest {
             cocktailRepository.addOrReplaceCocktail(mapper.mapFrom(cocktail))
+        }
+    }
+
+    fun deleteCocktail(cocktail: CocktailModel) {
+        launchRequest {
+            cocktailRepository.deleteCocktails(mapper.mapFrom(cocktail))
         }
     }
 

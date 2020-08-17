@@ -1,10 +1,7 @@
 package com.slutsenko.cocktailapp.data.db.impl.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.slutsenko.cocktailapp.data.db.Table
 import com.slutsenko.cocktailapp.data.db.impl.dao.base.BaseDao
 import com.slutsenko.cocktailapp.data.db.model.CocktailDbModel
@@ -34,17 +31,17 @@ interface CocktailDao : BaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addOrReplaceCocktails(vararg cocktail: CocktailDbModel)
-//
-//    @Transaction
-//    fun replaceAllCocktails(vararg cocktail: CocktailDbModel) {
-//        deleteAllCocktails()
-//        addOrReplaceCocktails(*cocktail)
-//    }
-//
-//    @Delete
-//    fun deleteCocktails(vararg cocktail: CocktailDbModel)
-//
-//    @Transaction
-//    @Query("DELETE FROM ${Table.COCKTAIL}")
-//    fun deleteAllCocktails()
+
+    @Transaction
+    fun replaceAllCocktails(vararg cocktail: CocktailDbModel) {
+        deleteAllCocktails()
+        addOrReplaceCocktails(*cocktail)
+    }
+
+    @Delete
+    fun deleteCocktails(vararg cocktail: CocktailDbModel)
+
+    @Transaction
+    @Query("DELETE FROM ${Table.COCKTAIL}")
+    fun deleteAllCocktails()
 }
