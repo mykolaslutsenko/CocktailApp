@@ -24,6 +24,7 @@
     <string name="log_out">вийти</string>
     <string name="show_main_navigation_bar_titles">показати титри навігейшн бар</string>
     <string name="menu_remove_favorite">видалити з улюблених</string>
+    <string name="remove_cocktail">видалити коктейль</string>
     <string name="drop">Скинути</string>
     <string name="apply">Застосувати</string>
     <string name="result">Результат</string>

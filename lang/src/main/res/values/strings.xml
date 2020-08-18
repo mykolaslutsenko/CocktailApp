@@ -17,6 +17,7 @@
     <string name="menu_remove_favorite">remove favorite</string>
     <string name="menu_item_open">open</string>
     <string name="menu_add_favorite">add favorite</string>
+    <string name="remove_cocktail">remove cocktail</string>
     <string name="profile">profile</string>
     <string name="main">main</string>
     <string name="log_out">Log out</string>

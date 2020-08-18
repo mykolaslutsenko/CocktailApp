@@ -18,6 +18,9 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
                             savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
+    val EXTRA_KEY_ALCOHOL = "EXTRA_KEY_ALCOHOL"
+    val EXTRA_KEY_CATEGORY = "EXTRA_KEY_CATEGORY"
+    val EXTRA_KEY_SORT = "EXTRA_KEY_SORT"
 
     var cocktailDBLiveData: LiveData<List<CocktailModel>> = cocktailRepository.cocktailListLiveData.map(mapper::mapTo)
 
@@ -25,17 +28,40 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
 
     val viewPagerLiveData: MutableLiveData<Page> = MutableLiveData()
 
-    var alcoholDrinkFilterLiveData: MutableLiveData<CocktailAlcoholType> = MutableLiveData()
+    var alcoholDrinkFilterLiveData: MutableLiveData<CocktailAlcoholType> = object : MutableLiveData<CocktailAlcoholType>() {
 
-    var categoryDrinkFilterLiveData: MutableLiveData<CocktailCategory> = MutableLiveData()
+        override fun setValue(value: CocktailAlcoholType?) {
+            savedStateHandle.set(EXTRA_KEY_ALCOHOL, value?.ordinal)
+            super.setValue(value)
+        }
+        override fun getValue(): CocktailAlcoholType? {
+            return CocktailAlcoholType.values()[savedStateHandle.get<Int>(EXTRA_KEY_ALCOHOL) ?: 0]
+        }
+    }
 
-    var sortDrinkLiveData: MutableLiveData<SortDrink> = MutableLiveData()
+    var categoryDrinkFilterLiveData: MutableLiveData<CocktailCategory> = object : MutableLiveData<CocktailCategory>() {
+        override fun setValue(value: CocktailCategory?) {
+            savedStateHandle.set(EXTRA_KEY_CATEGORY, value?.ordinal)
+            super.setValue(value)
+        }
+        override fun getValue(): CocktailCategory? {
+            return CocktailCategory.values()[savedStateHandle.get<Int>(EXTRA_KEY_CATEGORY) ?: 0]
+        }
+    }
+
+    var sortDrinkLiveData: MutableLiveData<SortDrink> = object :MutableLiveData<SortDrink>() {
+        override fun setValue(value: SortDrink?) {
+            savedStateHandle.set(EXTRA_KEY_SORT, value?.ordinal)
+            super.setValue(value)
+        }
+        override fun getValue(): SortDrink? {
+            return SortDrink.values()[savedStateHandle.get<Int>(EXTRA_KEY_SORT) ?: 0]
+        }
+    }
 
     var historyLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 
     var favoriteLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
-
-
 
     var cocktailQuantityLiveData: MutableLiveData<Int> = MutableLiveData()
 
