@@ -21,21 +21,16 @@ class FavoriteFragment : BaseFragment<MainFragmentViewModel>() {
 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
-        viewModel.favoriteLiveData.value = viewModel.cocktailDBLiveData.value?.filter { it.isFavorite == true }
-
+        viewModel.favoriteLiveData.value = viewModel.cocktailDBLiveData.value?.filter { it.isFavorite }
         cocktailAdapter = CocktailAdapter(viewModel, requireContext(), viewModel.favoriteLiveData.value
                 ?: emptyList())
         rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
         rv_database.adapter = cocktailAdapter
 
-        viewModel.mediatorLiveData.observe(requireActivity(), Observer {
-            viewModel.favoriteLiveData.value = it.filter { it.isFavorite == true }
+        viewModel.historyLiveData.observe(requireActivity(), Observer {
+            viewModel.favoriteLiveData.value = it.filter { it.isFavorite }
             cocktailAdapter.refreshData(viewModel.favoriteLiveData.value ?: emptyList())
         })
-//
-//        viewModel.cocktailDBLiveData.observe(requireActivity(), Observer {
-//            //viewModel.refreshParam()
-//        })
     }
 
     companion object {

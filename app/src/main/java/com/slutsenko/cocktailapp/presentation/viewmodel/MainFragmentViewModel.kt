@@ -21,6 +21,7 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
     val EXTRA_KEY_ALCOHOL = "EXTRA_KEY_ALCOHOL"
     val EXTRA_KEY_CATEGORY = "EXTRA_KEY_CATEGORY"
     val EXTRA_KEY_SORT = "EXTRA_KEY_SORT"
+    val EXTRA_KEY_SORT_ID = "EXTRA_KEY_SORT_ID"
 
     var cocktailDBLiveData: LiveData<List<CocktailModel>> = cocktailRepository.cocktailListLiveData.map(mapper::mapTo)
 
@@ -59,13 +60,23 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
         }
     }
 
-    var historyLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
+    var sortIdLiveData:MutableLiveData<Int> = object : MutableLiveData<Int> (){
+
+        override fun setValue(value: Int?) {
+            savedStateHandle.set(EXTRA_KEY_SORT_ID, value)
+            super.setValue(value)
+        }
+
+        override fun getValue(): Int? {
+            return savedStateHandle.get(EXTRA_KEY_SORT_ID) ?:R.id.menu_sort_recent
+        }
+    }
 
     var favoriteLiveData: MutableLiveData<List<CocktailModel>> = MutableLiveData()
 
     var cocktailQuantityLiveData: MutableLiveData<Int> = MutableLiveData()
 
-    var mediatorLiveData =
+    var historyLiveData =
             MediatorLiveData<List<CocktailModel>>().apply {
                 fun filterAndSort() {
                     value = filterAndSortCocktailList()
@@ -219,24 +230,11 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
                 sortDrinkLiveData.value = SortDrink.INGREDIENT_DESCENDING
             }
         }
-        sortDrinkLiveData.value.log
-    }
-
-    fun setStartParam() {
-        alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
-        categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
-        sortDrinkLiveData.value = SortDrink.RECENT
-    }
-
-    fun refreshParam() {
-//        alcoholDrinkFilterLiveData.value = alcoholDrinkFilterLiveData.value
-//        categoryDrinkFilterLiveData.value = categoryDrinkFilterLiveData.value
-//        sortDrinkLiveData.value = sortDrinkLiveData.value
     }
 
     fun dropFilters() {
-//        alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
-//        categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
+        alcoholDrinkFilterLiveData.value = CocktailAlcoholType.UNDEFINED
+        categoryDrinkFilterLiveData.value = CocktailCategory.UNDEFINED
     }
 
     fun saveToDb(cocktail: CocktailModel) {
@@ -250,5 +248,4 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
             cocktailRepository.deleteCocktails(mapper.mapFrom(cocktail))
         }
     }
-
 }

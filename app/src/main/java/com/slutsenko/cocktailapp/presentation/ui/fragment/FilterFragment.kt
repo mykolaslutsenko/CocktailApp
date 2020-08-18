@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_filter.*
@@ -62,9 +61,6 @@ class FilterFragment : BaseFragment<MainFragmentViewModel>() {
     }
 
     private fun initFilters() {
-        "init".log
-        viewModel.alcoholDrinkFilterLiveData.value.log
-        viewModel.categoryDrinkFilterLiveData.value.log
         tv_chosenAlcohol.text = viewModel.alcoholDrinkFilterLiveData.value?.key
         tv_chosenCategory.text = viewModel.categoryDrinkFilterLiveData.value?.key
     }
