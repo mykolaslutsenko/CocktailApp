@@ -18,7 +18,7 @@ inline fun <reified ViewModel : BaseViewModel, reified DataBinding: ViewDataBind
     noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ): Lazy<ViewModel> {
     val factoryPromise = factoryProducer ?: {
-        Injector.ViewModelFactory( this)
+        Injector.ViewModelFactory( application, this)
     }
 
     return ViewModelLazy(ViewModel::class, { viewModelStore }, factoryPromise)
@@ -29,7 +29,7 @@ fun <ViewModel: BaseViewModel, DataBinding:ViewDataBinding> BaseActivity<ViewMod
     factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ): Lazy<ViewModel> {
     val factoryPromise = factoryProducer ?: {
-        Injector.ViewModelFactory( this)
+        Injector.ViewModelFactory(application, this)
     }
     return ViewModelLazy(viewModelClass, { viewModelStore }, factoryPromise)
 }
@@ -43,26 +43,12 @@ inline fun <reified ViewModel : BaseViewModel> BaseFragment<ViewModel>.viewModel
         noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ): Lazy<ViewModel> {
     val factoryPromise = factoryProducer ?: {
-        Injector.ViewModelFactory(saveStateOwner)
+        Injector.ViewModelFactory(requireActivity().application, saveStateOwner)
     }
 
     return ViewModelLazy(ViewModel::class, { viewModelStore }, factoryPromise)
 }
 
-//@MainThread
-//fun <ViewModel: BaseViewModel> BaseFragment<ViewModel>.baseViewModels(
-//        owner: ViewModelStoreOwner = this,
-//        saveStateOwner: SavedStateRegistryOwner = this,
-//        factoryProducer: (() -> ViewModelProvider.Factory)? = null
-//): Lazy<ViewModel> {
-//    val factoryPromise = factoryProducer ?: {
-//        Injector.ViewModelFactory(
-//                application = requireActivity().application,
-//                owner = saveStateOwner)
-//    }
-//
-//    return ViewModelLazy(viewModelClass, { viewModelStore }, factoryPromise)
-//}
 
 @MainThread
 fun <ViewModel : BaseViewModel> BaseFragment<ViewModel>.baseViewModels(
@@ -71,7 +57,7 @@ fun <ViewModel : BaseViewModel> BaseFragment<ViewModel>.baseViewModels(
         factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ): Lazy<ViewModel> {
     val factoryPromise = factoryProducer ?: {
-        Injector.ViewModelFactory(owner = saveStateOwner)
+        Injector.ViewModelFactory(requireActivity().application, owner = saveStateOwner)
     }
 
     return ViewModelLazy(viewModelClass, { ownerProducer().viewModelStore }, factoryPromise)

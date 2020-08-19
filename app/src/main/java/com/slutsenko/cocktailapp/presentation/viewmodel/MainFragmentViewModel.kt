@@ -1,11 +1,11 @@
 package com.slutsenko.cocktailapp.presentation.viewmodel
 
+import android.app.Application
 import android.view.MenuItem
 import androidx.lifecycle.*
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
 import com.slutsenko.cocktailapp.databinding.adapter.Page
-import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailAlcoholType
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailCategory
@@ -13,10 +13,11 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.model.cocktail.SortDrink
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 
-class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
+class MainFragmentViewModel(application: Application,
+                            val cocktailRepository: CocktailRepository,
                             val mapper: CocktailModelMapper,
                             savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
+) : BaseViewModel(application) {
 
     val EXTRA_KEY_ALCOHOL = "EXTRA_KEY_ALCOHOL"
     val EXTRA_KEY_CATEGORY = "EXTRA_KEY_CATEGORY"
@@ -35,6 +36,7 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
             savedStateHandle.set(EXTRA_KEY_ALCOHOL, value?.ordinal)
             super.setValue(value)
         }
+
         override fun getValue(): CocktailAlcoholType? {
             return CocktailAlcoholType.values()[savedStateHandle.get<Int>(EXTRA_KEY_ALCOHOL) ?: 0]
         }
@@ -45,30 +47,31 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
             savedStateHandle.set(EXTRA_KEY_CATEGORY, value?.ordinal)
             super.setValue(value)
         }
+
         override fun getValue(): CocktailCategory? {
             return CocktailCategory.values()[savedStateHandle.get<Int>(EXTRA_KEY_CATEGORY) ?: 0]
         }
     }
 
-    var sortDrinkLiveData: MutableLiveData<SortDrink> = object :MutableLiveData<SortDrink>() {
+    var sortDrinkLiveData: MutableLiveData<SortDrink> = object : MutableLiveData<SortDrink>() {
         override fun setValue(value: SortDrink?) {
             savedStateHandle.set(EXTRA_KEY_SORT, value?.ordinal)
             super.setValue(value)
         }
+
         override fun getValue(): SortDrink? {
             return SortDrink.values()[savedStateHandle.get<Int>(EXTRA_KEY_SORT) ?: 0]
         }
     }
 
-    var sortIdLiveData:MutableLiveData<Int> = object : MutableLiveData<Int> (){
-
+    var sortIdLiveData: MutableLiveData<Int> = object : MutableLiveData<Int>() {
         override fun setValue(value: Int?) {
             savedStateHandle.set(EXTRA_KEY_SORT_ID, value)
             super.setValue(value)
         }
 
         override fun getValue(): Int? {
-            return savedStateHandle.get(EXTRA_KEY_SORT_ID) ?:R.id.menu_sort_recent
+            return savedStateHandle.get(EXTRA_KEY_SORT_ID) ?: R.id.menu_sort_recent
         }
     }
 
@@ -93,49 +96,39 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
                 addSource(sortDrinkLiveData) {
                     filterAndSort()
                 }
-
-
             }
-//
-
 
     private fun filterAndSortCocktailList(): List<CocktailModel> {
         filteredList = cocktailDBLiveData.value ?: emptyList()
-        filteredList.size.log
-        alcoholDrinkFilterLiveData.value.log
-        categoryDrinkFilterLiveData.value.log
-        sortDrinkLiveData.value.log
         filterAlcohol(alcoholDrinkFilterLiveData.value ?: CocktailAlcoholType.UNDEFINED)
         filterCategory(categoryDrinkFilterLiveData.value ?: CocktailCategory.UNDEFINED)
         sortCocktailList(sortDrinkLiveData.value ?: SortDrink.RECENT)
-        filteredList.size.log
-        return filteredList ?: emptyList()
+        return filteredList
     }
 
     private fun sortCocktailList(sort: SortDrink) {
         filteredList = when (sort) {
             SortDrink.RECENT -> {
-                filteredList?.sortedBy { it.id }
+                filteredList.sortedBy { it.id }
             }
             SortDrink.NAME_ASCENDING -> {
-                filteredList?.sortedBy { it.names.def }
+                filteredList.sortedBy { it.names.def }
             }
             SortDrink.NAME_DESCENDING -> {
-                filteredList?.sortedByDescending { it.names.def }
+                filteredList.sortedByDescending { it.names.def }
             }
             SortDrink.ALCOHOL_FIRST -> {
-                filteredList?.sortedBy { it.id }
+                filteredList.sortedBy { it.id }
             }
             SortDrink.NON_ALCOHOL_FIRST -> {
-                filteredList?.sortedBy { it.id }
+                filteredList.sortedBy { it.id }
             }
             SortDrink.INGREDIENT_ASCENDING -> {
-                filteredList?.sortedBy { it.ingredients.size }
+                filteredList.sortedBy { it.ingredients.size }
             }
             SortDrink.INGREDIENT_DESCENDING -> {
-                filteredList?.sortedByDescending { it.ingredients.size }
+                filteredList.sortedByDescending { it.ingredients.size }
             }
-            else -> filteredList
         }
     }
 
@@ -230,6 +223,11 @@ class MainFragmentViewModel(val cocktailRepository: CocktailRepository,
                 sortDrinkLiveData.value = SortDrink.INGREDIENT_DESCENDING
             }
         }
+    }
+
+    fun dropSort() {
+        sortIdLiveData.value = R.id.menu_sort_recent
+        sortDrinkLiveData.value = SortDrink.RECENT
     }
 
     fun dropFilters() {

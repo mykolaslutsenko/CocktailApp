@@ -8,5 +8,8 @@
     <color name="colorTextSecond">#727272</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="yellow">#FFEB3B</color>
+    <color name="colorGrey">#B3B3B3</color>
+    <color name="colorAlcoholFilter">#4465E6</color>
+    <color name="colorCategoryFilter">#E97CF1</color>
 
 </resources>

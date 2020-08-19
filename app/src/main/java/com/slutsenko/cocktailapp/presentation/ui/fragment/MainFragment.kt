@@ -5,10 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.presentation.adapter.list.FilterAdapter
 import com.slutsenko.cocktailapp.presentation.adapter.page.FavoritePagerAdapter
+import com.slutsenko.cocktailapp.presentation.model.cocktail.DrinkFilter
 import com.slutsenko.cocktailapp.presentation.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
@@ -22,8 +27,20 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
 
     override val contentLayoutResId: Int = R.layout.fragment_main
 
+    lateinit var filterAdapter: FilterAdapter
+
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
+
+        viewModel.historyLiveData.observe(requireActivity(), Observer {
+            val list = mutableListOf<DrinkFilter>()
+            list.add(viewModel.alcoholDrinkFilterLiveData.value as DrinkFilter)
+            list.add(viewModel.categoryDrinkFilterLiveData.value as DrinkFilter)
+            filterAdapter = FilterAdapter( list, requireActivity(), viewModel)
+            rv_filter.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            rv_filter.adapter = filterAdapter
+        })
+
 
         viewpager2.adapter = FavoritePagerAdapter(this)
         val tabLayout: TabLayout = requireView().findViewById(R.id.tab_layout)
@@ -34,33 +51,35 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
             }
         }.attach()
 
-        iv_main_toolbar_filter.setOnClickListener {
+        btn_filter.setOnClickListener {
             val filterFragment = FilterFragment.newInstance()
             childFragmentManager.beginTransaction()
                     .add(R.id.fcv_main_fragment, filterFragment, FilterFragment::class.java.simpleName)
                     .addToBackStack(FilterFragment::class.java.name)
                     .commit()
         }
-        iv_main_toolbar_filter.setOnLongClickListener {
+        btn_filter.setOnLongClickListener {
             viewModel.dropFilters()
             true
         }
         fab_search.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
-        iv_sort.setOnClickListener { v: View ->
+        btn_sort.setOnClickListener { v: View ->
             PopupMenu(requireContext(), v).apply {
-
                 setOnMenuItemClickListener {
                     viewModel.setSortValue(it)
                     viewModel.sortIdLiveData.value = it.itemId
                     true
                 }
-
                 inflate(R.menu.menu_sort_drink)
                 menu.findItem(viewModel.sortIdLiveData.value!!).isEnabled = false
                 show()
             }
+        }
+        btn_sort.setOnLongClickListener {
+            viewModel.dropSort()
+            true
         }
     }
 

@@ -8,7 +8,7 @@ import com.slutsenko.cocktailapp.util.SingletonHolder
 
 class AppSettingLocalSourceImpl(sharedPrefsHelper: SharedPrefsHelper) : AppSettingLocalSource {
 
-    val KEY = "KEY"
+    val KEY = "EXTRA_KEY_BOTTOM_TITLE"
     override val showBottomTitlesLiveData: MutableLiveData<Boolean> =
             object : MutableLiveData<Boolean>(sharedPrefsHelper.getBoolean(KEY, true)) {
         override fun getValue(): Boolean? {
@@ -21,7 +21,7 @@ class AppSettingLocalSourceImpl(sharedPrefsHelper: SharedPrefsHelper) : AppSetti
     }
 
     companion object : SingletonHolder<AppSettingLocalSourceImpl, Context>({ context ->
-        AppSettingLocalSourceImpl(SharedPrefsHelper(context.getSharedPreferences("aaa", Context.MODE_PRIVATE)))
+        AppSettingLocalSourceImpl(SharedPrefsHelper(context.getSharedPreferences("ololo", Context.MODE_PRIVATE)))
     })
 
 

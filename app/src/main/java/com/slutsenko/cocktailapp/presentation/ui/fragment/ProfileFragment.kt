@@ -19,6 +19,7 @@ class ProfileFragment : BaseFragment<MainFragmentViewModel>() {
         get() = MainFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_profile
     //private val mainActivityViewModel: MainActivityViewModel by baseViewModels()
+    //private val mainActivityViewModel: BaseViewModel by viewModels({requireActivity()})
     private lateinit var bottomSheetDialogFragment: RegularBottomSheetDialogFragment
     private lateinit var languageListBottomSheetDialogFragment: LanguageListBottomSheetDialogFragment
 
@@ -26,7 +27,8 @@ class ProfileFragment : BaseFragment<MainFragmentViewModel>() {
         super.configureView(savedInstanceState)
 
         chb_showTitle.setOnCheckedChangeListener { _, isChecked ->
-           // mainActivityViewModel.showNavigationBarTitlesLiveData.value = isChecked
+            viewModel.showNavigationBarTitlesLiveData.value = isChecked
+            //mainActivityViewModel.showNavigationBarTitlesLiveData.value = isChecked
         }
 
         btn_logOut.setOnClickListener {

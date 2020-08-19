@@ -46,6 +46,7 @@ object Injector {
     }
 
     class ViewModelFactory(
+            val application: Application,
             owner: SavedStateRegistryOwner,
             defaultArgs: Bundle? = (owner as? Activity)?.intent?.extras
                     ?: (owner as? Fragment)?.arguments
@@ -68,15 +69,16 @@ object Injector {
 //            }
             return when (modelClass) {
                 MainActivityViewModel::class.java ->
-                    MainActivityViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    MainActivityViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 SearchViewModel::class.java ->
-                    SearchViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    SearchViewModel(application,provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 LoginViewModel::class.java ->
-                    LoginViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    LoginViewModel(application,provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 AboutCocktailViewModel::class.java ->
-                    AboutCocktailViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    AboutCocktailViewModel(application,provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 MainFragmentViewModel::class.java ->
-                    MainFragmentViewModel(provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    MainFragmentViewModel(application,provideRepository(appContext), provideModelMapper(appContext), handle) as T
+
                 else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
             }
         }

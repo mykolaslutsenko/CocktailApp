@@ -1,6 +1,8 @@
 package com.slutsenko.cocktailapp.presentation.ui.activity
 
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
@@ -62,14 +64,12 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             fragmentTransaction.commit()
         }
 
-//        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
-//            if (it) {
-//                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-//            } else {
-//                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
-//            }
-//        })
-
-
+        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
+            if (it) {
+                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+            } else {
+                bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
+            }
+        })
     }
 }
