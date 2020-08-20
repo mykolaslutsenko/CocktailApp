@@ -5,6 +5,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.slutsenko.cocktailapp.data.db.Table
+import java.util.*
 
 @Entity(tableName = Table.COCKTAIL)
 data class CocktailDbModel(
@@ -37,8 +38,8 @@ data class CocktailDbModel(
         val ingredients: List<String> = emptyList(),
 
         @ColumnInfo(name = "measures")
-        val measures: List<String> = emptyList()
+        val measures: List<String> = emptyList(),
 
-//    @ColumnInfo(name = "date")
-//    val date: Date = Date(),
+        @ColumnInfo(name = "date")
+        val date: Date = Date()
 )

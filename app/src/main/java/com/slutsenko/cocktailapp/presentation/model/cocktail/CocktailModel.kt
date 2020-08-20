@@ -1,6 +1,7 @@
 package com.slutsenko.cocktailapp.presentation.model.cocktail
 
 import java.io.Serializable
+import java.util.*
 
 data class CocktailModel(
         val id: Long = -1L,
@@ -12,7 +13,6 @@ data class CocktailModel(
         val image: String = "",
         val instructions: LocalizedStringModel = LocalizedStringModel(),
         val ingredients: List<String> = emptyList(),
-        val measures: List<String> = emptyList()
-        /*,
-        //val date: Date = Date()*/
+        val measures: List<String> = emptyList(),
+        val date: Date = Date()
 ) : Serializable
