@@ -14,7 +14,7 @@
     <!--            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel" />-->
     <!--    </data>-->
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
@@ -42,22 +42,29 @@
                     android:text="@string/app_name"
                     android:textSize="@dimen/font_20" />
 
-                <ImageView
-                    android:id="@+id/btn_sort"
-                    android:layout_width="@dimen/dp_32"
-                    android:layout_height="@dimen/dp_32"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_sort_24" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/iv_sort_indicator"
-                    android:layout_width="@dimen/dp_16"
-                    android:layout_height="@dimen/dp_16"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="@dimen/dp_32"
-                    android:src="@drawable/ic_circle_8"
-                    android:visibility="invisible" />
+                    <ImageView
+                        android:id="@+id/btn_sort"
+                        android:layout_width="@dimen/dp_32"
+                        android:layout_height="@dimen/dp_32"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/dp_32"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_sort_24" />
+
+                    <ImageView
+                        android:id="@+id/iv_sort_indicator"
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="@dimen/dp_8"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/dp_32"
+                        android:src="@drawable/ic_circle_8"
+                        android:visibility="invisible" />
+                </FrameLayout>
 
                 <androidx.legacy.widget.Space
                     android:layout_width="0dp"
@@ -79,8 +86,8 @@
 
                     <ImageView
                         android:id="@+id/iv_indicator_filter"
-                        android:layout_width="@dimen/dp_16"
-                        android:layout_height="@dimen/dp_16"
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="@dimen/dp_8"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="@dimen/dp_32"
                         android:src="@drawable/ic_circle_8"
@@ -101,6 +108,7 @@
                     <com.google.android.material.appbar.CollapsingToolbarLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
                         android:minHeight="0dp"
                         app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -117,6 +125,7 @@
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
                 </com.google.android.material.appbar.AppBarLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -136,10 +145,12 @@
 
                 </androidx.viewpager2.widget.ViewPager2>
 
+
             </LinearLayout>
 
 
         </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_search"
@@ -152,5 +163,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

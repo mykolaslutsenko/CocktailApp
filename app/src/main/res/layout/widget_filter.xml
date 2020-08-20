@@ -4,9 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:id="@+id/container_rv_filter"
-    android:layout_margin="@dimen/dp_8"
-    app:cardCornerRadius="@dimen/dp_8">
+    android:id="@+id/container_rv_filter">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,6 +18,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:textSize="@dimen/font_20"
             android:id="@+id/txt_rv_filter_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -13,7 +13,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.list.FilterAdapter
 import com.slutsenko.cocktailapp.presentation.adapter.page.FavoritePagerAdapter
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailAlcoholType
+import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailCategory
 import com.slutsenko.cocktailapp.presentation.model.cocktail.DrinkFilter
+import com.slutsenko.cocktailapp.presentation.model.cocktail.SortDrink
 import com.slutsenko.cocktailapp.presentation.ui.activity.SearchActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
@@ -36,9 +39,19 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
             val list = mutableListOf<DrinkFilter>()
             list.add(viewModel.alcoholDrinkFilterLiveData.value as DrinkFilter)
             list.add(viewModel.categoryDrinkFilterLiveData.value as DrinkFilter)
-            filterAdapter = FilterAdapter( list, requireActivity(), viewModel)
+            filterAdapter = FilterAdapter(list, requireActivity(), viewModel)
             rv_filter.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             rv_filter.adapter = filterAdapter
+
+            if (viewModel.sortDrinkLiveData.value != SortDrink.RECENT) {
+                iv_sort_indicator.visibility = View.VISIBLE
+            }
+            else {iv_sort_indicator.visibility = View.GONE}
+            if (viewModel.alcoholDrinkFilterLiveData.value != CocktailAlcoholType.UNDEFINED ||
+                    viewModel.categoryDrinkFilterLiveData.value != CocktailCategory.UNDEFINED) {
+                iv_indicator_filter.visibility = View.VISIBLE
+            }
+            else { iv_indicator_filter.visibility = View.GONE }
         })
 
 
@@ -60,6 +73,7 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
         }
         btn_filter.setOnLongClickListener {
             viewModel.dropFilters()
+            iv_indicator_filter.visibility = View.GONE
             true
         }
         fab_search.setOnClickListener {

@@ -55,8 +55,8 @@ class FilterFragment : BaseFragment<MainFragmentViewModel>() {
             activity?.supportFragmentManager?.popBackStack()
         }
         btn_drop.setOnClickListener {
-           viewModel.dropFilters()
-            activity?.supportFragmentManager?.popBackStack()
+            viewModel.dropFilters()
+            initFilters()
         }
     }
 
