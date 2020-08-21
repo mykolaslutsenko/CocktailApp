@@ -3,6 +3,7 @@ package com.slutsenko.cocktailapp.data.repository.impl.source
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.slutsenko.cocktailapp.data.db.source.CocktailDbSource
+import com.slutsenko.cocktailapp.data.network.source.CocktailNetSource
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.CocktailRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.impl.source.base.BaseRepositoryImpl
 import com.slutsenko.cocktailapp.data.repository.model.CocktailRepoModel
@@ -10,6 +11,7 @@ import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
 
 class CocktailRepositoryImpl(
         private val dbSource: CocktailDbSource,
+        private val netSource: CocktailNetSource,
         private val mapper: CocktailRepoModelMapper
 ) : BaseRepositoryImpl(), CocktailRepository {
 
@@ -55,5 +57,9 @@ class CocktailRepositoryImpl(
 
     override suspend fun deleteAllCocktails() {
         dbSource.deleteAllCocktails()
+    }
+
+    override suspend fun searchCocktailRemote(query: String): List<CocktailRepoModel> {
+        return netSource.searchCocktail(query).run(mapper::mapNetToRepo)
     }
 }

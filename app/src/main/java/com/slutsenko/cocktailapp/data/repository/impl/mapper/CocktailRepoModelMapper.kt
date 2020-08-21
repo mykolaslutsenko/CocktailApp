@@ -1,7 +1,7 @@
 package com.slutsenko.cocktailapp.data.repository.impl.mapper
 
 import com.slutsenko.cocktailapp.data.db.model.CocktailDbModel
-import com.slutsenko.cocktailapp.data.network.CocktailNetModel
+import com.slutsenko.cocktailapp.data.network.model.cocktail.CocktailNetModel
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.base.BaseRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.model.CocktailRepoModel
 
@@ -40,12 +40,21 @@ class CocktailRepoModelMapper(
 
     override fun mapNetToRepo(net: CocktailNetModel): CocktailRepoModel = with(net) {
         CocktailRepoModel(
-                id = id!!,
-                //names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
+//                id = id!!,
+//                //names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
+//                category = category!!,
+//                alcoholType = alcoholType!!,
+//                glass = glass!!,
+//                image = image!!
+
+                        id = id!!,
+                names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
                 category = category!!,
                 alcoholType = alcoholType!!,
                 glass = glass!!,
-                image = image!!
+                image = image!!,
+                instructions = instructions.run(localizedStringRepoModelMapper::mapNetToRepo)
+                //ingredientsWithMeasures = ingredientsWithMeasures
 
                 )
     }

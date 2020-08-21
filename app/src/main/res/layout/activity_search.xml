@@ -2,65 +2,77 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel" />
     </data>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.slutsenko.cocktailapp.view.MyToolbar
-        android:id="@+id/search_toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_search"
-            style="@style/search_layout"
-            app:cardCornerRadius="@dimen/dp_2"
-            app:startIconDrawable="@drawable/ic_search">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_text"
-                            android:text="@={viewModel.searchLiveData}"
-                style="@style/search_edit_text" />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-    </com.slutsenko.cocktailapp.view.MyToolbar>
-
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/dp_8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_toolbar">
-
-
-
-        <TextView
-                android:text="@={viewModel.answerLiveData}"
-            android:id="@+id/tv_answer"
-            style="@style/message" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search"
+        <com.slutsenko.cocktailapp.view.MyToolbar
+            android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <SearchView
+                android:id="@+id/sv_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/dp_8"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:elevation="@dimen/dp_2"/>
+            <!--                android:background="@drawable/shape_search_view"-->
 
-    </FrameLayout>
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/til_search"-->
+<!--                style="@style/search_layout"-->
+<!--                app:cardCornerRadius="@dimen/dp_2"-->
+<!--                app:startIconDrawable="@drawable/ic_search">-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/tiet_text"-->
+<!--                    style="@style/search_edit_text"-->
+<!--                    android:text="@={viewModel.searchLiveData}" />-->
+
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+        </com.slutsenko.cocktailapp.view.MyToolbar>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_toolbar">
+
+
+            <TextView
+                android:id="@+id/tv_answer"
+                style="@style/message"/>
+<!--                android:text="@={viewModel.answerLiveData}" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
