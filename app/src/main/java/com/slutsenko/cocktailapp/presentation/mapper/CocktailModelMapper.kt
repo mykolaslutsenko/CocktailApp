@@ -22,7 +22,8 @@ class CocktailModelMapper(
                 image = image,
                 instructions = instructions.run(localizedStringModelMapper::mapFrom),
                 ingredients = ingredients,
-                measures = measures
+                measures = measures,
+                date = date
         )
     }
 
@@ -40,7 +41,8 @@ class CocktailModelMapper(
                 image = image,
                 instructions = instructions.run(localizedStringModelMapper::mapTo),
                 ingredients = ingredients,
-                measures = measures
+                measures = measures,
+                date = date
         )
     }
 }

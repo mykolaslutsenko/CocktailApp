@@ -11,7 +11,8 @@ class CocktailNetModel(val id: Long = -1L,
                        val glass: String = "",
                        val image: String = "",
                        val instructions: LocalizedStringNetModel = LocalizedStringNetModel(),
-                       val ingredientsWithMeasures: Map<String, String> = emptyMap(),
+                       val ingredients: List<String> = emptyList(),
+                       val measures: List<String> = emptyList(),
                        val date: Date = Date()) : Serializable {
 //    @SerializedName("idDrink")
 //    @Expose

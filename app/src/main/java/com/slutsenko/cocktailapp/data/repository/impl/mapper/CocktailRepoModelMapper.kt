@@ -7,7 +7,7 @@ import com.slutsenko.cocktailapp.data.repository.model.CocktailRepoModel
 
 class CocktailRepoModelMapper(
         private val localizedStringRepoModelMapper: LocalizedStringRepoModelMapper
-) : BaseRepoModelMapper<CocktailRepoModel, CocktailDbModel, CocktailNetModel /*CocktailNetModel*/>() {
+) : BaseRepoModelMapper<CocktailRepoModel, CocktailDbModel, CocktailNetModel>() {
     override fun mapDbToRepo(db: CocktailDbModel): CocktailRepoModel = with(db) {
         CocktailRepoModel(
                 id = id,
@@ -19,7 +19,8 @@ class CocktailRepoModelMapper(
                 image = image,
                 instructions = instructions.run(localizedStringRepoModelMapper::mapDbToRepo),
                 ingredients = ingredients,
-                measures = measures
+                measures = measures,
+                date = date
         )
     }
 
@@ -34,28 +35,23 @@ class CocktailRepoModelMapper(
                 image = image,
                 instructions = instructions.run(localizedStringRepoModelMapper::mapRepoToDb),
                 ingredients = ingredients,
-                measures = measures
+                measures = measures,
+                date = date
         )
     }
 
     override fun mapNetToRepo(net: CocktailNetModel): CocktailRepoModel = with(net) {
         CocktailRepoModel(
-//                id = id!!,
-//                //names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
-//                category = category!!,
-//                alcoholType = alcoholType!!,
-//                glass = glass!!,
-//                image = image!!
-
-                        id = id!!,
+                id = id,
                 names = names.run(localizedStringRepoModelMapper::mapNetToRepo),
-                category = category!!,
-                alcoholType = alcoholType!!,
-                glass = glass!!,
-                image = image!!,
-                instructions = instructions.run(localizedStringRepoModelMapper::mapNetToRepo)
-                //ingredientsWithMeasures = ingredientsWithMeasures
-
-                )
+                category = category,
+                alcoholType = alcoholType,
+                glass = glass,
+                image = image,
+                instructions = instructions.run(localizedStringRepoModelMapper::mapNetToRepo),
+                ingredients = ingredients,
+                measures = measures,
+                date = date
+        )
     }
 }
