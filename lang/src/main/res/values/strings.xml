@@ -5,9 +5,17 @@
     <string name="no_found">No cocktails found</string>
     <string name="toast_airmode">"Taste"</string>
     <string name="battery">battery</string>
+
+    <!--    Login -->
+    <string name="name">name</string>
+    <string name="last_name">last name</string>
     <string name="login">login</string>
     <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
     <string name="btn_login">Login</string>
+    <string name="btn_singUp">Sing Up</string>
+    <string name="no_account">You have no account? </string>
+    <string name="have_account">Already have account? </string>
 
     <string name="alcohol">Alcohol</string>
     <string name="change">Change</string>
@@ -33,7 +41,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="glass">Glass</string>
-    <string name="name">Name:</string>
+    <string name="cocktail_name">Name</string>
 
 
     <!--Sort type-->
@@ -79,8 +87,6 @@
     <string name="error_login">Error</string>
     <string name="ok">OK</string>
     <string name="error_login_desc">Incorrect login or password</string>
-
-
 
 
 </resources>

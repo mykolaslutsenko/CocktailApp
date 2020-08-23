@@ -27,6 +27,11 @@
         android:fillViewport="true"
         android:orientation="vertical">
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <ImageView
             android:id="@+id/iv_login_logo"
             android:layout_width="wrap_content"
@@ -43,13 +48,35 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dp_48">
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:focusableInTouchMode="true"
+            android:hint="@string/name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_lastName"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dp_48">
+        <EditText
+            android:id="@+id/et_lastName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:focusableInTouchMode="true"
+            android:hint="@string/last_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48">
-
-
-
             <EditText
                 android:text="@={viewModel.loginInputLiveData}"
                 android:id="@+id/et_login"
@@ -73,6 +100,21 @@
                 android:hint="@string/password" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_repeatPassword"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="@dimen/dp_48"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/et_repeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:focusableInTouchMode="true"
+                android:hint="@string/repeat_password" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -92,6 +134,33 @@
             android:onClick="onClickLogin"
             android:text="@string/btn_login"
             android:textColor="@color/colorPrimary" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="@string/have_account"
+                android:id="@+id/txt_haveAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:onClick="onSingInClick"
+                android:text = "@string/btn_singUp"
+                android:textColor="@color/colorLoginButton"
+                android:id="@+id/btn_singIn_singUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 </layout>

@@ -6,9 +6,17 @@
     <string name="toast_airmode">"Смакуйте маргаритку із відчуттям міри." +
                     " І надіємося, що Ви не пілот під  час польоту"</string>
     <string name="battery">батарея</string>
+
+    <!--    Login -->
+    <string name="name">ім\'я</string>
+    <string name="last_name">прізвище</string>
     <string name="login">логін</string>
     <string name="password">пароль</string>
-    <string name="btn_login">увійти</string>
+    <string name="repeat_password">повторити пароль</string>
+    <string name="btn_login">Увійти</string>
+    <string name="btn_singUp">Зареєструватись</string>
+    <string name="no_account">Не зареєстровані? </string>
+    <string name="have_account">Вже маєте створений профіль? </string>
 
 
     <string name="category">Категорія</string>
@@ -32,7 +40,7 @@
     <string name="favorite">УЛЮБЛЕНІ</string>
 
     <!--About cocktail-->
-    <string name="name">Назва</string>
+    <string name="cocktail_name">Назва</string>
     <string name="glass">Стакан</string>
     <string name="instructions">Інструкція</string>
     <string name="ingredients">Інгредієнти</string>

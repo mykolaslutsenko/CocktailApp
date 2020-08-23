@@ -11,5 +11,6 @@
     <color name="colorGrey">#B3B3B3</color>
     <color name="colorAlcoholFilter">#4465E6</color>
     <color name="colorCategoryFilter">#E97CF1</color>
+    <color name="colorLoginButton">#102F54</color>
 
 </resources>

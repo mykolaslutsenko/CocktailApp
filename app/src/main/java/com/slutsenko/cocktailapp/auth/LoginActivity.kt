@@ -57,6 +57,27 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         binding.viewModel = viewModel
     }
 
+    var login = true
+    fun onSingInClick(v: View?) {
+        if (login) {
+            til_name.visibility = View.VISIBLE
+            til_lastName.visibility = View.VISIBLE
+            til_repeatPassword.visibility = View.VISIBLE
+            txt_haveAccount.text = getString(R.string.have_account)
+            btn_singIn_singUp.text = getString(R.string.btn_login)
+            btn_login.text = getString(R.string.btn_singUp)
+            login = false
+        } else {
+            til_name.visibility = View.GONE
+            til_lastName.visibility = View.GONE
+            til_repeatPassword.visibility = View.GONE
+            txt_haveAccount.text = getString(R.string.no_account)
+            login = true
+            btn_singIn_singUp.text = getString(R.string.btn_singUp)
+            btn_login.text = getString(R.string.btn_login)
+        }
+    }
+
     fun onClickLogin(v: View?) {
         if (viewModel.isLoginDataValidLiveData.value == true) {
             startActivity(Intent(this, MainActivity::class.java))

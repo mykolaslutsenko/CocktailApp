@@ -3,7 +3,6 @@ package com.slutsenko.cocktailapp.presentation.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
-import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.extension.debounce
 import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
@@ -22,16 +21,14 @@ class SearchViewModel(application: Application,
 
     private var searchJob: Job? = null
 
-    val searchResultCocktailListLiveData: LiveData<List<CocktailModel>> =
-            MutableLiveData(emptyList())
+    val searchResultCocktailListLiveData: LiveData<List<CocktailModel>> = MutableLiveData(emptyList())
 
     val searchQueryLiveData = MutableLiveData<String>(null)
-    private val searchQueryDebounceLiveData =
-            searchQueryLiveData.map { "LOG $it (${System.currentTimeMillis()})".log; it }
-                    .debounce(1000L)
-    private val searchTriggerObserver = Observer<String?> { query ->
-        "LOG debounce $query (${System.currentTimeMillis()})".log
-        searchCocktail(query)
+
+    private val searchQueryDebounceLiveData = searchQueryLiveData.map {it}.debounce(1000L)
+
+    private val searchTriggerObserver = Observer<String?> {
+        searchCocktail(it)
     }
 
     init {
@@ -49,9 +46,7 @@ class SearchViewModel(application: Application,
             when {
                 query.isNullOrEmpty() -> emptyList()
                 else -> {
-                    cocktailRepository
-                            .searchCocktailRemote(query)
-                            .map(mapper::mapTo)
+                    cocktailRepository.searchCocktailRemote(query).map(mapper::mapTo)
                 }
             }
         }
