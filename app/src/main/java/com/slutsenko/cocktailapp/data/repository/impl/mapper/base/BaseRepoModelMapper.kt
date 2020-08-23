@@ -18,6 +18,10 @@ abstract class BaseRepoModelMapper<RepoModel, DbModel, NetModel> {
         throw NotImplementedError("provide mapping for model")
     }
 
+    open fun mapNetToDb(net: NetModel): DbModel {
+        throw NotImplementedError("provide mapping for model")
+    }
+
     open fun mapDbToRepo(db: List<DbModel>): List<RepoModel> = db.map(::mapDbToRepo)
     open fun mapRepoToDb(repo: List<RepoModel>): List<DbModel> = repo.map(::mapRepoToDb)
     open fun mapNetToRepo(net: List<NetModel>): List<RepoModel> = net.map(::mapNetToRepo)

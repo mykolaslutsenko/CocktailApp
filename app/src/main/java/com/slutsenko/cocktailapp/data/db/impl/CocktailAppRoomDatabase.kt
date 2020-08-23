@@ -6,13 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.slutsenko.cocktailapp.data.db.impl.dao.CocktailDao
+import com.slutsenko.cocktailapp.data.db.impl.dao.UserDao
 import com.slutsenko.cocktailapp.data.db.impl.typeconverter.DateConverter
 import com.slutsenko.cocktailapp.data.db.impl.typeconverter.StringListToStringConverter
 import com.slutsenko.cocktailapp.data.db.model.CocktailDbModel
+import com.slutsenko.cocktailapp.data.db.model.UserDbModel
 import com.slutsenko.cocktailapp.util.SingletonHolder
 
 @Database(entities = [
-    CocktailDbModel::class
+    CocktailDbModel::class, UserDbModel::class
 ], version = 1,
         exportSchema = false
 )
@@ -20,6 +22,7 @@ import com.slutsenko.cocktailapp.util.SingletonHolder
 abstract class CocktailAppRoomDatabase : RoomDatabase() {
 
     abstract fun cocktailDao(): CocktailDao
+    abstract fun userDao(): UserDao
 
     companion object : SingletonHolder<CocktailAppRoomDatabase, Context>({
 //        val MIGRATION_1_2: Migration = object: Migration(1,2){
@@ -32,7 +35,7 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
                 .databaseBuilder(
                         it.applicationContext,
                         CocktailAppRoomDatabase::class.java,
-                        "1"
+                        "lok"
                 )
                 .fallbackToDestructiveMigration()
                 //.addMigrations(MIGRATION_1_2)

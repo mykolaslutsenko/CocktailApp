@@ -1,4 +1,5 @@
 package com.slutsenko.cocktailapp.data.db.impl.dao.base
 
-interface BaseDao {
+interface BaseDao<T> {
+
 }

@@ -8,6 +8,5 @@ import retrofit2.http.Query
 interface CocktailApiService {
 
     @GET("search.php")
-//    suspend fun searchCocktail(@Query("s") query: String): List<CocktailNetModel>
     suspend fun searchCocktail(@Query("s") query: String): CocktailListResponseNetModel
 }
