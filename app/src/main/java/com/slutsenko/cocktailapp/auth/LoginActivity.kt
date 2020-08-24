@@ -1,6 +1,5 @@
 package com.slutsenko.cocktailapp.auth
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -8,9 +7,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityLoginBinding
-import com.slutsenko.cocktailapp.presentation.ui.activity.MainActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
-import com.slutsenko.cocktailapp.presentation.ui.dialog.*
+import com.slutsenko.cocktailapp.presentation.ui.dialog.ActionSingleDialogButton
+import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogButton
+import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogType
+import com.slutsenko.cocktailapp.presentation.ui.dialog.ErrorDialogType
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlin.reflect.KClass
 
@@ -49,7 +50,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 btn_login.setTextColor(Color.GRAY)
             }
         })
-        viewModel.isLoginDataValidLiveData.observe(this, Observer { })
+
+        viewModel.isLoggedLiveData.observe(this, Observer { })
     }
 
     override fun configureDataBinding(binding: ActivityLoginBinding) {
@@ -79,16 +81,17 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     fun onClickLogin(v: View?) {
-        if (viewModel.isLoginDataValidLiveData.value == true) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            ErrorDialogFragment.newInstance {
-                titleText = getString(R.string.error_login)
-                leftButtonText = getString(R.string.ok)
-                descriptionText = getString(R.string.error_login_desc)
-            }.show(supportFragmentManager, ErrorDialogFragment::class.java.simpleName)
-        }
+        //viewModel.invalidate()
+        viewModel.register()
+        //startActivity(Intent(this, MainActivity::class.java))
+        //finish()
+//        } else {
+//            ErrorDialogFragment.newInstance {
+//                titleText = getString(R.string.error_login)
+//                leftButtonText = getString(R.string.ok)
+//                descriptionText = getString(R.string.error_login_desc)
+//            }.show(supportFragmentManager, ErrorDialogFragment::class.java.simpleName)
+//        }
     }
 
     override fun onDialogFragmentClick(

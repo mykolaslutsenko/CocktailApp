@@ -31,6 +31,7 @@ import com.slutsenko.cocktailapp.data.network.impl.source.AuthNetSourceImpl
 import com.slutsenko.cocktailapp.data.network.impl.source.CocktailNetSourceImpl
 import com.slutsenko.cocktailapp.data.network.impl.source.UserNetSourceImpl
 import com.slutsenko.cocktailapp.data.network.impl.source.UserUploadNetSourceImpl
+import com.slutsenko.cocktailapp.data.network.interceptor.*
 import com.slutsenko.cocktailapp.data.network.model.cocktail.CocktailNetModel
 import com.slutsenko.cocktailapp.data.network.source.AuthNetSource
 import com.slutsenko.cocktailapp.data.network.source.CocktailNetSource
@@ -43,9 +44,11 @@ import com.slutsenko.cocktailapp.data.repository.impl.mapper.UserRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.base.BaseRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.impl.source.AuthRepositoryImpl
 import com.slutsenko.cocktailapp.data.repository.impl.source.CocktailRepositoryImpl
+import com.slutsenko.cocktailapp.data.repository.impl.source.TokenRepositoryImpl
 import com.slutsenko.cocktailapp.data.repository.impl.source.UserRepositoryImpl
 import com.slutsenko.cocktailapp.data.repository.source.AuthRepository
 import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
+import com.slutsenko.cocktailapp.data.repository.source.TokenRepository
 import com.slutsenko.cocktailapp.data.repository.source.UserRepository
 import com.slutsenko.cocktailapp.data.repository.source.base.BaseRepository
 import com.slutsenko.cocktailapp.extension.log
@@ -59,13 +62,19 @@ import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.X509TrustManager
 
 
 object Injector {
@@ -81,7 +90,7 @@ object Injector {
 
     val cocktailRetrofit by lazy {
 
-        //val provideRepository = provideRepository<BaseRepository>(appContext)
+        val provideRepository = provideRepository<TokenRepository>(appContext)
 
         provideRetrofit(
                 appContext,
@@ -100,51 +109,47 @@ object Injector {
                 ),
                 provideOkHttpClientBuilder(),
                 *arrayOf(
-//                        TokenInterceptor { provideRepository.token },
-//                        AppVersionInterceptor(),
-//                        PlatformInterceptor(),
-//                        PlatformVersionInterceptor()
+                        TokenInterceptor { provideRepository.token },
+                        AppVersionInterceptor(),
+                        PlatformInterceptor(),
+                        PlatformVersionInterceptor()
                 )
         )
     }
 
     val userRetrofit by lazy {
-        //val provideRepository = provideRepository<TokenRepository>(appContext)
+        val provideRepository = provideRepository<TokenRepository>(appContext)
 
         provideRetrofit(
                 appContext,
                 "https://devlightschool.ew.r.appspot.com/",
                 setOf(),
-                setOf(
-                        GsonConverterFactory.create(baseGsonBuilder.create())
-                ),
+                setOf(GsonConverterFactory.create(baseGsonBuilder.create())),
                 provideOkHttpClientBuilder(),
                 *arrayOf(
-//                        TokenInterceptor { provideRepository.token },
-//                        AppVersionInterceptor(),
-//                        PlatformInterceptor(),
-//                        PlatformVersionInterceptor()
+                        TokenInterceptor { provideRepository.token },
+                        AppVersionInterceptor(),
+                        PlatformInterceptor(),
+                        PlatformVersionInterceptor()
                 )
         )
     }
 
     val uploadRetrofit by lazy {
 
-        //val provideRepository = provideRepository<TokenRepository>(appContext)
+        val provideRepository = provideRepository<TokenRepository>(appContext)
 
         provideRetrofit(
                 appContext,
                 "https://devlightschool.ew.r.appspot.com/",
                 setOf(),
-                setOf(
-                        GsonConverterFactory.create(baseGsonBuilder.create())
-                ),
+                setOf(GsonConverterFactory.create(baseGsonBuilder.create())),
                 provideOkHttpClientBuilder(writeTimeoutSeconds = TimeUnit.MINUTES.toSeconds(5L)),
                 *arrayOf(
-//                        TokenInterceptor { provideRepository.token },
-//                        AppVersionInterceptor(),
-//                        PlatformInterceptor(),
-//                        PlatformVersionInterceptor()
+                        TokenInterceptor { provideRepository.token },
+                        AppVersionInterceptor(),
+                        PlatformInterceptor(),
+                        PlatformVersionInterceptor()
                 )
         )
     }
@@ -152,7 +157,6 @@ object Injector {
     fun init(applicationContext: Context) {
         require(applicationContext is Application) { "Context must be application context" }
         appContext = applicationContext
-        //init database
         CocktailAppRoomDatabase.instance(applicationContext)
     }
 
@@ -172,24 +176,17 @@ object Injector {
                 modelClass: Class<T>,
                 handle: SavedStateHandle
         ): T {
-//            return when {
-//                modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-//                    MainViewModel(provideRepository(appContext), handle) as T
-//                }
-//                else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
-//            }
             return when (modelClass) {
                 MainActivityViewModel::class.java ->
                     MainActivityViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 SearchViewModel::class.java ->
                     SearchViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 LoginViewModel::class.java ->
-                    LoginViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    LoginViewModel(application, provideRepository(appContext), provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 AboutCocktailViewModel::class.java ->
                     AboutCocktailViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 MainFragmentViewModel::class.java ->
                     MainFragmentViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
-
                 else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
             }
         }
@@ -216,6 +213,9 @@ object Injector {
                     provideRepoModelMapper(context),
                     provideLocalDataSource(context)
             ) as T
+            TokenRepository::class.java -> TokenRepositoryImpl(
+                    provideLocalDataSource(context)
+            ) as T
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         }
     }
@@ -237,9 +237,6 @@ object Injector {
 
     inline fun <reified T : BaseDbSource> provideDbDataSource(context: Context): T {
         return when (T::class.java) {
-//            CocktailDbSource::class.java -> CocktailDbSourceImpl(
-//                CocktailAppRoomDatabase.instance(context).cocktailDao()
-//            ) as T
             UserDbSource::class.java -> UserDbSourceImpl(provideDao(context)) as T
             CocktailDbSource::class.java -> CocktailDbSourceImpl(provideDao(context)) as T
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
@@ -267,7 +264,6 @@ object Injector {
             LocalizedStringRepoModelMapper::class.java -> LocalizedStringRepoModelMapper()
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         } as T
-
     }
 
     inline fun <reified T : BaseModelMapper<*, *>> provideNestedModelMapper(context: Context): T {
@@ -275,7 +271,6 @@ object Injector {
             LocalizedStringModelMapper::class.java -> LocalizedStringModelMapper()
             else -> throw IllegalStateException("Must provide repository for class ${T::class.java.simpleName}")
         } as T
-
     }
 
     inline fun <reified T : BaseDao<*>> provideDao(context: Context): T {
@@ -291,36 +286,36 @@ object Injector {
             writeTimeoutSeconds: Long = 120
     ): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
-//        try {
-//            val trustAllCerts = arrayOf(
-//                    object : X509TrustManager {
-//                        @Throws(CertificateException::class)
-//                        override fun checkClientTrusted(
-//                                chain: Array<X509Certificate>,
-//                                authType: String
-//                        ) = Unit
-//
-//                        @Throws(CertificateException::class)
-//                        override fun checkServerTrusted(
-//                                chain: Array<X509Certificate>,
-//                                authType: String
-//                        ) = Unit
-//
-//                        override fun getAcceptedIssuers(): Array<X509Certificate?> = emptyArray()
-//                    }
-//            )
-//
-//            // Install the all-trusting trust manager
-//            val sslContext = SSLContext.getInstance("TLS"/*TlsVersion.TLS_1_3.javaName*//*"SSL"*/)
-//            sslContext.init(null, trustAllCerts, SecureRandom())
-//            // Create an ssl socket factory with our all-trusting manager
-//            val sslSocketFactory = sslContext.socketFactory
-//
-//            builder.sslSocketFactory(sslSocketFactory, trustAllCerts.first() as X509TrustManager)
-//
-//        } catch (e: Exception) { // should never happen
-//            e.printStackTrace()
-//        }
+        try {
+            val trustAllCerts = arrayOf(
+                    object : X509TrustManager {
+                        @Throws(CertificateException::class)
+                        override fun checkClientTrusted(
+                                chain: Array<X509Certificate>,
+                                authType: String
+                        ) = Unit
+
+                        @Throws(CertificateException::class)
+                        override fun checkServerTrusted(
+                                chain: Array<X509Certificate>,
+                                authType: String
+                        ) = Unit
+
+                        override fun getAcceptedIssuers(): Array<X509Certificate?> = emptyArray()
+                    }
+            )
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("TLS"/*TlsVersion.TLS_1_3.javaName*//*"SSL"*/)
+            sslContext.init(null, trustAllCerts, SecureRandom())
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts.first() as X509TrustManager)
+
+        } catch (e: Exception) { // should never happen
+            e.printStackTrace()
+        }
 
         return builder
                 .hostnameVerifier(HostnameVerifier { _, _ -> true })
@@ -334,7 +329,6 @@ object Injector {
             AuthNetSource::class.java -> AuthNetSourceImpl(provideUserService()) as T
             UserNetSource::class.java -> UserNetSourceImpl(provideUserService()) as T
             UserUploadNetSource::class.java -> UserUploadNetSourceImpl(context, provideUploadService()) as T
-
             CocktailNetSource::class.java -> CocktailNetSourceImpl(provideCocktailService()) as T
             else -> throw IllegalStateException("Must provide NetDataSource for class ${T::class.java.simpleName}")
         }
@@ -364,9 +358,9 @@ object Injector {
             vararg interceptors: Interceptor
     ): Retrofit {
 
-        //interceptors.forEach { okHttpClientBuilder.addInterceptor(it) }
+        interceptors.forEach { okHttpClientBuilder.addInterceptor(it) }
 
-        //configureOkHttpInterceptors(context, okHttpClientBuilder)
+        configureOkHttpInterceptors(context, okHttpClientBuilder)
         val builder = Retrofit.Builder()
 
         callAdapterFactories.forEach {
@@ -377,7 +371,6 @@ object Injector {
             builder.addConverterFactory(it)
         }
 
-
         builder
                 .client(okHttpClientBuilder.build())
                 .baseUrl(hostName)
@@ -385,20 +378,24 @@ object Injector {
         return builder.build()
     }
 
-//    fun <T : ViewModel> provideViewModelFactory(context: Context, clazz: Class<T>): ViewModelProvider.AndroidViewModelFactory {
-//        return when (clazz) {
-//            MainViewModel::class.java -> provideMainActivityViewModelFactory(context)
-//            else -> throw IllegalStateException("Must provide factory for class ${clazz.simpleName}")
-//        }
-//    }
-//
-//    private fun provideMainActivityViewModelFactory(context: Context): MainViewModelFactory {
-//        return MainViewModelFactory(
-//            getApplication(context),
-//            provideRepository(context),
-//            provideRepository(context),
-//            provideRepository(context),
-//            provideRepository(context)
+    internal fun configureOkHttpInterceptors(
+            context: Context,
+            okHttpClientBuilder: OkHttpClient.Builder
+    ) {
+
+        // OkHttp Logger
+        val logger = HttpLoggingInterceptor()
+        logger.level = HttpLoggingInterceptor.Level.BODY
+        okHttpClientBuilder.addInterceptor(logger)
+
+        // Postman Mock
+        okHttpClientBuilder.addInterceptor(PostmanMockInterceptor())
+
+        // Gander
+//        okHttpClientBuilder.addInterceptor(
+//                GanderInterceptor(context).apply {
+//                    showNotification(true)
+//                }
 //        )
-//    }
+    }
 }
