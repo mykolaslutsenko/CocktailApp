@@ -4,15 +4,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:background="#00ffffff">
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:paddingTop="@dimen/dp_8"
+        android:background="@drawable/background_regular"
         android:paddingBottom="@dimen/dp_8">
 
         <LinearLayout
@@ -75,6 +75,7 @@
                     android:id="@+id/btn_dialog_bs_left"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_48"
+                    android:background="@drawable/btn_regular"
                     android:layout_weight="1" />
 
                 <Space
@@ -85,6 +86,7 @@
                 <Button
                     android:id="@+id/btn_dialog_bs_right"
                     android:layout_width="0dp"
+                    android:background="@drawable/btn_regular"
                     android:layout_height="@dimen/dp_48"
                     android:layout_weight="1" />
             </LinearLayout>

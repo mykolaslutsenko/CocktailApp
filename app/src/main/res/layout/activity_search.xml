@@ -29,41 +29,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/dp_8"
+                android:layout_margin="@dimen/offset_8"
                 android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:elevation="@dimen/dp_2"/>
-            <!--                android:background="@drawable/shape_search_view"-->
-
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/til_search"-->
-<!--                style="@style/search_layout"-->
-<!--                app:cardCornerRadius="@dimen/dp_2"-->
-<!--                app:startIconDrawable="@drawable/ic_search">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/tiet_text"-->
-<!--                    style="@style/search_edit_text"-->
-<!--                    android:text="@={viewModel.searchLiveData}" />-->
-
-
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+                android:queryBackground="@android:color/transparent" />
         </com.slutsenko.cocktailapp.view.MyToolbar>
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/dp_8"
+            android:layout_margin="@dimen/offset_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_toolbar">
 
-
             <TextView
                 android:id="@+id/tv_answer"
                 style="@style/message"/>
-<!--                android:text="@={viewModel.answerLiveData}" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_search"

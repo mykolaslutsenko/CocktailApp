@@ -14,7 +14,7 @@
     <dimen name="image_size">156dp</dimen>
 
 
-    <!--font size-->
+
     <dimen name="font_8">8sp</dimen>
     <dimen name="font_10">10sp</dimen>
     <dimen name="font_12">12sp</dimen>
@@ -22,5 +22,45 @@
     <dimen name="font_16">16sp</dimen>
     <dimen name="font_18">18sp</dimen>
     <dimen name="font_20">20sp</dimen>
+
+
+
+    <dimen name="offset_4">4dp</dimen>
+    <dimen name="offset_8">8dp</dimen>
+    <dimen name="offset_12">12dp</dimen>
+    <dimen name="offset_16">16dp</dimen>
+    <dimen name="offset_20">20dp</dimen>
+    <dimen name="offset_24">24dp</dimen>
+    <dimen name="offset_32">32dp</dimen>
+    <dimen name="offset_40">40dp</dimen>
+    <dimen name="offset_48">48dp</dimen>
+    <dimen name="offset_64">64dp</dimen>
+    <dimen name="offset_72">72dp</dimen>
+    <dimen name="offset_88">88dp</dimen>
+    <dimen name="offset_128">128dp</dimen>
+
+
+
+    <dimen name="img_logo_height">48dp</dimen>
+    <dimen name="toolbar_img_item_height">48dp</dimen>
+    <dimen name="regular_img_item_height">152dp</dimen>
+    <dimen name="large_img_item_height">300dp</dimen>
+
+    <dimen name="login_field_height">48dp</dimen>
+    <dimen name="login_btn_height">48dp</dimen>
+
+    <dimen name="toolbar_btn_size">32dp</dimen>
+    <dimen name="toolbar_indicator_size">8dp</dimen>
+
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="filter_fragment_field_height">48dp</dimen>
+
+    <dimen name="corner_radius_regular">8dp</dimen>
+
+    <dimen name="elevation_8">8dp</dimen>
+    <dimen name="elevation_16">16dp</dimen>
+
+
+
 
 </resources>

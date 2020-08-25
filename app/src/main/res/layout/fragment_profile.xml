@@ -11,7 +11,7 @@
 
     <Button
         android:id="@+id/btn_logOut"
-        android:layout_margin="@dimen/dp_16"
+        android:layout_margin="@dimen/offset_16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/btn_changeLang"
-        android:layout_margin="@dimen/dp_16"
+        android:layout_margin="@dimen/offset_16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,7 +27,7 @@
 
     <CheckBox
         android:id="@+id/chb_showTitle"
-        android:layout_margin="@dimen/dp_48"
+        android:layout_margin="@dimen/offset_48"
         android:checked="true"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"

@@ -2,6 +2,7 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,17 +19,17 @@
 
         <ImageView
             android:id="@+id/toolbar_iv_back"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:layout_width="@dimen/toolbar_btn_size"
+            android:layout_height="@dimen/toolbar_btn_size"
             android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/dp_16"
+            android:layout_margin="@dimen/offset_16"
             android:src="@drawable/ic_back_24" />
 
         <TextView
             android:id="@+id/title_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_16"
+            android:layout_margin="@dimen/offset_16"
             android:layout_weight="1"
             android:gravity="start|bottom"
             android:text="@string/app_name"
@@ -53,14 +54,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
+                android:layout_height="@dimen/filter_fragment_field_height"
                 android:background="@color/colorGrey"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
-                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/offset_48"
                     android:gravity="start|center_vertical"
                     android:text="@string/alcohol" />
             </LinearLayout>
@@ -68,7 +69,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
+                android:layout_height="@dimen/filter_fragment_field_height"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal">
 
@@ -77,45 +78,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/offset_48"
                     android:gravity="start|center_vertical" />
 
                 <TextView
                     android:id="@+id/tv_change_alcohol"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/dp_48"
-                    android:layout_marginEnd="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/offset_48"
+                    android:layout_marginEnd="@dimen/offset_48"
                     android:layout_weight="0"
-                    android:drawableEnd="@drawable/ic_expand_24"
                     android:gravity="center_vertical"
-                    android:text="@string/change" />
+                    android:text="@string/change"
+                    app:drawableEndCompat="@drawable/ic_expand_24" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
+                android:layout_height="@dimen/filter_fragment_field_height"
                 android:background="@color/colorGrey"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
-                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/offset_48"
                     android:gravity="start|center_vertical"
                     android:text="@string/category" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
+                android:layout_height="@dimen/filter_fragment_field_height"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_chosenCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/offset_48"
                     android:gravity="start|center_vertical"
                     android:layout_weight="1" />
 
@@ -123,12 +124,12 @@
                     android:id="@+id/tv_change_category"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/dp_48"
-                    android:layout_marginEnd="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/offset_48"
+                    android:layout_marginEnd="@dimen/offset_48"
                     android:layout_weight="0"
-                    android:drawableEnd="@drawable/ic_expand_24"
                     android:gravity="center_vertical"
-                    android:text="@string/change" />
+                    android:text="@string/change"
+                    app:drawableEndCompat="@drawable/ic_expand_24" />
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
@@ -137,7 +138,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
+                android:layout_height="@dimen/filter_fragment_field_height"
                 android:layout_margin="@dimen/dp_24"
                 android:orientation="horizontal">
 

@@ -3,17 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <!--    <data>-->
-
-    <!--        <import type="com.slutsenko.cocktailapp.databinding.adapter.ViewPagerBindingAdapter.DataBindingConverter" />-->
-
-    <!--        <import type="com.slutsenko.cocktailapp.databinding.adapter.Page" />-->
-
-    <!--        <variable-->
-    <!--            name="viewModel"-->
-    <!--            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainViewModel" />-->
-    <!--    </data>-->
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,17 +17,17 @@
             <com.slutsenko.cocktailapp.view.MyToolbar
                 android:id="@+id/main_fragment_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/toolbar_height"
                 android:background="@color/colorPrimary"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/title_toolbar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_16"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_marginStart="@dimen/offset_32"
                     android:layout_weight="1"
-                    android:gravity="start|bottom"
+                    android:gravity="start|center"
                     android:text="@string/app_name"
                     android:textSize="@dimen/font_20" />
 
@@ -49,19 +38,19 @@
 
                     <ImageView
                         android:id="@+id/btn_sort"
-                        android:layout_width="@dimen/dp_32"
-                        android:layout_height="@dimen/dp_32"
+                        android:layout_width="@dimen/toolbar_btn_size"
+                        android:layout_height="@dimen/toolbar_btn_size"
                         android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="@dimen/dp_32"
+                        android:layout_marginEnd="@dimen/offset_32"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_sort_24" />
 
                     <ImageView
                         android:id="@+id/iv_sort_indicator"
-                        android:layout_width="@dimen/dp_8"
-                        android:layout_height="@dimen/dp_8"
+                        android:layout_width="@dimen/toolbar_indicator_size"
+                        android:layout_height="@dimen/toolbar_indicator_size"
                         android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="@dimen/dp_32"
+                        android:layout_marginEnd="@dimen/offset_32"
                         android:src="@drawable/ic_circle_8"
                         android:visibility="invisible" />
                 </FrameLayout>
@@ -77,8 +66,8 @@
 
                     <ImageView
                         android:id="@+id/btn_filter"
-                        android:layout_width="@dimen/dp_32"
-                        android:layout_height="@dimen/dp_32"
+                        android:layout_width="@dimen/toolbar_btn_size"
+                        android:layout_height="@dimen/toolbar_btn_size"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="@dimen/dp_32"
                         android:scaleType="centerInside"
@@ -86,8 +75,8 @@
 
                     <ImageView
                         android:id="@+id/iv_indicator_filter"
-                        android:layout_width="@dimen/dp_8"
-                        android:layout_height="@dimen/dp_8"
+                        android:layout_width="@dimen/toolbar_indicator_size"
+                        android:layout_height="@dimen/toolbar_indicator_size"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="@dimen/dp_32"
                         android:src="@drawable/ic_circle_8"
@@ -141,7 +130,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
-                    <!--                bind:vp_page="@={DataBindingConverter.convertPageToInt(viewModel.viewPagerLiveData)}">-->
 
                 </androidx.viewpager2.widget.ViewPager2>
 

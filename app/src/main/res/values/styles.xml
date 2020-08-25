@@ -26,7 +26,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_14</item>
-        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:padding">@dimen/offset_8</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
@@ -35,7 +35,7 @@
     <style name="about_cocktail_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/dp_16</item>
+        <item name="android:textSize">@dimen/font_16</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
@@ -43,7 +43,7 @@
     </style>
 
     <style name="about_cocktail_text.title">
-        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:padding">@dimen/offset_8</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_18</item>
@@ -52,7 +52,7 @@
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:lineSpacingExtra">@dimen/font_10</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">#e7e7e7</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
     <style name="search_edit_text">
@@ -72,9 +72,9 @@
     <style name="search_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">@dimen/dp_8</item>
-        <item name="android:background">@color/colorAppBar</item>
-        <item name="android:elevation">@dimen/dp_8</item>
+        <item name="android:layout_margin">@dimen/offset_8</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:elevation">@dimen/elevation_8</item>
     </style>
 
     <style name="fab">
