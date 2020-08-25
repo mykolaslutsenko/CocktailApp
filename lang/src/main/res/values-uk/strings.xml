@@ -15,8 +15,8 @@
     <string name="repeat_password">повторити пароль</string>
     <string name="btn_login">Увійти</string>
     <string name="btn_singUp">Зареєструватись</string>
-    <string name="no_account">Не зареєстровані? </string>
-    <string name="have_account">Вже маєте створений профіль? </string>
+    <string name="no_account">Не зареєстровані?</string>
+    <string name="have_account">Вже маєте створений профіль?</string>
 
 
     <string name="category">Категорія</string>

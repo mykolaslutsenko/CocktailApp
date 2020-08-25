@@ -26,7 +26,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                 withContext(context) { request() }.apply { liveData?.setValue(this) }
             } catch (e: Exception) {
                 e.printStackTrace()
-                throw e
             }
         }
     }

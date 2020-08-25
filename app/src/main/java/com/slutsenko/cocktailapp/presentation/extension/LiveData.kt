@@ -51,9 +51,9 @@ inline fun <T> LiveData<T?>.observeNotNullOnce(crossinline observer: (T) -> Unit
 
 @MainThread
 inline fun <T> LiveData<T>.observeUntil(
-    lifecycleOwner: LifecycleOwner? = null,
-    crossinline predicate: (T) -> Boolean,
-    crossinline observer: (T) -> Unit
+        lifecycleOwner: LifecycleOwner? = null,
+        crossinline predicate: (T) -> Boolean,
+        crossinline observer: (T) -> Unit
 ): Observer<T> {
     val observerObject = object : Observer<T> {
         override fun onChanged(t: T) {
@@ -70,7 +70,7 @@ inline fun <T> LiveData<T>.observeUntil(
 
 @MainThread
 inline fun <reified T, reified R : Collection<T>> LiveData<R>.observeNotEmptyOnce(
-    crossinline observer: (R) -> Unit
+        crossinline observer: (R) -> Unit
 ): Observer<R> {
     val observerObject = object : Observer<R> {
         override fun onChanged(t: R) {
@@ -101,9 +101,9 @@ inline fun <reified T> LiveData<T?>.mapNotNull(): LiveData<T> = MediatorLiveData
 }
 
 inline fun <reified T, reified R> LiveData<T?>.mapNotNull(crossinline predicate: T.() -> R = { this as R }): LiveData<R> =
-    MediatorLiveData<R>().also {
-        it.addSource(this) { newValue -> if (newValue != null) it.value = newValue.predicate() }
-    }
+        MediatorLiveData<R>().also {
+            it.addSource(this) { newValue -> if (newValue != null) it.value = newValue.predicate() }
+        }
 
 //inline fun <reified T, reified R> LiveData<T>.mapNotNull(crossinline predicate: T.() -> R = { this as R }): LiveData<R> =
 //    MediatorLiveData<R>().also {
@@ -111,41 +111,41 @@ inline fun <reified T, reified R> LiveData<T?>.mapNotNull(crossinline predicate:
 //    }
 
 fun <T> LiveData<T>.mapWithPrevious(initialValue: T, predicate: (current: T, new: T) -> T): LiveData<T> =
-    MediatorLiveData<T>().also {
-        it.value = predicate(it.value ?: initialValue, this.value ?: initialValue)
-        it.addSource(this) { newValue ->
-            it.value = predicate(it.value!!, newValue)
+        MediatorLiveData<T>().also {
+            it.value = predicate(it.value ?: initialValue, this.value ?: initialValue)
+            it.addSource(this) { newValue ->
+                it.value = predicate(it.value!!, newValue)
+            }
         }
-    }
 
 fun <T> LiveData<T>.mapWithPrevious(predicate: (current: T?, new: T?) -> T?): LiveData<T?> =
-    MediatorLiveData<T?>().also {
-        it.value = predicate(it.value, this.value)
-        it.addSource(this) { newValue ->
-            it.value = predicate(it.value, newValue)
+        MediatorLiveData<T?>().also {
+            it.value = predicate(it.value, this.value)
+            it.addSource(this) { newValue ->
+                it.value = predicate(it.value, newValue)
+            }
         }
-    }
 
 fun <T> LiveData<T>.distinctNotNullValues(onDistinct: (current: T, new: T) -> Unit = { _, _ -> }): LiveData<T?> =
-    object : MediatorLiveData<T?>() {
-        private var currentDistinctValue: T? = null
+        object : MediatorLiveData<T?>() {
+            private var currentDistinctValue: T? = null
 
-        init {
-            this@distinctNotNullValues.value?.apply { currentDistinctValue = this }
-            addSource(this@distinctNotNullValues) { newValue ->
-                currentDistinctValue.let { distinctValue ->
-                    if (distinctValue == null && newValue != null) {
-                        currentDistinctValue = newValue
-                    }
-                    if (distinctValue != null && newValue != null && distinctValue != newValue) {
-                        value = newValue
-                        onDistinct(distinctValue, newValue)
-                        currentDistinctValue = newValue
+            init {
+                this@distinctNotNullValues.value?.apply { currentDistinctValue = this }
+                addSource(this@distinctNotNullValues) { newValue ->
+                    currentDistinctValue.let { distinctValue ->
+                        if (distinctValue == null && newValue != null) {
+                            currentDistinctValue = newValue
+                        }
+                        if (distinctValue != null && newValue != null && distinctValue != newValue) {
+                            value = newValue
+                            onDistinct(distinctValue, newValue)
+                            currentDistinctValue = newValue
+                        }
                     }
                 }
             }
         }
-    }
 
 @MainThread
 inline fun <T> LiveData<T?>.observeTillDestroyNotNull(owner: LifecycleOwner, crossinline observer: (T) -> Unit) {
@@ -157,8 +157,8 @@ inline fun <T> LiveData<T?>.observeTillDestroyNotNull(owner: LifecycleOwner, cro
     }
 
     owner.lifecycle.addObserver(
-        onCreate = { observeForever(liveDataObserver) },
-        onDestroy = { removeObserver(liveDataObserver) }
+            onCreate = { observeForever(liveDataObserver) },
+            onDestroy = { removeObserver(liveDataObserver) }
     )
 }
 
@@ -172,8 +172,8 @@ inline fun <T> LiveData<T>.observeTillDestroy(owner: LifecycleOwner, crossinline
     }
 
     owner.lifecycle.addObserver(
-        onCreate = { observeForever(liveDataObserver) },
-        onDestroy = { removeObserver(liveDataObserver) }
+            onCreate = { observeForever(liveDataObserver) },
+            onDestroy = { removeObserver(liveDataObserver) }
     )
 }
 
@@ -203,7 +203,7 @@ fun <T> LiveData<T>.throttle(duration: Long = 300L): LiveData<T> = MediatorLiveD
 }
 
 fun <T> mediatorLiveData(
-    block: MediatorLiveData<T>.() -> Unit
+        block: MediatorLiveData<T>.() -> Unit
 ): LiveData<T> = MediatorLiveData<T>().apply {
     block()
 }

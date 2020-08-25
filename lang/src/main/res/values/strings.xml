@@ -14,8 +14,8 @@
     <string name="repeat_password">repeat password</string>
     <string name="btn_login">Login</string>
     <string name="btn_singUp">Sing Up</string>
-    <string name="no_account">You have no account? </string>
-    <string name="have_account">Already have account? </string>
+    <string name="no_account">You have no account?</string>
+    <string name="have_account">Already have account?</string>
 
     <string name="alcohol">Alcohol</string>
     <string name="change">Change</string>

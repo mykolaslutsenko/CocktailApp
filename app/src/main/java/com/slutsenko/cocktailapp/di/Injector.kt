@@ -62,7 +62,6 @@ import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -384,9 +383,9 @@ object Injector {
     ) {
 
         // OkHttp Logger
-        val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BODY
-        okHttpClientBuilder.addInterceptor(logger)
+//        val logger = HttpLoggingInterceptor()
+//        logger.level = HttpLoggingInterceptor.Level.BODY
+//        okHttpClientBuilder.addInterceptor(logger)
 
         // Postman Mock
         okHttpClientBuilder.addInterceptor(PostmanMockInterceptor())

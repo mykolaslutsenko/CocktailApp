@@ -17,26 +17,50 @@ class LoginViewModel(application: Application,
                      private val mapper: CocktailModelMapper,
                      savedStateHandle: SavedStateHandle
 ) : BaseViewModel(application) {
-    var isLoggedLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val loginInputLiveData: MutableLiveData<String?> = MutableLiveData()
+    var isCorrectLoginWithServerLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    var isCorrectRegisterWithServerLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val firstNameInputLiveData: MutableLiveData<String?> = MutableLiveData()
+    val lastNameInputLiveData: MutableLiveData<String?> = MutableLiveData()
+    val emailInputLiveData: MutableLiveData<String?> = MutableLiveData()
     val passwordInputLiveData: MutableLiveData<String?> = MutableLiveData()
+    val repeatPasswordInputLiveData: MutableLiveData<String?> = MutableLiveData()
 
-    fun invalidate() {
-        launchRequest(isLoggedLiveData) {
-            authRepository.signIn(
-                    email = loginInputLiveData.value!!,
-                    password = passwordInputLiveData.value!!
-            )
+    fun login() {
+        if (isLoginDataCorrectLiveData.value == true) {
+            launchRequest(isCorrectLoginWithServerLiveData) {
+                authRepository.signIn(
+                        emailInputLiveData.value ?: "",
+                        passwordInputLiveData.value ?: ""
+                )
+            }
+        }
+        else {
+            isCorrectLoginWithServerLiveData.value = false
         }
     }
 
-
+    fun register() {
+        if (isRegisterDataCorrectLiveData.value == true) {
+            launchRequest(isCorrectRegisterWithServerLiveData) {
+                authRepository.signUp(
+                        firstNameInputLiveData.value ?: "",
+                        lastNameInputLiveData.value ?: "",
+                        emailInputLiveData.value ?: "",
+                        passwordInputLiveData.value ?: ""
+                )
+            }
+        }
+        else {
+            isCorrectRegisterWithServerLiveData.value = false
+        }
+    }
 
     val isLoginDataCorrectLiveData: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun check() {
-            value = isValidLogin(loginInputLiveData.value) && isValidPassword(passwordInputLiveData.value)
+            value = isValidLogin(emailInputLiveData.value) &&
+                    isValidPassword(passwordInputLiveData.value)
         }
-        addSource(loginInputLiveData) {
+        addSource(emailInputLiveData) {
             check()
         }
         addSource(passwordInputLiveData) {
@@ -44,17 +68,28 @@ class LoginViewModel(application: Application,
         }
     }
 
-    fun register() {
-        launchRequest (isLoggedLiveData) {
-            authRepository.signUp(
-                    "ololo12",
-                    "oloko12",
-                    "olo1l2o@gmail.com",
-                    "ol2o1123"
-            )
+    val isRegisterDataCorrectLiveData: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun check() {
+            value = isValidLogin(emailInputLiveData.value) &&
+                    isValidPassword(passwordInputLiveData.value) &&
+                    passwordInputLiveData.value == repeatPasswordInputLiveData.value
+        }
+        addSource(firstNameInputLiveData) {
+            check()
+        }
+        addSource(lastNameInputLiveData) {
+            check()
+        }
+        addSource(emailInputLiveData) {
+            check()
+        }
+        addSource(passwordInputLiveData) {
+            check()
+        }
+        addSource(repeatPasswordInputLiveData) {
+            check()
         }
     }
-
 
     private fun isValidLogin(login: String?): Boolean {
         return login?.length!! >= 6
@@ -68,6 +103,4 @@ class LoginViewModel(application: Application,
             return passwordMatcher.find(password) != null
         } ?: return false
     }
-
 }
-
