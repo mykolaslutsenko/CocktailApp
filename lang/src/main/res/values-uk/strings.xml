@@ -27,6 +27,12 @@
 
     <string name="menu_item_open">відкрити</string>
     <string name="menu_add_favorite">додати в улюблені</string>
+
+
+    <string name="save">зберегти</string>
+    <string name="language">мова</string>
+    <string name="setting">налаштування</string>
+    <string name="edit_profile">редагувати профіль</string>
     <string name="profile">профіль</string>
     <string name="main">головна</string>
     <string name="log_out">вийти</string>

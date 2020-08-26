@@ -67,7 +67,7 @@ class MainFragment : BaseFragment<MainFragmentViewModel>() {
         btn_filter.setOnClickListener {
             val filterFragment = FilterFragment.newInstance()
             childFragmentManager.beginTransaction()
-                    .add(R.id.fcv_main_fragment, filterFragment, FilterFragment::class.java.simpleName)
+                    .add(R.id.fcv_main_fragment, filterFragment, FilterFragment::class.java.name)
                     .addToBackStack(FilterFragment::class.java.name)
                     .commit()
         }

@@ -26,8 +26,14 @@
     <string name="menu_item_open">open</string>
     <string name="menu_add_favorite">add favorite</string>
     <string name="remove_cocktail">remove cocktail</string>
+
+    <string name="save">save</string>
+    <string name="setting">setting</string>
     <string name="profile">profile</string>
+    <string name="edit_profile">edit profile</string>
     <string name="main">main</string>
+    <string name="language">language</string>
+
     <string name="log_out">Log out</string>
     <string name="show_main_navigation_bar_titles">Show main navigation bar titles</string>
     <string name="drop">Drop</string>

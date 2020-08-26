@@ -108,4 +108,12 @@
         <item name="android:outlineAmbientShadowColor" tools:ignore="NewApi">?colorPrimary</item>
     </style>
 
+    <style name="setting_layout_style">
+        <item name="layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/font_20</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
 </resources>

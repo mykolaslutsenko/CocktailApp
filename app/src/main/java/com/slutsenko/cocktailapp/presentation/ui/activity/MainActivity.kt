@@ -7,7 +7,7 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment
-import com.slutsenko.cocktailapp.presentation.ui.fragment.ProfileFragment
+import com.slutsenko.cocktailapp.presentation.ui.fragment.SettingFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.reflect.KClass
@@ -18,7 +18,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
     override val viewModelClass: KClass<MainActivityViewModel>
         get() = MainActivityViewModel::class
     private var mainFragment: MainFragment? = null
-    private var profileFragment: ProfileFragment? = null
+    private var settingFragment: SettingFragment? = null
 
     override fun myView(): Int {
         return R.layout.activity_main
@@ -30,16 +30,16 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
                 R.id.menu_main -> {
                     supportFragmentManager
                             .beginTransaction()
-                            .hide(profileFragment!!)
+                            .hide(settingFragment!!)
                             .show(mainFragment!!)
                             .commit()
                     true
                 }
-                R.id.menu_profile -> {
+                R.id.menu_setting -> {
                     supportFragmentManager
                             .beginTransaction()
                             .hide(mainFragment!!)
-                            .show(profileFragment!!)
+                            .show(settingFragment!!)
                             .commit()
                     true
                 }
@@ -47,19 +47,19 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             }
         }
 
-        profileFragment = supportFragmentManager.findFragmentByTag(ProfileFragment::class.java.simpleName)
-                as? ProfileFragment
-        mainFragment = supportFragmentManager.findFragmentByTag(MainFragment::class.java.simpleName)
+        settingFragment = supportFragmentManager.findFragmentByTag(SettingFragment::class.java.name)
+                as? SettingFragment
+        mainFragment = supportFragmentManager.findFragmentByTag(MainFragment::class.java.name)
                 as? MainFragment
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        if (profileFragment == null) {
-            profileFragment = ProfileFragment.newInstance()
-            fragmentTransaction.add(R.id.fcv_main, profileFragment!!, ProfileFragment::class.java.simpleName)
-            fragmentTransaction.hide(profileFragment!!)
+        if (settingFragment == null) {
+            settingFragment = SettingFragment.newInstance()
+            fragmentTransaction.add(R.id.fcv_main, settingFragment!!, SettingFragment::class.java.name)
+            fragmentTransaction.hide(settingFragment!!)
         }
         if (mainFragment == null) {
             mainFragment = MainFragment.newInstance()
-            fragmentTransaction.add(R.id.fcv_main, mainFragment!!, MainFragment::class.java.simpleName)
+            fragmentTransaction.add(R.id.fcv_main, mainFragment!!, MainFragment::class.java.name)
             fragmentTransaction.setPrimaryNavigationFragment(mainFragment!!)
             fragmentTransaction.commit()
         }
