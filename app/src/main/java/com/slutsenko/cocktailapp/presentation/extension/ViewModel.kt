@@ -37,7 +37,7 @@ fun <ViewModel: BaseViewModel, DataBinding:ViewDataBinding> BaseActivity<ViewMod
 
 //region Fragment
 @MainThread
-inline fun <reified ViewModel : BaseViewModel> BaseFragment<ViewModel>.viewModels(
+inline fun <reified ViewModel : BaseViewModel, DataBinding:ViewDataBinding> BaseFragment<ViewModel, DataBinding>.viewModels(
         owner: SavedStateRegistryOwner = this,
         saveStateOwner: SavedStateRegistryOwner = this,
         noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
@@ -51,7 +51,7 @@ inline fun <reified ViewModel : BaseViewModel> BaseFragment<ViewModel>.viewModel
 
 
 @MainThread
-fun <ViewModel : BaseViewModel> BaseFragment<ViewModel>.baseViewModels(
+fun <ViewModel : BaseViewModel, DataBinding:ViewDataBinding> BaseFragment<ViewModel, DataBinding>.baseViewModels(
         ownerProducer: () -> ViewModelStoreOwner = { requireActivity() },
         saveStateOwner: SavedStateRegistryOwner = this,
         factoryProducer: (() -> ViewModelProvider.Factory)? = null

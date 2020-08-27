@@ -19,18 +19,26 @@
             android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/search_btn_back"
+                android:layout_width="@dimen/toolbar_btn_size"
+                android:layout_height="@dimen/toolbar_btn_size"
+                android:layout_marginStart="@dimen/offset_16"
+                android:layout_weight="0"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_24" />
 
             <SearchView
                 android:id="@+id/sv_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/offset_8"
-                android:iconifiedByDefault="false"
+                android:layout_gravity="center"
                 android:queryBackground="@android:color/transparent" />
         </com.slutsenko.cocktailapp.view.MyToolbar>
 

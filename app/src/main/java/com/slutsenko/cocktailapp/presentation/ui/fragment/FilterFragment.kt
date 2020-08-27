@@ -5,13 +5,14 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.FragmentFilterBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlin.reflect.KClass
 
 
-class FilterFragment : BaseFragment<MainFragmentViewModel>() {
+class FilterFragment : BaseFragment<MainFragmentViewModel, FragmentFilterBinding>() {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_filter

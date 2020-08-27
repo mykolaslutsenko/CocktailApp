@@ -86,11 +86,11 @@
                 android:layout_height="@dimen/login_field_height">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_login"
+                    android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/login_field_height"
                     android:focusableInTouchMode="true"
-                    android:hint="@string/login"
+                    android:hint="@string/email"
                     android:text="@={viewModel.emailInputLiveData}" />
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -9,6 +9,7 @@
     <!--    Login -->
     <string name="name">name</string>
     <string name="last_name">last name</string>
+    <string name="email">email</string>
     <string name="login">login</string>
     <string name="password">password</string>
     <string name="repeat_password">repeat password</string>

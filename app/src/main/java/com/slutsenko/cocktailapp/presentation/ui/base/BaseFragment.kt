@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.slutsenko.cocktailapp.presentation.extension.baseViewModels
@@ -15,14 +17,16 @@ import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogButton
 import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogType
 import kotlin.reflect.KClass
 
-abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment(),
+abstract class BaseFragment<ViewModel : BaseViewModel, DataBinding : ViewDataBinding> : Fragment(),
         BaseDialogFragment.OnDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseDialogFragment.OnDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentClickListener<Any, DialogButton, DialogType<DialogButton>>,
         BaseBottomSheetDialogFragment.OnBottomSheetDialogFragmentDismissListener<Any, DialogButton, DialogType<DialogButton>> {
     abstract val viewModelClass: KClass<ViewModel>
     protected val viewModel: ViewModel by baseViewModels()
+    protected open lateinit var dataBinding: DataBinding
 
+    protected open fun configureDataBinding(binding: DataBinding) {}
     private val log = "BaseLog"
 
     protected abstract val contentLayoutResId: Int
@@ -33,7 +37,11 @@ abstract class BaseFragment<ViewModel : BaseViewModel> : Fragment(),
             savedInstanceState: Bundle?
     ): View? {
         Log.d(log, this::class.java.toString() + " On create view")
-        return inflater.inflate(contentLayoutResId, container, false)
+
+        dataBinding = DataBindingUtil.inflate(inflater, contentLayoutResId, container, false)
+        dataBinding.lifecycleOwner = this@BaseFragment
+        configureDataBinding(dataBinding)
+        return dataBinding.root
     }
 
 

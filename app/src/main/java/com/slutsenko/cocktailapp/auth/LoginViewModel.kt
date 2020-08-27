@@ -25,6 +25,10 @@ class LoginViewModel(application: Application,
     val passwordInputLiveData: MutableLiveData<String?> = MutableLiveData()
     val repeatPasswordInputLiveData: MutableLiveData<String?> = MutableLiveData()
 
+    init {
+        emailInputLiveData.value = "mykola@gmail.com"
+        passwordInputLiveData.value = "a23456"
+    }
     fun login() {
         if (isLoginDataCorrectLiveData.value == true) {
             launchRequest(isCorrectLoginWithServerLiveData) {
@@ -33,8 +37,7 @@ class LoginViewModel(application: Application,
                         passwordInputLiveData.value ?: ""
                 )
             }
-        }
-        else {
+        } else {
             isCorrectLoginWithServerLiveData.value = false
         }
     }
@@ -49,8 +52,7 @@ class LoginViewModel(application: Application,
                         passwordInputLiveData.value ?: ""
                 )
             }
-        }
-        else {
+        } else {
             isCorrectRegisterWithServerLiveData.value = false
         }
     }
@@ -92,7 +94,7 @@ class LoginViewModel(application: Application,
     }
 
     private fun isValidLogin(login: String?): Boolean {
-        return login?.length!! >= 6
+        return login?.length ?: 0 >= 6
     }
 
 

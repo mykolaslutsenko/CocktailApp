@@ -50,6 +50,10 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 }
             }
         })
+
+        search_btn_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun configureDataBinding(binding: ActivitySearchBinding) {

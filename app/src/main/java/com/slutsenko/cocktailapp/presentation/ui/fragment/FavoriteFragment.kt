@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.FragmentFavoriteBinding
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlin.reflect.KClass
 
 
-class FavoriteFragment : BaseFragment<MainFragmentViewModel>() {
+class FavoriteFragment : BaseFragment<MainFragmentViewModel, FragmentFavoriteBinding>() {
 
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class

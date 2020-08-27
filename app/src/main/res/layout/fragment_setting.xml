@@ -1,90 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:clickable="true"
-    android:focusable="true"
-    tools:context=".presentation.ui.fragment.SettingFragment">
 
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:focusable="true"
+        tools:context=".presentation.ui.fragment.SettingFragment">
 
-
-        <com.slutsenko.cocktailapp.view.MyToolbar
-            android:id="@+id/main_fragment_toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
+            android:layout_height="match_parent"
             android:background="@color/colorPrimary"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <com.slutsenko.cocktailapp.view.MyToolbar
+                android:id="@+id/main_fragment_toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
-                android:layout_marginStart="@dimen/offset_64"
-                android:gravity="center"
-                android:text="@string/setting"
-                android:textSize="@dimen/font_20" />
+                android:background="@color/colorPrimaryDark"
+                android:orientation="horizontal">
 
-        </com.slutsenko.cocktailapp.view.MyToolbar>
 
-        <LinearLayout
-            android:id="@+id/ll_profile"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_field_height"
-            android:layout_marginTop="@dimen/offset_16"
-            android:layout_marginBottom="@dimen/offset_16"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_marginStart="@dimen/offset_32"
+                    android:gravity="center"
+                    android:text="@string/setting"
+                    android:textSize="@dimen/font_20" />
 
-            <ImageView
-                android:layout_width="@dimen/small_img_item_size"
-                android:layout_height="@dimen/small_img_item_size"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/offset_32"
-                android:layout_marginEnd="@dimen/offset_32"
-                android:src="@drawable/ic_profile_24" />
+            </com.slutsenko.cocktailapp.view.MyToolbar>
 
-            <TextView
-                style="@style/setting_layout_style"
-                android:text="@string/profile" />
+            <LinearLayout
+                android:id="@+id/ll_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_field_height"
+                android:layout_marginTop="@dimen/offset_16"
+                android:layout_marginBottom="@dimen/offset_16"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/small_img_item_size"
+                    android:layout_height="@dimen/small_img_item_size"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/offset_32"
+                    android:layout_marginEnd="@dimen/offset_32"
+                    android:src="@drawable/ic_profile_24" />
+
+                <TextView
+                    style="@style/setting_layout_style"
+                    android:text="@string/profile" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_language"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_field_height"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/small_img_item_size"
+                    android:layout_height="@dimen/small_img_item_size"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/offset_32"
+                    android:layout_marginEnd="@dimen/offset_32"
+                    android:src="@drawable/ic_language_24" />
+
+                <TextView
+                    style="@style/setting_layout_style"
+                    android:text="@string/language" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chb_showTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/offset_48"
+                android:checked="true"
+                android:text="@string/show_main_navigation_bar_titles" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_language"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_setting_fragment"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_field_height"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/small_img_item_size"
-                android:layout_height="@dimen/small_img_item_size"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/offset_32"
-                android:layout_marginEnd="@dimen/offset_32"
-                android:src="@drawable/ic_language_24" />
-
-            <TextView
-                style="@style/setting_layout_style"
-                android:text="@string/language" />
-        </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/chb_showTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/offset_48"
-            android:checked="true"
-            android:text="@string/show_main_navigation_bar_titles" />
-    </LinearLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_setting_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:layout_height="match_parent" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

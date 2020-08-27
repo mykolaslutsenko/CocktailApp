@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.FragmentMainBinding
 import com.slutsenko.cocktailapp.presentation.adapter.list.FilterAdapter
 import com.slutsenko.cocktailapp.presentation.adapter.page.FavoritePagerAdapter
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailAlcoholType
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlin.reflect.KClass
 
 
-class MainFragment : BaseFragment<MainFragmentViewModel>() {
+class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() {
     override val viewModelClass: KClass<MainFragmentViewModel>
         get() = MainFragmentViewModel::class
 

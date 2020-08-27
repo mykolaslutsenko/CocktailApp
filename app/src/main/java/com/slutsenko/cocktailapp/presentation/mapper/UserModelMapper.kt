@@ -9,19 +9,21 @@ class UserModelMapper(
 
     override fun mapFrom(model: UserModel) = with(model) {
         UserRepoModel(
-            id = id,
-            name = name,
-            lastName = lastName,
-            avatar = avatar
+                id = id,
+                name = name,
+                lastName = lastName,
+                email = email,
+                avatar = avatar
         )
     }
 
-    override fun mapTo(model: UserRepoModel)= with(model) {
+    override fun mapTo(model: UserRepoModel) = with(model) {
         UserModel(
-            id = id,
-            name = name,
-            lastName = lastName,
-            avatar = avatar
+                id = id,
+                name = name,
+                lastName = lastName,
+                email = email,
+                avatar = avatar
         )
     }
 }

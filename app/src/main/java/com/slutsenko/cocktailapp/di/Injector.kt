@@ -56,10 +56,7 @@ import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.LocalizedStringModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.UserModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.base.BaseModelMapper
-import com.slutsenko.cocktailapp.presentation.viewmodel.AboutCocktailViewModel
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
-import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
@@ -97,8 +94,8 @@ object Injector {
                 setOf(),
                 setOf(
                         GsonConverterFactory.create(
-                               baseGsonBuilder
-                                //register deserializer for cocktail list for only cocktail retrofit
+                                baseGsonBuilder
+                                        //register deserializer for cocktail list for only cocktail retrofit
                                         .registerTypeAdapter(
                                                 deserializeType<CocktailNetModel>(),
                                                 CocktailNetModelDeserializer()
@@ -176,6 +173,8 @@ object Injector {
                 handle: SavedStateHandle
         ): T {
             return when (modelClass) {
+                SettingFragmentViewModel::class.java ->
+                    SettingFragmentViewModel(application, provideRepository(appContext), provideModelMapper(appContext)) as T
                 MainActivityViewModel::class.java ->
                     MainActivityViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 SearchViewModel::class.java ->

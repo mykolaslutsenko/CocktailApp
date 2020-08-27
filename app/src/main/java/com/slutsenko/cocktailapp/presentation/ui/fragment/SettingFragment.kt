@@ -5,17 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.slutsenko.cocktailapp.R
+import com.slutsenko.cocktailapp.databinding.FragmentFavoriteBinding
 import com.slutsenko.cocktailapp.presentation.ui.activity.SplashActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.*
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
+import com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel
 import com.slutsenko.cocktailapp.util.Language
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlin.reflect.KClass
 
-class SettingFragment : BaseFragment<MainFragmentViewModel>() {
-    override val viewModelClass: KClass<MainFragmentViewModel>
-        get() = MainFragmentViewModel::class
+class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteBinding>() {
+    override val viewModelClass: KClass<SettingFragmentViewModel>
+        get() = SettingFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_setting
 
 

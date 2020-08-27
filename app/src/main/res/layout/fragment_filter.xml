@@ -1,164 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:clickable="true"
-    android:focusable="true"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.slutsenko.cocktailapp.view.MyToolbar
-        android:id="@+id/main_fragment_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary">
+    <data>
 
-        <ImageView
-            android:id="@+id/toolbar_iv_back"
-            android:layout_width="@dimen/toolbar_btn_size"
-            android:layout_height="@dimen/toolbar_btn_size"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/offset_16"
-            android:src="@drawable/ic_back_24" />
-
-        <TextView
-            android:id="@+id/title_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/offset_16"
-            android:layout_weight="1"
-            android:gravity="start|bottom"
-            android:text="@string/app_name"
-            android:textSize="@dimen/font_20" />
-
-        <androidx.legacy.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+        <variable
+            name="viewModel"
+            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel" />
+    </data>
 
 
-    </com.slutsenko.cocktailapp.view.MyToolbar>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.slutsenko.cocktailapp.view.MyToolbar
+            android:id="@+id/main_fragment_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/toolbar_iv_back"
+                android:layout_width="@dimen/toolbar_btn_size"
+                android:layout_height="@dimen/toolbar_btn_size"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/offset_16"
+                android:src="@drawable/ic_back_24" />
+
+            <TextView
+                android:id="@+id/title_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/offset_16"
+                android:layout_weight="1"
+                android:gravity="start|bottom"
+                android:text="@string/app_name"
+                android:textSize="@dimen/font_20" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+
+        </com.slutsenko.cocktailapp.view.MyToolbar>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/offset_16"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/filter_fragment_field_height"
-                android:background="@color/colorGrey"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/alcohol" />
-            </LinearLayout>
+                    android:layout_height="@dimen/filter_fragment_field_height"
+                    android:background="@color/colorPrimaryDark"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/alcohol" />
+                </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/filter_fragment_field_height"
-                android:background="@color/colorPrimary"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_chosenAlcohol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:gravity="start|center_vertical" />
-
-                <TextView
-                    android:id="@+id/tv_change_alcohol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:layout_marginEnd="@dimen/offset_48"
-                    android:layout_weight="0"
-                    android:gravity="center_vertical"
-                    android:text="@string/change"
-                    app:drawableEndCompat="@drawable/ic_expand_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/filter_fragment_field_height"
-                android:background="@color/colorGrey"
-                android:orientation="horizontal">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/category" />
-            </LinearLayout>
+                    android:layout_height="@dimen/filter_fragment_field_height"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/filter_fragment_field_height"
-                android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_chosenAlcohol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical" />
 
-                <TextView
-                    android:id="@+id/tv_chosenCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:gravity="start|center_vertical"
+                    <TextView
+                        android:id="@+id/tv_change_alcohol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:layout_marginEnd="@dimen/offset_48"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="@string/change"
+                        app:drawableEndCompat="@drawable/ic_expand_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/filter_fragment_field_height"
+                    android:background="@color/colorPrimaryDark"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/category" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/filter_fragment_field_height"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_chosenCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:layout_weight="1"
+                        android:gravity="start|center_vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_change_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/offset_48"
+                        android:layout_marginEnd="@dimen/offset_48"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="@string/change"
+                        app:drawableEndCompat="@drawable/ic_expand_24" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/tv_change_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/offset_48"
-                    android:layout_marginEnd="@dimen/offset_48"
-                    android:layout_weight="0"
-                    android:gravity="center_vertical"
-                    android:text="@string/change"
-                    app:drawableEndCompat="@drawable/ic_expand_24" />
-            </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/filter_fragment_field_height"
-                android:layout_margin="@dimen/dp_24"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_drop"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/drop" />
+                    android:layout_height="@dimen/filter_fragment_field_height"
+                    android:layout_margin="@dimen/dp_32"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_apply"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/apply" />
+                    <Button
+                        android:id="@+id/btn_drop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_regular"
+                        android:text="@string/drop" />
 
+                    <Space
+                        android:layout_width="@dimen/offset_16"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/btn_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_regular"
+                        android:text="@string/apply" />
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

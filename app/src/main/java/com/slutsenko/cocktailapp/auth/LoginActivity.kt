@@ -125,17 +125,9 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     fun onClickLogin(v: View?) {
         when (isScreenLogin) {
-            true -> login()
-            false -> register()
+            true -> viewModel.login()
+            false -> viewModel.register()
         }
-    }
-
-    private fun register() {
-        viewModel.register()
-    }
-
-    private fun login() {
-        viewModel.login()
     }
 
     override fun onDialogFragmentClick(

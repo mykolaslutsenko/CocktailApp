@@ -89,7 +89,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
             type: DialogType<DialogButton>,
             data: Any?
     ) {
-        (dialog.parentFragment as? BaseFragment<*>)?.onDialogFragmentDismiss(
+        (dialog.parentFragment as? BaseFragment<*,*>)?.onDialogFragmentDismiss(
                 dialog,
                 type,
                 data
@@ -103,7 +103,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
             type: DialogType<DialogButton>,
             data: Any?
     ) {
-        (dialog.parentFragment as? BaseFragment<*>)?.onDialogFragmentClick(
+        (dialog.parentFragment as? BaseFragment<*,*>)?.onDialogFragmentClick(
                 dialog,
                 buttonType,
                 type,
@@ -116,7 +116,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
             type: DialogType<DialogButton>,
             data: Any?
     ) {
-        (dialog.parentFragment as? BaseFragment<*>)?.onBottomSheetDialogFragmentDismiss(
+        (dialog.parentFragment as? BaseFragment<*,*>)?.onBottomSheetDialogFragmentDismiss(
                 dialog,
                 type,
                 data
@@ -129,7 +129,7 @@ abstract class BaseActivity<ViewModel : BaseViewModel, DataBinding : ViewDataBin
             type: DialogType<DialogButton>,
             data: Any?
     ) {
-        (dialog.parentFragment as? BaseFragment<*>)?.onBottomSheetDialogFragmentClick(
+        (dialog.parentFragment as? BaseFragment<*,*>)?.onBottomSheetDialogFragmentClick(
                 dialog,
                 buttonType,
                 type,

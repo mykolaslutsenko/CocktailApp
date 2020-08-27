@@ -17,6 +17,9 @@ data class UserDbModel(
     @ColumnInfo(name = "last_name")
     val lastName: String = "",
 
+    @ColumnInfo(name = "email")
+    val email: String = "",
+
     @ColumnInfo(name = "avatar")
     val avatar: String? = null
 )

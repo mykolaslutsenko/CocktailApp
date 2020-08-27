@@ -10,6 +10,8 @@
     <!--    Login -->
     <string name="name">ім\'я</string>
     <string name="last_name">прізвище</string>
+
+    <string name="email">електронна пошта</string>
     <string name="login">логін</string>
     <string name="password">пароль</string>
     <string name="repeat_password">повторити пароль</string>
