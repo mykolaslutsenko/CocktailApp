@@ -67,8 +67,8 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
             RegularDialogType -> {
                 when (buttonType) {
                     RightDialogButton -> {
-                        val intent = Intent(requireContext(), LoginActivity::class.java)
-                        requireContext().startActivity(intent)
+                        requireContext().startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        viewModel.deleteUser()
                         requireActivity().finishAffinity()
                     }
                     LeftDialogButton -> {

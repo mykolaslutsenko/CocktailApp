@@ -56,7 +56,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         {
             if (it) {
                 startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                finishAffinity()
             } else {
                 ErrorDialogFragment.newInstance {
                     titleText = getString(R.string.error_login)

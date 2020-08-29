@@ -173,8 +173,10 @@ object Injector {
                 handle: SavedStateHandle
         ): T {
             return when (modelClass) {
+                SplashActivityViewModel::class.java ->
+                    SplashActivityViewModel(application, provideRepository(appContext)) as T
                 SettingFragmentViewModel::class.java ->
-                    SettingFragmentViewModel(application, provideRepository(appContext), provideModelMapper(appContext)) as T
+                    SettingFragmentViewModel(application, provideRepository(appContext), provideRepository(appContext), provideModelMapper(appContext)) as T
                 MainActivityViewModel::class.java ->
                     MainActivityViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
                 SearchViewModel::class.java ->

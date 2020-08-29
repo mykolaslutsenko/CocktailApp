@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.slutsenko.cocktailapp.data.repository.model.UserRepoModel
+import com.slutsenko.cocktailapp.data.repository.source.TokenRepository
 import com.slutsenko.cocktailapp.data.repository.source.UserRepository
 import com.slutsenko.cocktailapp.presentation.mapper.UserModelMapper
 import com.slutsenko.cocktailapp.presentation.model.user.UserModel
@@ -13,6 +14,7 @@ import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 class SettingFragmentViewModel(
         application: Application,
         private val userRepository: UserRepository,
+        private val tokenRepository: TokenRepository,
         private val userModelMapper: UserModelMapper
 ) : BaseViewModel(application) {
 
@@ -34,5 +36,13 @@ class SettingFragmentViewModel(
             userRepository.updateUser(
                     UserRepoModel(userLiveData.value!!.id, firstNameLiveData.value!!, lastNameLiveData.value!!, userLiveData.value!!.email))
         }
+
+    }
+
+    fun deleteUser() {
+        launchRequest {
+            userRepository.deleteUser()
+        }
+        tokenRepository.token = null
     }
 }
