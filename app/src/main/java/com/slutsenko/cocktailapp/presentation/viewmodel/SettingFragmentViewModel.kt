@@ -23,23 +23,14 @@ class SettingFragmentViewModel(
         }
     }
 
-    var firstNameLiveData: MutableLiveData<String?> = MutableLiveData(userLiveData.value?.name)
-    var lastNameLiveData: MutableLiveData<String?> = MutableLiveData(userLiveData.value?.lastName)
+    var firstNameLiveData: MutableLiveData<String?> = MutableLiveData()
+    var lastNameLiveData: MutableLiveData<String?> = MutableLiveData()
+    var emailLiveData: MutableLiveData<String?> = MutableLiveData()
 
-//    var localUserLiveData: MutableLiveData<UserModel?> = MediatorLiveData<UserModel?>().apply {
-//        fun check() {
-//            value = userLiveData.value
-//        }
-//
-//        addSource(userLiveData) {
-//            check()
-//        }
-//    }
 
 
     fun updateUser() {
         launchRequest {
-            //userRepository.updateUser(userModelMapper.mapFrom(localUserLiveData.value!!))
             userRepository.updateUser(
                     UserRepoModel(userLiveData.value!!.id, firstNameLiveData.value!!, lastNameLiveData.value!!, userLiveData.value!!.email))
         }

@@ -1,6 +1,5 @@
 package com.slutsenko.cocktailapp.presentation.ui.base
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -44,7 +43,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel, DataBinding : ViewDataBin
         return dataBinding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         configureView(savedInstanceState)
         Log.d(log, this::class.java.toString() + " On view created")
@@ -53,57 +51,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel, DataBinding : ViewDataBin
     protected open fun configureView(savedInstanceState: Bundle?) {
         //stub
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d(log, this::class.java.toString() + " On attach")
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(log, this::class.java.toString() + " On create")
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d(log, this::class.java.toString() + " On view state restored")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(log, this::class.java.toString() + " On start")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(log, this::class.java.toString() + " On resume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(log, this::class.java.toString() + " On pause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(log, this::class.java.toString() + " On stop")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(log, this::class.java.toString() + " On destroyed view")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(log, this::class.java.toString() + " On destroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d(log, this::class.java.toString() + " On detach")
-    }
-
 
     override fun onDialogFragmentDismiss(
             dialog: DialogFragment,

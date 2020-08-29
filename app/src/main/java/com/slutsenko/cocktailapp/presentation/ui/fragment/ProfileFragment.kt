@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.auth.LoginActivity
+import com.slutsenko.cocktailapp.databinding.FragmentEditProfileBinding
 import com.slutsenko.cocktailapp.databinding.FragmentProfileBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.*
@@ -23,13 +24,10 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
         super.configureView(savedInstanceState)
 
         viewModel.userLiveData.observe(requireActivity(), Observer {
+            viewModel.firstNameLiveData.value = it?.name
+            viewModel.lastNameLiveData.value = it?.lastName
+            viewModel.emailLiveData.value = it?.email
         })
-
-        viewModel.firstNameLiveData.observe(requireActivity(), Observer {
-        })
-        viewModel.lastNameLiveData.observe(requireActivity(), Observer {
-        })
-
 
         profile_btn_logOut.setOnClickListener {
             bottomSheetDialogFragment = RegularBottomSheetDialogFragment.newInstance {
@@ -79,5 +77,10 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
                 }
             }
         }
+    }
+
+    override fun configureDataBinding(binding: FragmentProfileBinding) {
+        super.configureDataBinding(binding)
+        binding.viewModel = viewModel
     }
 }

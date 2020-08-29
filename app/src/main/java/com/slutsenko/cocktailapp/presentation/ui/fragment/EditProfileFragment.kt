@@ -19,14 +19,6 @@ class EditProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentEditP
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
-        viewModel.userLiveData.observe(requireActivity(), Observer {
-        })
-
-        viewModel.firstNameLiveData.observe(requireActivity(), Observer {
-        })
-        viewModel.lastNameLiveData.observe(requireActivity(), Observer {
-        })
-
         editProfile_btn_save.setOnClickListener {
             viewModel.updateUser()
             parentFragmentManager.popBackStack()
