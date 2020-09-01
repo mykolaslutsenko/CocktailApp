@@ -1,17 +1,25 @@
 package com.slutsenko.cocktailapp.presentation.ui.fragment
 
+import android.Manifest
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Environment
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.auth.LoginActivity
-import com.slutsenko.cocktailapp.databinding.FragmentEditProfileBinding
 import com.slutsenko.cocktailapp.databinding.FragmentProfileBinding
+import com.slutsenko.cocktailapp.extension.log
+import com.slutsenko.cocktailapp.presentation.extension.convertBitmapToFile
+import com.slutsenko.cocktailapp.presentation.extension.convertMbToBinaryBytes
+import com.slutsenko.cocktailapp.presentation.extension.scaleToSize
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.*
 import com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.io.File
 import kotlin.reflect.KClass
 
 class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBinding>() {
@@ -27,6 +35,7 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
             viewModel.firstNameLiveData.value = it?.name
             viewModel.lastNameLiveData.value = it?.lastName
             viewModel.emailLiveData.value = it?.email
+            viewModel.avatarLiveData.value = it?.avatar
         })
 
         profile_btn_logOut.setOnClickListener {
@@ -43,8 +52,15 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
         }
 
         profile_btn_changeImage.setOnClickListener {
-
+            ActivityCompat.requestPermissions(
+                    requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    21
+            )
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, 22)
         }
+
 
         profile_btn_changeUserData.setOnClickListener {
             val editProfileFragment = EditProfileFragment()
@@ -55,6 +71,23 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
         }
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val uri = data?.data ?: return
+
+        val bitmap = BitmapFactory.decodeStream(
+                requireActivity().contentResolver.openInputStream(uri))
+                .scaleToSize(convertMbToBinaryBytes(1))
+        val imageFile = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                System.currentTimeMillis().toString() + ".jpeg"
+        )
+        bitmap.convertBitmapToFile(imageFile)
+        viewModel.uploadAvatar(imageFile) { fraction ->
+            "LOG PROGRESS = fraction=$fraction, percent=${fraction * 100.0F}%".log
+        }
+    }
+
 
     override fun onBottomSheetDialogFragmentClick(
             dialog: DialogFragment,
@@ -84,3 +117,4 @@ class ProfileFragment : BaseFragment<SettingFragmentViewModel, FragmentProfileBi
         binding.viewModel = viewModel
     }
 }
+

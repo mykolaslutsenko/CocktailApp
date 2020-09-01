@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.slutsenko.cocktailapp.data.repository.model.UserRepoModel
 import com.slutsenko.cocktailapp.data.repository.source.TokenRepository
 import com.slutsenko.cocktailapp.data.repository.source.UserRepository
 import com.slutsenko.cocktailapp.presentation.mapper.UserModelMapper
 import com.slutsenko.cocktailapp.presentation.model.user.UserModel
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
+import java.io.File
 
 class SettingFragmentViewModel(
         application: Application,
@@ -28,15 +28,23 @@ class SettingFragmentViewModel(
     var firstNameLiveData: MutableLiveData<String?> = MutableLiveData()
     var lastNameLiveData: MutableLiveData<String?> = MutableLiveData()
     var emailLiveData: MutableLiveData<String?> = MutableLiveData()
-
+    var avatarLiveData: MutableLiveData<String?> = MutableLiveData()
 
 
     fun updateUser() {
         launchRequest {
             userRepository.updateUser(
-                    UserRepoModel(userLiveData.value!!.id, firstNameLiveData.value!!, lastNameLiveData.value!!, userLiveData.value!!.email))
+                    userModelMapper.mapFrom(
+                            UserModel(
+                                    userLiveData.value?.id ?: 1L,
+                                    firstNameLiveData.value ?: "",
+                                    lastNameLiveData.value ?: "",
+                                    userLiveData.value?.email ?: "",
+                                    avatarLiveData.value ?: ""
+                            )
+                    )
+            )
         }
-
     }
 
     fun deleteUser() {
@@ -44,5 +52,11 @@ class SettingFragmentViewModel(
             userRepository.deleteUser()
         }
         tokenRepository.token = null
+    }
+
+    fun uploadAvatar(file: File, onUploadProgress: (Float) -> Unit = { _ -> }) {
+        launchRequest {
+            userRepository.updateUserAvatar(file, onUploadProgress)
+        }
     }
 }

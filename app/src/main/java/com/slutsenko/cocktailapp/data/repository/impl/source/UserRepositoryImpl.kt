@@ -30,14 +30,12 @@ class UserRepositoryImpl(
     override suspend fun refreshUser() {
         userNetSource.getUser()
             .run(userModelMapper::mapNetToDb)
-            .run {
-                userDbSource.saveUser(this)
-            }
+            .run { userDbSource.saveUser(this) }
     }
 
     override suspend fun updateUser(user: UserRepoModel) {
         userDbSource.saveUser(user.run(userModelMapper::mapRepoToDb))
-        userNetSource.updateUser(user.run(userModelMapper::mapRepoToNet))
+        userNetSource.updateUser(userModelMapper.mapRepoToNet(user))
     }
 
     override suspend fun updateUserAvatar(avatar: File, onUploadProgress: (Float) -> Unit): String {
@@ -49,6 +47,4 @@ class UserRepositoryImpl(
     override suspend fun deleteUser() {
         userDbSource.deleteUser()
     }
-
-
 }

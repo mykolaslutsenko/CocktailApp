@@ -2,7 +2,9 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
 
@@ -20,11 +22,12 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_cocktail_image"
+            android:id="@+id/iv_user_blur_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/large_img_item_height"
             android:background="@color/colorPrimary"
             android:scaleType="centerCrop"
+            bind:blur_avatar="@{viewModel.avatarLiveData}"
             android:src="@drawable/ic_camera_24" />
 
         <com.slutsenko.cocktailapp.view.MyToolbar
@@ -83,8 +86,8 @@
                 android:layout_gravity="center">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
+                    android:layout_width="165dp"
+                    android:layout_height="165dp"
                     android:layout_gravity="center"
                     app:cardBackgroundColor="@color/colorGrey"
                     app:cardCornerRadius="85dp">
@@ -98,6 +101,7 @@
                         <ImageView
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            bind:regular_avatar="@{viewModel.avatarLiveData}"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_camera_24" />
                     </androidx.cardview.widget.CardView>
@@ -115,6 +119,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:scaleType="centerCrop"
+
                         android:src="@drawable/ic_autorenew_24" />
                 </androidx.cardview.widget.CardView>
             </FrameLayout>

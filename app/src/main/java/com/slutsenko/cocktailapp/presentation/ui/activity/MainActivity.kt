@@ -24,6 +24,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         return R.layout.activity_main
     }
 
+
     override fun activityCreated() {
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when (it.itemId) {

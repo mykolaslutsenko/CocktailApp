@@ -18,14 +18,14 @@ open class BaseNetSourceImpl<ApiService>(private val apiService: ApiService) {
      * @param request lambda that invokes desire api request.
      * @return api response model.
      */
-    //@Throws(ApiException::class, Throwable::class)
+    @Throws(ApiException::class, Throwable::class)
     protected open suspend fun <ResponseModel : Any?> performRequest(
-        request: suspend ApiService.() -> ResponseModel
+            request: suspend ApiService.() -> ResponseModel
     ): ResponseModel {
         return try {
             apiService.request()
         } catch (e: Exception) {
-            throw /*parseApiErrorException*/ (e)
+            throw parseApiErrorException(e)
         }
     }
 

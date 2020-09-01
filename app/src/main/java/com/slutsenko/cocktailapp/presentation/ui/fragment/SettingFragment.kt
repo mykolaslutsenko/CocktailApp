@@ -49,6 +49,8 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
     }
 
 
+
+
     override fun onBottomSheetDialogFragmentClick(
             dialog: DialogFragment,
             buttonType: DialogButton,
