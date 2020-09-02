@@ -2,7 +2,9 @@ package com.slutsenko.cocktailapp.presentation.viewmodel
 
 import android.app.Application
 import android.view.MenuItem
+import androidx.core.os.bundleOf
 import androidx.lifecycle.*
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
 import com.slutsenko.cocktailapp.databinding.adapter.Page
@@ -12,11 +14,14 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailCategory
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.model.cocktail.SortDrink
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
+import com.slutsenko.cocktailapp.util.FirebaseAnalyticHelper.FirebaseConstant.Companion.FILTER_ALCOHOL
+import com.slutsenko.cocktailapp.util.FirebaseAnalyticHelper.FirebaseConstant.Companion.FILTER_COCKTAIL_TYPE
 
 class MainFragmentViewModel(application: Application,
                             val cocktailRepository: CocktailRepository,
                             val mapper: CocktailModelMapper,
-                            savedStateHandle: SavedStateHandle
+                            savedStateHandle: SavedStateHandle,
+                            val firebaseAnalytics: FirebaseAnalytics
 ) : BaseViewModel(application) {
 
     val EXTRA_KEY_ALCOHOL = "EXTRA_KEY_ALCOHOL"
@@ -244,6 +249,13 @@ class MainFragmentViewModel(application: Application,
     fun deleteCocktail(cocktail: CocktailModel) {
         launchRequest {
             cocktailRepository.deleteCocktails(mapper.mapFrom(cocktail))
+        }
+    }
+
+    fun sentFirebaseFilters() {
+        if (!historyLiveData.value.isNullOrEmpty()) {
+            firebaseAnalytics.logEvent(FILTER_ALCOHOL, bundleOf((alcoholDrinkFilterLiveData.value?.key?:"empty")to "alcohol"))
+            firebaseAnalytics.logEvent(FILTER_COCKTAIL_TYPE, bundleOf((categoryDrinkFilterLiveData.value?.key?:"empty")to "category"))
         }
     }
 }

@@ -57,6 +57,7 @@ import com.slutsenko.cocktailapp.presentation.mapper.LocalizedStringModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.UserModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.base.BaseModelMapper
 import com.slutsenko.cocktailapp.presentation.viewmodel.*
+import com.slutsenko.cocktailapp.util.FirebaseAnalyticHelper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
@@ -154,6 +155,8 @@ object Injector {
         require(applicationContext is Application) { "Context must be application context" }
         appContext = applicationContext
         CocktailAppRoomDatabase.instance(applicationContext)
+
+        FirebaseAnalyticHelper.instance(applicationContext)
     }
 
     class ViewModelFactory(
@@ -174,19 +177,57 @@ object Injector {
         ): T {
             return when (modelClass) {
                 SplashActivityViewModel::class.java ->
-                    SplashActivityViewModel(application, provideRepository(appContext)) as T
+                    SplashActivityViewModel(
+                            application,
+                            provideRepository(appContext)
+                    ) as T
                 SettingFragmentViewModel::class.java ->
-                    SettingFragmentViewModel(application, provideRepository(appContext), provideRepository(appContext), provideModelMapper(appContext)) as T
+                    SettingFragmentViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            FirebaseAnalyticHelper.instance(appContext)
+                    ) as T
                 MainActivityViewModel::class.java ->
-                    MainActivityViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    MainActivityViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            handle,
+                            FirebaseAnalyticHelper.instance(appContext)
+                    ) as T
                 SearchViewModel::class.java ->
-                    SearchViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    SearchViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            handle
+                    ) as T
                 LoginViewModel::class.java ->
-                    LoginViewModel(application, provideRepository(appContext), provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    LoginViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            handle
+                    ) as T
                 AboutCocktailViewModel::class.java ->
-                    AboutCocktailViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    AboutCocktailViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            handle,
+                            FirebaseAnalyticHelper.instance(appContext)
+                    ) as T
                 MainFragmentViewModel::class.java ->
-                    MainFragmentViewModel(application, provideRepository(appContext), provideModelMapper(appContext), handle) as T
+                    MainFragmentViewModel(
+                            application,
+                            provideRepository(appContext),
+                            provideModelMapper(appContext),
+                            handle,
+                            FirebaseAnalyticHelper.instance(appContext)
+                    ) as T
                 else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
             }
         }

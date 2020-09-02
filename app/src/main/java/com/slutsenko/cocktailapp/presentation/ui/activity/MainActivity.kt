@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.get
 import com.slutsenko.cocktailapp.R
@@ -15,6 +14,7 @@ import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment
 import com.slutsenko.cocktailapp.presentation.ui.fragment.SettingFragment
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
+import com.slutsenko.cocktailapp.util.FirebaseAnalyticHelper.FirebaseConstant.Companion.MAIN_TAB_NAME
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.reflect.KClass
 
@@ -50,13 +50,13 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
                     //displayWelcomeMessage()
                 }
 
-        var firebase = FirebaseAnalytics.getInstance(this)
+        //var firebase = FirebaseAnalytics.getInstance(this)
 
 
         bottom_navigation_view.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_main -> {
-                    firebase.logEvent("main", bundleOf("main" to "click"))
+                    viewModel.firebaseAnalytics.logEvent(MAIN_TAB_NAME, bundleOf("main" to "click"))
                     supportFragmentManager
                             .beginTransaction()
                             .hide(settingFragment!!)
@@ -65,7 +65,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
                     true
                 }
                 R.id.menu_setting -> {
-                    firebase.logEvent("profile", bundleOf("profile" to "click"))
+                    viewModel.firebaseAnalytics.logEvent(MAIN_TAB_NAME, bundleOf("setting" to "click"))
                     supportFragmentManager
                             .beginTransaction()
                             .hide(mainFragment!!)

@@ -25,9 +25,8 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
 
     override fun activityCreated() {
 
-        val current = intent.getSerializableExtra("cocktail") as CocktailModel
-        viewModel.currentCocktailLiveData?.value = current
-        viewModel.saveToDb(current)
+        viewModel.currentCocktailLiveData?.value = intent.getSerializableExtra("cocktail") as CocktailModel
+        viewModel.saveToDb()
 
         cocktailAdapter = IngredientWithMeasureAdapter(
                 this,

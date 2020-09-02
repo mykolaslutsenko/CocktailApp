@@ -54,6 +54,7 @@ class FilterFragment : BaseFragment<MainFragmentViewModel, FragmentFilterBinding
         }
         btn_apply.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
+            viewModel.sentFirebaseFilters()
         }
         btn_drop.setOnClickListener {
             viewModel.dropFilters()
