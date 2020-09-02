@@ -3,13 +3,18 @@ package com.slutsenko.cocktailapp.presentation.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.FragmentMainBinding
 import com.slutsenko.cocktailapp.presentation.adapter.list.FilterAdapter
@@ -36,6 +41,33 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 1
+        }
+        val config = FirebaseRemoteConfig.getInstance()
+        config.setConfigSettingsAsync(configSettings)
+
+
+        Log.d("config", "${config.get("main_toolbar_title").asString()}")
+        val toolbar = config.get("main_toolbar_title").asString()
+        config.fetchAndActivate()
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        title_toolbar.text = toolbar
+                        val updated = task.result
+                        Log.d("config", "Config params updated: $updated")
+                        Toast.makeText(requireContext(), "Fetch and activate succeeded",
+                                Toast.LENGTH_SHORT).show()
+
+
+
+                    } else {
+                        Toast.makeText(requireContext(), "Fetch failed",
+                                Toast.LENGTH_SHORT).show()
+                    }
+                    //displayWelcomeMessage()
+                }
+
 
 
         viewModel.historyLiveData.observe(requireActivity(), Observer {
@@ -48,13 +80,15 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
 
             if (viewModel.sortDrinkLiveData.value != SortDrink.RECENT) {
                 iv_sort_indicator.visibility = View.VISIBLE
+            } else {
+                iv_sort_indicator.visibility = View.GONE
             }
-            else {iv_sort_indicator.visibility = View.GONE}
             if (viewModel.alcoholDrinkFilterLiveData.value != CocktailAlcoholType.UNDEFINED ||
                     viewModel.categoryDrinkFilterLiveData.value != CocktailCategory.UNDEFINED) {
                 iv_indicator_filter.visibility = View.VISIBLE
+            } else {
+                iv_indicator_filter.visibility = View.GONE
             }
-            else { iv_indicator_filter.visibility = View.GONE }
         })
 
 

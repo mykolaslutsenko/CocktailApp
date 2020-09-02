@@ -33,22 +33,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
     override fun activityCreated() {
 
-        val config = FirebaseRemoteConfig.getInstance()
-        Log.d("config","${config.get("main_toolbar_title").asString()}")
-        config.fetchAndActivate()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val updated = task.result
-                        Log.d("config", "Config params updated: $updated")
-                        Toast.makeText(this, "Fetch and activate succeeded",
-                                Toast.LENGTH_SHORT).show()
 
-                    } else {
-                        Toast.makeText(this, "Fetch failed",
-                                Toast.LENGTH_SHORT).show()
-                    }
-                    //displayWelcomeMessage()
-                }
 
         //var firebase = FirebaseAnalytics.getInstance(this)
 
