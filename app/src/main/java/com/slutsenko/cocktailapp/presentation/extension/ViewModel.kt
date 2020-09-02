@@ -62,4 +62,5 @@ fun <ViewModel : BaseViewModel, DataBinding:ViewDataBinding> BaseFragment<ViewMo
 
     return ViewModelLazy(viewModelClass, { ownerProducer().viewModelStore }, factoryPromise)
 }
+
 //endregion

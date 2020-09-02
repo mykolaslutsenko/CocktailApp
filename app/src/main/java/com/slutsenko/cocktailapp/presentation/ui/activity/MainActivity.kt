@@ -94,7 +94,8 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             fragmentTransaction.commit()
         }
 
-        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer<Boolean> {
+        viewModel.showNavigationBarTitlesLiveData.observe(this, Observer {
+            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG ).show()
             if (it) {
                 bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
             } else {

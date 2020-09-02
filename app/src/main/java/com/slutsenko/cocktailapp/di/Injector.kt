@@ -42,20 +42,15 @@ import com.slutsenko.cocktailapp.data.repository.impl.mapper.CocktailRepoModelMa
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.LocalizedStringRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.UserRepoModelMapper
 import com.slutsenko.cocktailapp.data.repository.impl.mapper.base.BaseRepoModelMapper
-import com.slutsenko.cocktailapp.data.repository.impl.source.AuthRepositoryImpl
-import com.slutsenko.cocktailapp.data.repository.impl.source.CocktailRepositoryImpl
-import com.slutsenko.cocktailapp.data.repository.impl.source.TokenRepositoryImpl
-import com.slutsenko.cocktailapp.data.repository.impl.source.UserRepositoryImpl
-import com.slutsenko.cocktailapp.data.repository.source.AuthRepository
-import com.slutsenko.cocktailapp.data.repository.source.CocktailRepository
-import com.slutsenko.cocktailapp.data.repository.source.TokenRepository
-import com.slutsenko.cocktailapp.data.repository.source.UserRepository
+import com.slutsenko.cocktailapp.data.repository.impl.source.*
+import com.slutsenko.cocktailapp.data.repository.source.*
 import com.slutsenko.cocktailapp.data.repository.source.base.BaseRepository
 import com.slutsenko.cocktailapp.extension.log
 import com.slutsenko.cocktailapp.presentation.mapper.CocktailModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.LocalizedStringModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.UserModelMapper
 import com.slutsenko.cocktailapp.presentation.mapper.base.BaseModelMapper
+import com.slutsenko.cocktailapp.presentation.ui.base.BaseViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.*
 import com.slutsenko.cocktailapp.util.FirebaseAnalyticHelper
 import okhttp3.Interceptor
@@ -193,6 +188,7 @@ object Injector {
                     MainActivityViewModel(
                             application,
                             provideRepository(appContext),
+                            provideRepository(appContext),
                             provideModelMapper(appContext),
                             handle,
                             FirebaseAnalyticHelper.instance(appContext)
@@ -228,6 +224,10 @@ object Injector {
                             handle,
                             FirebaseAnalyticHelper.instance(appContext)
                     ) as T
+
+                BaseViewModel::class.java -> BaseViewModel(
+                        application
+                ) as T
                 else -> throw NotImplementedError("Must provide viewModel for class ${modelClass.simpleName}")
             }
         }
@@ -235,6 +235,8 @@ object Injector {
 
     inline fun <reified T : BaseRepository> provideRepository(context: Context): T {
         return when (T::class.java) {
+            AppSettingRepository::class.java -> AppSettingRepositoryImpl.instance(context) as T
+
             CocktailRepository::class.java -> CocktailRepositoryImpl(
                     provideDbDataSource(context),
                     provideNetDataSource(context),

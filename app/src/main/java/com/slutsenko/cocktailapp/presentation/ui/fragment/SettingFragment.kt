@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.FragmentFavoriteBinding
 import com.slutsenko.cocktailapp.presentation.ui.activity.SplashActivity
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.*
+import com.slutsenko.cocktailapp.presentation.viewmodel.MainActivityViewModel
 import com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel
 import com.slutsenko.cocktailapp.util.Language
 import kotlinx.android.synthetic.main.fragment_setting.*
@@ -19,6 +21,10 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
         get() = SettingFragmentViewModel::class
     override val contentLayoutResId: Int = R.layout.fragment_setting
 
+    private val mainViewModel: MainActivityViewModel
+        get() {
+            return ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
+        }
 
     private lateinit var languageListBottomSheetDialogFragment: LanguageListBottomSheetDialogFragment
 
@@ -26,11 +32,8 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
         super.configureView(savedInstanceState)
 
         chb_showTitle.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.showNavigationBarTitlesLiveData.value = isChecked
-            //mainActivityViewModel.showNavigationBarTitlesLiveData.value = isChecked
+            mainViewModel.showNavigationBarTitlesLiveData.value = isChecked
         }
-
-
 
         ll_language.setOnClickListener {
             languageListBottomSheetDialogFragment = LanguageListBottomSheetDialogFragment.newInstance(
@@ -40,7 +43,8 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
 
         ll_profile.setOnClickListener{
             val profileFragment = ProfileFragment()
-            childFragmentManager.beginTransaction()
+            childFragmentManager
+                    .beginTransaction()
                     .add(R.id.fcv_setting_fragment, profileFragment, ProfileFragment::class.java.name)
                     .addToBackStack(ProfileFragment::class.java.name)
                     .commit()

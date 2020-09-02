@@ -5,16 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.slutsenko.cocktailapp.data.repository.impl.source.AppSettingRepositoryImpl
-import com.slutsenko.cocktailapp.data.repository.source.AppSettingRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
-
-    protected val appSettingRepository: AppSettingRepository =
-            AppSettingRepositoryImpl.instance(application)
-    val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = appSettingRepository.mutableLiveData
 
     protected fun <T> launchRequest(
             liveData: LiveData<T>? = null,

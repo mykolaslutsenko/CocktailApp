@@ -23,6 +23,10 @@ class SettingFragmentViewModel(
         val firebaseAnalytics: FirebaseAnalytics
 ) : BaseViewModel(application) {
 
+//    protected val appSettingRepository: AppSettingRepository =
+//            AppSettingRepositoryImpl.instance(application)
+//    val showNavigationBarTitlesLiveData: MutableLiveData<Boolean> = appSettingRepository.mutableLiveData
+
     var userLiveData: LiveData<UserModel?> = userRepository.userLiveData.map {
         when {
             it != null -> userModelMapper.mapTo(it)
