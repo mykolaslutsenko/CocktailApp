@@ -36,6 +36,8 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
+
+
         viewModel.historyLiveData.observe(requireActivity(), Observer {
             val list = mutableListOf<DrinkFilter>()
             list.add(viewModel.alcoholDrinkFilterLiveData.value as DrinkFilter)
@@ -73,6 +75,7 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
                     .commit()
         }
         btn_filter.setOnLongClickListener {
+            throw IllegalStateException("FILTER CRASHLYTIC INIT")
             viewModel.dropFilters()
             iv_indicator_filter.visibility = View.GONE
             true
@@ -91,8 +94,10 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
                 menu.findItem(viewModel.sortIdLiveData.value!!).isEnabled = false
                 show()
             }
+
         }
         btn_sort.setOnLongClickListener {
+            throw IllegalStateException("SORT CRASHLYTIC INIT")
             viewModel.dropSort()
             true
         }

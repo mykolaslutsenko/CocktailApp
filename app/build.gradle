@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+// Google Services Gradle plugin (FCM)
+apply plugin: 'com.google.gms.google-services'
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
+
 
 android {
     compileSdkVersion 29
@@ -85,6 +90,17 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0-RC1"
 
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
+
+    // Recommended: Add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.4.4'
+    // Add the Firebase Crashlytics SDK
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    // Add the SDK for Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    // Add the SDK for Firebase Dynamic Links
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx:19.1.0'
+    // Add the SDK for Firebase Remote Config
+    implementation 'com.google.firebase:firebase-config-ktx:19.2.0'
 
     implementation project(':lang')
 

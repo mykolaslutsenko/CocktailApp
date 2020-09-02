@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "919158145011",
+    "firebase_url": "https://cocktail-app-f5342.firebaseio.com",
+    "project_id": "cocktail-app-f5342",
+    "storage_bucket": "cocktail-app-f5342.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919158145011:android:45b74450c19766573d9c86",
+        "android_client_info": {
+          "package_name": "com.example.cocktailapptest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919158145011-6v115ens8h5imcvjua5c7ionucftlu4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cocktailapptest",
+            "certificate_hash": "a0edbff9f6875055fe0b06efb13bcf9db87f6b7a"
+          }
+        },
+        {
+          "client_id": "919158145011-u8g6arevc5n1ppt2drk2pnkbsla2hioa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJv-1cPnkeD7EiASldVQMXoQg9wGM7lWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919158145011-u8g6arevc5n1ppt2drk2pnkbsla2hioa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
