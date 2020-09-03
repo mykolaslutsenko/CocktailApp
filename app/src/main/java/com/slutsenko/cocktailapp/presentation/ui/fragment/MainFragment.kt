@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,34 +40,7 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 1
-        }
-        val config = FirebaseRemoteConfig.getInstance()
-        config.setConfigSettingsAsync(configSettings)
-
-
-        Log.d("config", "${config.get("main_toolbar_title").asString()}")
-        val toolbar = config.get("main_toolbar_title").asString()
-        config.fetchAndActivate()
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        title_toolbar.text = toolbar
-                        val updated = task.result
-                        Log.d("config", "Config params updated: $updated")
-                        Toast.makeText(requireContext(), "Fetch and activate succeeded",
-                                Toast.LENGTH_SHORT).show()
-
-
-
-                    } else {
-                        Toast.makeText(requireContext(), "Fetch failed",
-                                Toast.LENGTH_SHORT).show()
-                    }
-                    //displayWelcomeMessage()
-                }
-
-
+        remoteConfigToolbar()
 
         viewModel.historyLiveData.observe(requireActivity(), Observer {
             val list = mutableListOf<DrinkFilter>()
@@ -109,7 +81,6 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
                     .commit()
         }
         btn_filter.setOnLongClickListener {
-            throw IllegalStateException("FILTER CRASHLYTIC INIT")
             viewModel.dropFilters()
             iv_indicator_filter.visibility = View.GONE
             true
@@ -131,10 +102,28 @@ class MainFragment : BaseFragment<MainFragmentViewModel, FragmentMainBinding>() 
 
         }
         btn_sort.setOnLongClickListener {
-            throw IllegalStateException("SORT CRASHLYTIC INIT")
             viewModel.dropSort()
             true
         }
+    }
+
+    private fun remoteConfigToolbar() {
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 1
+        }
+        val config = FirebaseRemoteConfig.getInstance()
+        config.setConfigSettingsAsync(configSettings)
+
+        Log.d("config", config.get("main_toolbar_title").asString())
+        val toolbar = config.get("main_toolbar_title").asString()
+        config.fetchAndActivate()
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        title_toolbar.text = toolbar
+                        val updated = task.result
+                        Log.d("config", "Config params updated: $updated")
+                    }
+                }
     }
 
 

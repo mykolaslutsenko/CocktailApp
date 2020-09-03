@@ -1,13 +1,9 @@
 package com.slutsenko.cocktailapp.presentation.ui.activity
 
-import android.util.Log
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.get
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityMainBinding
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
@@ -80,7 +76,6 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         }
 
         viewModel.showNavigationBarTitlesLiveData.observe(this, Observer {
-            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG ).show()
             if (it) {
                 bottom_navigation_view.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
             } else {

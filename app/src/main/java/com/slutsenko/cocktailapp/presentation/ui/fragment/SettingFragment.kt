@@ -3,8 +3,13 @@ package com.slutsenko.cocktailapp.presentation.ui.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.FragmentFavoriteBinding
 import com.slutsenko.cocktailapp.presentation.ui.activity.SplashActivity
@@ -31,6 +36,8 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
     override fun configureView(savedInstanceState: Bundle?) {
         super.configureView(savedInstanceState)
 
+        remoteConfigTitleBottomBar()
+
         chb_showTitle.setOnCheckedChangeListener { _, isChecked ->
             mainViewModel.showNavigationBarTitlesLiveData.value = isChecked
         }
@@ -41,7 +48,7 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
             languageListBottomSheetDialogFragment.show(childFragmentManager, LanguageListBottomSheetDialogFragment::class.java.name)
         }
 
-        ll_profile.setOnClickListener{
+        ll_profile.setOnClickListener {
             val profileFragment = ProfileFragment()
             childFragmentManager
                     .beginTransaction()
@@ -52,7 +59,29 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
 
     }
 
+    private fun remoteConfigTitleBottomBar() {
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 1
+        }
+        val config = FirebaseRemoteConfig.getInstance()
+        config.setConfigSettingsAsync(configSettings)
 
+        Log.d("config", config.get("show_title_bottom_navigation_bar").asString())
+        val isShowTitle = config.get("show_title_bottom_navigation_bar").asBoolean()
+        config.fetchAndActivate()
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        if (isShowTitle) {
+                            chb_showTitle.visibility = View.GONE
+                        } else {
+                            chb_showTitle.visibility = View.VISIBLE
+                        }
+                        val updated = task.result
+                        Log.d("config", "Config params updated: $updated")
+                    }
+                }
+
+    }
 
 
     override fun onBottomSheetDialogFragmentClick(
@@ -67,7 +96,8 @@ class SettingFragment : BaseFragment<SettingFragmentViewModel, FragmentFavoriteB
                 when (buttonType) {
                     ItemListDialogButton -> {
                         val selectedLanguage = data as Language
-                        val sharedPref = activity?.getSharedPreferences("lang", Context.MODE_PRIVATE) ?: return
+                        val sharedPref = activity?.getSharedPreferences("lang", Context.MODE_PRIVATE)
+                                ?: return
                         sharedPref.edit().putString("language", selectedLanguage.locale).apply()
                         val intent = Intent(requireContext(), SplashActivity::class.java)
                         requireActivity().startActivity(intent)
