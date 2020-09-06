@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.R
@@ -44,10 +45,42 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         return cocktailsList.size
     }
 
-    fun refreshData(list: List<CocktailModel>) {
-        cocktailsList = list
-        notifyDataSetChanged()
+    fun updateList(newList: List<CocktailModel>) {
+        val diffResult = DiffUtil.calculateDiff(
+                HistoryDiffUtil(cocktailsList, newList)
+        )
+        cocktailsList = newList
+        diffResult.dispatchUpdatesTo(this)
     }
+
+    class HistoryDiffUtil(var oldList: List<CocktailModel>, var newList: List<CocktailModel>) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
+        }
+    }
+
+
+//    public void updateList(ArrayList<Person> newList) {
+//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(this.persons, newList));
+//        diffResult.dispatchUpdatesTo(this);
+//    }
+
+//    fun refreshData(list: List<CocktailModel>) {
+//        cocktailsList = list
+//        notifyDataSetChanged()
+//    }
 
     inner class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cocktailImage: ImageView = itemView.findViewById(R.id.iv_cocktail)

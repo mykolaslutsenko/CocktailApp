@@ -33,7 +33,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         rv_search.adapter = cocktailAdapter
 
         viewModel.searchResultCocktailListLiveData.observe(this, Observer {
-            cocktailAdapter?.refreshData(it)
+            cocktailAdapter?.updateList(it)
         })
 
         sv_toolbar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

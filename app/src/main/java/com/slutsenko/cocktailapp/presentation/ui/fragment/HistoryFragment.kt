@@ -25,7 +25,7 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel, FragmentHistoryBindi
         rv_database.adapter = cocktailAdapter
 
         viewModel.historyLiveData.observe(requireActivity(), Observer {
-            cocktailAdapter.refreshData(it)
+            cocktailAdapter.updateList(it)
             viewModel.cocktailQuantityLiveData.value = it.size
         })
     }

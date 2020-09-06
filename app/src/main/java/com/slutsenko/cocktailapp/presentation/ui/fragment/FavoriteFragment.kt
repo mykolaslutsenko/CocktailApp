@@ -34,7 +34,7 @@ class FavoriteFragment : BaseFragment<MainFragmentViewModel, FragmentFavoriteBin
 
         viewModel.historyLiveData.observe(requireActivity(), Observer {
             viewModel.favoriteLiveData.value = it.filter { it.isFavorite }
-            cocktailAdapter.refreshData(viewModel.favoriteLiveData.value ?: emptyList())
+            cocktailAdapter.updateList(viewModel.favoriteLiveData.value ?: emptyList())
         })
     }
 

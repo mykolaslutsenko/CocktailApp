@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.R
@@ -49,9 +50,30 @@ class FavoriteAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         return cocktailsList.size
     }
 
-    fun refreshData(list: List<CocktailModel>) {
-        cocktailsList = list
-        notifyDataSetChanged()
+    fun updateList(newList: List<CocktailModel>) {
+        val diffResult = DiffUtil.calculateDiff(
+                FavoriteAdapter.FavoriteDiffUtil(cocktailsList, newList)
+        )
+        cocktailsList = newList
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    class FavoriteDiffUtil(var oldList: List<CocktailModel>, var newList: List<CocktailModel>) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
+        }
     }
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -106,6 +128,7 @@ class FavoriteAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             }
         }
 
+
         private fun startAboutActivity() {
             val intent = Intent(context, AboutCocktailActivity::class.java)
             val cocktail = cocktailsList[adapterPosition]
@@ -133,4 +156,6 @@ class FavoriteAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             viewModel?.saveToDb(favoriteCocktail)
         }
     }
+
+
 }
