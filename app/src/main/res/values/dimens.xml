@@ -64,6 +64,10 @@
     <dimen name="elevation_8">8dp</dimen>
     <dimen name="elevation_16">16dp</dimen>
 
+    <dimen name="favorite_item_size">72dp</dimen>
+    <dimen name="favorite_image_size">56dp</dimen>
+
+
 
 
 

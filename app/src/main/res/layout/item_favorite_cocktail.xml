@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/favorite_item_size">
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/offset_16"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/favorite_item_size"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/favorite_image_size"
+            android:layout_height="@dimen/favorite_image_size"
+            app:cardCornerRadius="@dimen/corner_radius_regular">
+
+            <ImageView
+                android:id="@+id/iv_favorite_cocktail"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/favorite_image_size"
+                android:layout_height="@dimen/favorite_image_size" />
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="@dimen/offset_16"
+            android:layout_height="0dp"/>
+        
+        <LinearLayout
+            android:layout_margin="@dimen/offset_8"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                style="@style/drink_name"
+                android:padding="0dp"
+                android:id="@+id/txt_favorite_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                style="@style/drink_detail"
+                android:id="@+id/txt_favorite_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 />
+
+            <TextView
+                style="@style/drink_detail"
+                android:id="@+id/txt_favorite_alcohol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 />
+
+            <TextView
+                style="@style/drink_detail"
+                android:id="@+id/txt_favorite_glass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                 />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_more_favorite"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_gravity="end|top"
+        android:layout_margin="@dimen/offset_8"
+        android:src="@drawable/ic_more_vert_24" />
+
+    <ImageView
+        android:id="@+id/iv_star_favorite"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/offset_16"
+        android:src="@drawable/ic_star_white_48" />
+
+</FrameLayout>
