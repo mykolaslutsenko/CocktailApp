@@ -10,6 +10,7 @@ import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.ui.fragment.MainFragment.Companion.COLUMN
 import com.slutsenko.cocktailapp.presentation.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.fragment_history.*
 import kotlin.reflect.KClass
 
 
@@ -30,6 +31,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 this@SearchActivity,
                 viewModel.searchResultCocktailListLiveData.value ?: emptyList())
         rv_search.layoutManager = GridLayoutManager(this, COLUMN)
+        rv_database.addItemDecoration(CocktailAdapter.CardViewDecorator())
         rv_search.adapter = cocktailAdapter
 
         viewModel.searchResultCocktailListLiveData.observe(this, Observer {

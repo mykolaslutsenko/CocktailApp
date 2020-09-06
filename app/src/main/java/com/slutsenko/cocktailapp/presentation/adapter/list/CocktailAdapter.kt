@@ -3,6 +3,7 @@ package com.slutsenko.cocktailapp.presentation.adapter.list
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,9 @@ import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 
 class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, private val context: Context, private var cocktailsList: List<CocktailModel>)
     : RecyclerView.Adapter<CocktailViewHolder>() {
+
+    val itemOffset = context.resources.getDimension(R.dimen.offset_16)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)
         return CocktailViewHolder(view)
@@ -71,6 +75,19 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
                     && oldList[oldItemPosition].id == newList[newItemPosition].id
         }
+    }
+
+    class CardViewDecorator: RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            super.getItemOffsets(outRect, view, parent, state)
+            outRect.top = ITEM_OFFSET
+            outRect.bottom = ITEM_OFFSET
+            outRect.left = ITEM_OFFSET
+            outRect.right = ITEM_OFFSET
+        }
+
+        private val ITEM_OFFSET = 16
     }
 
     inner class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

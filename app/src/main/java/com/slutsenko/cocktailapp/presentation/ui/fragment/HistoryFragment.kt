@@ -22,6 +22,7 @@ class HistoryFragment : BaseFragment<MainFragmentViewModel, FragmentHistoryBindi
         cocktailAdapter = CocktailAdapter(viewModel, requireContext(), viewModel.historyLiveData.value
                 ?: emptyList())
         rv_database.layoutManager = GridLayoutManager(context, MainFragment.COLUMN)
+        rv_database.addItemDecoration(CocktailAdapter.CardViewDecorator())
         rv_database.adapter = cocktailAdapter
 
         viewModel.historyLiveData.observe(requireActivity(), Observer {
