@@ -6,4 +6,5 @@ import com.slutsenko.cocktailapp.data.network.source.base.BaseNetSource
 
 interface CocktailNetSource: BaseNetSource {
     suspend fun searchCocktail(query: String): List<CocktailNetModel>
+    suspend fun searchCocktailById(id: Long): CocktailNetModel
 }

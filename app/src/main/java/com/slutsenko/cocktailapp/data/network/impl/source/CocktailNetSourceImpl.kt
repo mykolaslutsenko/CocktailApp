@@ -7,13 +7,19 @@ import com.slutsenko.cocktailapp.data.network.source.CocktailNetSource
 
 
 class CocktailNetSourceImpl(
-    apiService: CocktailApiService
+        apiService: CocktailApiService
 ) : BaseNetSourceImpl<CocktailApiService>(apiService),
         CocktailNetSource {
 
     override suspend fun searchCocktail(query: String): List<CocktailNetModel> {
         return performRequest {
             searchCocktail(query).cocktails ?: emptyList()
+        }
+    }
+
+    override suspend fun searchCocktailById(id: Long): CocktailNetModel {
+        return performRequest {
+            searchCocktailById(id).cocktails?.firstOrNull()!!
         }
     }
 }

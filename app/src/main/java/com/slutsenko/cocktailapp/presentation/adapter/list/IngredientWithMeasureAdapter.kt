@@ -17,13 +17,19 @@ class IngredientWithMeasureAdapter(var context: Context, var ingredients: List<S
     override fun onBindViewHolder(holder: IngredientAndMeasureViewHolder, position: Int) {
         holder.number.text = (position + 1).toString()
         holder.ingredient.text = ingredients?.get(position)
-        if (position < measures?.size!!) {
+        if (position < measures?.size?:0) {
             holder.measure.text = measures?.get(position)
         }
     }
 
     override fun getItemCount(): Int {
-        return ingredients?.size!!
+        return ingredients?.size?:0
+    }
+
+    fun refreshAdapter(newIngredients: List<String>?,  newMeasures: List<String>?) {
+        ingredients = newIngredients
+        measures = newMeasures
+        notifyDataSetChanged()
     }
 
     inner class IngredientAndMeasureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

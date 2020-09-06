@@ -91,7 +91,6 @@ object Injector {
                 setOf(
                         GsonConverterFactory.create(
                                 baseGsonBuilder
-                                        //register deserializer for cocktail list for only cocktail retrofit
                                         .registerTypeAdapter(
                                                 deserializeType<CocktailNetModel>(),
                                                 CocktailNetModelDeserializer()

@@ -18,4 +18,5 @@ interface CocktailRepository : BaseRepository {
     suspend fun deleteAllCocktails()
 
     suspend fun searchCocktailRemote(query: String): List<CocktailRepoModel>
+    suspend fun searchCocktailByIdRemote(id: Long): CocktailRepoModel?
 }

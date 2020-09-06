@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.databinding.ActivityAboutCocktailBinding
 import com.slutsenko.cocktailapp.presentation.adapter.list.IngredientWithMeasureAdapter
-import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.ui.base.BaseActivity
 import com.slutsenko.cocktailapp.presentation.viewmodel.AboutCocktailViewModel
 import kotlinx.android.synthetic.main.activity_about_cocktail.*
@@ -25,16 +24,28 @@ class AboutCocktailActivity : BaseActivity<AboutCocktailViewModel, ActivityAbout
 
     override fun activityCreated() {
 
-        viewModel.currentCocktailLiveData?.value = intent.getSerializableExtra("cocktail") as CocktailModel
-        viewModel.saveToDb()
+        val idNotification = intent.getSerializableExtra("cocktail_id_notification") as? Long
+        val idAdapter = intent.getSerializableExtra("cocktail_id_adapter") as? Long
+
+        val id = idAdapter ?: idNotification
+
+        viewModel.currentCocktailLiveData = viewModel.searchCocktail(id!!)
+
+        viewModel.currentCocktailLiveData.observe {
+            cocktailAdapter.refreshAdapter(
+                    viewModel.currentCocktailLiveData.value?.ingredients,
+                    viewModel.currentCocktailLiveData.value?.measures
+            )
+        }
 
         cocktailAdapter = IngredientWithMeasureAdapter(
                 this,
-                viewModel.currentCocktailLiveData?.value!!.ingredients,
-                viewModel.currentCocktailLiveData?.value!!.measures)
+                viewModel.currentCocktailLiveData.value?.ingredients,
+                viewModel.currentCocktailLiveData.value?.measures)
         rv_ingredient_and_measure.layoutManager =
                 LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_ingredient_and_measure.adapter = cocktailAdapter
+        //rv_ingredient_and_measure.addItemDecoration(DividerItemDecoration(applicationContext, VERTICAL))
     }
 
     override fun configureDataBinding(binding: ActivityAboutCocktailBinding) {

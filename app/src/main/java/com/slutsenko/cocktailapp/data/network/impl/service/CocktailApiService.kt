@@ -9,4 +9,7 @@ interface CocktailApiService {
 
     @GET("search.php")
     suspend fun searchCocktail(@Query("s") query: String): CocktailListResponseNetModel
+
+    @GET("lookup.php")
+    suspend fun searchCocktailById(@Query("i") id: Long): CocktailListResponseNetModel
 }

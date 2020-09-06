@@ -19,12 +19,26 @@ class AboutCocktailViewModel(application: Application,
 
 ) : BaseViewModel(application) {
 
-    var currentCocktailLiveData: MutableLiveData<CocktailModel>? = MutableLiveData()
+    var currentCocktailLiveData: MutableLiveData<CocktailModel?> = MutableLiveData()
 
-    fun saveToDb() {
-        launchRequest {
-            cocktailRepository.addOrReplaceCocktail(mapper.mapFrom(currentCocktailLiveData?.value!!))
+    fun searchCocktail(id: Long):MutableLiveData<CocktailModel?> {
+        val cocktailLiveData = MutableLiveData<CocktailModel?>()
+        launchRequest(cocktailLiveData) {
+            val cocktailDb = cocktailRepository.getCocktailById(id)
+            if (cocktailDb == null) {
+                val cocktailNet = cocktailRepository.searchCocktailByIdRemote(id)
+                if (cocktailNet != null) {
+                    cocktailRepository.addOrReplaceCocktail(cocktailNet)
+                    firebaseAnalytics.logEvent(COCKTAIL_ID, bundleOf(
+                            currentCocktailLiveData.value?.id.toString() to "id"))
+                    mapper.mapTo(cocktailNet)
+                } else {
+                    null
+                }
+            } else {
+                mapper.mapTo(cocktailDb)
+            }
         }
-        firebaseAnalytics.logEvent(COCKTAIL_ID, bundleOf(currentCocktailLiveData?.value?.id.toString() to "id"))
+        return cocktailLiveData
     }
 }

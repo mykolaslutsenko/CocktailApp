@@ -16,9 +16,9 @@ class CocktailRepositoryImpl(
 ) : BaseRepositoryImpl(), CocktailRepository {
 
     override val cocktailListLiveData: LiveData<List<CocktailRepoModel>> =
-        dbSource.cocktailListLiveData.map(mapper::mapDbToRepo)
+            dbSource.cocktailListLiveData.map(mapper::mapDbToRepo)
 
-    override  fun getCocktailLiveData(): List<CocktailRepoModel> {
+    override fun getCocktailLiveData(): List<CocktailRepoModel> {
         return dbSource.getCocktailLiveData().map(mapper::mapDbToRepo)
     }
 
@@ -39,19 +39,19 @@ class CocktailRepositoryImpl(
 
     override suspend fun addOrReplaceCocktails(vararg cocktail: CocktailRepoModel) {
         dbSource.addOrReplaceCocktails(
-            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
+                *cocktail.map(mapper::mapRepoToDb).toTypedArray()
         )
     }
 
     override suspend fun replaceAllCocktails(vararg cocktail: CocktailRepoModel) {
         dbSource.replaceAllCocktails(
-            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
+                *cocktail.map(mapper::mapRepoToDb).toTypedArray()
         )
     }
 
     override suspend fun deleteCocktails(vararg cocktail: CocktailRepoModel) {
         dbSource.deleteCocktails(
-            *cocktail.map(mapper::mapRepoToDb).toTypedArray()
+                *cocktail.map(mapper::mapRepoToDb).toTypedArray()
         )
     }
 
@@ -61,5 +61,9 @@ class CocktailRepositoryImpl(
 
     override suspend fun searchCocktailRemote(query: String): List<CocktailRepoModel> {
         return netSource.searchCocktail(query).run(mapper::mapNetToRepo)
+    }
+
+    override suspend fun searchCocktailByIdRemote(id: Long): CocktailRepoModel? {
+        return netSource.searchCocktailById(id).run(mapper::mapNetToRepo)
     }
 }

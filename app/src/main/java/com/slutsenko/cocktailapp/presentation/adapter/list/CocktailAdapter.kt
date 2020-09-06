@@ -102,7 +102,7 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         private fun startAboutActivity() {
             val intent = Intent(context, AboutCocktailActivity::class.java)
             val cocktail = cocktailsList[adapterPosition]
-            intent.putExtra("cocktail", cocktail)
+            intent.putExtra("cocktail_id_adapter", cocktail.id)
             context.startActivity(intent)
         }
 
