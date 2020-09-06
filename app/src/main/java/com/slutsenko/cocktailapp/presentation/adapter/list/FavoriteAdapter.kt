@@ -68,11 +68,11 @@ class FavoriteAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
+            return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
+            return oldList[oldItemPosition].names == newList[newItemPosition].names
         }
     }
 

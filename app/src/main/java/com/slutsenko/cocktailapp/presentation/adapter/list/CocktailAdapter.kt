@@ -63,24 +63,15 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
+            return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
+                    && oldList[oldItemPosition].id == newList[newItemPosition].id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldList[oldItemPosition].isFavorite == newList[newItemPosition].isFavorite
+                    && oldList[oldItemPosition].id == newList[newItemPosition].id
         }
     }
-
-
-//    public void updateList(ArrayList<Person> newList) {
-//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(this.persons, newList));
-//        diffResult.dispatchUpdatesTo(this);
-//    }
-
-//    fun refreshData(list: List<CocktailModel>) {
-//        cocktailsList = list
-//        notifyDataSetChanged()
-//    }
 
     inner class CocktailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cocktailImage: ImageView = itemView.findViewById(R.id.iv_cocktail)
@@ -93,13 +84,12 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
                 if (favoriteCocktail.isFavorite) {
                     removeFavorite()
                 } else addFavorite()
-
             }
 
 
             itemView.setOnLongClickListener { v: View? ->
                 PopupMenu(context, v).apply {
-                    // MainActivity implements OnMenuItemClickListener
+
                     setOnMenuItemClickListener {
                         when (it.itemId) {
                             R.id.menu_item_open -> {
@@ -147,6 +137,7 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             val favoriteCocktail = cocktailsList[adapterPosition]
             if (!favoriteCocktail.isFavorite) {
                 favoriteCocktail.isFavorite = true
+                favorite.setColorFilter(Color.YELLOW)
             }
             viewModel?.saveToDb(favoriteCocktail)
         }
@@ -155,6 +146,7 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
             val favoriteCocktail = cocktailsList[adapterPosition]
             if (favoriteCocktail.isFavorite) {
                 favoriteCocktail.isFavorite = false
+                favorite.setColorFilter(Color.WHITE)
             }
             viewModel?.saveToDb(favoriteCocktail)
         }
