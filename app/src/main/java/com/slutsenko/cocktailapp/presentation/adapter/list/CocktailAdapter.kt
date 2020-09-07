@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.R
@@ -19,13 +20,35 @@ import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
 import com.slutsenko.cocktailapp.presentation.ui.activity.AboutCocktailActivity
 import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
 
-class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, private val context: Context, private var cocktailsList: List<CocktailModel>)
+class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null,
+                      private val context: Context,
+                      private var cocktailsList: List<CocktailModel>,
+                      var recyclerView: RecyclerView)
     : RecyclerView.Adapter<CocktailViewHolder>() {
+    private var layoutManager: GridLayoutManager? = null
 
-    val itemOffset = context.resources.getDimension(R.dimen.offset_16)
+    val SPAN_SIZE = 2
+
+    init {
+        layoutManager = GridLayoutManager(context, SPAN_SIZE)
+        layoutManager?.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                when (cocktailsList.size % SPAN_SIZE) {
+                    1 ->
+                        when (position) {
+                            0 -> return SPAN_SIZE
+                        }
+                }
+                return 1
+            }
+        }
+        recyclerView.layoutManager = layoutManager
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cocktail, parent, false)
+
+
         return CocktailViewHolder(view)
     }
 
@@ -77,7 +100,7 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null, priv
         }
     }
 
-    class CardViewDecorator: RecyclerView.ItemDecoration() {
+    class CardViewDecorator : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
