@@ -27,7 +27,7 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null,
     : RecyclerView.Adapter<CocktailViewHolder>() {
     private var layoutManager: GridLayoutManager? = null
 
-    val SPAN_SIZE = 2
+    val SPAN_SIZE = 4
 
     init {
         layoutManager = GridLayoutManager(context, SPAN_SIZE)
@@ -37,6 +37,17 @@ class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null,
                     1 ->
                         when (position) {
                             0 -> return SPAN_SIZE
+                        }
+                    2 ->
+                        when (position) {
+                            0 -> return SPAN_SIZE
+                            1 -> return SPAN_SIZE
+                        }
+                    3 ->
+                        when (position) {
+                            0 -> return SPAN_SIZE
+                            1 -> return SPAN_SIZE
+                            2 -> return SPAN_SIZE
                         }
                 }
                 return 1
