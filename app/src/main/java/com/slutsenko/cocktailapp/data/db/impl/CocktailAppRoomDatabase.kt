@@ -35,7 +35,7 @@ abstract class CocktailAppRoomDatabase : RoomDatabase() {
                 .databaseBuilder(
                         it.applicationContext,
                         CocktailAppRoomDatabase::class.java,
-                        "lokk"
+                        "data"
                 )
                 .fallbackToDestructiveMigration()
                 //.addMigrations(MIGRATION_1_2)
