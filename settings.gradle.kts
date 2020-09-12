@@ -1,4 +1,6 @@
 
+
 rootProject.name = "Cocktail App"
 include (":app")
-include (":lang")
+include (":localization")
+include(":core:styling")

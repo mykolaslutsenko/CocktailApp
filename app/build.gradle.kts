@@ -142,7 +142,8 @@ android {
 }
 
 dependencies {
-    implementation(lang)
+    api(localization)
+    api(coreStyling)
     api(Lib.Google.material)
 
 

@@ -39,6 +39,7 @@ import org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
 buildscript {
+    val kotlin_version by extra("1.4.0")
     repositories {
         google()
         jcenter()
@@ -51,6 +52,7 @@ buildscript {
         classpath("com.google.gms:google-services:4.3.3")
 
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.2.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
 
     }
 }
