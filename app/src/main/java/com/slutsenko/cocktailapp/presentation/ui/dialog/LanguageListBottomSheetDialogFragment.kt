@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import com.slutsenko.cocktailapp.R
-import com.slutsenko.cocktailapp.util.Language
+import com.slutsenko.common.Language
 
 
 

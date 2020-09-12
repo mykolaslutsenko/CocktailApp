@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.slutsenko.cocktailapp.data.lokal.impl.SharedPrefsHelper
 import com.slutsenko.cocktailapp.data.lokal.source.AppSettingLocalSource
-import com.slutsenko.cocktailapp.util.SingletonHolder
+import com.slutsenko.common.SingletonHolder
 
 class AppSettingLocalSourceImpl(sharedPrefsHelper: SharedPrefsHelper) : AppSettingLocalSource {
 

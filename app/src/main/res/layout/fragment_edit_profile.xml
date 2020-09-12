@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel" />
+            type="com.slutsenko.cocktailapp.feature.main.SettingFragmentViewModel" />
     </data>
 
     <FrameLayout
@@ -17,7 +17,7 @@
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".presentation.ui.fragment.EditProfileFragment">
+        tools:context=".feature.main.fragment.EditProfileFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
 
-            <com.slutsenko.cocktailapp.view.MyToolbar
+            <com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar
                 android:id="@+id/main_fragment_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
@@ -48,7 +48,7 @@
                     android:text="@string/edit_profile"
                     android:textSize="@dimen/font_20" />
 
-            </com.slutsenko.cocktailapp.view.MyToolbar>
+            </com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar>
 
             <LinearLayout
                 android:layout_width="match_parent"

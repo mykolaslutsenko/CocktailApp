@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.data.network.impl.extension.deserializeType
 import com.slutsenko.cocktailapp.data.network.impl.extension.toJson
-import com.slutsenko.cocktailapp.presentation.ui.activity.SplashActivity
+import com.slutsenko.cocktailapp.feature.splash.SplashActivity
 
 class MessagingService : FirebaseMessagingService() {
     lateinit var manager: NotificationManager

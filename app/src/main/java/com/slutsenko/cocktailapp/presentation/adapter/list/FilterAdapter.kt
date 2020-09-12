@@ -13,7 +13,7 @@ import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailAlcoholType
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailCategory
 import com.slutsenko.cocktailapp.presentation.model.cocktail.DrinkFilter
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
+import com.slutsenko.cocktailapp.feature.main.MainFragmentViewModel
 
 class FilterAdapter(val filter: List<DrinkFilter>, val context: Context, val viewModel: MainFragmentViewModel)
     : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {

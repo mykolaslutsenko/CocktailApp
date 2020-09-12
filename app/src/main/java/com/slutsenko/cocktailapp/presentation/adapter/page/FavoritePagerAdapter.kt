@@ -2,8 +2,8 @@ package com.slutsenko.cocktailapp.presentation.adapter.page
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.slutsenko.cocktailapp.presentation.ui.fragment.FavoriteFragment
-import com.slutsenko.cocktailapp.presentation.ui.fragment.HistoryFragment
+import com.slutsenko.cocktailapp.feature.main.fragment.FavoriteFragment
+import com.slutsenko.cocktailapp.feature.main.fragment.HistoryFragment
 
 class FavoritePagerAdapter(fr: Fragment) : FragmentStateAdapter(fr) {
     override fun getItemCount(): Int = 2

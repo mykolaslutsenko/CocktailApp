@@ -17,8 +17,8 @@ import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.adapter.list.CocktailAdapter.CocktailViewHolder
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
-import com.slutsenko.cocktailapp.presentation.ui.activity.AboutCocktailActivity
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
+import com.slutsenko.cocktailapp.feature.detail.AboutCocktailActivity
+import com.slutsenko.cocktailapp.feature.main.MainFragmentViewModel
 
 class CocktailAdapter(private val viewModel: MainFragmentViewModel? = null,
                       private val context: Context,

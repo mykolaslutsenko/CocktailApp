@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.slutsenko.cocktailapp.data.lokal.impl.source.AppSettingLocalSourceImpl
 import com.slutsenko.cocktailapp.data.lokal.source.AppSettingLocalSource
 import com.slutsenko.cocktailapp.data.repository.source.AppSettingRepository
-import com.slutsenko.cocktailapp.util.SingletonHolder
+import com.slutsenko.common.SingletonHolder
 
 class AppSettingRepositoryImpl private constructor(private val localSource: AppSettingLocalSource) : AppSettingRepository {
     override val mutableLiveData: MutableLiveData<Boolean> = localSource.showBottomTitlesLiveData

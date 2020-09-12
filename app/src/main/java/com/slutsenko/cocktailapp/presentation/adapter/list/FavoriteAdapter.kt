@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.slutsenko.cocktailapp.R
 import com.slutsenko.cocktailapp.presentation.model.cocktail.CocktailModel
-import com.slutsenko.cocktailapp.presentation.ui.activity.AboutCocktailActivity
-import com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel
+import com.slutsenko.cocktailapp.feature.detail.AboutCocktailActivity
+import com.slutsenko.cocktailapp.feature.main.MainFragmentViewModel
 
 class FavoriteAdapter(private val viewModel: MainFragmentViewModel? = null, private val context: Context, private var cocktailsList: List<CocktailModel>)
     : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {

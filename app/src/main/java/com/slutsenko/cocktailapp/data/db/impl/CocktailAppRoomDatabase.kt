@@ -11,7 +11,7 @@ import com.slutsenko.cocktailapp.data.db.impl.typeconverter.DateConverter
 import com.slutsenko.cocktailapp.data.db.impl.typeconverter.StringListToStringConverter
 import com.slutsenko.cocktailapp.data.db.model.CocktailDbModel
 import com.slutsenko.cocktailapp.data.db.model.UserDbModel
-import com.slutsenko.cocktailapp.util.SingletonHolder
+import com.slutsenko.common.SingletonHolder
 
 @Database(entities = [
     CocktailDbModel::class, UserDbModel::class

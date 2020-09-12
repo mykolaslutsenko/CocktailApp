@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel" />
+            type="com.slutsenko.cocktailapp.feature.main.MainFragmentViewModel" />
     </data>
 
 
@@ -20,7 +20,7 @@
         android:focusable="true"
         android:orientation="vertical">
 
-        <com.slutsenko.cocktailapp.view.MyToolbar
+        <com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar
             android:id="@+id/main_fragment_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -49,7 +49,7 @@
                 android:layout_height="0dp" />
 
 
-        </com.slutsenko.cocktailapp.view.MyToolbar>
+        </com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

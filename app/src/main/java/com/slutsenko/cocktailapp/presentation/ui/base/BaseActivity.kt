@@ -16,7 +16,7 @@ import com.slutsenko.cocktailapp.presentation.ui.dialog.BaseBottomSheetDialogFra
 import com.slutsenko.cocktailapp.presentation.ui.dialog.BaseDialogFragment
 import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogButton
 import com.slutsenko.cocktailapp.presentation.ui.dialog.DialogType
-import com.slutsenko.cocktailapp.util.Language
+import com.slutsenko.common.Language
 import java.util.*
 import kotlin.reflect.KClass
 

@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.presentation.viewmodel.SettingFragmentViewModel" />
+            type="com.slutsenko.cocktailapp.feature.main.SettingFragmentViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -30,7 +30,7 @@
             bind:blur_avatar="@{viewModel.avatarLiveData}"
             android:src="@drawable/ic_camera_24" />
 
-        <com.slutsenko.cocktailapp.view.MyToolbar
+        <com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar
             android:id="@+id/main_fragment_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
@@ -71,7 +71,7 @@
                 android:src="@drawable/ic_exit_24" />
 
 
-        </com.slutsenko.cocktailapp.view.MyToolbar>
+        </com.slutsenko.cocktailapp.presentation.ui.widget.MyToolbar>
 
         <LinearLayout
             android:layout_width="wrap_content"

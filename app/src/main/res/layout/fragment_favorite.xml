@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.slutsenko.cocktailapp.presentation.viewmodel.MainFragmentViewModel" />
+            type="com.slutsenko.cocktailapp.feature.main.MainFragmentViewModel" />
     </data>
 
     <FrameLayout

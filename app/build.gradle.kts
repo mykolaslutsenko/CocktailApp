@@ -110,8 +110,6 @@
 //}
 
 
-
-
 import io.devlight.gradle.extension.release
 
 plugins {
@@ -122,7 +120,8 @@ plugins {
 
 android {
 
-    defaultConfig.javaCompileOptions.annotationProcessorOptions.arguments = mapOf("room.incremental" to "true")
+    defaultConfig.javaCompileOptions.annotationProcessorOptions.arguments =
+        mapOf("room.incremental" to "true")
 
 
     buildTypes {
@@ -147,67 +146,67 @@ dependencies {
     api(Lib.Google.material)
 
 
-        //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation ("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.0")
-    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation ("androidx.gridlayout:gridlayout:1.0.0")
-    testImplementation ("junit:junit:4.13")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.2.0")
-    implementation ("com.google.android.material:material:1.2.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
+    testImplementation("junit:junit:4.13")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    implementation("com.google.android.material:material:1.2.0")
 
     //retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //glide
-    implementation ("com.github.bumptech.glide:glide:4.11.0")
-   // kapt ("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    // kapt ("com.github.bumptech.glide:compiler:4.11.0")
 
     //recycler
-    implementation ("androidx.recyclerview:recyclerview:1.1.0")
-    implementation ("androidx.recyclerview:recyclerview-selection:1.1.0-rc01")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0-rc01")
 
     //room
-    implementation ("androidx.room:room-common:2.2.5")
-    implementation ("androidx.room:room-runtime:2.2.5")
+    implementation("androidx.room:room-common:2.2.5")
+    implementation("androidx.room:room-runtime:2.2.5")
     //kapt ("androidx.room:room-compiler:2.2.5")
     kapt(Lib.AndroidX.Room.compiler)
-    implementation ("androidx.room:room-ktx:2.2.5")
-    androidTestImplementation ("androidx.room:room-testing:2.2.5")
+    implementation("androidx.room:room-ktx:2.2.5")
+    androidTestImplementation("androidx.room:room-testing:2.2.5")
 
 
-    implementation ("androidx.core:core-ktx:1.5.0-alpha02")
-    implementation ("androidx.collection:collection-ktx:1.1.0")
+    implementation("androidx.core:core-ktx:1.5.0-alpha02")
+    implementation("androidx.collection:collection-ktx:1.1.0")
     //implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
-    implementation ("androidx.fragment:fragment-ktx:1.3.0-alpha08")
-    implementation ("com.google.android.material:material:1.3.0-alpha02")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha07")
-    implementation ("androidx.activity:activity-ktx:1.2.0-alpha08")
-    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.fragment:fragment-ktx:1.3.0-alpha08")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha07")
+    implementation("androidx.activity:activity-ktx:1.2.0-alpha08")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.5.0-RC1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.5.0-RC1")
 
-    implementation ("jp.wasabeef:glide-transformations:4.0.1")
+    implementation("jp.wasabeef:glide-transformations:4.0.1")
 
     // Recommended: Add the Firebase SDK for Google Analytics
-    implementation ("com.google.firebase:firebase-analytics-ktx:17.4.4")
+    implementation("com.google.firebase:firebase-analytics-ktx:17.4.4")
     // Add the Firebase Crashlytics SDK
-    implementation ("com.google.firebase:firebase-crashlytics:17.1.1")
+    implementation("com.google.firebase:firebase-crashlytics:17.1.1")
     // Add the SDK for Firebase Cloud Messaging
-    implementation ("com.google.firebase:firebase-messaging:20.2.4")
+    implementation("com.google.firebase:firebase-messaging:20.2.4")
     // Add the SDK for Firebase Dynamic Links
-    implementation ("com.google.firebase:firebase-dynamic-links-ktx:19.1.0")
+    implementation("com.google.firebase:firebase-dynamic-links-ktx:19.1.0")
     // Add the SDK for Firebase Remote Config
-    implementation ("com.google.firebase:firebase-config-ktx:19.2.0")
+    implementation("com.google.firebase:firebase-config-ktx:19.2.0")
 
 
 
 
-//    implementation(coreCommon)
+    implementation(coreCommon)
 //    implementation(coreKodein)
 //    implementation(corePresentation)
 //
